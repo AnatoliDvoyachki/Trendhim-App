@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/bracelets"
+            android:icon="@drawable/bracelet"
+            android:title="Bracelets" />
+        <item
+            android:id="@+id/neckleces"
+            android:icon="@drawable/pendant"
+            android:title="Necklaces" />
+        <item
+            android:id="@+id/watches"
+            android:icon="@drawable/watch"
+            android:title="Watches" />
+        <item
+            android:id="@+id/bags"
+            android:icon="@drawable/portfolio"
+            android:title="Bags" />
+        <item
+            android:id="@+id/beardCare"
+            android:icon="@drawable/beard"
+            android:title="Beard Care" />
+        <item
+            android:id="@+id/bowTies"
+            android:icon="@drawable/bow_tie"
+            android:title="Bow Ties" />
+        <item
+            android:id="@+id/ties"
+            android:icon="@drawable/tie"
+            android:title="Ties" />
+    </group>
+
+    <item android:title="Extras">
+        <menu>
+            <item
+                android:id="@+id/weeklyLook"
+                android:icon="@drawable/business_suit"
+                android:title="Weekly Look" />
+            <item
+                android:id="@+id/aboutUs"
+                android:icon="@drawable/about_us"
+                android:title="About us" />
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/settings"
+                android:title="Settings" />
+            <item
+                android:id="@+id/logOut"
+                android:icon="@drawable/logout"
+                android:title="Log out" />
+        </menu>
+    </item>
+
+</menu>
