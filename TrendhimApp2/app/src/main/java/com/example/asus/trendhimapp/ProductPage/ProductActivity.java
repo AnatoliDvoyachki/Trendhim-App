@@ -33,7 +33,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         setTitle("Product Page");
-
+        // test
+        int a = 1;
         initializeComponents();
     }
 
