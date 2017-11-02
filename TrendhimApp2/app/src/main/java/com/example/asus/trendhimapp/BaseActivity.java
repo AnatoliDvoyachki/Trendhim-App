@@ -18,7 +18,7 @@ import com.example.asus.trendhimapp.CategoryPage.CategoryPageActivity;
 public class BaseActivity  extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
 
-    public static DrawerLayout drawer; 
+    public static DrawerLayout drawer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
