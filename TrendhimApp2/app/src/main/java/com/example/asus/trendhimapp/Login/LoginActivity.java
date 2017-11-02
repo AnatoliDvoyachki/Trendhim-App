@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.BaseActivity;
@@ -27,9 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener {
 
-    private FirebaseUser user;
     private FirebaseAuth auth;
-    private DatabaseReference userDatabase;
     private EditText emailEditText, passwordEditText;
     private static final String TAG = LoginActivity.class.getCanonicalName();
 
@@ -44,20 +43,25 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         setTitle("Log in");
 
-
         emailEditText = findViewById(R.id.input_email_login);
         passwordEditText = findViewById(R.id.input_password_login);
 
         auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        userDatabase = FirebaseDatabase.getInstance().getReference("user");
 
         passwordEditText.setOnKeyListener(this);
         LinearLayout loginLayout = findViewById(R.id.loginLayout);
         loginLayout.setOnClickListener(this);
 
-    }
+        Intent intent = getIntent();
 
+        if(intent != null){
+            String email = intent.getStringExtra("email");
+
+            if(email != null)
+                emailEditText.setText(email);
+        }
+
+    }
 
     public void login(View view){
 
@@ -69,19 +73,21 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
+                    if(task.isSuccessful()) {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG).show();
                         Log.d(TAG, "sign in failed", task.getException());
                     }
                 }
             });
         }
+    }
 
-
-
+    public void goToSignUp(View view){
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -103,7 +109,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
 
 
     /**
-     * Performs logIn operation when the user clicks the Enter button on the psw textView.
+     * Performs logIn operation when the user clicks the Enter button on the keyboard.
      *
      * @param v, keycode, event
      * @return false

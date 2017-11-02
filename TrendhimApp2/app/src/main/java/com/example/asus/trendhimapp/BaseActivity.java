@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryPageActivity;
+import com.example.asus.trendhimapp.Login.LoginActivity;
 
 public class BaseActivity  extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
@@ -76,6 +77,11 @@ public class BaseActivity  extends AppCompatActivity
      */
     public void backToHomePage(View view){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void main_to_login(View view){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
 }

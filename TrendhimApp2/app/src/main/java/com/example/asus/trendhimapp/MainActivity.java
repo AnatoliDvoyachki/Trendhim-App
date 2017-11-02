@@ -20,9 +20,4 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    public void main_to_login(View view){
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
-    }
-
 }

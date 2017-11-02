@@ -1,6 +1,163 @@
 package com.example.asus.trendhimapp.Login;
 
-import com.example.asus.trendhimapp.BaseActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-public class SignupActivity extends BaseActivity{
+import com.example.asus.trendhimapp.BaseActivity;
+import com.example.asus.trendhimapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class SignupActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener{
+
+    private EditText emailEditText, passwordEditText, confirmEditText;
+    private FirebaseUser user;
+    private FirebaseAuth auth;
+    private static final String TAG = SignupActivity.class.getCanonicalName();
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View contentView = inflater.inflate(R.layout.activity_signup, null, false);
+        BaseActivity.drawer.addView(contentView, 0);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        setTitle("Sign up");
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+        emailEditText = findViewById(R.id.input_email_signUp);
+        passwordEditText = findViewById(R.id.input_password_signUp);
+        confirmEditText = findViewById(R.id.confirmPassword);
+
+        confirmEditText.setOnKeyListener(this);
+        LinearLayout signupLayout = findViewById(R.id.signupLayout);
+        signupLayout.setOnClickListener(this);
+
+    }
+
+    public void signUp(View view){
+
+        final EditText[] fields = {emailEditText, passwordEditText, confirmEditText};
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+        String confirm = confirmEditText.getText().toString();
+
+        if(validate(fields)) {
+            if (!password.equals(confirm))
+                confirmEditText.setError("Passwords don't match");
+            else if (!isEmailValid(email))
+                emailEditText.setError("Email is invalid");
+            else {
+                if (password.equals(confirm)) {
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                intent.putExtra("email", user.getEmail());
+                                startActivity(intent);
+
+                                for(EditText editText : fields)
+                                    editText.setText(null);
+                            } else if(!task.isSuccessful()) {
+                                    Toast.makeText(SignupActivity.this, "Ups! Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    try {
+                                        throw task.getException();
+                                    } catch(FirebaseAuthWeakPasswordException e) {
+                                        passwordEditText.setError("Password has to be at least 6 characters");
+                                        passwordEditText.requestFocus();
+                                    } catch(FirebaseAuthInvalidCredentialsException e) {
+                                        emailEditText.setError("Invalid email format");
+                                        emailEditText.requestFocus();
+                                    } catch(FirebaseAuthUserCollisionException e) {
+                                        emailEditText.setError("User already exists");
+                                        emailEditText.requestFocus();
+                                    } catch(Exception e) {
+                                        Log.w("SignInLog", "createUserWithEmail:failure", task.getException());
+                                    }
+                                }
+                            }
+                    });
+                }
+            }
+        }
+    }
+
+    private boolean validate(EditText[] fields) {
+        boolean complete = true;
+        for (EditText currentField : fields) {
+            if (currentField.getText().toString().matches("")) {
+                currentField.setError("This field cannot be empty");
+                complete = false;
+            }
+        }
+        return complete;
+    }
+
+    /**
+     * method is used for checking valid email id format.
+     *
+     * @param email
+     * @return boolean true for valid false for invalid
+     */
+    public static boolean isEmailValid (String email) {
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    /**
+     * Performs SignUp operation when the user clicks the Enter button on the keyboard.
+     *
+     * @param v, keycode, event
+     * @return false
+     */
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)
+            signUp(v);
+
+        return false;
+    }
+
+    /**
+     * Hides the keyboard whenever the user clicks somewhere in the layout.
+     *
+     * @param v View to witch the method is associated to
+     */
+    @Override
+    public void onClick(View v) {
+
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+    }
 }
