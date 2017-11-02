@@ -10,26 +10,26 @@
 
     <!--  Email Label -->
     <EditText
-        android:id="@+id/input_email_signup"
+        android:id="@+id/input_email_signUp"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:padding="10dp"
         android:background="@drawable/round_rect"
         android:textColor="@android:color/darker_gray"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:textColorHint="@android:color/darker_gray" />
 
     <!-- Password Label -->
     <EditText
-        android:id="@+id/input_password_signup"
+        android:id="@+id/input_password_signUp"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_rect"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:textColor="@android:color/darker_gray"
         android:textColorHint="@android:color/darker_gray" />
@@ -42,7 +42,7 @@
         android:padding="10dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_rect"
-        android:hint="Confirm Password"
+        android:hint="@string/confirm_password"
         android:inputType="textPassword"
         android:textColor="@android:color/darker_gray"
         android:textColorHint="@android:color/darker_gray" />
@@ -50,13 +50,13 @@
 
     <!-- Signup Button -->
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_signup"
+        android:id="@+id/btn_signUp"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
         android:onClick="signUp"
-        android:text="Create Account"/>
+        android:text="@string/create_account"/>
 
 </LinearLayout>

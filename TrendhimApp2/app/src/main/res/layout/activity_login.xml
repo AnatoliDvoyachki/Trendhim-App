@@ -16,7 +16,7 @@
         android:layout_marginTop="50dp"
         android:padding="10dp"
         android:background="@drawable/round_rect"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:textColor="@android:color/darker_gray"
         android:textColorHint="@android:color/darker_gray" />
@@ -29,7 +29,7 @@
         android:padding="10dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_rect"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:textColorHint="@android:color/darker_gray" />
 
@@ -42,7 +42,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
-        android:text="Log in"/>
+        android:text="@string/log_in"/>
 
     <!-- Align text views horizontally -->
     <LinearLayout
@@ -52,25 +52,25 @@
 
         <!-- Text Label -->
         <TextView
-            android:id="@+id/logintext"
+            android:id="@+id/loginText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text="Not a member? "
+            android:text="@string/not_a_member"
             android:textColor="@android:color/darker_gray"
-            android:textSize="16dip" />
+            android:textSize="16sp" />
 
         <!-- Sign up Text Label-->
         <TextView
             android:id="@+id/link_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:onClick="goToSignUp"
             android:gravity="center"
-            android:text="Sign up "
+            android:onClick="goToSignUp"
+            android:text="@string/sign_up"
             android:textColor="@android:color/darker_gray"
-            android:textSize="16dip"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
     </LinearLayout>
