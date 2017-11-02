@@ -26,11 +26,9 @@ public class CategoryPageActivity extends BaseActivity {
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-
-
         setTitle("Category Page");
         // Lookup the recycler view in activity layout
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewCategory_page);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewCategory_page);
 
         // Initialize categories
         categories = CategoryPage.createCategoryList(50);
@@ -42,7 +40,8 @@ public class CategoryPageActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
 
         // Set layout manager to position the items
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2,
+                GridLayoutManager.VERTICAL, false));
 
     }
 }

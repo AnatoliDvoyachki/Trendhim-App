@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 public class MainActivity extends BaseActivity {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +16,5 @@ public class MainActivity extends BaseActivity {
         BaseActivity.drawer.addView(contentView, 0);
 
     }
-
 
 }
