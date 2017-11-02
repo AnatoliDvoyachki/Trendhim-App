@@ -1,7 +1,8 @@
 package com.example.asus.trendhimapp.ProductPage;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,9 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asus.trendhimapp.BaseActivity;
 import com.example.asus.trendhimapp.R;
 
-public class ProductActivity extends AppCompatActivity implements View.OnClickListener,
+public class ProductActivity extends BaseActivity implements View.OnClickListener,
         CompoundButton.OnCheckedChangeListener {
 
     private ImageView bannerImageView, leftImageView, rightImageView, brandImageView;
@@ -20,11 +22,18 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     private CheckBox discountCheckBox;
     private TextView brandTextView, priceTextView;
 
-    //wsjka
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
+        
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_product, null, false);
+        BaseActivity.drawer.addView(contentView, 0);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+        setTitle("Product Page");
+
         initializeComponents();
     }
 
