@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "843067515003",
+    "firebase_url": "https://trendhim-31939.firebaseio.com",
+    "project_id": "trendhim-31939",
+    "storage_bucket": "trendhim-31939.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:843067515003:android:0d3ed882c29fb039",
+        "android_client_info": {
+          "package_name": "com.example.asus.trendhimapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "843067515003-l3ebto1gsod6in0vlah5ip11n8hedt02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.asus.trendhimapp",
+            "certificate_hash": "11cb52a27927ee783e854c5a4aed7bdf1793ce7a"
+          }
+        },
+        {
+          "client_id": "843067515003-1qu9uvgvaplg2lbg68mvvnkjvtfmhp7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7re9Rx08P_oPfm3IVFCE77D_YpWH0-ko"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "843067515003-1qu9uvgvaplg2lbg68mvvnkjvtfmhp7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

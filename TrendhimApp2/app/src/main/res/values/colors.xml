@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#E8E6E6</color>
     <color name="colorAccent">#E8E6E6</color>
     <color name="black">#000000</color>
-    <color name="white">#fff</color>
+    <color name="white">#ffffff</color>
 
     <!--- Green for the buttons -->
     <color name="buttonGreen">#27c769</color>

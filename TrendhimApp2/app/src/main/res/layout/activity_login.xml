@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/model_guy"
+    android:orientation="vertical"
+    android:gravity="center">
 
-</android.support.constraint.ConstraintLayout>
+    <!--  Email Label -->
+    <EditText
+        android:id="@+id/input_email_login"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:padding="10dp"
+        android:background="@drawable/round_rect"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/darker_gray"
+        android:textColorHint="@android:color/darker_gray" />
+
+    <!-- Password Label -->
+    <EditText
+        android:id="@+id/input_password_login"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_rect"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="@android:color/darker_gray" />
+
+    <!-- Login Button -->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:onClick="login"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:text="Log in"/>
+
+    <!-- Align text views horizontally -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Text Label -->
+        <TextView
+            android:id="@+id/logintext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="Not a member? "
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16dip" />
+
+        <!-- Sign up Text Label-->
+        <TextView
+            android:id="@+id/link_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="goToSignUp"
+            android:gravity="center"
+            android:text="Sign up "
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16dip"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>
