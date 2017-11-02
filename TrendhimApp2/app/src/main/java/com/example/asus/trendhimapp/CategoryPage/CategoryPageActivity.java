@@ -26,6 +26,8 @@ public class CategoryPageActivity extends BaseActivity {
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
+
+
         setTitle("Category Page");
         // Lookup the recycler view in activity layout
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewCategory_page);
