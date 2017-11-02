@@ -32,7 +32,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         View contentView = inflater.inflate(R.layout.activity_product, null, false);
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
         initializeComponents();
     }
 
