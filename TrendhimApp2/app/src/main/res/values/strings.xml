@@ -6,4 +6,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!--- ProductActivity.java strings -->
+    <string name="addToCartButtonLabel">Add to Cart</string>
+    <string name="addToWishlistButtonLabel">Add to Wishlist</string>
+    <string name="discountCheckBoxLabel">Some sample text</string>
 </resources>

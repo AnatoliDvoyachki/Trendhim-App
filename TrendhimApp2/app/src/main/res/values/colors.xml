@@ -6,4 +6,9 @@
     <color name="black">#000000</color>
     <color name="white">#fff</color>
 
+    <!--- Green for the buttons -->
+    <color name="buttonGreen">#27c769</color>
+    <!-- Light grey checkbox background color-->
+    <color name="lightGrey">#f3f3f3</color>
+
 </resources>

@@ -21,6 +21,10 @@
         <activity android:name=".CategoryPage.CategoryPageActivity" />
 
         <activity android:name=".BaseActivity"/>
+
+        <activity android:name=".ProductPage.ProductActivity"
+            android:parentActivityName=".CategoryPage.CategoryPageActivity"/>
+
     </application>
 
 </manifest>

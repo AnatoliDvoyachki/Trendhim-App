@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView android:layout_height="250dp"
+        android:layout_width="237dp"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/rightImageView"
+        app:srcCompat="@drawable/bracelet"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/bannerImageView"/>
+
+    <ImageView android:layout_height="70dp"
+        android:layout_width="120dp"
+        app:srcCompat="@drawable/bracelet"
+        android:id="@+id/leftImageView"
+        android:layout_toRightOf="@+id/discountCheckBox"
+        android:layout_toEndOf="@+id/discountCheckBox"
+        android:layout_alignTop="@+id/rightImageView"/>
+
+    <ImageView android:layout_height="70dp"
+        android:layout_width="216dp"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/addToCartButton"
+        app:srcCompat="@drawable/bracelet"
+        android:id="@+id/rightImageView"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="21dp"/>
+
+    <Button android:layout_height="30dp"
+        android:layout_width="170dp"
+        android:layout_above="@+id/discountCheckBox"
+        android:id="@+id/addToCartButton"
+        android:textColor="@color/white"
+        android:text="@string/addToCartButtonLabel"
+        android:background="@color/buttonGreen"
+        android:layout_alignStart="@+id/discountCheckBox"
+        android:layout_alignLeft="@+id/discountCheckBox"/>
+
+    <Button android:layout_height="30dp"
+        android:layout_width="170dp"
+        android:layout_above="@+id/discountCheckBox"
+        android:id="@+id/addToWishlistButton"
+        android:textColor="@color/white"
+        android:text="@string/addToWishlistButtonLabel"
+        android:background="@color/buttonGreen"
+        android:layout_alignRight="@+id/leftImageView"
+        android:layout_alignEnd="@+id/leftImageView"/>
+
+    <CheckBox android:layout_height="30dp"
+        android:layout_width="223dp"
+        android:layout_marginBottom="19dp"
+        android:id="@+id/discountCheckBox"
+        android:text="@string/discountCheckBoxLabel"
+        android:background="@color/lightGrey"
+        android:layout_alignStart="@+id/rightImageView"
+        android:layout_alignLeft="@+id/rightImageView"
+        android:buttonTint="#13ce66"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageView android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_marginBottom="38dp"
+        android:layout_above="@+id/addToCartButton"
+        app:srcCompat="@drawable/bracelet"
+        android:id="@+id/brandPictureImageView"
+        android:layout_alignStart="@+id/rightImageView"
+        android:layout_alignLeft="@+id/rightImageView"/>
+
+    <TextView android:layout_height="20dp"
+        android:layout_width="100dp"
+        android:layout_marginBottom="14dp"
+        android:layout_above="@+id/addToCartButton"
+        android:id="@+id/brandTextView"
+        android:text="The brand"
+        android:layout_alignStart="@+id/brandPictureImageView"
+        android:layout_alignLeft="@+id/brandPictureImageView"/>
+
+    <TextView android:layout_height="20dp"
+        android:layout_width="60dp"
+        android:id="@+id/priceTextView"
+        android:layout_alignTop="@+id/brandPictureImageView"
+        android:text="The price"
+        android:layout_alignRight="@+id/leftImageView"
+        android:layout_alignEnd="@+id/leftImageView"/>
+
+</RelativeLayout>
