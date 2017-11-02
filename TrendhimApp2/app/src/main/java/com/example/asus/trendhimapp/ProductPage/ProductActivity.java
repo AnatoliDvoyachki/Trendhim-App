@@ -20,6 +20,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     private CheckBox discountCheckBox;
     private TextView brandTextView, priceTextView;
 
+    //wsjka
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
