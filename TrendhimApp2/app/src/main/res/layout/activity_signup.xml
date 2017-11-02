@@ -11,7 +11,7 @@
     <!--  Email Label -->
     <EditText
         android:id="@+id/input_email"
-        android:layout_width="350dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:padding="10dp"
         android:background="@drawable/round_rect"
@@ -22,7 +22,7 @@
         <!-- Password Label -->
     <EditText
         android:id="@+id/input_password"
-        android:layout_width="350dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:padding="10dp"
         android:layout_marginTop="30dp"
@@ -34,7 +34,7 @@
         <!-- Password Re-enter Label -->
     <EditText
         android:id="@+id/confirmPassword"
-        android:layout_width="350dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:padding="10dp"
         android:layout_marginTop="30dp"
@@ -47,21 +47,11 @@
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_signup"
-            android:layout_width="350dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:text="Create Account"/>
-
-    <TextView
-        android:id="@+id/link_login"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:text="Already a member? Login"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="16dip" />
 
 </LinearLayout>
