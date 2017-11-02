@@ -42,6 +42,7 @@
         android:src="@drawable/wishlist" />
 
     <ImageView
+        android:onClick="main_to_login"
         android:id="@+id/login_icon"
         android:layout_width="20dp"
         android:layout_height="wrap_content"

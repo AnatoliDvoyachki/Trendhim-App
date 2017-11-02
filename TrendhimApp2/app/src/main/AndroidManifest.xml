@@ -25,6 +25,12 @@
         <activity android:name=".ProductPage.ProductActivity"
             android:parentActivityName=".CategoryPage.CategoryPageActivity"/>
 
+        <activity android:name=".Login.LoginActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity android:name=".Login.SignupActivity"
+            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

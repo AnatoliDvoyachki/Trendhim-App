@@ -1,4 +1,6 @@
 package com.example.asus.trendhimapp.Login;
 
-public class SignupActivity {
+import com.example.asus.trendhimapp.BaseActivity;
+
+public class SignupActivity extends BaseActivity{
 }

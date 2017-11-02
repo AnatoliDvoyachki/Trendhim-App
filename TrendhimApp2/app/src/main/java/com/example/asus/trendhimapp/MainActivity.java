@@ -1,9 +1,12 @@
 package com.example.asus.trendhimapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import com.example.asus.trendhimapp.Login.LoginActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -17,5 +20,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    public void main_to_login(View view){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
 
 }
