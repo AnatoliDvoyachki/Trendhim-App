@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="10dp"
-        android:text="Brand name"
+        android:text="@string/brand_name"
         android:textAllCaps="true"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:text="Product name"
+        android:text="@string/product_name"
         android:textSize="16sp" />
 
     <TextView
