@@ -81,7 +81,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                 Product product = dataSnapshot1.getValue(Product.class);
                                 Intent intent = new Intent(context, ProductActivity.class);
-                                intent.putExtra("productId", product.getProductId());
+                                intent.putExtra("productId", String.valueOf(product.getProductId()));
                                 intent.putExtra("category", category);
 
                                 context.startActivity(intent);

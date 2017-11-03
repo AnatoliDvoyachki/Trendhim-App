@@ -110,8 +110,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                Product product = dataSnapshot1.getValue(Product.class);
+                                Product product = dataSnapshot.getValue(Product.class);
                                     brandTextView.setText(product.getBrand()); //set brand
                                     priceTextView.setText(product.getPrice()); // set price
                                     BitmapFactory.getPicture(
@@ -120,7 +119,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                                             product.getLeftPictureUrl(), leftImageView); // get the left picture
                                     BitmapFactory.getPicture(
                                             product.getRightPictureUrl(), rightImageView); // get the right picture
-                            }
                         }
                     }
 
