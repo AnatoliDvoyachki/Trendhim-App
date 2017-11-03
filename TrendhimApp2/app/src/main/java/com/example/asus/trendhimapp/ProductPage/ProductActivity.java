@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.BaseActivity;
+import com.example.asus.trendhimapp.MainActivities.BaseActivity;
 import com.example.asus.trendhimapp.ProductPage.Products.*;
 import com.example.asus.trendhimapp.R;
 import com.google.firebase.database.DatabaseReference;
