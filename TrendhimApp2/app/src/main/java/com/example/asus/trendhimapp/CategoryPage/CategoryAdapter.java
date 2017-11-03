@@ -80,9 +80,16 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
                         if (dataSnapshot.exists()) {
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                 Product product = dataSnapshot1.getValue(Product.class);
+
                                 Intent intent = new Intent(context, ProductActivity.class);
+
                                 intent.putExtra("productId", String.valueOf(product.getProductId()));
-                                intent.putExtra("category", category);
+                                intent.putExtra("productName", product.getProductName());
+                                intent.putExtra("brand", product.getBrand());
+                                intent.putExtra("bannerPictureUrl", product.getBannerPictureUrl());
+                                intent.putExtra("price", String.valueOf(product.getPrice()));
+                                intent.putExtra("leftPictureUrl", product.getLeftPictureUrl());
+                                intent.putExtra("rightPictureUrl", product.getRightPictureUrl());
 
                                 context.startActivity(intent);
                             }

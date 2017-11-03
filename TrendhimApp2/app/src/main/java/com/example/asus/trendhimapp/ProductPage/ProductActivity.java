@@ -1,5 +1,6 @@
 package com.example.asus.trendhimapp.ProductPage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -13,20 +14,13 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.MainActivities.BaseActivity;
 import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
-import com.example.asus.trendhimapp.ProductPage.Products.Product;
 import com.example.asus.trendhimapp.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView bannerImageView, leftImageView, rightImageView;
-    private TextView brandTextView, priceTextView;
+    private TextView brandTextView, priceTextView, productNameTextView;
 
     // some test values for a bag
     //public String bannerPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_banner.png?alt=media&token=953c4b0e-6308-494d-b788-b069f478eb1c";
@@ -64,6 +58,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         priceTextView.setTypeface(null, Typeface.BOLD); // make the text bold
         priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
 
+        productNameTextView = findViewById(R.id.productNameTextView);
+
         // test value
         //  Product product = new Product(2, "Bag", bannerPic, leftPic, rightPic, "Delton", 150);
 //        Intent fromCategory = getIntent();
@@ -72,12 +68,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 //            product = (Product) bundle.get(Constants.PRODUCT_ITEM);
 //        }
 //        bundle.clear(); // cleanup the bundle
-
-       /* BitmapFactory.getPicture(product.getBannerPictureUrl(), bannerImageView); // get the banner
-        BitmapFactory.getPicture(product.getLeftPictureUrl(), leftImageView); // get the left picture
-        BitmapFactory.getPicture(product.getRightPictureUrl(), rightImageView); // get the right picture
-        brandTextView.setText(product.getBrand()); // set the brand
-        priceTextView.setText(String.valueOf(product.getPrice())); // set the price*/
 
     }
 
@@ -92,42 +82,31 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    public void getProductFromIntent(){
+    @SuppressLint("SetTextI18n")
+    public void getProductFromIntent() {
 
         Intent intent = getIntent();
 
         if (intent != null) {
-            final String productId = intent.getStringExtra("productId");
-            String category = intent.getStringExtra("category");
+            String productName = intent.getStringExtra("productName");
+            String price = intent.getStringExtra("price");
+            String bannerPictureUrl = intent.getStringExtra("bannerPictureUrl");
+            String leftPictureUrl = intent.getStringExtra("leftPictureUrl");
+            String rightPictureUrl = intent.getStringExtra("rightPictureUrl");
+            String brand = intent.getStringExtra("brand");
 
-            if (productId != null && category != null) {
+            if (productName != null && price != null && bannerPictureUrl != null && leftPictureUrl != null
+                    && rightPictureUrl != null && brand != null) {
 
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference productDatabase = firebaseDatabase.getReference(category);
-                Query query = productDatabase.orderByChild("productId").equalTo(productId);
-
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                                Product product = dataSnapshot.getValue(Product.class);
-                                    brandTextView.setText(product.getBrand()); //set brand
-                                    priceTextView.setText(product.getPrice()); // set price
-                                    BitmapFactory.getPicture(
-                                            product.getBannerPictureUrl(), bannerImageView); // get the banner
-                                    BitmapFactory.getPicture(
-                                            product.getLeftPictureUrl(), leftImageView); // get the left picture
-                                    BitmapFactory.getPicture(
-                                            product.getRightPictureUrl(), rightImageView); // get the right picture
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+                brandTextView.setText(brand); //set brand
+                priceTextView.setText(price + " €"); // set price
+                productNameTextView.setText(productName); //set product name
+                BitmapFactory.getPicture(
+                        bannerPictureUrl, bannerImageView); // get the banner
+                BitmapFactory.getPicture(
+                       leftPictureUrl, leftImageView); // get the left picture
+                BitmapFactory.getPicture(
+                        rightPictureUrl, rightImageView); // get the right picture
             }
         }
     }
