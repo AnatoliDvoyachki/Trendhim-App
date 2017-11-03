@@ -1,9 +1,10 @@
 package com.example.asus.trendhimapp.ProductPage;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+
+import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,32 +12,38 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Anatoli on 02-Nov-17.
- */
-
-/**
  * Thread, used to handle the downloads from the GoogleFirebase storage service.
  **/
-public class DownloadThread extends AsyncTask<String, Integer, Bitmap> {
+    public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
+    private String pictureUrl;
 
-    public DownloadThread(ImageView imageView) {
+    /***
+     *  Constructs the Thread.
+     *  @param pictureUrl
+     *         url reference to the picture
+     *  @param imageView
+     *          the view to which the picture will be assigned after execution
+     **/
+    public DownloadThread(String pictureUrl, ImageView imageView) {
+        this.pictureUrl = pictureUrl;
         this.imageView = imageView;
     }
 
     @Override
-    protected Bitmap doInBackground(String... params) {
-        return downloadImage(params[0]);
+    protected Bitmap doInBackground(Void... voids) {
+        return downloadImage(pictureUrl);
     }
 
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
-        imageView.setImageBitmap(bitmap); // Once the download is finished, show the image to the user
+        BitmapFactory.savePicture(pictureUrl, bitmap);// Once the download is finished, cache the image
+        imageView.setImageBitmap(bitmap); // Then show it to the user
     }
 
     /*
-     * Used to download an image, referenced by the url passed as a param
+     * Used to download an image, referenced by an url
      * @param urlString
      *      the url of the image
      * @return
@@ -49,15 +56,14 @@ public class DownloadThread extends AsyncTask<String, Integer, Bitmap> {
         try {
             URL url = new URL(urlString);
             con = (HttpURLConnection) url.openConnection();
-            con.getContentLength();
             inFromInternet = con.getInputStream();
-            bitmap = BitmapFactory.decodeStream(inFromInternet);
+            bitmap = android.graphics.BitmapFactory.decodeStream(inFromInternet);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             con.disconnect();
             try {
-                inFromInternet.close();
+                if (inFromInternet != null) {inFromInternet.close(); }
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

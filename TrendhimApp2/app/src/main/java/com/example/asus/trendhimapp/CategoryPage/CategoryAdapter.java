@@ -8,7 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
+import com.example.asus.trendhimapp.ProductPage.Products.Product;
 import com.example.asus.trendhimapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -36,39 +43,55 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         View contactView = inflater.inflate(R.layout.item_category, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
-        return viewHolder;
+        return new ViewHolder(contactView);
     }
-
-
-
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
 
-        CategoryPage category = categoryPageList.get(position);
+        CategoryPage product = categoryPageList.get(position);
 
         // Set item views based on your views and data model
         TextView productName = viewHolder.productNameTextView;
-        productName.setText(category.getName());
+        productName.setText(product.getName());
 
         TextView productBrand = viewHolder.productBrandTextView;
-        productBrand.setText(category.getBrand());
+        productBrand.setText(product.getBrand());
 
         TextView productPrice = viewHolder.productPriceTextView;
-        productPrice.setText(String.valueOf(category.getPrice()));
+        productPrice.setText(String.valueOf(product.getPrice()));
 
-        //ImageView productImage = viewHolder.productImage;
-        //productImage.setImageResource(category.getImage());
+        ImageView productImage = viewHolder.productImage;
+        BitmapFactory.getPicture(product.getBannerPictureURL(), productImage);
 
     }
-
-
 
     @Override
     public int getItemCount() {
         return categoryPageList.size();
+    }
+
+    void addData(String category) {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(category);
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for(DataSnapshot product : dataSnapshot.getChildren()) {
+                        Product p = product.getValue(Product.class);
+                        categoryPageList.add(new CategoryPage(p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl()));
+                        notifyItemInserted(getItemCount());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
     }
 
     // Provide a direct reference to each of the views

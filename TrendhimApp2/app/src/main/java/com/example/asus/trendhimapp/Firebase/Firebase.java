@@ -1,6 +1,6 @@
 package com.example.asus.trendhimapp.Firebase;
 
-import com.example.asus.trendhimapp.ProductPage.Products.*;
+import com.example.asus.trendhimapp.ProductPage.Products.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public final class Firebase {
     private static FirebaseDatabase firebaseDatabase;
     private static DatabaseReference myRef;
-
+    private static final String TAG = Firebase.class.getCanonicalName();
     // No instantiation
     private Firebase() {}
 
