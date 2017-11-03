@@ -11,23 +11,27 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity android:name=".MainActivities.MainActivity">
+
+        </activity>
+
+        <activity android:name=".CategoryPage.CategoryPageActivity" />
+
+        <activity android:name=".MainActivities.BaseActivity" />
+
+        <activity
+            android:name=".ProductPage.ProductActivity"
+            android:parentActivityName=".CategoryPage.CategoryPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        >
 
-        <activity android:name=".CategoryPage.CategoryPageActivity" />
+        <activity android:name=".Login.LoginActivity" />
 
-        <activity android:name=".MainActivities.BaseActivity"/>
-
-        <activity android:name=".ProductPage.ProductActivity"
-            android:parentActivityName=".CategoryPage.CategoryPageActivity"/>
-
-        <activity android:name=".Login.LoginActivity"/>
-
-        <activity android:name=".Login.SignupActivity"/>
+        <activity android:name=".Login.SignupActivity" />
 
     </application>
 

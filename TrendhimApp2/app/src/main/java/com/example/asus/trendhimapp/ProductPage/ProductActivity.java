@@ -29,9 +29,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     public String rightPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_right_sided_picture.PNG?alt=media&token=1849f345-bff7-4b91-bca8-163aeeef356f";
     public String brandPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_brand_image.png?alt=media&token=27b58ecd-6ab1-445b-aa1a-983caadf64b6";
 
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,32 +61,18 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
 
         Product product = new Product(2, bannerPic, leftPic, rightPic, brandPic, "Delton", 150.0);
-        // Intent fromCategory = getIntent();
-        // Bundle bundle = fromCategory.getExtras();
-        /*if (bundle != null) {
-            if (bundle.containsKey(Constants.BAG)) {
-                product = (Bag) bundle.get(Constants.BAG);
-            } else if (bundle.containsKey(Constants.BEARD_CARE)) {
-                product = (BeardCare) bundle.get(Constants.BEARD_CARE);
-            } else if (bundle.containsKey(Constants.BOW_TIE)) {
-                product = (BowTie) bundle.get(Constants.BOW_TIE);
-            } else if (bundle.containsKey(Constants.BRACELET)) {
-                product = (Bracelet) bundle.get(Constants.BRACELET);
-            } else if (bundle.containsKey(Constants.NECKLACE)) {
-                product = (Necklace) bundle.get(Constants.NECKLACE);
-            } else if (bundle.containsKey(Constants.TIE)) {
-                product = (Tie) bundle.get(Constants.TIE);
-            } else {
-                product = (Watch) bundle.get(Constants.WATCH);
-            }*/
-        //  bundle.clear(); // cleanup the bundle
+        Intent fromCategory = getIntent();
+        Bundle bundle = fromCategory.getExtras();
+        if (bundle != null) {
+            product = (Product) bundle.get(Constants.PRODUCT_ITEM);
+        }
+        bundle.clear(); // cleanup the bundle
         new DownloadThread(bannerImageView).execute(product.getBannerPictureUrl()); // download the banner
         new DownloadThread(leftImageView).execute(product.getLeftPictureUrl()); // download the left pic
         new DownloadThread(rightImageView).execute(product.getRightPictureUrl()); // download the right pic
         new DownloadThread(brandImageView).execute(product.getBrandPictureUrl()); // download the brand pic
         brandTextView.setText(product.getBrand()); // set the brand
-        priceTextView.setText(String.format("$%.2f", product.getPrice())); // set the price
-
+        priceTextView.setText(String.format(Constants.PRICE_FORMAT, product.getPrice())); // set the price
     }
 
 
