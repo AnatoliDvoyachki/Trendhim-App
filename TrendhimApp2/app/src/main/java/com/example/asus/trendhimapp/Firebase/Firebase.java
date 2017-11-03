@@ -1,6 +1,5 @@
 package com.example.asus.trendhimapp.Firebase;
 
-import com.example.asus.trendhimapp.ProductPage.Constants;
 import com.example.asus.trendhimapp.ProductPage.Products.*;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,28 +29,8 @@ public final class Firebase {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    if (tableName.equals(Constants.TABLE_NAME_BAGS)) {
-                        Bag bag = ds.getValue(Bag.class);
-                        productList.add(bag);
-                    } else if (tableName.equals(Constants.TABLE_NAME_BEARD_CARES)) {
-                        BeardCare beardCare = ds.getValue(BeardCare.class);
-                        productList.add(beardCare);
-                    } else if (tableName.equals(Constants.BOW_TIE)) {
-                        BowTie bowTie = ds.getValue(BowTie.class);
-                        productList.add(bowTie);
-                    } else if (tableName.equals(Constants.TABLE_NAME_BRACELETS)) {
-                        Bracelet bracelet = ds.getValue(Bracelet.class);
-                        productList.add(bracelet);
-                    } else if (tableName.equals(Constants.TABLE_NAME_NECKLACES)) {
-                        Necklace necklace = ds.getValue(Necklace.class);
-                        productList.add(necklace);
-                    } else if (tableName.equals(Constants.TABLE_NAME_TIES)) {
-                        Tie tie = ds.getValue(Tie.class);
-                        productList.add(tie);
-                    } else {
-                        Watch watch = ds.getValue(Watch.class);
-                        productList.add(watch);
-                    }
+                    Product theProduct = ds.getValue(Product.class);
+                    productList.add(theProduct);
                 }
             }
 

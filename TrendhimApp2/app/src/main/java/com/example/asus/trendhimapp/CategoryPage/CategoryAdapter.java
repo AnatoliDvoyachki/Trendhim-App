@@ -41,6 +41,8 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     }
 
 
+
+
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
@@ -61,6 +63,8 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         //productImage.setImageResource(category.getImage());
 
     }
+
+
 
     @Override
     public int getItemCount() {

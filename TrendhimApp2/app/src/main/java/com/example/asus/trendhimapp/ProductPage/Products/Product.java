@@ -1,6 +1,6 @@
 package com.example.asus.trendhimapp.ProductPage.Products;
 
-public abstract class Product {
+public class Product {
     private int productId;
     private String bannerPictureUrl, leftPictureUrl, rightPictureUrl, brandPictureUrl, brand;
     private double price;

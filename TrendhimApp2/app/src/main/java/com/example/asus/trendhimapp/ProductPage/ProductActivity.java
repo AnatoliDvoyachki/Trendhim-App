@@ -17,7 +17,6 @@ import com.example.asus.trendhimapp.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.lang.reflect.Type;
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
     private ImageView bannerImageView, leftImageView, rightImageView, brandImageView;
@@ -64,7 +63,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         priceTextView.setTypeface(null, Typeface.BOLD); // make the text bold
         priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
 
-        Product product = new Bag(2, bannerPic, leftPic, rightPic, brandPic, "Delton", 150.0);
+        Product product = new Product(2, bannerPic, leftPic, rightPic, brandPic, "Delton", 150.0);
         // Intent fromCategory = getIntent();
         // Bundle bundle = fromCategory.getExtras();
         /*if (bundle != null) {

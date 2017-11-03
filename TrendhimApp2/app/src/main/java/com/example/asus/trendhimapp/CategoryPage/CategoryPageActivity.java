@@ -44,4 +44,6 @@ public class CategoryPageActivity extends BaseActivity {
                 GridLayoutManager.VERTICAL, false));
 
     }
+
+
 }
