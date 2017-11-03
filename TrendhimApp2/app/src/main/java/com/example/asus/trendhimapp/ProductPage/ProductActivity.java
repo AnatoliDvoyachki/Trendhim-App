@@ -1,7 +1,6 @@
 package com.example.asus.trendhimapp.ProductPage;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +13,6 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.MainActivities.BaseActivity;
 import com.example.asus.trendhimapp.ProductPage.Products.*;
 import com.example.asus.trendhimapp.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
@@ -61,16 +58,17 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
 
         Product product = new Product(2, bannerPic, leftPic, rightPic, brandPic, "Delton", 150.0);
-        Intent fromCategory = getIntent();
-        Bundle bundle = fromCategory.getExtras();
-        if (bundle != null) {
-            product = (Product) bundle.get(Constants.PRODUCT_ITEM);
-        }
-        bundle.clear(); // cleanup the bundle
-        new DownloadThread(bannerImageView).execute(product.getBannerPictureUrl()); // download the banner
-        new DownloadThread(leftImageView).execute(product.getLeftPictureUrl()); // download the left pic
-        new DownloadThread(rightImageView).execute(product.getRightPictureUrl()); // download the right pic
-        new DownloadThread(brandImageView).execute(product.getBrandPictureUrl()); // download the brand pic
+//        Intent fromCategory = getIntent();
+//        Bundle bundle = fromCategory.getExtras();
+//        if (bundle != null) {
+//            product = (Product) bundle.get(Constants.PRODUCT_ITEM);
+//        }
+//        bundle.clear(); // cleanup the bundle
+
+        BitmapFactory.getPicture(product.getBannerPictureUrl(), bannerImageView); // get the banner
+        BitmapFactory.getPicture(product.getLeftPictureUrl(), leftImageView); // get the left picture
+        BitmapFactory.getPicture(product.getRightPictureUrl(), rightImageView); // get the right picture
+        BitmapFactory.getPicture(product.getBrandPictureUrl(), brandImageView); // get the brand picture
         brandTextView.setText(product.getBrand()); // set the brand
         priceTextView.setText(String.format(Constants.PRICE_FORMAT, product.getPrice())); // set the price
     }
