@@ -35,7 +35,7 @@
         android:textColorHint="@android:color/darker_gray" />
 
     <!-- Login Button -->
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/btn_login"
         android:onClick="login"
         android:layout_width="250dp"

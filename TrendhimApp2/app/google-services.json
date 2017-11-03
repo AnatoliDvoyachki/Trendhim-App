@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "843067515003-nsj55bvpq41tdpqrjpq6uv13cp8ji6dq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.asus.trendhimapp",
+            "certificate_hash": "c7ebc3a7d3da2fce653611bddf98594e05a7a925"
+          }
+        },
+        {
           "client_id": "843067515003-l3ebto1gsod6in0vlah5ip11n8hedt02.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
