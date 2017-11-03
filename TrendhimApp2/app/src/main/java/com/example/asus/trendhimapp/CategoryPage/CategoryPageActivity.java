@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.asus.trendhimapp.MainActivities.BaseActivity;
-import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.R;
 
 import java.util.ArrayList;
@@ -45,16 +43,13 @@ public class CategoryPageActivity extends BaseActivity {
         categories = new ArrayList<>();
 
         // Create adapter for the categories
-        adapter = new CategoryAdapter(this, categories);
+        adapter = new CategoryAdapter(this, categories, getCategory());
 
         // Attach the adapter to the recycler view
         recyclerView.setAdapter(adapter);
 
         //Populate the recycler view
         adapter.addData(getCategory());
-
-        //Handle touch events
-        handleTouchEvents();
 
         // Set layout manager to position the items
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2,
@@ -66,7 +61,7 @@ public class CategoryPageActivity extends BaseActivity {
      * Get category from the Navigation Bar - Used for the database queries
      * @return category title
      */
-    String getCategory(){
+    public String getCategory(){
         Intent intent = getIntent();
         if(intent != null){
             String category = intent.getStringExtra("category");
@@ -74,30 +69,6 @@ public class CategoryPageActivity extends BaseActivity {
                 return category;
         }
         return null;
-    }
-
-    /**
-     * Handle touch event - Redirect to the selected product
-     */
-    public void handleTouchEvents() {
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView recycler, MotionEvent event) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView recycler, MotionEvent event) {
-                Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
-                intent.putExtra("category", getCategory());
-                startActivity(intent);
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
     }
 
     /**

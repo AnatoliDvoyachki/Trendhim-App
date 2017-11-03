@@ -1,6 +1,7 @@
 package com.example.asus.trendhimapp.CategoryPage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
 import com.example.asus.trendhimapp.ProductPage.Products.Product;
 import com.example.asus.trendhimapp.R;
@@ -15,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
@@ -23,18 +26,12 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private Context context;
     private List<CategoryPage> categoryPageList;
+    private String category;
 
-    CategoryAdapter(Context context, List<CategoryPage> categories) {
+    CategoryAdapter(Context context, List<CategoryPage> categories, String category) {
         this.categoryPageList = categories;
         this.context = context;
-    }
-
-    /**
-     * Access to the context object in the Recycler View
-     * @return context
-     */
-    private Context getContext() {
-        return context;
+        this.category = category;
     }
 
     @Override
@@ -53,7 +50,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
 
-        CategoryPage product = categoryPageList.get(position);
+        final CategoryPage product = categoryPageList.get(position);
 
         // Set item views based on the views and data model
         TextView productName = viewHolder.productNameTextView;
@@ -68,7 +65,39 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         ImageView productImage = viewHolder.productImage;
         BitmapFactory.getPicture(product.getBannerPictureURL(), productImage);
 
-    }
+        /*
+          Handle touch event - Redirect to the selected product
+         */
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(category);
+                Query query = databaseReference.orderByChild("productId")
+                        .equalTo(product.getProductId());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                Product product = dataSnapshot1.getValue(Product.class);
+                                Intent intent = new Intent(context, ProductActivity.class);
+                                intent.putExtra("productId", product.getProductId());
+                                intent.putExtra("category", category);
+
+                                context.startActivity(intent);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+}
 
     @Override
     public int getItemCount() {
@@ -87,7 +116,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
                 if (dataSnapshot.exists()) {
                     for(DataSnapshot product : dataSnapshot.getChildren()) {
                         Product p = product.getValue(Product.class);
-                        categoryPageList.add(new CategoryPage(p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl()));
+                        categoryPageList.add(new CategoryPage(p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), p.getProductId()));
                         // Notify the adapter that an item was inserted in position = getItemCount()
                         notifyItemInserted(getItemCount());
                     }
