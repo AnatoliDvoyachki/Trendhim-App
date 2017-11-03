@@ -15,7 +15,7 @@ import java.util.List;
 class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private Context context;
-    private  List<CategoryPage> categoryPageList;
+    private List<CategoryPage> categoryPageList;
 
     CategoryAdapter(Context context, List<CategoryPage> categories) {
         this.categoryPageList = categories;
@@ -40,6 +40,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         return viewHolder;
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
@@ -56,7 +57,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         TextView productPrice = viewHolder.productPriceTextView;
         productPrice.setText(String.valueOf(category.getPrice()));
 
-       //ImageView productImage = viewHolder.productImage;
+        //ImageView productImage = viewHolder.productImage;
         //productImage.setImageResource(category.getImage());
 
     }

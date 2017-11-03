@@ -1,93 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <RelativeLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView android:layout_height="250dp"
-        android:layout_width="237dp"
-        android:layout_marginBottom="16dp"
-        android:layout_above="@+id/rightImageView"
-        app:srcCompat="@drawable/bracelet"
+    <!-- Product banner !-->
+    <ImageView
+        android:id="@+id/bannerImageView"
+        android:layout_width="240dp"
+        android:layout_height="250dp"
+        android:layout_above="@+id/leftImageView"
         android:layout_centerHorizontal="true"
-        android:id="@+id/bannerImageView"/>
+        android:layout_marginBottom="16dp"
+        android:cropToPadding="true"
+        android:scaleType="centerCrop" />
 
-    <ImageView android:layout_height="70dp"
-        android:layout_width="120dp"
-        app:srcCompat="@drawable/bracelet"
+    <!-- Left product picture !-->
+    <ImageView
         android:id="@+id/leftImageView"
-        android:layout_toRightOf="@+id/discountCheckBox"
-        android:layout_toEndOf="@+id/discountCheckBox"
-        android:layout_alignTop="@+id/rightImageView"/>
-
-    <ImageView android:layout_height="70dp"
-        android:layout_width="216dp"
-        android:layout_marginBottom="80dp"
+        android:layout_width="120dp"
+        android:layout_height="65dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/addToCartButton"
-        app:srcCompat="@drawable/bracelet"
+        android:layout_alignTop="@+id/rightImageView"
+        android:layout_marginStart="27dp"
+        android:cropToPadding="true"
+        android:padding="1dp"
+        android:scaleType="centerCrop" />
+
+    <!-- Right product picture !-->
+    <ImageView
         android:id="@+id/rightImageView"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="21dp"/>
+        android:layout_width="190dp"
+        android:layout_height="65dp"
+        android:layout_above="@+id/addToWishlistButton"
+        android:layout_marginBottom="125dp"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/leftImageView"
+        android:cropToPadding="true"
+        android:padding="1dp"
+        android:scaleType="centerCrop" />
 
-    <Button android:layout_height="30dp"
-        android:layout_width="170dp"
-        android:layout_above="@+id/discountCheckBox"
+    <!-- Add to cart button !-->
+    <Button
         android:id="@+id/addToCartButton"
-        android:textColor="@color/white"
+        android:layout_width="155dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/buttonGreen"
         android:text="@string/addToCartButtonLabel"
-        android:background="@color/buttonGreen"
-        android:layout_alignStart="@+id/discountCheckBox"
-        android:layout_alignLeft="@+id/discountCheckBox"/>
+        android:textColor="@color/white" />
 
-    <Button android:layout_height="30dp"
-        android:layout_width="170dp"
-        android:layout_above="@+id/discountCheckBox"
+    <!-- Add to wishlist !-->
+    <Button
         android:id="@+id/addToWishlistButton"
-        android:textColor="@color/white"
-        android:text="@string/addToWishlistButtonLabel"
+        android:layout_width="155dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/brandTextView"
+        android:layout_alignTop="@+id/addToCartButton"
+        android:layout_marginLeft="5dp"
         android:background="@color/buttonGreen"
-        android:layout_alignRight="@+id/leftImageView"
-        android:layout_alignEnd="@+id/leftImageView"/>
+        android:text="@string/addToWishlistButtonLabel"
+        android:textColor="@color/white" />
 
-    <CheckBox android:layout_height="30dp"
-        android:layout_width="223dp"
-        android:layout_marginBottom="19dp"
-        android:id="@+id/discountCheckBox"
-        android:text="@string/discountCheckBoxLabel"
-        android:background="@color/lightGrey"
-        android:layout_alignStart="@+id/rightImageView"
-        android:layout_alignLeft="@+id/rightImageView"
-        android:buttonTint="#13ce66"
-        android:layout_alignParentBottom="true"/>
-
-    <ImageView android:layout_height="wrap_content"
-        android:layout_width="100dp"
-        android:layout_marginBottom="38dp"
-        android:layout_above="@+id/addToCartButton"
-        app:srcCompat="@drawable/bracelet"
+    <!-- Brand image view !-->
+    <ImageView
         android:id="@+id/brandPictureImageView"
-        android:layout_alignStart="@+id/rightImageView"
-        android:layout_alignLeft="@+id/rightImageView"/>
-
-    <TextView android:layout_height="20dp"
         android:layout_width="100dp"
-        android:layout_marginBottom="14dp"
-        android:layout_above="@+id/addToCartButton"
-        android:id="@+id/brandTextView"
-        android:text="The brand"
-        android:layout_alignStart="@+id/brandPictureImageView"
-        android:layout_alignLeft="@+id/brandPictureImageView"/>
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/leftImageView"
+        android:layout_below="@+id/leftImageView"
+        android:layout_marginTop="15dp"
 
-    <TextView android:layout_height="20dp"
-        android:layout_width="60dp"
+        android:padding="1dp" />
+
+    <!-- Brand name !-->
+    <TextView
+        android:id="@+id/brandTextView"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/brandPictureImageView"
+        android:layout_below="@+id/priceTextView"
+        android:layout_marginTop="26dp"
+        android:gravity="center" />
+
+    <!-- Price text view !-->
+    <TextView
         android:id="@+id/priceTextView"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignEnd="@+id/rightImageView"
         android:layout_alignTop="@+id/brandPictureImageView"
-        android:text="The price"
-        android:layout_alignRight="@+id/leftImageView"
-        android:layout_alignEnd="@+id/leftImageView"/>
+        android:gravity="center" />
 
 </RelativeLayout>

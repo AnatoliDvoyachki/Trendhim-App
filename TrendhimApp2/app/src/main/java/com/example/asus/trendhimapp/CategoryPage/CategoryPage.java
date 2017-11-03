@@ -28,11 +28,11 @@ class CategoryPage {
     }
 
 
-     static ArrayList<CategoryPage> createCategoryList(int numCategories) {
+    static ArrayList<CategoryPage> createCategoryList(int numCategories) {
         ArrayList<CategoryPage> categories = new ArrayList<>();
 
         for (int i = 1; i <= numCategories; i++) {
-            categories.add(new CategoryPage("Product " + i, 100 * i, "Brand" + i));
+            categories.add(new CategoryPage("Watch " + i, 100 * i, "Brand" + i));
         }
 
         return categories;
