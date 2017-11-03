@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,16 +20,14 @@
 
         <activity android:name=".CategoryPage.CategoryPageActivity" />
 
-        <activity android:name=".BaseActivity"/>
+        <activity android:name=".MainActivities.BaseActivity"/>
 
         <activity android:name=".ProductPage.ProductActivity"
             android:parentActivityName=".CategoryPage.CategoryPageActivity"/>
 
-        <activity android:name=".Login.LoginActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Login.LoginActivity"/>
 
-        <activity android:name=".Login.SignupActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Login.SignupActivity"/>
 
     </application>
 

@@ -12,19 +12,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.BaseActivity;
-import com.example.asus.trendhimapp.MainActivity;
+import com.example.asus.trendhimapp.MainActivities.BaseActivity;
+import com.example.asus.trendhimapp.MainActivities.MainActivity;
 import com.example.asus.trendhimapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener {
 
@@ -49,6 +45,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         auth = FirebaseAuth.getInstance();
 
         passwordEditText.setOnKeyListener(this);
+
         LinearLayout loginLayout = findViewById(R.id.loginLayout);
         loginLayout.setOnClickListener(this);
 
@@ -61,16 +58,17 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
                 emailEditText.setText(email);
         }
 
-    }
 
+    }
     public void login(View view){
 
         EditText[] editTextFields = {emailEditText, passwordEditText};
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-
+        validate(editTextFields);
         if(validate(editTextFields)) {
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            auth.signInWithEmailAndPassword(email, password).
+                    addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {

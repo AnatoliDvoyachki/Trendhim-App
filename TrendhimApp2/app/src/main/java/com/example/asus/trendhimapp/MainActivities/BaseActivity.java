@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp;
+package com.example.asus.trendhimapp.MainActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryPageActivity;
 import com.example.asus.trendhimapp.Login.LoginActivity;
+import com.example.asus.trendhimapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

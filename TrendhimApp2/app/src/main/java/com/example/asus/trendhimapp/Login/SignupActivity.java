@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.BaseActivity;
+import com.example.asus.trendhimapp.MainActivities.BaseActivity;
 import com.example.asus.trendhimapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 public class SignupActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener{
 
     private EditText emailEditText, passwordEditText, confirmEditText;
-    private FirebaseUser user;
     private FirebaseAuth auth;
     private static final String TAG = SignupActivity.class.getCanonicalName();
 
@@ -48,63 +47,70 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
         setTitle("Sign up");
 
         auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
 
         emailEditText = findViewById(R.id.input_email_signUp);
         passwordEditText = findViewById(R.id.input_password_signUp);
         confirmEditText = findViewById(R.id.confirmPassword);
 
         confirmEditText.setOnKeyListener(this);
+
         LinearLayout signupLayout = findViewById(R.id.signupLayout);
         signupLayout.setOnClickListener(this);
 
     }
 
-    public void signUp(View view){
+    public void signUp(View view) {
+        final EditText[] fields = {passwordEditText, confirmEditText, emailEditText};
+        validate(fields);
 
-        final EditText[] fields = {emailEditText, passwordEditText, confirmEditText};
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String confirm = confirmEditText.getText().toString();
+        assert passwordEditText != null;
+        if (!(passwordEditText.getText().toString().equals(confirmEditText.getText().toString())))
+            confirmEditText.setError("Passwords don't match");
+        if (!isEmailValid(emailEditText.getText().toString()))
+            emailEditText.setError("Invalid Email");
+        else {
+            if (passwordEditText.getText().toString().equals(confirmEditText.getText().toString())) {
+                auth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
 
-        if(validate(fields)) {
-            if (!password.equals(confirm))
-                confirmEditText.setError("Passwords don't match");
-            else if (!isEmailValid(email))
-                emailEditText.setError("Email is invalid");
-            else {
-                if (password.equals(confirm)) {
-                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                intent.putExtra("email", user.getEmail());
-                                startActivity(intent);
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    intent.putExtra("email",user.getEmail());
+                                    startActivity(intent);
+                                    for (EditText editText : fields)
+                                        editText.setText(null);
+                                } else {
+                                    if(!task.isSuccessful()) {
+                                        Toast.makeText(SignupActivity.this, "Ups! Authentication failed.", Toast.LENGTH_SHORT).show();
+                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
-                                for(EditText editText : fields)
-                                    editText.setText(null);
-                            } else if(!task.isSuccessful()) {
-                                    Toast.makeText(SignupActivity.this, "Ups! Authentication failed.", Toast.LENGTH_SHORT).show();
-                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    try {
-                                        throw task.getException();
-                                    } catch(FirebaseAuthWeakPasswordException e) {
-                                        passwordEditText.setError("Password has to be at least 6 characters");
-                                        passwordEditText.requestFocus();
-                                    } catch(FirebaseAuthInvalidCredentialsException e) {
-                                        emailEditText.setError("Invalid email format");
-                                        emailEditText.requestFocus();
-                                    } catch(FirebaseAuthUserCollisionException e) {
-                                        emailEditText.setError("User already exists");
-                                        emailEditText.requestFocus();
-                                    } catch(Exception e) {
-                                        Log.w("SignInLog", "createUserWithEmail:failure", task.getException());
+                                        try {
+                                            throw task.getException();
+                                        } catch(FirebaseAuthWeakPasswordException e) {
+                                            passwordEditText.setError("Password has to be at least 6 characters");
+                                            passwordEditText.requestFocus();
+                                        } catch(FirebaseAuthInvalidCredentialsException e) {
+                                            emailEditText.setError("Invalid email format");
+                                            emailEditText.requestFocus();
+                                        } catch(FirebaseAuthUserCollisionException e) {
+                                            emailEditText.setError("User already exists");
+                                            emailEditText.requestFocus();
+                                        } catch(Exception e) {
+                                            Log.w("SignInLog", "createUserWithEmail:failure", task.getException());
+                                        }
                                     }
+                                    // If sign in fails, display a message to the user.
                                 }
+
+                                // ...
                             }
-                    });
-                }
+                        });
+
             }
         }
     }
