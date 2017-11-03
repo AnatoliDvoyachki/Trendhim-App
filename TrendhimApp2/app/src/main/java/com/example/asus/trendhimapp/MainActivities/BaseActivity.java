@@ -26,6 +26,7 @@ public class BaseActivity  extends AppCompatActivity
 
     public static DrawerLayout drawer;
     private FirebaseAuth auth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class BaseActivity  extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         auth = FirebaseAuth.getInstance();
-
+        user = auth.getCurrentUser();
     }
 
     @Override
@@ -104,7 +105,12 @@ public class BaseActivity  extends AppCompatActivity
                 startActivity(intent);
                 break;
             case R.id.logOut:
-                auth.signOut();
+                if(user != null) {
+                    auth.signOut();
+                    Toast.makeText(getApplicationContext(), "You have successfully logged out", Toast.LENGTH_LONG).show();
+                } else
+                  Toast.makeText(getApplicationContext(), "You need to log in first", Toast.LENGTH_LONG).show();
+
 
         }
 
