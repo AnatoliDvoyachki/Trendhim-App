@@ -43,7 +43,7 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
     }
 
     /*
-     * Used to download an image, referenced by the url passed as a param
+     * Used to download an image, referenced by an url
      * @param urlString
      *      the url of the image
      * @return
