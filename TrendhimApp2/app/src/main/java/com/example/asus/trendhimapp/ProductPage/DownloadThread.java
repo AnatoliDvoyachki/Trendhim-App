@@ -12,10 +12,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Anatoli on 02-Nov-17.
- */
-
-/**
  * Thread, used to handle the downloads from the GoogleFirebase storage service.
  **/
 public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
@@ -60,7 +56,6 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
         try {
             URL url = new URL(urlString);
             con = (HttpURLConnection) url.openConnection();
-            con.getContentLength();
             inFromInternet = con.getInputStream();
             bitmap = android.graphics.BitmapFactory.decodeStream(inFromInternet);
         } catch (IOException e) {

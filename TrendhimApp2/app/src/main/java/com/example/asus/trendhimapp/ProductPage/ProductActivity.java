@@ -16,7 +16,7 @@ import com.example.asus.trendhimapp.R;
 
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
-    private ImageView bannerImageView, leftImageView, rightImageView, brandImageView;
+    private ImageView bannerImageView, leftImageView, rightImageView;
     private Button addToCartButton, addToWishlistButton;
     private TextView brandTextView, priceTextView;
 
@@ -24,8 +24,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     public String bannerPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_banner.png?alt=media&token=953c4b0e-6308-494d-b788-b069f478eb1c";
     public String leftPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_left_sided_picture.PNG?alt=media&token=53584d12-c70b-4a8e-82b2-e32ef8177e19";
     public String rightPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_right_sided_picture.PNG?alt=media&token=1849f345-bff7-4b91-bca8-163aeeef356f";
-    public String brandPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_brand_image.png?alt=media&token=27b58ecd-6ab1-445b-aa1a-983caadf64b6";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +40,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         bannerImageView = findViewById(R.id.bannerImageView);
         leftImageView = findViewById(R.id.leftImageView);
         rightImageView = findViewById(R.id.rightImageView);
-        brandImageView = findViewById(R.id.brandPictureImageView);
 
         addToCartButton = findViewById(R.id.addToCartButton);
         addToWishlistButton = findViewById(R.id.addToWishlistButton);
@@ -56,8 +53,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         priceTextView = findViewById(R.id.priceTextView);
         priceTextView.setTypeface(null, Typeface.BOLD); // make the text bold
         priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
-
-        Product product = new Product(2, bannerPic, leftPic, rightPic, brandPic, "Delton", 150.0);
+        // test value
+        Product product = new Product(2, bannerPic, leftPic, rightPic, "Delton", 150.0);
 //        Intent fromCategory = getIntent();
 //        Bundle bundle = fromCategory.getExtras();
 //        if (bundle != null) {
@@ -68,7 +65,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         BitmapFactory.getPicture(product.getBannerPictureUrl(), bannerImageView); // get the banner
         BitmapFactory.getPicture(product.getLeftPictureUrl(), leftImageView); // get the left picture
         BitmapFactory.getPicture(product.getRightPictureUrl(), rightImageView); // get the right picture
-        BitmapFactory.getPicture(product.getBrandPictureUrl(), brandImageView); // get the brand picture
         brandTextView.setText(product.getBrand()); // set the brand
         priceTextView.setText(String.format(Constants.PRICE_FORMAT, product.getPrice())); // set the price
     }

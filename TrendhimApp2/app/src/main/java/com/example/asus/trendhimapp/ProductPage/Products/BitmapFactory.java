@@ -32,7 +32,7 @@ public final class BitmapFactory {
             Log.d(TAG, "Downloading");
         } else {
             imageView.setImageBitmap(bitmap); // If it is stored locally, reuse it
-            Log.d(TAG, "Reused " + bitmap.toString());
+            Log.d(TAG, "Reused " + bitmap);
         }
     }
 
@@ -44,7 +44,7 @@ public final class BitmapFactory {
      **/
     public static void savePicture(String url, Bitmap bitmap) {
         PICTURE_CACHE.put(url, bitmap);
-        Log.d(TAG, "Saved " + bitmap.toString());
+        Log.d(TAG, "Saved " + bitmap);
     }
 
 }

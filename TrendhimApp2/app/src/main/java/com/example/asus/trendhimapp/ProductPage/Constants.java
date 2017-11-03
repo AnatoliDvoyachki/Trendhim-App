@@ -5,6 +5,7 @@ public final class Constants {
 
     public static final String PRODUCT_ITEM = "Product";
 
+    // ProductActivity price TextView format
     public static final String PRICE_FORMAT = "$%.2f";
 
     // Names of the entities in GoogleFirebase
