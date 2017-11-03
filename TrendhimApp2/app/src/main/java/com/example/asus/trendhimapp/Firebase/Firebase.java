@@ -31,8 +31,7 @@ public final class Firebase {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
         return productList;
     }

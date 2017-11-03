@@ -33,9 +33,10 @@
         android:id="@+id/rightImageView"
         android:layout_width="190dp"
         android:layout_height="65dp"
-        android:layout_above="@+id/addToCartButton"
+        android:layout_above="@+id/addToWishlistButton"
         android:layout_marginBottom="125dp"
-        android:layout_toEndOf="@+id/addToWishlistButton"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/leftImageView"
         android:cropToPadding="true"
         android:padding="1dp"
         android:scaleType="centerCrop" />
@@ -66,6 +67,8 @@
         android:text="@string/addToWishlistButtonLabel"
         android:textColor="@color/white" />
 
+    <!-- Brand image view !-->
+
     <!-- Brand name !-->
     <TextView
         android:id="@+id/brandTextView"
@@ -73,7 +76,7 @@
         android:layout_height="30dp"
         android:layout_alignStart="@+id/leftImageView"
         android:layout_below="@+id/leftImageView"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="19dp"
         android:gravity="center" />
 
     <!-- Price text view !-->
