@@ -14,7 +14,7 @@ import java.net.URL;
 /**
  * Thread, used to handle the downloads from the GoogleFirebase storage service.
  **/
-    public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
+public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
     private String pictureUrl;
 
@@ -63,7 +63,7 @@ import java.net.URL;
         } finally {
             con.disconnect();
             try {
-                if (inFromInternet != null) {inFromInternet.close(); }
+                inFromInternet.close();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

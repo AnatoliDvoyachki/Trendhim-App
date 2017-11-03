@@ -3,6 +3,7 @@ package com.example.asus.trendhimapp.ProductPage.Products;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.asus.trendhimapp.ProductPage.DownloadThread;
 
