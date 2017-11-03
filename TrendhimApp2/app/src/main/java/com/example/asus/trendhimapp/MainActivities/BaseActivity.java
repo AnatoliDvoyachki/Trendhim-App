@@ -103,6 +103,8 @@ public class BaseActivity  extends AppCompatActivity
                 intent.putExtra("category", Constants.TABLE_NAME_BOW_TIES);
                 startActivity(intent);
                 break;
+            case R.id.logOut:
+                auth.signOut();
 
         }
 
