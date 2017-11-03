@@ -7,7 +7,7 @@
             android:icon="@drawable/bracelet"
             android:title="Bracelets" />
         <item
-            android:id="@+id/neckleces"
+            android:id="@+id/necklaces"
             android:icon="@drawable/pendant"
             android:title="Necklaces" />
         <item

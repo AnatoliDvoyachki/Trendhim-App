@@ -16,6 +16,7 @@ import com.example.asus.trendhimapp.R;
 
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
+
     private ImageView bannerImageView, leftImageView, rightImageView;
     private Button addToCartButton, addToWishlistButton;
     private TextView brandTextView, priceTextView;
@@ -54,7 +55,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         priceTextView.setTypeface(null, Typeface.BOLD); // make the text bold
         priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
         // test value
-        Product product = new Product(2, bannerPic, leftPic, rightPic, "Delton", 150.0);
+        Product product = new Product(2, "Bag", bannerPic, leftPic, rightPic, "Delton", 150);
 //        Intent fromCategory = getIntent();
 //        Bundle bundle = fromCategory.getExtras();
 //        if (bundle != null) {
