@@ -18,13 +18,13 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
     private String pictureUrl;
 
-    /***
+    /**
      *  Constructs the Thread.
      *  @param pictureUrl
      *         url reference to the picture
      *  @param imageView
      *          the view to which the picture will be assigned after execution
-     **/
+     */
     public DownloadThread(String pictureUrl, ImageView imageView) {
         this.pictureUrl = pictureUrl;
         this.imageView = imageView;
@@ -42,7 +42,7 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
         imageView.setImageBitmap(bitmap); // Then show it to the user
     }
 
-    /*
+    /**
      * Used to download an image, referenced by an url
      * @param urlString
      *      the url of the image

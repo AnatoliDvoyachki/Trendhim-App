@@ -29,7 +29,10 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         this.context = context;
     }
 
-    // Access to the context object in the Recycler View
+    /**
+     * Access to the context object in the Recycler View
+     * @return context
+     */
     private Context getContext() {
         return context;
     }
@@ -52,7 +55,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
         CategoryPage product = categoryPageList.get(position);
 
-        // Set item views based on your views and data model
+        // Set item views based on the views and data model
         TextView productName = viewHolder.productNameTextView;
         productName.setText(product.getName());
 
@@ -72,6 +75,10 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         return categoryPageList.size();
     }
 
+    /**
+     * Populate the recycler view. Get data from the database which name is equal to the parameter.
+     * @param category
+     */
     void addData(String category) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(category);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -81,6 +88,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
                     for(DataSnapshot product : dataSnapshot.getChildren()) {
                         Product p = product.getValue(Product.class);
                         categoryPageList.add(new CategoryPage(p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl()));
+                        // Notify the adapter that an item was inserted in position = getItemCount()
                         notifyItemInserted(getItemCount());
                     }
                 }
@@ -94,8 +102,10 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         });
     }
 
-    // Provide a direct reference to each of the views
-    // Used to cache the views within the layout for fast access
+    /**
+     *  Provide a direct reference to each of the views
+     * used to cache the views within the layout for fast access
+    */
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView productNameTextView;
@@ -103,11 +113,14 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         TextView productBrandTextView;
         ImageView productImage;
 
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
+        /**
+         *  We also create a constructor that does the view lookups to find each subview
+         */
         ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
+            /*
+              Stores the itemView in a public final member variable that can be used
+              to access the context from any ViewHolder instance.
+             */
             super(itemView);
 
             productNameTextView = itemView.findViewById(R.id.product_name_category);
