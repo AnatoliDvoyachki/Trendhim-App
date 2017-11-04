@@ -15,8 +15,6 @@ import java.util.HashMap;
 public final class BitmapFlyweight {
     private BitmapFlyweight() {}
 
-    private final static String TAG = "FLYWEIGHT:";
-
     private final static HashMap<String, Bitmap> PICTURE_CACHE = new HashMap<>();
 
     /**
@@ -28,11 +26,9 @@ public final class BitmapFlyweight {
     public static void getPicture(String url, ImageView imageView) {
         Bitmap bitmap = PICTURE_CACHE.get(url);
         if (bitmap == null) {
-            Log.d(TAG, "Downloading");
             new DownloadThread(url, imageView).execute(); // If the picture is not stored locally, download it
         } else {
             imageView.setImageBitmap(bitmap); // If it is stored locally, reuse it
-            Log.d(TAG, "Reused " + bitmap);
         }
     }
 
@@ -44,7 +40,6 @@ public final class BitmapFlyweight {
      **/
     public static void savePicture(String url, Bitmap bitmap) {
         PICTURE_CACHE.put(url, bitmap);
-        Log.d(TAG, "Saved " + bitmap);
     }
 
 }

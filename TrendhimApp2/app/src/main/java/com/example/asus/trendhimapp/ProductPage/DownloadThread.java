@@ -65,7 +65,6 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
                     con.disconnect();
                 if (inFromInternet != null)
                     inFromInternet.close();
-
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

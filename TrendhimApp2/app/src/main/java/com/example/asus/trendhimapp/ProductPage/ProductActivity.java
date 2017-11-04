@@ -18,7 +18,6 @@ import com.example.asus.trendhimapp.R;
 
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
-
     private ImageView bannerImageView, leftImageView, rightImageView;
     private TextView brandTextView, priceTextView, productNameTextView;
 
@@ -29,7 +28,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_product, null, false);
         BaseActivity.drawer.addView(contentView, 0);
-
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         initializeComponents();
         getProductFromIntent();
@@ -56,6 +54,31 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         productNameTextView = findViewById(R.id.productNameTextView);
     }
 
+    @SuppressLint("SetTextI18n")
+    public void getProductFromIntent() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            String productName = intent.getStringExtra("productName");
+            String price = intent.getStringExtra("price");
+            String bannerPictureUrl = intent.getStringExtra("bannerPictureUrl");
+            String leftPictureUrl = intent.getStringExtra("leftPictureUrl");
+            String rightPictureUrl = intent.getStringExtra("rightPictureUrl");
+            String brand = intent.getStringExtra("brand");
+            if (productName != null && price != null && bannerPictureUrl != null && leftPictureUrl != null
+                    && rightPictureUrl != null && brand != null) {
+                // set all the values & pictures
+                brandTextView.setText(brand);
+                priceTextView.setText(price + " €");
+                productNameTextView.setText(productName);
+                BitmapFlyweight.getPicture(
+                        bannerPictureUrl, bannerImageView);
+                BitmapFlyweight.getPicture(
+                        leftPictureUrl, leftImageView);
+                BitmapFlyweight.getPicture(
+                        rightPictureUrl, rightImageView);
+            }
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -64,35 +87,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             Toast.makeText(getApplicationContext(), "Test add to wishlist", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getApplicationContext(), "Test add to cart", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @SuppressLint("SetTextI18n")
-    public void getProductFromIntent() {
-
-        Intent intent = getIntent();
-
-        if (intent != null) {
-            String productName = intent.getStringExtra("productName");
-            String price = intent.getStringExtra("price");
-            String bannerPictureUrl = intent.getStringExtra("bannerPictureUrl");
-            String leftPictureUrl = intent.getStringExtra("leftPictureUrl");
-            String rightPictureUrl = intent.getStringExtra("rightPictureUrl");
-            String brand = intent.getStringExtra("brand");
-
-            if (productName != null && price != null && bannerPictureUrl != null && leftPictureUrl != null
-                    && rightPictureUrl != null && brand != null) {
-
-                brandTextView.setText(brand); //set brand
-                priceTextView.setText(price + " €"); // set price
-                productNameTextView.setText(productName); //set product name
-                BitmapFlyweight.getPicture(
-                        bannerPictureUrl, bannerImageView); // get the banner
-                BitmapFlyweight.getPicture(
-                        leftPictureUrl, leftImageView); // get the left picture
-                BitmapFlyweight.getPicture(
-                        rightPictureUrl, rightImageView); // get the right picture
-            }
         }
     }
 
