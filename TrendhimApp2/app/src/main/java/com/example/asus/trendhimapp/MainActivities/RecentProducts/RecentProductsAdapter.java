@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
+import com.example.asus.trendhimapp.MainActivities.MainActivity;
 import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
 import com.example.asus.trendhimapp.ProductPage.Products.Product;
@@ -34,6 +35,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     public RecentProductsAdapter(Context context, List<CategoryProduct> recentProducts) {
         this.recentProducts = recentProducts;
         this.context = context;
+
     }
 
     @Override
@@ -187,6 +189,8 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                 }
                             });
                         }
+                    } else {
+                        MainActivity.noRecentProducts.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -225,7 +229,6 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
             productPriceTextView = itemView.findViewById(R.id.product_price_main);
             productBrandTextView = itemView.findViewById(R.id.brand_name_main);
             productImage = itemView.findViewById(R.id.product_image_main);
-
         }
     }
 

@@ -1,7 +1,6 @@
 package com.example.asus.trendhimapp.MainActivities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -9,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.MainActivities.RecentProducts.RecentProductsAdapter;
@@ -20,6 +20,7 @@ public class MainActivity extends BaseActivity {
 
     ArrayList<CategoryProduct> recentProducts;
     RecentProductsAdapter adapter;
+    public static TextView noRecentProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class MainActivity extends BaseActivity {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.content_main, null, false);
         BaseActivity.drawer.addView(contentView, 0);
+
+        noRecentProducts = findViewById(R.id.noRecentProducts);
 
         // Lookup the recycler view in activity layout
         RecyclerView recyclerView = findViewById(R.id.recyclerViewmain);

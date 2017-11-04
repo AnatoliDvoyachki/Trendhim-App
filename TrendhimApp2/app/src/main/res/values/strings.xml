@@ -23,5 +23,6 @@
     <string name="logo">logo</string>
     <string name="bannerimage">bannerImage</string>
     <string name="recent_products">Recent products</string>
+    <string name="you_don_t_have_recent_products">You don\'t have recent products</string>
 
 </resources>

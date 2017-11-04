@@ -3,12 +3,14 @@ package com.example.asus.trendhimapp.CategoryPage;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.asus.trendhimapp.MainActivities.RecentProducts.RecentProduct;
 import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
 import com.example.asus.trendhimapp.ProductPage.Products.Product;
@@ -19,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -177,16 +180,44 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         }
     }
 
-    private void addToRecent(CategoryProduct product) {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
-            Map<String, String> values = new HashMap<>();
-            values.put("key", product.getKey());
-            values.put("user_email", user.getEmail());
-            values.put("category", category);
-            myRef.push().setValue(values);
-        }
+    private void addToRecent(final CategoryProduct product) {
 
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final boolean[] exists = {false};
+        if(user != null){ //if the user is logged in
+            Query query = myRef.orderByChild("user_email").equalTo(user.getEmail()); //get user recent products
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+                        if(Objects.equals(recentProduct.getKey(), product.getKey())) {
+                            //if the product is not added to the database
+                            Log.i("shit", product.getKey());
+                            exists[0] = true;
+                            break;
+                        }
+                    }
+
+                    if(!exists[0]){
+                        Map<String, String> values = new HashMap<>();
+                        values.put("key", product.getKey());
+                        values.put("user_email", user.getEmail());
+                        values.put("category", category);
+                        myRef.push().setValue(values);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }
     }
+
 }

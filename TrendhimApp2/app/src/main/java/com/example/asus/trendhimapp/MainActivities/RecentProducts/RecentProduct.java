@@ -20,7 +20,7 @@ public class RecentProduct {
         return category;
     }
 
-    String getKey() {
+    public String getKey() {
         return key;
     }
 
