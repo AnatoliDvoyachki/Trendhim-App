@@ -19,13 +19,13 @@
 
         </activity>
 
-        <activity android:name=".CategoryPage.CategoryPageActivity" />
+        <activity android:name=".CategoryPage.CategoryProductActivity" />
 
         <activity android:name=".MainActivities.BaseActivity" />
 
         <activity
             android:name=".ProductPage.ProductActivity"
-            android:parentActivityName=".CategoryPage.CategoryPageActivity"/>
+            android:parentActivityName=".CategoryPage.CategoryProductActivity"/>
 
         <activity android:name=".Login.LoginActivity" />
 

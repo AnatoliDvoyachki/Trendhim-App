@@ -10,7 +10,7 @@ public final class Constants {
 
     // Entity names in Google Firebase
     public static final String TABLE_NAME_BAGS = "bags";
-    public static final String TABLE_NAME_BEARD_CARE = "beard_cares";
+    public static final String TABLE_NAME_BEARD_CARE = "beard_care";
     public static final String TABLE_NAME_BOW_TIES = "bow_ties";
     public static final String TABLE_NAME_BRACELETS = "bracelets";
     public static final String TABLE_NAME_NECKLACES = "necklaces";
