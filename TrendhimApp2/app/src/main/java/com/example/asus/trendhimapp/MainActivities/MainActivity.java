@@ -44,8 +44,9 @@ public class MainActivity extends BaseActivity {
             public void onClick(View view) {
                 if(i % 2 == 0)
                     recentProductsLayout.setVisibility(View.VISIBLE);
-                else if(i % 2 != 0)
+                if(i % 2 != 0)
                     recentProductsLayout.setVisibility(View.GONE);
+                i++;
             }
         });
 
@@ -59,8 +60,9 @@ public class MainActivity extends BaseActivity {
             public void onClick(View view) {
                 if(i1 % 2 == 0)
                     recommendedProductsLayout.setVisibility(View.VISIBLE);
-                else if(i1 % 2 != 0)
-                    recentProductsLayout.setVisibility(View.GONE);
+                if(i1 % 2 != 0)
+                    recommendedProductsLayout.setVisibility(View.GONE);
+                i1++;
             }
         });
 
