@@ -1,11 +1,9 @@
 package com.example.asus.trendhimapp.ProductPage.Products;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.asus.trendhimapp.ProductPage.DownloadThread;
+import com.example.asus.trendhimapp.ProductPage.DownloadTask;
 
 import java.util.HashMap;
 
@@ -26,7 +24,7 @@ public final class BitmapFlyweight {
     public static void getPicture(String url, ImageView imageView) {
         Bitmap bitmap = PICTURE_CACHE.get(url);
         if (bitmap == null) {
-            new DownloadThread(url, imageView).execute(); // If the picture is not stored locally, download it
+            new DownloadTask(url, imageView).execute(); // If the picture is not stored locally, download it
         } else {
             imageView.setImageBitmap(bitmap); // If it is stored locally, reuse it
         }

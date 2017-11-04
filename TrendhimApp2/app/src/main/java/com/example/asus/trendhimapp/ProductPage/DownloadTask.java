@@ -13,9 +13,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Thread, used to handle the downloads from the GoogleFirebase storage service.
+ * Used to handle the downloads from the GoogleFirebase storage service.
  **/
-public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
+public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
     private String pictureUrl;
 
@@ -25,7 +25,7 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
      * @param pictureUrl url reference to the picture
      * @param imageView  the view to which the picture will be assigned after execution
      */
-    public DownloadThread(String pictureUrl, ImageView imageView) {
+    public DownloadTask(String pictureUrl, ImageView imageView) {
         this.pictureUrl = pictureUrl;
         this.imageView = imageView;
     }
