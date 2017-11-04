@@ -15,9 +15,9 @@ import java.util.HashMap;
 public final class BitmapFlyweight {
     private BitmapFlyweight() {}
 
-    private static String TAG = "FLYWEIGHT:";
+    private final static String TAG = "FLYWEIGHT:";
 
-    private static HashMap<String, Bitmap> PICTURE_CACHE = new HashMap<>();
+    private final static HashMap<String, Bitmap> PICTURE_CACHE = new HashMap<>();
 
     /**
      * Used to get a picture for the ImageViews.
