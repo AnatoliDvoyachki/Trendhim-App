@@ -71,22 +71,30 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Query the recent_product database to get the product category
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recent_products");
+                //get product which key is equal to the one clicked
                 databaseReference.orderByChild("key").equalTo(product.getKey())
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
                             for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                //Found product
                                 RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+
+                                //Query to the product category to get the product information
                                 DatabaseReference category_products_database =
                                         FirebaseDatabase.getInstance().getReference(recentProduct.getCategory());
+
                                 category_products_database.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
                                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                                //If the object key is correct
                                                 if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
+
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
 
                                                     Intent intent = new Intent(context, ProductActivity.class);
@@ -97,12 +105,11 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                     intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
                                                     intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
                                                     intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
+
                                                     context.startActivity(intent);
                                                 }
-
                                             }
                                         }
-
                                     }
 
                                     @Override
@@ -119,7 +126,6 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
                     }
                 });
-
             }
         });
 
@@ -136,33 +142,43 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null) {
+
+        if(user != null) { //Add products to the recent products recycler view if the user is logged in
             Query query = myRef.orderByChild("user_email").equalTo(user.getEmail());
+
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(final DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         for(final DataSnapshot product : dataSnapshot.getChildren()) {
+                            //Found product
                             RecentProduct recentProduct = product.getValue(RecentProduct.class);
-                            final String productKey = recentProduct.getKey();
-                            String productCategory = recentProduct.getCategory();
+
+                            final String productKey = recentProduct.getKey(); //Product key
+                            String productCategory = recentProduct.getCategory(); //Product category
+
+                            //Query to the product category database
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
+
                             Query query = myRef.orderByChild(productKey);
                             query.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
                                         for (DataSnapshot product : dataSnapshot.getChildren()) {
+
                                             Product p = product.getValue(Product.class);
+                                            //If the key of the product found is equal to the recent product key
                                             if(Objects.equals(product.getKey(), productKey)) {
-                                                recentProducts.add(new CategoryProduct(
-                                                        p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), productKey));
+
+                                                recentProducts.add(new CategoryProduct(p.getProductName(), p.getPrice(),
+                                                        p.getBrand(), p.getBannerPictureUrl(), productKey));
+
                                                 // Notify the adapter that an item was inserted in position = getItemCount()
                                                 notifyItemInserted(getItemCount());
                                             }
                                         }
                                     }
-
                                 }
 
                                 @Override
