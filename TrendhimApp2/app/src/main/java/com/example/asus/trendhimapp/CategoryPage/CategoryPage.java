@@ -3,13 +3,14 @@ package com.example.asus.trendhimapp.CategoryPage;
 class CategoryPage {
 
     private String name, brand, bannerPictureURL;
-    private int price;
+    private int price, productId;
 
-    CategoryPage(String name, int price, String brand, String bannerPictureURL) {
+    CategoryPage(String name, int price, String brand, String bannerPictureURL, int productId) {
         this.name = name;
         this.price = price;
         this.brand = brand;
         this.bannerPictureURL = bannerPictureURL;
+        this.productId = productId;
     }
 
     String getName() {
@@ -26,6 +27,10 @@ class CategoryPage {
 
     String getBannerPictureURL(){
         return bannerPictureURL;
+    }
+
+    int getProductId() {
+        return productId;
     }
 
 }

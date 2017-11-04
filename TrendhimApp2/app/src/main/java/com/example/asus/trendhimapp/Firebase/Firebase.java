@@ -12,8 +12,7 @@ public final class Firebase {
     // No instantiation
     private Firebase() {}
 
-    /*
-    *
+    /**
     * Fetches an array list of all objects inside a Firebase entity specified by @param tableName
     * Example: ArrayList<Product> bagList = Firebase.getAll(Constants.TABLE_NAME_BAGS); - to get all bags
     */

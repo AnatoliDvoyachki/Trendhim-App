@@ -26,6 +26,7 @@ public class BaseActivity  extends AppCompatActivity
 
     public static DrawerLayout drawer;
     private FirebaseAuth auth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class BaseActivity  extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         auth = FirebaseAuth.getInstance();
-
+        user = auth.getCurrentUser();
     }
 
     @Override
@@ -103,6 +104,13 @@ public class BaseActivity  extends AppCompatActivity
                 intent.putExtra("category", Constants.TABLE_NAME_BOW_TIES);
                 startActivity(intent);
                 break;
+            case R.id.logOut:
+                if(user != null) {
+                    auth.signOut();
+                    Toast.makeText(getApplicationContext(), "You have successfully logged out", Toast.LENGTH_LONG).show();
+                } else
+                  Toast.makeText(getApplicationContext(), "You need to log in first", Toast.LENGTH_LONG).show();
+
 
         }
 
@@ -120,6 +128,12 @@ public class BaseActivity  extends AppCompatActivity
         startActivity(intent);
     }
 
+    /**
+     * Start Log In Activity whenever the Log In button is clicked
+     * and the user is not signed in.
+     * If the user is signed in - Display Toast
+     * @param view
+     */
     public void main_to_login(View view){
 
         if(!isUserOnline()) {
@@ -128,9 +142,16 @@ public class BaseActivity  extends AppCompatActivity
         }
     }
 
+    /**
+     * Display Toast if the user is already signed in
+     * @return true if the user is signed in - false if not
+     */
     public boolean isUserOnline(){
+        //Check track of the current user
         FirebaseUser currentUser = auth.getCurrentUser();
+
         boolean isLoggedIn = false;
+
         if (currentUser != null) {
             // User already logged in
             Toast.makeText(getApplicationContext(), "You are already logged in", Toast.LENGTH_LONG).show();

@@ -33,10 +33,9 @@
         android:id="@+id/rightImageView"
         android:layout_width="190dp"
         android:layout_height="65dp"
-        android:layout_above="@+id/addToWishlistButton"
+        android:layout_above="@+id/addToCartButton"
         android:layout_marginBottom="125dp"
-        android:layout_marginStart="15dp"
-        android:layout_toEndOf="@+id/leftImageView"
+        android:layout_toEndOf="@+id/addToWishlistButton"
         android:cropToPadding="true"
         android:padding="1dp"
         android:scaleType="centerCrop" />
@@ -62,12 +61,10 @@
         android:layout_height="30dp"
         android:layout_alignStart="@+id/brandTextView"
         android:layout_alignTop="@+id/addToCartButton"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:background="@color/buttonGreen"
         android:text="@string/addToWishlistButtonLabel"
         android:textColor="@color/white" />
-
-    <!-- Brand image view !-->
 
     <!-- Brand name !-->
     <TextView
@@ -76,7 +73,18 @@
         android:layout_height="30dp"
         android:layout_alignStart="@+id/leftImageView"
         android:layout_below="@+id/leftImageView"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="23dp"
+        android:gravity="center"
+        android:textSize="10sp" />
+
+    <!-- Product name !-->
+    <TextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+
+        android:layout_alignStart="@+id/brandTextView"
+        android:layout_below="@+id/priceTextView"
         android:gravity="center" />
 
     <!-- Price text view !-->
@@ -84,8 +92,9 @@
         android:id="@+id/priceTextView"
         android:layout_width="100dp"
         android:layout_height="30dp"
+        android:layout_alignBaseline="@+id/brandTextView"
+        android:layout_alignBottom="@+id/brandTextView"
         android:layout_alignEnd="@+id/rightImageView"
-        android:layout_alignTop="@+id/brandTextView"
         android:gravity="center" />
 
 </RelativeLayout>

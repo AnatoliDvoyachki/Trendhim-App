@@ -2,9 +2,8 @@ package com.example.asus.trendhimapp.ProductPage.Products;
 
 public class Product {
 
-    private int productId;
     private String bannerPictureUrl, leftPictureUrl, rightPictureUrl, brand, productName;
-    private int price;
+    private int productId, price;
 
     // No-argument constructor for the Firebase implementation
     public Product() {}

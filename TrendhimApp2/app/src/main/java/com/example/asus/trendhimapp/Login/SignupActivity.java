@@ -54,11 +54,16 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
 
         confirmEditText.setOnKeyListener(this);
 
-        LinearLayout signupLayout = findViewById(R.id.signupLayout);
-        signupLayout.setOnClickListener(this);
+        LinearLayout signUpLayout = findViewById(R.id.signupLayout);
+        signUpLayout.setOnClickListener(this);
 
     }
 
+    /**
+     * Method listening for sign up button clicks.
+     * Sign up users with email and password and save its information the the database
+     * @param view
+     */
     public void signUp(View view) {
         final EditText[] fields = {passwordEditText, confirmEditText, emailEditText};
         validate(fields);
@@ -89,6 +94,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
                                         Toast.makeText(SignupActivity.this, "Ups! Authentication failed.", Toast.LENGTH_SHORT).show();
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
+                                        // If sign in fails, display a message to the user.
                                         try {
                                             throw task.getException();
                                         } catch(FirebaseAuthWeakPasswordException e) {
@@ -104,10 +110,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
                                             Log.w("SignInLog", "createUserWithEmail:failure", task.getException());
                                         }
                                     }
-                                    // If sign in fails, display a message to the user.
                                 }
-
-                                // ...
                             }
                         });
 
@@ -115,6 +118,12 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
         }
     }
 
+    /**
+     * Check if all fields are filled in
+     *
+     * @param fields Array of EditText containing all the text fields in the Sign Up class
+     * @return true if the fields are correctly filled in
+     */
     private boolean validate(EditText[] fields) {
         boolean complete = true;
         for (EditText currentField : fields) {
@@ -127,10 +136,10 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
     }
 
     /**
-     * method is used for checking valid email id format.
+     * Check if the email format is valid .
      *
      * @param email
-     * @return boolean true for valid false for invalid
+     * @return true for valid - false for invalid
      */
     public static boolean isEmailValid (String email) {
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
@@ -140,7 +149,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
     }
 
     /**
-     * Performs SignUp operation when the user clicks the Enter button on the keyboard.
+     * Perform Sign Up operation when the user clicks the Enter button on the keyboard.
      *
      * @param v, keycode, event
      * @return false
@@ -155,7 +164,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
     }
 
     /**
-     * Hides the keyboard whenever the user clicks somewhere in the layout.
+     * Hide the keyboard whenever the user clicks somewhere in the layout.
      *
      * @param v View to witch the method is associated to
      */

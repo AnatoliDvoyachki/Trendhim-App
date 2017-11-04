@@ -57,9 +57,13 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
             if(email != null)
                 emailEditText.setText(email);
         }
-
-
     }
+
+    /**
+     * Method listening for login button clicks.
+     * Sign in users with email and password
+     * @param view
+     */
     public void login(View view){
 
         EditText[] editTextFields = {emailEditText, passwordEditText};
@@ -75,7 +79,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Incorrect email or password", Toast.LENGTH_LONG).show();
                         Log.d(TAG, "sign in failed", task.getException());
                     }
                 }
@@ -83,6 +87,10 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         }
     }
 
+    /**
+     * Redirect the user to the Sign Up Activity
+     * @param view
+     */
     public void goToSignUp(View view){
         Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
         startActivity(intent);
@@ -91,7 +99,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
     /**
      * Check if all fields are filled in
      *
-     * @param fields Array of EditText containing all the text fields in the MainActivity class
+     * @param fields Array of EditText containing all the text fields in the Log In class
      * @return true if the fields are correctly filled in
      */
     private boolean validate(EditText[] fields) {

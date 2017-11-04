@@ -8,9 +8,9 @@ public final class Constants {
     // ProductActivity price TextView format
     public static final String PRICE_FORMAT = "$%.2f";
 
-    // Names of the entities in GoogleFirebase
+    // Entity names in Google Firebase
     public static final String TABLE_NAME_BAGS = "bags";
-    public static final String TABLE_NAME_BEARD_CARES = "beard_cares";
+    public static final String TABLE_NAME_BEARD_CARE = "beard_cares";
     public static final String TABLE_NAME_BOW_TIES = "bow_ties";
     public static final String TABLE_NAME_BRACELETS = "bracelets";
     public static final String TABLE_NAME_NECKLACES = "necklaces";
