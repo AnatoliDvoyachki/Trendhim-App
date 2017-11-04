@@ -52,7 +52,6 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     public void onBindViewHolder(RecentProductsAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         final CategoryProduct product = recentProducts.get(position);
-
         // Set item views based on the views and data model
         TextView productName = viewHolder.productNameTextView;
         productName.setText(product.getName());
@@ -72,45 +71,47 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final DatabaseReference recent_products_database = FirebaseDatabase.getInstance().getReference("recent_products");
-
-                Query query = recent_products_database.orderByChild("user_email").equalTo(user.getEmail());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recent_products");
+                databaseReference.orderByChild("key").equalTo(product.getKey())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            RecentProduct recentProduct = child.getValue(RecentProduct.class);
-                            // Get push id value.
-                            String key = recentProduct.getKey();
-                            DatabaseReference category_products_database = FirebaseDatabase.getInstance().getReference();
-                            category_products_database.orderByKey().equalTo(key)
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    for(DataSnapshot child : dataSnapshot.getChildren()) {
-                                        Product foundProduct = child.getValue(Product.class);
+                        if(dataSnapshot.exists()){
+                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+                                DatabaseReference category_products_database =
+                                        FirebaseDatabase.getInstance().getReference(recentProduct.getCategory());
+                                category_products_database.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                                if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
+                                                    Product foundProduct = dataSnapshot1.getValue(Product.class);
 
-                                        Intent intent = new Intent(context, ProductActivity.class);
+                                                    Intent intent = new Intent(context, ProductActivity.class);
 
-                                        intent.putExtra("productName", foundProduct.getProductName());
-                                        intent.putExtra("brand", foundProduct.getBrand());
-                                        intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
-                                        intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
-                                        intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
-                                        intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
-                                        context.startActivity(intent);
+                                                    intent.putExtra("productName", foundProduct.getProductName());
+                                                    intent.putExtra("brand", foundProduct.getBrand());
+                                                    intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
+                                                    intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
+                                                    intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
+                                                    intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
+                                                    context.startActivity(intent);
+                                                }
+
+                                            }
+                                        }
+
                                     }
 
-                                }
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
+                                    }
+                                });
+                            }
                         }
-
                     }
 
                     @Override
@@ -118,6 +119,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
                     }
                 });
+
             }
         });
 
