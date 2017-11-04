@@ -14,6 +14,8 @@ import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
 import com.example.asus.trendhimapp.ProductPage.Products.Product;
 import com.example.asus.trendhimapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -70,48 +72,45 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recent_products");
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final DatabaseReference recent_products_database = FirebaseDatabase.getInstance().getReference("recent_products");
+
+                Query query = recent_products_database.orderByChild("user_email").equalTo(user.getEmail());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(final DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            for(final DataSnapshot product : dataSnapshot.getChildren()) {
-                                RecentProduct recentProduct = product.getValue(RecentProduct.class);
-                                final String productKey = recentProduct.getKey();
-                                String productCategory = recentProduct.getCategory();
-                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
-                                Query query = myRef.orderByChild(productKey);
-                                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.exists()) {
-                                            for (DataSnapshot product : dataSnapshot.getChildren()) {
-                                                Product foundProduct = product.getValue(Product.class);
-                                                if(Objects.equals(product.getKey(), productKey)) {
-                                                    Intent intent = new Intent(context, ProductActivity.class);
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            RecentProduct recentProduct = child.getValue(RecentProduct.class);
+                            // Get push id value.
+                            String key = recentProduct.getKey();
+                            DatabaseReference category_products_database = FirebaseDatabase.getInstance().getReference();
+                            category_products_database.orderByKey().equalTo(key)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for(DataSnapshot child : dataSnapshot.getChildren()) {
+                                        Product foundProduct = child.getValue(Product.class);
 
-                                                    intent.putExtra("productName", foundProduct.getProductName());
-                                                    intent.putExtra("brand", foundProduct.getBrand());
-                                                    intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
-                                                    intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
-                                                    intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
-                                                    intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
-                                                    intent.putExtra("ID", "FromRecyclerView");
-                                                    context.startActivity(intent);
-                                                }
+                                        Intent intent = new Intent(context, ProductActivity.class);
 
-                                            }
-                                        }
+                                        intent.putExtra("productName", foundProduct.getProductName());
+                                        intent.putExtra("brand", foundProduct.getBrand());
+                                        intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
+                                        intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
+                                        intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
+                                        intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
+                                        context.startActivity(intent);
                                     }
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
+                                }
 
-                                    }
-                                });
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                            }
+                                }
+                            });
                         }
+
                     }
 
                     @Override
@@ -134,48 +133,53 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
      */
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for(final DataSnapshot product : dataSnapshot.getChildren()) {
-                        RecentProduct recentProduct = product.getValue(RecentProduct.class);
-                        final String productKey = recentProduct.getKey();
-                        String productCategory = recentProduct.getCategory();
-                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
-                        Query query = myRef.orderByChild(productKey);
-                        query.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    for (DataSnapshot product : dataSnapshot.getChildren()) {
-                                        Product p = product.getValue(Product.class);
-                                        if(Objects.equals(product.getKey(), productKey)) {
-                                            recentProducts.add(new CategoryProduct(
-                                                    p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), productKey));
-                                            // Notify the adapter that an item was inserted in position = getItemCount()
-                                            notifyItemInserted(getItemCount());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null) {
+            Query query = myRef.orderByChild("user_email").equalTo(user.getEmail());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(final DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for(final DataSnapshot product : dataSnapshot.getChildren()) {
+                            RecentProduct recentProduct = product.getValue(RecentProduct.class);
+                            final String productKey = recentProduct.getKey();
+                            String productCategory = recentProduct.getCategory();
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
+                            Query query = myRef.orderByChild(productKey);
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        for (DataSnapshot product : dataSnapshot.getChildren()) {
+                                            Product p = product.getValue(Product.class);
+                                            if(Objects.equals(product.getKey(), productKey)) {
+                                                recentProducts.add(new CategoryProduct(
+                                                        p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), productKey));
+                                                // Notify the adapter that an item was inserted in position = getItemCount()
+                                                notifyItemInserted(getItemCount());
+                                            }
                                         }
                                     }
+
                                 }
 
-                            }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
+                                }
+                            });
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
+                }
 
-        });
+            });
+        }
+
     }
 
     /**

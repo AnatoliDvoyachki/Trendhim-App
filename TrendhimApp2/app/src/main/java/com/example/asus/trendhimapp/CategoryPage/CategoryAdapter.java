@@ -180,11 +180,13 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     private void addToRecent(CategoryProduct product) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            Map<String, String> values = new HashMap<>();
+            values.put("key", product.getKey());
+            values.put("user_email", user.getEmail());
+            values.put("category", category);
+            myRef.push().setValue(values);
+        }
 
-        Map<String, String> values = new HashMap<>();
-        values.put("key", product.getKey());
-        values.put("user_email", user.getEmail());
-        values.put("category", category);
-        myRef.push().setValue(values);
     }
 }
