@@ -1,11 +1,11 @@
-package com.example.asus.trendhimapp.ProductPage;
+package com.example.asus.trendhimapp.Util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
+import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,16 +55,14 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
         try {
             URL url = new URL(urlString);
             con = (HttpURLConnection) url.openConnection();
-            inFromInternet = con.getInputStream();
-            bitmap = BitmapFactory.decodeStream(inFromInternet);
+            if (con != null) inFromInternet = con.getInputStream();
+            if (inFromInternet != null) bitmap = BitmapFactory.decodeStream(inFromInternet);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (con != null)
-                    con.disconnect();
-                if (inFromInternet != null)
-                    inFromInternet.close();
+                if (con != null) con.disconnect();
+                if (inFromInternet != null) inFromInternet.close();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

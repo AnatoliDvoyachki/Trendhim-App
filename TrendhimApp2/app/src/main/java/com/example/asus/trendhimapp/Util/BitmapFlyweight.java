@@ -1,9 +1,7 @@
-package com.example.asus.trendhimapp.ProductPage.Products;
+package com.example.asus.trendhimapp.Util;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;
-
-import com.example.asus.trendhimapp.ProductPage.DownloadTask;
 
 import java.util.HashMap;
 
