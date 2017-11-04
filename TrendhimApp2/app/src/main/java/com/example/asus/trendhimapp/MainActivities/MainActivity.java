@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
@@ -16,11 +18,13 @@ import com.example.asus.trendhimapp.R;
 
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     ArrayList<CategoryProduct> recentProducts;
     RecentProductsAdapter adapter;
     public static TextView noRecentProducts;
+    ImageView imageView;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,8 @@ public class MainActivity extends BaseActivity {
         View contentView = inflater.inflate(R.layout.content_main, null, false);
         BaseActivity.drawer.addView(contentView, 0);
 
+        imageView = findViewById(R.id.recentproductsImage);
+        imageView.setOnClickListener(this);
         noRecentProducts = findViewById(R.id.noRecentProducts);
 
         // Lookup the recycler view in activity layout
@@ -57,4 +63,16 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        LinearLayout linearLayout = findViewById(R.id.recentProductsLayout);
+
+        if(i % 2 == 0)
+            linearLayout.setVisibility(View.VISIBLE);
+
+        if(i % 2 != 0)
+            linearLayout.setVisibility(View.GONE);
+
+        i++;
+    }
 }
