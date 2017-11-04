@@ -3,11 +3,6 @@ package com.example.asus.trendhimapp.ProductPage;
 public final class Constants {
     private Constants() {}
 
-    public static final String PRODUCT_ITEM = "Product";
-
-    // ProductActivity price TextView format
-    public static final String PRICE_FORMAT = "$%.2f";
-
     // Entity names in Google Firebase
     public static final String TABLE_NAME_BAGS = "bags";
     public static final String TABLE_NAME_BEARD_CARE = "beard_care";

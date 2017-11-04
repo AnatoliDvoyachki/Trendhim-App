@@ -1,10 +1,11 @@
 package com.example.asus.trendhimapp.ProductPage;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
+import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,11 +20,10 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
     private String pictureUrl;
 
     /**
-     *  Constructs the Thread.
-     *  @param pictureUrl
-     *         url reference to the picture
-     *  @param imageView
-     *          the view to which the picture will be assigned after execution
+     * Constructs the Thread.
+     *
+     * @param pictureUrl url reference to the picture
+     * @param imageView  the view to which the picture will be assigned after execution
      */
     public DownloadThread(String pictureUrl, ImageView imageView) {
         this.pictureUrl = pictureUrl;
@@ -38,16 +38,15 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
-        BitmapFactory.savePicture(pictureUrl, bitmap);// Once the download is finished, cache the image
+        BitmapFlyweight.savePicture(pictureUrl, bitmap);// Once the download is finished, cache the image
         imageView.setImageBitmap(bitmap); // Then show it to the user
     }
 
     /**
      * Used to download an image, referenced by an url
-     * @param urlString
-     *      the url of the image
-     * @return
-     *      a bitmap of the image
+     *
+     * @param urlString the url of the image
+     * @return a bitmap of the image
      */
     private Bitmap downloadImage(String urlString) {
         HttpURLConnection con = null;
@@ -57,14 +56,14 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
             URL url = new URL(urlString);
             con = (HttpURLConnection) url.openConnection();
             inFromInternet = con.getInputStream();
-            bitmap = android.graphics.BitmapFactory.decodeStream(inFromInternet);
+            bitmap = BitmapFactory.decodeStream(inFromInternet);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(con != null)
-                con.disconnect();
             try {
-                if(inFromInternet != null)
+                if (con != null)
+                    con.disconnect();
+                if (inFromInternet != null)
                     inFromInternet.close();
 
             } catch (IOException ioe) {

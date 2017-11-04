@@ -12,8 +12,8 @@ import java.util.HashMap;
 /**
  * Utility class, used for obtaining Bitmap objects. Implemented using the Flyweight Design Pattern.
  **/
-public final class BitmapFactory {
-    private BitmapFactory() {}
+public final class BitmapFlyweight {
+    private BitmapFlyweight() {}
 
     private static String TAG = "FLYWEIGHT:";
 
@@ -28,8 +28,8 @@ public final class BitmapFactory {
     public static void getPicture(String url, ImageView imageView) {
         Bitmap bitmap = PICTURE_CACHE.get(url);
         if (bitmap == null) {
-            new DownloadThread(url, imageView).execute(); // If the picture is not stored locally, download it
             Log.d(TAG, "Downloading");
+            new DownloadThread(url, imageView).execute(); // If the picture is not stored locally, download it
         } else {
             imageView.setImageBitmap(bitmap); // If it is stored locally, reuse it
             Log.d(TAG, "Reused " + bitmap);

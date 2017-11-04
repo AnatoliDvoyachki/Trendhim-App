@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.ProductPage.ProductActivity;
-import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
+import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
 import com.example.asus.trendhimapp.ProductPage.Products.Product;
 import com.example.asus.trendhimapp.R;
 import com.google.firebase.database.DataSnapshot;
@@ -62,7 +62,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         productPrice.setText(String.valueOf(product.getPrice()));
 
         ImageView productImage = viewHolder.productImage;
-        BitmapFactory.getPicture(product.getBannerPictureURL(), productImage);
+        BitmapFlyweight.getPicture(product.getBannerPictureURL(), productImage);
 
         /*
         Handle touch event - Redirect to the selected product

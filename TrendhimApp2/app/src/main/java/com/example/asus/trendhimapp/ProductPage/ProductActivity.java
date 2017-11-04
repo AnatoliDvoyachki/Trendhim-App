@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.MainActivities.BaseActivity;
-import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
+import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
 import com.example.asus.trendhimapp.R;
 
 
@@ -21,11 +21,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
     private ImageView bannerImageView, leftImageView, rightImageView;
     private TextView brandTextView, priceTextView, productNameTextView;
-
-    // some test values for a bag
-    //public String bannerPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_banner.png?alt=media&token=953c4b0e-6308-494d-b788-b069f478eb1c";
-    // public String leftPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_left_sided_picture.PNG?alt=media&token=53584d12-c70b-4a8e-82b2-e32ef8177e19";
-    //public String rightPic = "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_right_sided_picture.PNG?alt=media&token=1849f345-bff7-4b91-bca8-163aeeef356f";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +54,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
 
         productNameTextView = findViewById(R.id.productNameTextView);
-
-        // test value
-        //  Product product = new Product(2, "Bag", bannerPic, leftPic, rightPic, "Delton", 150);
-//        Intent fromCategory = getIntent();
-//        Bundle bundle = fromCategory.getExtras();
-//        if (bundle != null) {
-//            product = (Product) bundle.get(Constants.PRODUCT_ITEM);
-//        }
-//        bundle.clear(); // cleanup the bundle
-
     }
 
 
@@ -101,11 +86,11 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                 brandTextView.setText(brand); //set brand
                 priceTextView.setText(price + " €"); // set price
                 productNameTextView.setText(productName); //set product name
-                BitmapFactory.getPicture(
+                BitmapFlyweight.getPicture(
                         bannerPictureUrl, bannerImageView); // get the banner
-                BitmapFactory.getPicture(
-                       leftPictureUrl, leftImageView); // get the left picture
-                BitmapFactory.getPicture(
+                BitmapFlyweight.getPicture(
+                        leftPictureUrl, leftImageView); // get the left picture
+                BitmapFlyweight.getPicture(
                         rightPictureUrl, rightImageView); // get the right picture
             }
         }
