@@ -18,13 +18,13 @@ import com.example.asus.trendhimapp.R;
 
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity {
 
     ArrayList<CategoryProduct> recentProducts;
     RecentProductsAdapter adapter;
     public static TextView noRecentProducts;
-    ImageView imageView;
-    int i = 0;
+    ImageView recentProductImage, recommendedProductsImage;
+    int i = 0, i1= 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         View contentView = inflater.inflate(R.layout.content_main, null, false);
         BaseActivity.drawer.addView(contentView, 0);
 
-        imageView = findViewById(R.id.recentproductsImage);
-        imageView.setOnClickListener(this);
+        final LinearLayout recentProductsLayout = findViewById(R.id.recentProductsLayout);
+
+        recentProductImage = findViewById(R.id.recentproductsImage);
+
+        recentProductImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(i % 2 == 0)
+                    recentProductsLayout.setVisibility(View.VISIBLE);
+                else if(i % 2 != 0)
+                    recentProductsLayout.setVisibility(View.GONE);
+            }
+        });
+
         noRecentProducts = findViewById(R.id.noRecentProducts);
+
+        final LinearLayout recommendedProductsLayout = findViewById(R.id.recommendedProductsLayout);
+
+        recommendedProductsImage = findViewById(R.id.recommendedProductsImage);
+        recommendedProductsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(i1 % 2 == 0)
+                    recommendedProductsLayout.setVisibility(View.VISIBLE);
+                else if(i1 % 2 != 0)
+                    recentProductsLayout.setVisibility(View.GONE);
+            }
+        });
 
         // Lookup the recycler view in activity layout
         RecyclerView recyclerView = findViewById(R.id.recyclerViewmain);
@@ -60,19 +85,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         helper.attachToRecyclerView(recyclerView);
 
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        LinearLayout linearLayout = findViewById(R.id.recentProductsLayout);
-
-        if(i % 2 == 0)
-            linearLayout.setVisibility(View.VISIBLE);
-
-        if(i % 2 != 0)
-            linearLayout.setVisibility(View.GONE);
-
-        i++;
     }
 }
