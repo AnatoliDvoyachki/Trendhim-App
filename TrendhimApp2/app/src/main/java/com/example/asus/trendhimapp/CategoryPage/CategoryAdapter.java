@@ -13,22 +13,26 @@ import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
 import com.example.asus.trendhimapp.ProductPage.Products.Product;
 import com.example.asus.trendhimapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private Context context;
-    private List<CategoryPage> categoryPageList;
+    private List<CategoryProduct> categoryPageList;
     private String category;
 
-    CategoryAdapter(Context context, List<CategoryPage> categories, String category) {
+    CategoryAdapter(Context context, List<CategoryProduct> categories, String category) {
         this.categoryPageList = categories;
         this.context = context;
         this.category = category;
@@ -40,17 +44,17 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.item_category, parent, false);
+        View categoryProductsView = inflater.inflate(R.layout.item_category, parent, false);
 
         // Return a new holder instance
-        return new ViewHolder(contactView);
+        return new ViewHolder(categoryProductsView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
 
-        final CategoryPage product = categoryPageList.get(position);
+        final CategoryProduct product = categoryPageList.get(position);
 
         // Set item views based on the views and data model
         TextView productName = viewHolder.productNameTextView;
@@ -72,28 +76,31 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(category);
-                Query query = databaseReference.orderByChild("productId")
-                        .equalTo(product.getProductId());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                Product product = dataSnapshot1.getValue(Product.class);
+                                if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
+                                    Product foundProduct = dataSnapshot1.getValue(Product.class);
 
-                                Intent intent = new Intent(context, ProductActivity.class);
+                                    Intent intent = new Intent(context, ProductActivity.class);
 
-                                intent.putExtra("productId", String.valueOf(product.getProductId()));
-                                intent.putExtra("productName", product.getProductName());
-                                intent.putExtra("brand", product.getBrand());
-                                intent.putExtra("bannerPictureUrl", product.getBannerPictureUrl());
-                                intent.putExtra("price", String.valueOf(product.getPrice()));
-                                intent.putExtra("leftPictureUrl", product.getLeftPictureUrl());
-                                intent.putExtra("rightPictureUrl", product.getRightPictureUrl());
+                                    intent.putExtra("productName", foundProduct.getProductName());
+                                    intent.putExtra("brand", foundProduct.getBrand());
+                                    intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
+                                    intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
+                                    intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
+                                    intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
+                                    context.startActivity(intent);
+                                }
 
-                                context.startActivity(intent);
                             }
+                            //Add product to recent activity
+                            addToRecent(product);
+
                         }
+
                     }
 
                     @Override
@@ -122,10 +129,13 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for(DataSnapshot product : dataSnapshot.getChildren()) {
+                        String productKey = product.getKey();
                         Product p = product.getValue(Product.class);
-                        categoryPageList.add(new CategoryPage(p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), p.getProductId()));
+                        categoryPageList.add(new CategoryProduct(
+                                p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), productKey));
                         // Notify the adapter that an item was inserted in position = getItemCount()
                         notifyItemInserted(getItemCount());
+
                     }
                 }
             }
@@ -165,5 +175,16 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
             productImage = itemView.findViewById(R.id.product_image_category);
 
         }
+    }
+
+    private void addToRecent(CategoryProduct product) {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        Map<String, String> values = new HashMap<>();
+        values.put("key", product.getKey());
+        values.put("user_email", user.getEmail());
+        values.put("category", category);
+        myRef.push().setValue(values);
     }
 }

@@ -9,14 +9,14 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/product_image_category"
+        android:id="@+id/product_image_main"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_weight="1"
         android:contentDescription="@string/bannerimage" />
 
     <TextView
-        android:id="@+id/brand_name_category"
+        android:id="@+id/brand_name_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -27,7 +27,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/product_name_category"
+        android:id="@+id/product_name_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
@@ -35,11 +35,10 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/product_price_category"
+        android:id="@+id/product_price_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:text="£300"
         android:textSize="18sp"
         android:textStyle="bold" />
 

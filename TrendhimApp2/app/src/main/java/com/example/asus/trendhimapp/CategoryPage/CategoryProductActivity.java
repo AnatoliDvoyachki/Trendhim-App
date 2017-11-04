@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
-public class CategoryPageActivity extends BaseActivity {
+public class CategoryProductActivity extends BaseActivity {
 
-    ArrayList<CategoryPage> categories;
+    ArrayList<CategoryProduct> categoryProducts;
     CategoryAdapter adapter;
     RecyclerView recyclerView;
 
@@ -40,10 +40,10 @@ public class CategoryPageActivity extends BaseActivity {
         recyclerView.setItemAnimator(new SlideInUpAnimator());
 
         // Initialize categories
-        categories = new ArrayList<>();
+        categoryProducts = new ArrayList<>();
 
         // Create adapter for the categories
-        adapter = new CategoryAdapter(this, categories, getCategory());
+        adapter = new CategoryAdapter(this, categoryProducts, getCategory());
 
         // Attach the adapter to the recycler view
         recyclerView.setAdapter(adapter);

@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.CategoryPage.CategoryPageActivity;
+import com.example.asus.trendhimapp.CategoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.Login.LoginActivity;
 import com.example.asus.trendhimapp.ProductPage.Constants;
 import com.example.asus.trendhimapp.R;
@@ -70,37 +70,37 @@ public class BaseActivity  extends AppCompatActivity
 
         switch (id) {
             case R.id.bracelets:
-                intent = new Intent(this, CategoryPageActivity.class);
+                intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra("category", Constants.TABLE_NAME_BRACELETS);
                 startActivity(intent);
                 break;
             case R.id.bags:
-                intent = new Intent(this, CategoryPageActivity.class);
+                intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra("category", Constants.TABLE_NAME_BAGS);
                 startActivity(intent);
                 break;
             case R.id.watches:
-                intent = new Intent(this, CategoryPageActivity.class);
+                intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra("category", Constants.TABLE_NAME_WATCHES);
                 startActivity(intent);
                 break;
             case R.id.beardCare:
-                intent = new Intent(this, CategoryPageActivity.class);
+                intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra("category", Constants.TABLE_NAME_BEARD_CARE);
                 startActivity(intent);
                 break;
             case R.id.necklaces:
-                intent = new Intent(this, CategoryPageActivity.class);
+                intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra("category", Constants.TABLE_NAME_NECKLACES);
                 startActivity(intent);
                 break;
             case R.id.ties:
-                intent = new Intent(this, CategoryPageActivity.class);
+                intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra("category", Constants.TABLE_NAME_TIES);
                 startActivity(intent);
                 break;
             case R.id.bowTies:
-                intent = new Intent(this, CategoryPageActivity.class);
+                intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra("category", Constants.TABLE_NAME_BOW_TIES);
                 startActivity(intent);
                 break;

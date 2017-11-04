@@ -43,13 +43,14 @@
     <!-- Add to cart button !-->
     <Button
         android:id="@+id/addToCartButton"
-        android:layout_width="155dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="31dp"
         android:layout_marginEnd="21dp"
         android:layout_marginRight="10dp"
+        android:padding="10dp"
         android:background="@color/buttonGreen"
         android:text="@string/addToCartButtonLabel"
         android:textColor="@color/white" />
@@ -57,11 +58,12 @@
     <!-- Add to wishlist !-->
     <Button
         android:id="@+id/addToWishlistButton"
-        android:layout_width="155dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/brandTextView"
         android:layout_alignTop="@+id/addToCartButton"
         android:layout_marginStart="5dp"
+        android:padding="10dp"
         android:background="@color/buttonGreen"
         android:text="@string/addToWishlistButtonLabel"
         android:textColor="@color/white" />
@@ -69,7 +71,7 @@
     <!-- Brand name !-->
     <TextView
         android:id="@+id/brandTextView"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/leftImageView"
         android:layout_below="@+id/leftImageView"
@@ -80,9 +82,8 @@
     <!-- Product name !-->
     <TextView
         android:id="@+id/productNameTextView"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-
         android:layout_alignStart="@+id/brandTextView"
         android:layout_below="@+id/priceTextView"
         android:gravity="center" />
