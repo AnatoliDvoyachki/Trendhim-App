@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.ProductPage.ProductActivity;
-import com.example.asus.trendhimapp.ProductPage.Products.BitmapFactory;
+import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
 import com.example.asus.trendhimapp.ProductPage.Products.Product;
 import com.example.asus.trendhimapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,7 +67,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         productPrice.setText(String.valueOf(product.getPrice()));
 
         ImageView productImage = viewHolder.productImage;
-        BitmapFactory.getPicture(product.getBannerPictureURL(), productImage);
+        BitmapFlyweight.getPicture(product.getBannerPictureURL(), productImage);
 
         /*
           Handle touch event - Redirect to the selected product
