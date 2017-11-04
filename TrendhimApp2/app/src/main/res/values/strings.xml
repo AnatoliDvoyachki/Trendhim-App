@@ -22,5 +22,6 @@
     <string name="product_name">Product name</string>
     <string name="logo">logo</string>
     <string name="bannerimage">bannerImage</string>
+    <string name="recent_products">Recent products</string>
 
 </resources>
