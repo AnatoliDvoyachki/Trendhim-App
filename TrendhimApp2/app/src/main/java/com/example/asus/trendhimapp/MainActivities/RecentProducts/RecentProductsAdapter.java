@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.MainActivities.MainActivity;
-import com.example.asus.trendhimapp.ProductPage.ProductActivity;
-import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 import com.example.asus.trendhimapp.ProductPage.Product;
+import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +30,7 @@ import java.util.Objects;
 public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAdapter.ViewHolder> {
 
     private Context context;
-    private List<CategoryProduct> recentProducts;
+    private static List<CategoryProduct> recentProducts;
 
     public RecentProductsAdapter(Context context, List<CategoryProduct> recentProducts) {
         this.recentProducts = recentProducts;
@@ -51,7 +51,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     }
 
     @Override
-    public void onBindViewHolder(RecentProductsAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(RecentProductsAdapter.ViewHolder viewHolder, final int position) {
         // Get the data model based on position
         final CategoryProduct product = recentProducts.get(position);
         // Set item views based on the views and data model
@@ -83,7 +83,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                         if(dataSnapshot.exists()){
                             for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                                 //Found product
-                                RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+                                final RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
 
                                 //Query to the product category to get the product information
                                 DatabaseReference category_products_database =
@@ -98,7 +98,6 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                 if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
 
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
-
                                                     Intent intent = new Intent(context, ProductActivity.class);
 
                                                     intent.putExtra("productKey", product.getKey());
@@ -110,8 +109,12 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                     intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
 
                                                     context.startActivity(intent);
+
+
+
                                                 }
                                             }
+
                                         }
                                     }
 
@@ -147,24 +150,22 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user != null) { //Add products to the recent products recycler view if the user is logged in
-            Query query = myRef.orderByChild("visit_date");
-
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
+            myRef.orderByChild("visit_date")
+                    .addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
                 @Override
                 public void onDataChange(final DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        for(final DataSnapshot product : dataSnapshot.getChildren()) {
+                        for (final DataSnapshot product : dataSnapshot.getChildren()) {
                             //Found product
-                            RecentProduct recentProduct = product.getValue(RecentProduct.class);
+                            final RecentProduct recentProduct = product.getValue(RecentProduct.class);
 
                             final String productKey = recentProduct.getKey(); //Product key
                             String productCategory = recentProduct.getCategory(); //Product category
-                            String userEmail = recentProduct.getEmail();
 
-                            if(Objects.equals(userEmail, user.getEmail())) {
-                                //Query to the product category database
-                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
+                            //Query to the product category database
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
 
+                            if(user != null){
                                 Query query = myRef.orderByChild(productKey);
                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -174,13 +175,13 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
                                                 Product p = product.getValue(Product.class);
                                                 //If the key of the product found is equal to the recent product key
-                                                if(Objects.equals(product.getKey(), productKey)) {
+                                                if (Objects.equals(product.getKey(), productKey)) {
 
-                                                    recentProducts.add(new CategoryProduct(p.getProductName(), p.getPrice(),
+                                                    recentProducts.add(0, new CategoryProduct(p.getProductName(), p.getPrice(),
                                                             p.getBrand(), p.getBannerPictureUrl(), productKey));
 
-                                                    // Notify the adapter that an item was inserted in position = getItemCount()
-                                                    notifyItemInserted(getItemCount());
+                                                    // Notify the adapter that an item was inserted in position = 0
+                                                    notifyItemInserted(0);
                                                 }
                                             }
                                         }
