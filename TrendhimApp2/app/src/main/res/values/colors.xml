@@ -10,5 +10,6 @@
     <color name="buttonGreen">#27c769</color>
     <!-- Light grey checkbox background color-->
     <color name="lightGrey">#f3f3f3</color>
+    <color name="darkGrey">#7e7e7e</color>
 
 </resources>
