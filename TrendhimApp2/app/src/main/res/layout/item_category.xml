@@ -5,12 +5,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
-    android:paddingStart="10dp"
     android:gravity="center">
 
     <ImageView
         android:id="@+id/product_image_category"
         android:layout_width="160dp"
+        android:paddingStart="10dp"
         android:layout_height="160dp"
         android:layout_weight="1"
         android:contentDescription="@string/bannerimage" />
@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="10dp"
+        android:layout_gravity="center"
         android:text="@string/brand_name"
         android:textAllCaps="true"
         android:textSize="18sp"
@@ -30,6 +31,7 @@
         android:id="@+id/product_name_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:paddingTop="10dp"
         android:text="@string/product_name"
         android:textSize="16sp" />
@@ -38,6 +40,7 @@
         android:id="@+id/product_price_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:paddingTop="10dp"
         android:text="£300"
         android:textSize="18sp"

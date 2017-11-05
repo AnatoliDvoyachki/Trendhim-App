@@ -1,20 +1,22 @@
 package com.example.asus.trendhimapp.CategoryPage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.MainActivities.RecentProducts.RecentProduct;
-import com.example.asus.trendhimapp.ProductPage.ProductActivity;
-import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 import com.example.asus.trendhimapp.ProductPage.Product;
+import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> implements View.OnTouchListener{
 
     private Context context;
     private List<CategoryProduct> categoryPageList;
@@ -53,6 +55,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         return new ViewHolder(categoryProductsView);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // Get the data model based on position
@@ -69,8 +72,24 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         TextView productPrice = viewHolder.productPriceTextView;
         productPrice.setText(String.valueOf(product.getPrice()));
 
-        ImageView productImage = viewHolder.productImage;
+        final ImageView productImage = viewHolder.productImage;
         BitmapFlyweight.getPicture(product.getBannerPictureURL(), productImage);
+
+       viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        productImage.animate().alpha(1f);
+                        getProduct(product);
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                        productImage.animate().alpha(0.7f);
+                        break;
+                }
+                return true;
+            }
+        });
 
         /*
           Handle touch event - Redirect to the selected product
@@ -78,40 +97,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(category);
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
-                                    Product foundProduct = dataSnapshot1.getValue(Product.class);
-
-                                    Intent intent = new Intent(context, ProductActivity.class);
-
-                                    intent.putExtra("productKey", product.getKey());
-                                    intent.putExtra("productName", foundProduct.getProductName());
-                                    intent.putExtra("brand", foundProduct.getBrand());
-                                    intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
-                                    intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
-                                    intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
-                                    intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
-                                    context.startActivity(intent);
-                                }
-
-                            }
-                            //Add product to recent activity
-                            addToRecent(product);
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+              getProduct(product);
             }
         });
 
@@ -150,6 +136,11 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
             }
 
         });
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return false;
     }
 
     /**
@@ -219,6 +210,43 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
             });
 
         }
+    }
+
+    public void getProduct(final CategoryProduct product){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(category);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
+                            Product foundProduct = dataSnapshot1.getValue(Product.class);
+
+                            Intent intent = new Intent(context, ProductActivity.class);
+
+                            intent.putExtra("productKey", product.getKey());
+                            intent.putExtra("productName", foundProduct.getProductName());
+                            intent.putExtra("brand", foundProduct.getBrand());
+                            intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
+                            intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
+                            intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
+                            intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
+                            context.startActivity(intent);
+                        }
+
+                    }
+                    //Add product to recent activity
+                    addToRecent(product);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }
