@@ -100,7 +100,8 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
 
                                                     Intent intent = new Intent(context, ProductActivity.class);
-
+                                                    
+                                                    intent.putExtra("productKey", product.getKey());
                                                     intent.putExtra("productName", foundProduct.getProductName());
                                                     intent.putExtra("brand", foundProduct.getBrand());
                                                     intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());

@@ -89,6 +89,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
                                     Intent intent = new Intent(context, ProductActivity.class);
 
+                                    intent.putExtra("productKey", product.getKey());
                                     intent.putExtra("productName", foundProduct.getProductName());
                                     intent.putExtra("brand", foundProduct.getBrand());
                                     intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());

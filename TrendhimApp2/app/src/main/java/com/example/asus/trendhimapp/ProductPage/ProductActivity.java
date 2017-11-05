@@ -14,8 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.MainActivities.BaseActivity;
-import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.Util.BitmapFlyweight;
+import com.example.asus.trendhimapp.Util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -88,7 +89,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         final int id = v.getId();
-        if (super.isUserOnline()) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
             if (id == R.id.addToWishlistButton) {
                 addToWishlist();
             } else {
@@ -104,29 +107,36 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("wishlist");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Intent intent = getIntent();
-        String productKey = intent.getStringExtra("productKey"), productEntity = null;
-        WishlistProduct wishlistProduct = null;
-        if (productKey != null) {
-            String userEmail = user.getEmail();
-            if (productKey.startsWith("tie")) {
-                wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_TIES, productKey);
-            } else if (productKey.startsWith("bracelet")) {
-                wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BRACELETS, productKey);
-            } else if (productKey.startsWith("bow_tie")) {
-                wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BOW_TIES, productKey);
-            } else if (productKey.startsWith("beard_care")) {
-                wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BEARD_CARE, productKey);
-            } else if (productKey.startsWith("necklace")) {
-                wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_NECKLACES, productKey);
-            } else if (productKey.startsWith("watch")) {
-                wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_WATCHES, productKey);
+        if(intent != null){
+            String productKey = intent.getStringExtra("productKey");
+            Log.i(this.getLocalClassName(), "pro" + productKey);
+            WishlistProduct wishlistProduct = null;
+            if (productKey != null) {
+                String userEmail = user.getEmail();
+                if (productKey.startsWith("tie")) {
+                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_TIES, productKey);
+                } else if (productKey.startsWith("bracelet")) {
+                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BRACELETS, productKey);
+                } else if (productKey.startsWith("bow_tie")) {
+                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BOW_TIES, productKey);
+                } else if (productKey.startsWith("beard_care")) {
+                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BEARD_CARE, productKey);
+                } else if (productKey.startsWith("necklace")) {
+                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_NECKLACES, productKey);
+                } else if (productKey.startsWith("watch")) {
+                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_WATCHES, productKey);
+                } else {
+                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BAGS, productKey);
+                }
+                myRef.push().setValue(wishlistProduct);
+                Toast.makeText(this, "Item successfuly added to wishlist!", Toast.LENGTH_SHORT).show();
+            } else
+                Log.d(this.getLocalClassName(), "Better safe than sorry");
+
             } else {
-                wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BAGS, productKey);
+                Log.d(this.getLocalClassName(), "Intent was null");
+
             }
-            myRef.push().setValue(wishlistProduct);
-            Toast.makeText(this, "Item successfuly added to wishlist!", Toast.LENGTH_SHORT).show();
-        } else {
-            Log.d(this.getLocalClassName(), "Better safe than sorry");
         }
-    }
+
 }
