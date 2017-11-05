@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> implements View.OnTouchListener{
+class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private Context context;
     private List<CategoryProduct> categoryPageList;
@@ -138,11 +138,6 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> i
         });
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        return false;
-    }
-
     /**
      *  Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access
@@ -212,7 +207,7 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> i
         }
     }
 
-    public void getProduct(final CategoryProduct product){
+    private void getProduct(final CategoryProduct product){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(category);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
