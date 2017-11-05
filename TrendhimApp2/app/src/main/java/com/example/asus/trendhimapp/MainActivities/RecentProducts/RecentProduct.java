@@ -12,7 +12,7 @@ public class RecentProduct {
         this.key = key;
     }
 
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 

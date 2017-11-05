@@ -144,10 +144,10 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
      */
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user != null) { //Add products to the recent products recycler view if the user is logged in
-            Query query = myRef.orderByChild("user_email").equalTo(user.getEmail());
+            Query query = myRef.orderByChild("visit_date");
 
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -159,36 +159,40 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
                             final String productKey = recentProduct.getKey(); //Product key
                             String productCategory = recentProduct.getCategory(); //Product category
+                            String userEmail = recentProduct.getEmail();
 
-                            //Query to the product category database
-                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
+                            if(Objects.equals(userEmail, user.getEmail())) {
+                                //Query to the product category database
+                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
 
-                            Query query = myRef.orderByChild(productKey);
-                            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.exists()) {
-                                        for (DataSnapshot product : dataSnapshot.getChildren()) {
+                                Query query = myRef.orderByChild(productKey);
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            for (DataSnapshot product : dataSnapshot.getChildren()) {
 
-                                            Product p = product.getValue(Product.class);
-                                            //If the key of the product found is equal to the recent product key
-                                            if(Objects.equals(product.getKey(), productKey)) {
+                                                Product p = product.getValue(Product.class);
+                                                //If the key of the product found is equal to the recent product key
+                                                if(Objects.equals(product.getKey(), productKey)) {
 
-                                                recentProducts.add(new CategoryProduct(p.getProductName(), p.getPrice(),
-                                                        p.getBrand(), p.getBannerPictureUrl(), productKey));
+                                                    recentProducts.add(new CategoryProduct(p.getProductName(), p.getPrice(),
+                                                            p.getBrand(), p.getBannerPictureUrl(), productKey));
 
-                                                // Notify the adapter that an item was inserted in position = getItemCount()
-                                                notifyItemInserted(getItemCount());
+                                                    // Notify the adapter that an item was inserted in position = getItemCount()
+                                                    notifyItemInserted(getItemCount());
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
 
-                                }
-                            });
+                                    }
+                                });
+                            }
+
                         }
                     } else {
                         MainActivity.noRecentProducts.setVisibility(View.VISIBLE);
