@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -168,32 +169,41 @@ class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     }
 
     private void addToRecent(final CategoryProduct product) {
+        final String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
         final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final boolean[] exists = {false};
         if(user != null){ //if the user is logged in
-            Query query = myRef.orderByChild("user_email").equalTo(user.getEmail()); //get user recent products
-
+            Query query = myRef.orderByChild("visit_date"); //get user recent products
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
-                        if(Objects.equals(recentProduct.getKey(), product.getKey())) {
+                        if(Objects.equals(recentProduct.getKey(), product.getKey())
+                                && Objects.equals(recentProduct.getEmail(), user.getEmail())) {
                             //if the product is not added to the database
-                            Log.i("shit", product.getKey());
                             exists[0] = true;
                             break;
                         }
                     }
 
                     if(!exists[0]){
+
                         Map<String, String> values = new HashMap<>();
                         values.put("key", product.getKey());
-                        values.put("user_email", user.getEmail());
+                        values.put("email", user.getEmail());
                         values.put("category", category);
+                        values.put("visit_date", currentDateTimeString);
                         myRef.push().setValue(values);
+
+                    } else if(exists[0]) {
+                        for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                            RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+                            if(Objects.equals(recentProduct.getKey(), product.getKey()))
+                                dataSnapshot1.getRef().child("visit_date").setValue(currentDateTimeString);
+                        }
                     }
 
                 }
