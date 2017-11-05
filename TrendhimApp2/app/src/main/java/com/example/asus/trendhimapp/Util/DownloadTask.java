@@ -1,11 +1,11 @@
-package com.example.asus.trendhimapp.ProductPage;
+package com.example.asus.trendhimapp.Util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
+import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,9 +13,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Thread, used to handle the downloads from the GoogleFirebase storage service.
+ * Used to handle the downloads from the GoogleFirebase storage service.
  **/
-public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
+public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
     private String pictureUrl;
 
@@ -25,7 +25,7 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
      * @param pictureUrl url reference to the picture
      * @param imageView  the view to which the picture will be assigned after execution
      */
-    public DownloadThread(String pictureUrl, ImageView imageView) {
+    public DownloadTask(String pictureUrl, ImageView imageView) {
         this.pictureUrl = pictureUrl;
         this.imageView = imageView;
     }
@@ -55,16 +55,14 @@ public class DownloadThread extends AsyncTask<Void, Void, Bitmap> {
         try {
             URL url = new URL(urlString);
             con = (HttpURLConnection) url.openConnection();
-            inFromInternet = con.getInputStream();
-            bitmap = BitmapFactory.decodeStream(inFromInternet);
+            if (con != null) inFromInternet = con.getInputStream();
+            if (inFromInternet != null) bitmap = BitmapFactory.decodeStream(inFromInternet);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (con != null)
-                    con.disconnect();
-                if (inFromInternet != null)
-                    inFromInternet.close();
+                if (con != null) con.disconnect();
+                if (inFromInternet != null) inFromInternet.close();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

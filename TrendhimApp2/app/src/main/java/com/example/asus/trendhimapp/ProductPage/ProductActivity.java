@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.MainActivities.BaseActivity;
-import com.example.asus.trendhimapp.ProductPage.Products.BitmapFlyweight;
+import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 import com.example.asus.trendhimapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
