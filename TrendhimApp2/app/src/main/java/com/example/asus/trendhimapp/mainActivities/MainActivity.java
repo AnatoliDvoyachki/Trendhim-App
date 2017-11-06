@@ -12,19 +12,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
-import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
+import com.example.asus.trendhimapp.mainActivities.newProducts.NewProductsAdapter;
+import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
 
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
 
-    ArrayList<CategoryProduct> recentProducts;
-    public static RecentProductsAdapter adapter;
+    ArrayList<CategoryProduct> recentProducts, recommendedProducts;
+    public RecentProductsAdapter adapter;
     public static TextView noRecentProducts;
     ImageView recentProductImage, recommendedProductsImage;
     int i = 0, i1= 0;
+    public NewProductsAdapter newProductAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        initializeRecentProductRecyclerView();
+        initializeRecommendedProductsRecyclerView();
+    }
+
+    void initializeRecentProductRecyclerView(){
         // Lookup the recycler view in activity layout
         RecyclerView recyclerView = findViewById(R.id.recyclerViewmain);
 
@@ -85,6 +92,30 @@ public class MainActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         helper.attachToRecyclerView(recyclerView);
+    }
+
+    void initializeRecommendedProductsRecyclerView() {
+
+        // Lookup the recycler view in the activity layout (new)
+        RecyclerView recyclerViewNewProducts = findViewById(R.id.rvRecommendProducts);
+
+        //Recommended products initialize
+        recommendedProducts = new ArrayList<>();
+
+        // Create a new adapter for the category
+        newProductAdapter = new NewProductsAdapter(this, recommendedProducts);
+
+        // Attach the adapter to the recycler view
+        recyclerViewNewProducts.setAdapter(newProductAdapter);
+
+        //Populate the recycler view
+        newProductAdapter.addData();
+
+        SnapHelper helperNew = new LinearSnapHelper();
+        LinearLayoutManager layoutManagerNew = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewNewProducts.setLayoutManager(layoutManagerNew);
+
+        helperNew.attachToRecyclerView(recyclerViewNewProducts);
 
     }
 

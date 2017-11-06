@@ -165,11 +165,13 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                         for (final DataSnapshot product : dataSnapshot.getChildren()) {
                             //Found product
                             final RecentProduct recentProduct = product.getValue(RecentProduct.class);
+                            if (Objects.equals(recentProduct.getEmail(), user.getEmail())) {
+                                final String productKey = recentProduct.getKey(); //Product key
+                                String productCategory = recentProduct.getCategory(); //Product category
 
-                            final String productKey = recentProduct.getKey(); //Product key
-                            String productCategory = recentProduct.getCategory(); //Product category
+                                getProducts(user, productCategory, productKey);
+                            }
 
-                            getProducts(user, productCategory, productKey);
                         }
                     } else {
                         MainActivity.noRecentProducts.setVisibility(View.VISIBLE);

@@ -37,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
                 android:text="@string/you_don_t_have_recent_products"
                 android:visibility="gone" />
 
@@ -48,8 +49,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerViewmain"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
         </LinearLayout>
@@ -77,7 +77,7 @@
                 android:id="@+id/rvRecommendProducts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginStart="5dp" />
 
         </LinearLayout>

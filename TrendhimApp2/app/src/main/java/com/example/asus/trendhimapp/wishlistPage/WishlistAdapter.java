@@ -1,5 +1,6 @@
 package com.example.asus.trendhimapp.wishlistPage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private Context context;
     private List<CategoryProduct> productList;
 
-    public WishlistAdapter(Context context) {
+    WishlistAdapter(Context context) {
         this.productList = new ArrayList<>();
         this.context = context;
         setEmail();
@@ -46,9 +47,10 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return new ViewHolder(wishlistProducts);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-        CategoryProduct currentProduct = productList.get(position);
+    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
+        final CategoryProduct currentProduct = productList.get(position);
         BitmapFlyweight.getPicture(currentProduct.getBannerPictureURL(), viewHolder.bannerImageView);
         viewHolder.productNameTextView.setText(currentProduct.getName());
         viewHolder.priceTextView.setText(currentProduct.getPrice() + "€");
@@ -56,9 +58,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         viewHolder.removeProductImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CategoryProduct selectedProduct = productList.get(position);
-                removeItem(selectedProduct);
-                productList.remove(selectedProduct);
+                removeItem(currentProduct);
+                productList.remove(currentProduct);
                 notifyDataSetChanged();
                 Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
             }
