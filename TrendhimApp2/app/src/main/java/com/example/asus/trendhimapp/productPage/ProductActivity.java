@@ -129,6 +129,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    /**
+     * Returns true, if the wishlist contains an item with the email and key passed as parameters. Otherwise, fase.
+     **/
     private boolean wishlistItemExists(final String userEmail, final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
