@@ -13,7 +13,7 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_weight="1"
-        android:contentDescription="@string/bannerimage" />
+        android:contentDescription="@string/banner_image" />
 
     <TextView
         android:id="@+id/brand_name_main"

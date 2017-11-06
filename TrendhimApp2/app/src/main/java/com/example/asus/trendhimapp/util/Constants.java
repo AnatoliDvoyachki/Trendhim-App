@@ -12,4 +12,15 @@ public final class Constants {
     public static final String TABLE_NAME_TIES = "ties";
     public static final String TABLE_NAME_WATCHES = "watches";
     public static final String TABLE_NAME_WISHLIST = "wishlist";
+
+    // Attribute name for the Product object
+    public static final String KEY_PRODUCT_NAME = "productName";
+    public static final String KEY_PRICE = "price";
+    public static final String KEY_BANNER_PIC_URL = "bannerPictureUrl";
+    public static final String KEY_LEFT_PIC_URL = "leftPictureUrl";
+    public static final String KEY_RIGHT_PIC_URL = "rightPictureUrl";
+    public static final String KEY_BRAND_NAME = "brand";
+    public static final String KEY_PRODUCT_KEY = "productKey";
+
+    public static final String WATCH_PREFIX = "watch";
 }
