@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.Login.LoginActivity;
+import com.example.asus.trendhimapp.ProductPage.WishlistActivity.WishlistActivity;
 import com.example.asus.trendhimapp.Util.Constants;
 import com.example.asus.trendhimapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +37,28 @@ public class BaseActivity  extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.shopping_cart_icon: {
+                        Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    case R.id.wishList_icon: {
+                        if (isUserOnline()) {
+                            Intent toWishlist = new Intent(BaseActivity.this, WishlistActivity.class);
+                            startActivity(toWishlist);
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                    default:
+                        return false;
+                }
+            }
+        });
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
