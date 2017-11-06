@@ -168,7 +168,7 @@ public class BaseActivity  extends AppCompatActivity
             Intent toWishList = new Intent(BaseActivity.this, WishlistActivity.class);
             startActivity(toWishList);
         } else {
-            Toast.makeText(getApplicationContext(), "You need to login", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
         }
     }
 

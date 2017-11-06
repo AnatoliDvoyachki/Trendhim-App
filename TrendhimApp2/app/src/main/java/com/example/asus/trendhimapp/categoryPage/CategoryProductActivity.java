@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.util.Constants;
 
 import java.util.ArrayList;
 
@@ -78,25 +79,25 @@ public class CategoryProductActivity extends BaseActivity {
     public String setTitle(){
         String category = null;
         switch (getCategory()){
-            case "bags":
+            case Constants.TABLE_NAME_BAGS:
                 category = "Bags";
                 break;
-            case "bracelets":
+            case Constants.TABLE_NAME_BRACELETS:
                 category = "Bracelets";
                 break;
-            case  "ties":
+            case  Constants.TABLE_NAME_TIES:
                 category = "Ties";
                 break;
-            case "bow_ties":
+            case Constants.TABLE_NAME_BOW_TIES:
                 category = "Bow Ties";
                 break;
-            case "beard_care":
+            case Constants.TABLE_NAME_BEARD_CARE:
                 category = "Beard Care";
                 break;
-            case "necklaces":
+            case Constants.TABLE_NAME_NECKLACES:
                 category = "Necklaces";
                 break;
-            case "watches":
+            case Constants.TABLE_NAME_WATCHES:
                 category = "Watches";
         }
         return category;

@@ -116,9 +116,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                 String entityName;
                 // get the entity name from the product key ;)
                 if (productKey.startsWith(Constants.WATCH_PREFIX)) {
-                    entityName = productKey.replaceAll("\\d", "es");
+                    entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "es");
                 } else {
-                    entityName = productKey.replaceAll("\\d", "s");
+                    entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "s");
                 }
                 myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
                 Toast.makeText(this, R.string.added_to_wishlist_success_message, Toast.LENGTH_SHORT).show();
@@ -146,8 +146,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
         return count != 0;
     }
