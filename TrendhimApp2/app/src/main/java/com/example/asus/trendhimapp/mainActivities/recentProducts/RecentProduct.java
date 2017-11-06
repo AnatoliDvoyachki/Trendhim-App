@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.MainActivities.RecentProducts;
+package com.example.asus.trendhimapp.mainActivities.recentProducts;
 
 public class RecentProduct {
 

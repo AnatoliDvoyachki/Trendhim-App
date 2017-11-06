@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.example.asus.trendhimapp.MainActivities.BaseActivity;
+import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.R;
 
 import java.util.ArrayList;

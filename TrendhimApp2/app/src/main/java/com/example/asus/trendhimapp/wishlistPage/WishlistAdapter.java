@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.WishlistPage;
+package com.example.asus.trendhimapp.wishlistPage;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
-import com.example.asus.trendhimapp.ProductPage.Product;
+import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.Util.BitmapFlyweight;
-import com.example.asus.trendhimapp.Util.Constants;
+import com.example.asus.trendhimapp.util.BitmapFlyweight;
+import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

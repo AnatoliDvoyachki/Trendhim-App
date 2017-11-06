@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.Util;
+package com.example.asus.trendhimapp.util;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;

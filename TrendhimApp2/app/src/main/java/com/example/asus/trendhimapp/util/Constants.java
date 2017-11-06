@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.Util;
+package com.example.asus.trendhimapp.util;
 
 public final class Constants {
     private Constants() {}

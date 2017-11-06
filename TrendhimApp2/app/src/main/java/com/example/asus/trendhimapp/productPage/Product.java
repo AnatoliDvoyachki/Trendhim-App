@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.ProductPage;
+package com.example.asus.trendhimapp.productPage;
 
 public class Product {
 

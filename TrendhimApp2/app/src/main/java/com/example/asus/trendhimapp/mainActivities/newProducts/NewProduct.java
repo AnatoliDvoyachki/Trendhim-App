@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.MainActivities.NewProducts;
+package com.example.asus.trendhimapp.mainActivities.newProducts;
 
 public class NewProduct {
 
