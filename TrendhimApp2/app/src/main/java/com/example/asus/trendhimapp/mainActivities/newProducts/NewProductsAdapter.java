@@ -40,7 +40,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View newProductsView = inflater.inflate(R.layout.item_product, parent, false);
+        View newProductsView = inflater.inflate(R.layout.item_new_product, parent, false);
 
         // Return a new holder instance
         return new ViewHolder(newProductsView);
@@ -84,17 +84,19 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      */
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recommended_products");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
+
                 if (dataSnapshot.exists()) {
-                    for(DataSnapshot product : dataSnapshot.getChildren()) {
-                        String productKey = product.getKey();
-                        Product p = product.getValue(Product.class);
-                        newProducts.add(new CategoryProduct(
-                                p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), productKey));
-                        // Notify the adapter that an item was inserted in position = getItemCount()
-                        notifyItemInserted(getItemCount());
+
+                    for (final DataSnapshot product : dataSnapshot.getChildren()) {
+                        //Found product
+                        final NewProduct newProduct = product.getValue(NewProduct.class);
+                        final String productKey = newProduct.getKey(); //Product key
+                        String productCategory = newProduct.getCategory(); //Product category
+
+                        queryGetProducts(productCategory, productKey);
 
                     }
                 }
@@ -106,6 +108,45 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
             }
 
         });
+
+    }
+
+    /**
+     * Query to the product category database to get an specific product
+     * @param productCategory
+     * @param productKey
+     */
+    private void queryGetProducts(String productCategory, final String productKey){
+
+        //Query to the product category database
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot product : dataSnapshot.getChildren()) {
+
+                        Product p = product.getValue(Product.class);
+                        //If the key of the product found is equal to the recent product key
+                        if (Objects.equals(product.getKey(), productKey)) {
+
+                            newProducts.add(0, new CategoryProduct(p.getProductName(), p.getPrice(),
+                                    p.getBrand(), p.getBannerPictureUrl(), productKey));
+
+                            // Notify the adapter that an item was inserted in position = 0
+                            notifyItemInserted(0);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     /**
@@ -194,10 +235,10 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
          */
             super(itemView);
 
-            productNameTextView = itemView.findViewById(R.id.product_name_main);
-            productPriceTextView = itemView.findViewById(R.id.product_price_main);
-            productBrandTextView = itemView.findViewById(R.id.brand_name_main);
-            productImage = itemView.findViewById(R.id.product_image_main);
+            productNameTextView = itemView.findViewById(R.id.product_name_newProduct);
+            productPriceTextView = itemView.findViewById(R.id.product_price_newProduct);
+            productBrandTextView = itemView.findViewById(R.id.brand_name_newProduct);
+            productImage = itemView.findViewById(R.id.product_image_newProduct);
         }
     }
 
