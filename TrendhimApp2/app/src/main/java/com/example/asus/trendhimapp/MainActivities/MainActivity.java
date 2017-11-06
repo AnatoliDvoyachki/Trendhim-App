@@ -2,7 +2,7 @@ package com.example.asus.trendhimapp.MainActivities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity {
         });
 
         // Lookup the recycler view in activity layout
-        RecyclerView rvRecentProducts = findViewById(R.id.recyclerViewmain);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewmain);
 
         // Initialize categories
         recentProducts = new ArrayList<>();
@@ -76,18 +76,17 @@ public class MainActivity extends BaseActivity {
         adapter = new RecentProductsAdapter(this, recentProducts);
 
         // Attach the adapter to the recycler view
-        rvRecentProducts.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         //Populate the recycler view
         adapter.addData();
-        adapter.notifyDataSetChanged();
 
         SnapHelper helper = new LinearSnapHelper();
-        GridLayoutManager layoutManager =
-                new GridLayoutManager(this,1, GridLayoutManager.HORIZONTAL, false);
-        rvRecentProducts.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        helper.attachToRecyclerView(rvRecentProducts);
+        helper.attachToRecyclerView(recyclerView);
 
     }
+
 }
+
