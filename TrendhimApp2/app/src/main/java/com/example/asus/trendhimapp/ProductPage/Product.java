@@ -48,4 +48,16 @@ public class Product {
         return price;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "bannerPictureUrl='" + bannerPictureUrl + '\'' +
+                ", leftPictureUrl='" + leftPictureUrl + '\'' +
+                ", rightPictureUrl='" + rightPictureUrl + '\'' +
+                ", brand='" + brand + '\'' +
+                ", productName='" + productName + '\'' +
+                ", key='" + key + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

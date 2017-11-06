@@ -23,7 +23,9 @@
             android:parentActivityName=".CategoryPage.CategoryProductActivity" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Login.SignupActivity" />
-        <activity android:name=".ProductPage.WishlistActivity.WishlistActivity"></activity>
+        <activity android:name=".ProductPage.WishlistActivity.WishlistActivity">
+
+        </activity>
     </application>
 
 </manifest>
