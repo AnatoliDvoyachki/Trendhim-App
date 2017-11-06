@@ -1,5 +1,6 @@
 package com.example.asus.trendhimapp.MainActivities.RecentProducts;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +25,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAdapter.ViewHolder> {
@@ -110,10 +116,10 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
                                                     context.startActivity(intent);
 
-
-
                                                 }
                                             }
+
+                                            addToRecent(product, recentProduct.getCategory(), position);
 
                                         }
                                     }
@@ -150,11 +156,13 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user != null) { //Add products to the recent products recycler view if the user is logged in
-            myRef.orderByChild("visit_date")
-                    .addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+           Query query = myRef.orderByKey();
+                    query.addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
                 @Override
                 public void onDataChange(final DataSnapshot dataSnapshot) {
+
                     if (dataSnapshot.exists()) {
+
                         for (final DataSnapshot product : dataSnapshot.getChildren()) {
                             //Found product
                             final RecentProduct recentProduct = product.getValue(RecentProduct.class);
@@ -208,6 +216,58 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
             });
         }
 
+    }
+
+    private void addToRecent(final CategoryProduct product, final String category, final int position) {
+
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final boolean[] exists = {false};
+
+        if(user != null){ //if the user is logged in
+
+            myRef.orderByKey()
+                    .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+
+                                if(Objects.equals(recentProduct.getKey(), product.getKey())
+                                        && Objects.equals(recentProduct.getEmail(), user.getEmail())) {
+                                    //if the product is added to the database
+                                    Date curDate = new Date();
+                                    dataSnapshot1.getRef().child("visit_date").setValue(convertDateToString(curDate));
+                                    notifyItemChanged(position);
+                                    exists[0] = true;
+                                }
+                            }
+
+                            if(!exists[0]){
+                                Date curDate = new Date();
+                                Map<String, String> values = new HashMap<>();
+                                values.put("key", product.getKey());
+                                values.put("email", user.getEmail());
+                                values.put("category", category);
+                                myRef.child(convertDateToString(curDate)).setValue(values);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+        }
+    }
+
+    private static String convertDateToString(Date date) {
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("yyyyMMddhhmmss");
+        return dateFormatter.format(date);
     }
 
     /**

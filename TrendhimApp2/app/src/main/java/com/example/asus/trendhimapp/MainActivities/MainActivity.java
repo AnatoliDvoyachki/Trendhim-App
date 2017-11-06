@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
 
     ArrayList<CategoryProduct> recentProducts;
-    RecentProductsAdapter adapter;
+    public static RecentProductsAdapter adapter;
     public static TextView noRecentProducts;
     ImageView recentProductImage, recommendedProductsImage;
     int i = 0, i1= 0;
@@ -80,9 +80,11 @@ public class MainActivity extends BaseActivity {
 
         //Populate the recycler view
         adapter.addData();
+        adapter.notifyDataSetChanged();
 
         SnapHelper helper = new LinearSnapHelper();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         helper.attachToRecyclerView(recyclerView);
