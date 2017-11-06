@@ -108,12 +108,15 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Intent intent = getIntent();
         if (intent != null) {
-            WishlistProduct wishlistProduct;
             String userEmail = user.getEmail();
             String productKey = intent.getStringExtra("productKey");
-            String entityName = productKey.replaceAll("\\d", "s"); // replace digits with s
-            wishlistProduct = new WishlistProduct(productKey, entityName, userEmail);
-            myRef.push().setValue(wishlistProduct);
+            String entityName;
+            if (productKey.startsWith("watch")) {
+                entityName = productKey.replace("\\d", "es");
+            } else {
+                entityName = productKey.replace("\\d", "s");
+            }
+            myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
             Toast.makeText(this, "Item successfuly added to wishlist!", Toast.LENGTH_SHORT).show();
         }
     }
