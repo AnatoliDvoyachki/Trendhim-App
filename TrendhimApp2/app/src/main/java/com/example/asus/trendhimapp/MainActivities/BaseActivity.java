@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.CategoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.Login.LoginActivity;
-import com.example.asus.trendhimapp.ProductPage.WishlistActivity.WishlistActivity;
+import com.example.asus.trendhimapp.WishlistPage.WishlistActivity;
 import com.example.asus.trendhimapp.Util.Constants;
 import com.example.asus.trendhimapp.R;
 import com.google.firebase.auth.FirebaseAuth;
