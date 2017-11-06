@@ -137,7 +137,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                                 RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
 
-                                if(Objects.equals(recentProduct.getKey(), product.getKey())) {
+                                if(Objects.equals(recentProduct.getKey(), product.getProductKey())) {
                                     //if the product is in the recent_product database
                                     Date curDate = new Date();
                                     dataSnapshot1.getRef().child("visit_date").setValue(convertDateToString(curDate));
@@ -149,7 +149,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                             if(!exists[0]) { //if the product is not in the recent_product database
                                 Date curDate = new Date();
                                 Map<String, String> values = new HashMap<>();
-                                values.put("key", product.getKey());
+                                values.put("key", product.getProductKey());
                                 values.put("email", user.getEmail());
                                 values.put("category", category);
                                 myRef.child(convertDateToString(curDate)).setValue(values);
@@ -252,13 +252,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                        if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
+                        if(Objects.equals(product.getProductKey(), dataSnapshot1.getKey())) {
 
                             Product foundProduct = dataSnapshot1.getValue(Product.class);
 
                             Intent intent = new Intent(context, ProductActivity.class);
 
-                            intent.putExtra("productKey", product.getKey());
+                            intent.putExtra("productKey", product.getProductKey());
                             intent.putExtra("productName", foundProduct.getProductName());
                             intent.putExtra("brand", foundProduct.getBrand());
                             intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());

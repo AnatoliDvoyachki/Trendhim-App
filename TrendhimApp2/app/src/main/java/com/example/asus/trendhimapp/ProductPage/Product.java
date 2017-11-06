@@ -2,7 +2,7 @@ package com.example.asus.trendhimapp.ProductPage;
 
 public class Product {
 
-    private String bannerPictureUrl, leftPictureUrl, rightPictureUrl, brand, productName, key;
+    private String bannerPictureUrl, leftPictureUrl, rightPictureUrl, brand, productName, productKey;
     private int price;
 
     // No-argument constructor for the Firebase implementation
@@ -14,14 +14,14 @@ public class Product {
         this.productName = productName;
         this.brand = brand;
         this.bannerPictureUrl = bannerPictureUrl;
-        this.key = key;
+        this.productKey = key;
         this.leftPictureUrl = leftPictureUrl;
         this.rightPictureUrl = rightPictureUrl;
         this.price = price;
     }
 
-    public String getKey() {
-        return key;
+    public String getProductKey() {
+        return productKey;
     }
 
     public  String getProductName(){
@@ -56,7 +56,7 @@ public class Product {
                 ", rightPictureUrl='" + rightPictureUrl + '\'' +
                 ", brand='" + brand + '\'' +
                 ", productName='" + productName + '\'' +
-                ", key='" + key + '\'' +
+                ", productKey='" + productKey + '\'' +
                 ", price=" + price +
                 '}';
     }

@@ -11,7 +11,7 @@
     <string name="addToCartButtonLabel">Add to Cart</string>
     <string name="addToWishlistButtonLabel">Add to Wishlist</string>
     <string name="discountCheckBoxLabel">Some sample text</string>
-    <string name="email">Email</string>
+    <string name="email">Email:</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account">Create Account</string>

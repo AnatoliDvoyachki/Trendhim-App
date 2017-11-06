@@ -82,7 +82,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 //Query the recent_product database to get the product category
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recent_products");
                 //get product which key is equal to the one clicked
-                databaseReference.orderByChild("key").equalTo(product.getKey())
+                databaseReference.orderByChild("key").equalTo(product.getProductKey())
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -101,12 +101,12 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                         if (dataSnapshot.exists()) {
                                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                                 //If the object key is correct
-                                                if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
+                                                if(Objects.equals(product.getProductKey(), dataSnapshot1.getKey())) {
 
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
                                                     Intent intent = new Intent(context, ProductActivity.class);
 
-                                                    intent.putExtra("productKey", product.getKey());
+                                                    intent.putExtra("productKey", product.getProductKey());
                                                     intent.putExtra("productName", foundProduct.getProductName());
                                                     intent.putExtra("brand", foundProduct.getBrand());
                                                     intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
@@ -235,7 +235,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                             for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                 RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
 
-                                if(Objects.equals(recentProduct.getKey(), product.getKey())
+                                if(Objects.equals(recentProduct.getKey(), product.getProductKey())
                                         && Objects.equals(recentProduct.getEmail(), user.getEmail())) {
                                     //if the product is added to the database
                                     Date curDate = new Date();
@@ -248,7 +248,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                             if(!exists[0]){
                                 Date curDate = new Date();
                                 Map<String, String> values = new HashMap<>();
-                                values.put("key", product.getKey());
+                                values.put("key", product.getProductKey());
                                 values.put("email", user.getEmail());
                                 values.put("category", category);
                                 myRef.child(convertDateToString(curDate)).setValue(values);

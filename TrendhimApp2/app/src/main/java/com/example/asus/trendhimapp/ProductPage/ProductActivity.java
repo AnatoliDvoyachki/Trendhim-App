@@ -90,7 +90,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         final int id = v.getId();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
         if (currentUser != null) {
             if (id == R.id.addToWishlistButton) {
                 addToWishlist();
