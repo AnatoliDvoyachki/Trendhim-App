@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".mainActivities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".categoryPage.CategoryProductActivity" />
         <activity android:name=".mainActivities.BaseActivity" />
@@ -22,7 +19,12 @@
             android:parentActivityName=".categoryPage.CategoryProductActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.SignupActivity" />
-        <activity android:name=".wishlistPage.WishlistActivity"></activity>
+        <activity android:name=".wishlistPage.WishlistActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

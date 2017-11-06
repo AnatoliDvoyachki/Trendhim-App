@@ -35,10 +35,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     public WishlistAdapter(Context context) {
         this.productList = new ArrayList<>();
         this.context = context;
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            this.userEmail = firebaseUser.getEmail();
-        }
+        setEmail();
     }
 
     @Override
@@ -63,12 +60,13 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 removeItem(selectedProduct);
                 productList.remove(selectedProduct);
                 notifyDataSetChanged();
+                Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.addToCartImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "TODO ADD TO CART", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -123,6 +121,16 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         }
     }
 
+    private void setEmail() {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            this.userEmail = firebaseUser.getEmail();
+        }
+    }
+
+    /**
+     * Removes a product from the user's wishlist
+     **/
     private void removeItem(final CategoryProduct categoryProduct) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         final String productKey = categoryProduct.getKey();
@@ -134,6 +142,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                         WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
                         if (productKey.equals(wishProd.getProductKey()) && userEmail.equals(wishProd.getUserEmail())) {
                             ds.getRef().removeValue();
+                            notifyDataSetChanged();
                         }
                     }
                 }

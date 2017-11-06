@@ -16,6 +16,7 @@ import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.productPage.ProductActivity;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
+import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -187,10 +188,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                             Intent intent = new Intent(context, ProductActivity.class);
 
                             intent.putExtra("productKey", product.getKey());
-                            intent.putExtra("productName", foundProduct.getProductName());
+                            intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
                             intent.putExtra("brand", foundProduct.getBrand());
                             intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
-                            intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
+                            intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
                             intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
                             intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
 

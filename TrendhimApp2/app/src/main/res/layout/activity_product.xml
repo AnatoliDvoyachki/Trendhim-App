@@ -52,7 +52,7 @@
         android:layout_marginRight="10dp"
         android:padding="10dp"
         android:background="@color/buttonGreen"
-        android:text="@string/addToCartButtonLabel"
+        android:text="@string/add_to_cart_button_name"
         android:textColor="@color/white" />
 
     <!-- Add to wishlist !-->
@@ -65,7 +65,7 @@
         android:layout_marginStart="5dp"
         android:padding="10dp"
         android:background="@color/buttonGreen"
-        android:text="@string/addToWishlistButtonLabel"
+        android:text="@string/add_to_wishlist_button_name"
         android:textColor="@color/white" />
 
     <!-- Brand name !-->

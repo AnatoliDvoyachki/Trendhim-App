@@ -19,13 +19,17 @@ import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
     private ImageView bannerImageView, leftImageView, rightImageView;
     private TextView brandTextView, priceTextView, productNameTextView;
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         initializeComponents();
-        getProductFromIntent();
+        loadProduct();
     }
 
     private void initializeComponents() {
@@ -61,15 +65,15 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     @SuppressLint("SetTextI18n")
-    public void getProductFromIntent() {
+    public void loadProduct() {
         Intent intent = getIntent();
         if (intent != null) {
-            String productName = intent.getStringExtra("productName");
-            String price = intent.getStringExtra("price");
-            String bannerPictureUrl = intent.getStringExtra("bannerPictureUrl");
-            String leftPictureUrl = intent.getStringExtra("leftPictureUrl");
-            String rightPictureUrl = intent.getStringExtra("rightPictureUrl");
-            String brand = intent.getStringExtra("brand");
+            String productName = intent.getStringExtra(Constants.KEY_PRODUCT_NAME);
+            String price = intent.getStringExtra(Constants.KEY_PRICE);
+            String bannerPictureUrl = intent.getStringExtra(Constants.KEY_BANNER_PIC_URL);
+            String leftPictureUrl = intent.getStringExtra(Constants.KEY_LEFT_PIC_URL);
+            String rightPictureUrl = intent.getStringExtra(Constants.KEY_RIGHT_PIC_URL);
+            String brand = intent.getStringExtra(Constants.KEY_BRAND_NAME);
             if (productName != null && price != null && bannerPictureUrl != null && leftPictureUrl != null
                     && rightPictureUrl != null && brand != null) {
                 // set all the values & pictures
@@ -94,11 +98,10 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             if (id == R.id.addToWishlistButton) {
                 addToWishlist();
             } else {
-                Toast.makeText(this, "Test add to cart", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "TODO ADD TO CART", Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(this, "You must be logged in to access" +
-                    " these features!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -108,16 +111,45 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         Intent intent = getIntent();
         if (intent != null) {
             String userEmail = user.getEmail();
-            String productKey = intent.getStringExtra("productKey");
-            String entityName;
-            if (productKey.startsWith("watch")) {
-                entityName = productKey.replace("\\d", "es");
+            String productKey = intent.getStringExtra(Constants.KEY_PRODUCT_KEY);
+            if (!wishlistItemExists(userEmail, productKey)) {
+                String entityName;
+                // get the entity name from the product key ;)
+                if (productKey.startsWith(Constants.WATCH_PREFIX)) {
+                    entityName = productKey.replaceAll("\\d", "es");
+                } else {
+                    entityName = productKey.replaceAll("\\d", "s");
+                }
+                myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
+                Toast.makeText(this, R.string.added_to_wishlist_success_message, Toast.LENGTH_SHORT).show();
             } else {
-                entityName = productKey.replace("\\d", "s");
+                Toast.makeText(this, R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
             }
-            myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
-            Toast.makeText(this, "Item successfuly added to wishlist!", Toast.LENGTH_SHORT).show();
+            count = 0;
         }
+    }
+
+    private boolean wishlistItemExists(final String userEmail, final String productKey) {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
+                        if (userEmail.equals(wishProd.getUserEmail()) && productKey.equals(wishProd.getProductKey())) {
+                            count++;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        return count != 0;
     }
 
 }
