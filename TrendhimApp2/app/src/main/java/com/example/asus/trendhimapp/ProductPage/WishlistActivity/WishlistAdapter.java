@@ -126,7 +126,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private void removeItem(final CategoryProduct categoryProduct) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         final String productKey = categoryProduct.getProductKey();
-        Log.d(this.getClass().getCanonicalName(), "PRODUCT KEY: " + productKey);
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
