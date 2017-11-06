@@ -33,4 +33,14 @@ public class CategoryProduct {
         return key;
     }
 
+    @Override
+    public String toString() {
+        return "CategoryProduct{" +
+                "name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", bannerPictureURL='" + bannerPictureURL + '\'' +
+                ", key='" + key + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

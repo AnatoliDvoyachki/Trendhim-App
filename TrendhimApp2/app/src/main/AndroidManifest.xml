@@ -12,7 +12,6 @@
         <activity android:name=".MainActivities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,9 +22,7 @@
             android:parentActivityName=".CategoryPage.CategoryProductActivity" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Login.SignupActivity" />
-        <activity android:name=".ProductPage.WishlistActivity.WishlistActivity">
-
-        </activity>
+        <activity android:name=".ProductPage.WishlistActivity.WishlistActivity"></activity>
     </application>
 
 </manifest>
