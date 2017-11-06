@@ -80,14 +80,13 @@ public class MainActivity extends BaseActivity {
 
         //Populate the recycler view
         adapter.addData();
-        adapter.notifyDataSetChanged();
 
         SnapHelper helper = new LinearSnapHelper();
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         helper.attachToRecyclerView(recyclerView);
 
     }
+
 }
+

@@ -11,26 +11,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.asus.trendhimapp.MainActivities.MainActivity;
-import com.example.asus.trendhimapp.MainActivities.RecentProducts.RecentProduct;
+import com.example.asus.trendhimapp.MainActivities.RecentProducts.RecentProductsAdapter;
 import com.example.asus.trendhimapp.ProductPage.Product;
 import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.Util.BitmapFlyweight;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
@@ -113,70 +105,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return categoryPageList.size();
     }
 
-
-    /**
-     * Adds a product to the recent_products database whenever the user visits it
-     * @param product
-     */
-    private void addToRecent(final CategoryProduct product) {
-
-        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        final boolean[] exists = {false};
-
-        if(user != null){ //if the user is logged in
-
-            myRef.orderByChild("email").equalTo(user.getEmail())
-                    .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
-
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
-                                RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
-
-                                if(Objects.equals(recentProduct.getKey(), product.getProductKey())) {
-                                    //if the product is in the recent_product database
-                                    Date curDate = new Date();
-                                    dataSnapshot1.getRef().child("visit_date").setValue(convertDateToString(curDate));
-                                    MainActivity.adapter.notifyDataSetChanged();
-                                    exists[0] = true;
-                                }
-                            }
-
-                            if(!exists[0]) { //if the product is not in the recent_product database
-                                Date curDate = new Date();
-                                Map<String, String> values = new HashMap<>();
-                                values.put("key", product.getProductKey());
-                                values.put("email", user.getEmail());
-                                values.put("category", category);
-                                myRef.child(convertDateToString(curDate)).setValue(values);
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-        }
-    }
-
-    /**
-     * Convert Date to String
-     * @param date
-     * @return Date formatted into a date
-     */
-    private static String convertDateToString(Date date) {
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("yyyyMMddhhmmss");
-        return dateFormatter.format(date);
-    }
-
     /**
      * Populate the recycler view. Get data from the database which name is equal to the parameter.
      * @param category
@@ -252,13 +180,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                        if(Objects.equals(product.getProductKey(), dataSnapshot1.getKey())) {
+                        if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
 
                             Product foundProduct = dataSnapshot1.getValue(Product.class);
 
                             Intent intent = new Intent(context, ProductActivity.class);
 
-                            intent.putExtra("productKey", product.getProductKey());
+                            intent.putExtra("productKey", product.getKey());
                             intent.putExtra("productName", foundProduct.getProductName());
                             intent.putExtra("brand", foundProduct.getBrand());
                             intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
@@ -271,7 +199,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                     }
                     //Add product to recent activity
-                    addToRecent(product);
+                    RecentProductsAdapter.addToRecent(product, category);
                 }
 
             }

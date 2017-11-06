@@ -36,12 +36,11 @@ import java.util.Objects;
 public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAdapter.ViewHolder> {
 
     private Context context;
-    private static List<CategoryProduct> recentProducts;
+    private List<CategoryProduct> recentProducts;
 
     public RecentProductsAdapter(Context context, List<CategoryProduct> recentProducts) {
         this.recentProducts = recentProducts;
         this.context = context;
-
     }
 
     @Override
@@ -57,7 +56,8 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     }
 
     @Override
-    public void onBindViewHolder(RecentProductsAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(RecentProductsAdapter.ViewHolder viewHolder, int position) {
+
         // Get the data model based on position
         final CategoryProduct product = recentProducts.get(position);
         // Set item views based on the views and data model
@@ -82,7 +82,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 //Query the recent_product database to get the product category
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recent_products");
                 //get product which key is equal to the one clicked
-                databaseReference.orderByChild("key").equalTo(product.getProductKey())
+                databaseReference.orderByChild("key").equalTo(product.getKey())
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -101,12 +101,12 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                         if (dataSnapshot.exists()) {
                                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                                 //If the object key is correct
-                                                if(Objects.equals(product.getProductKey(), dataSnapshot1.getKey())) {
+                                                if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
 
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
                                                     Intent intent = new Intent(context, ProductActivity.class);
 
-                                                    intent.putExtra("productKey", product.getProductKey());
+                                                    intent.putExtra("productKey", product.getKey());
                                                     intent.putExtra("productName", foundProduct.getProductName());
                                                     intent.putExtra("brand", foundProduct.getBrand());
                                                     intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
@@ -119,7 +119,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                 }
                                             }
 
-                                            addToRecent(product, recentProduct.getCategory(), position);
+                                            addToRecent(product, recentProduct.getCategory());
 
                                         }
                                     }
@@ -154,9 +154,8 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         if(user != null) { //Add products to the recent products recycler view if the user is logged in
-           Query query = myRef.orderByKey();
+           Query query = myRef.orderByChild("order");
                     query.addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
                 @Override
                 public void onDataChange(final DataSnapshot dataSnapshot) {
@@ -170,38 +169,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                             final String productKey = recentProduct.getKey(); //Product key
                             String productCategory = recentProduct.getCategory(); //Product category
 
-                            //Query to the product category database
-                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
-
-                            if(user != null){
-                                Query query = myRef.orderByChild(productKey);
-                                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.exists()) {
-                                            for (DataSnapshot product : dataSnapshot.getChildren()) {
-
-                                                Product p = product.getValue(Product.class);
-                                                //If the key of the product found is equal to the recent product key
-                                                if (Objects.equals(product.getKey(), productKey)) {
-
-                                                    recentProducts.add(0, new CategoryProduct(p.getProductName(), p.getPrice(),
-                                                            p.getBrand(), p.getBannerPictureUrl(), productKey));
-
-                                                    // Notify the adapter that an item was inserted in position = 0
-                                                    notifyItemInserted(0);
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
-                            }
-
+                            getProducts(user, productCategory, productKey);
                         }
                     } else {
                         MainActivity.noRecentProducts.setVisibility(View.VISIBLE);
@@ -218,7 +186,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
     }
 
-    private void addToRecent(final CategoryProduct product, final String category, final int position) {
+    public static void addToRecent(final CategoryProduct product, final String category) {
 
         final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -227,48 +195,91 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
         if(user != null){ //if the user is logged in
 
-            myRef.orderByKey()
-                    .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+            myRef.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
 
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
 
-                                if(Objects.equals(recentProduct.getKey(), product.getProductKey())
-                                        && Objects.equals(recentProduct.getEmail(), user.getEmail())) {
-                                    //if the product is added to the database
-                                    Date curDate = new Date();
-                                    dataSnapshot1.getRef().child("visit_date").setValue(convertDateToString(curDate));
-                                    notifyItemChanged(position);
-                                    exists[0] = true;
-                                }
-                            }
+                        if(Objects.equals(recentProduct.getKey(), product.getKey())
+                                && Objects.equals(recentProduct.getEmail(), user.getEmail())) {
 
-                            if(!exists[0]){
-                                Date curDate = new Date();
-                                Map<String, String> values = new HashMap<>();
-                                values.put("key", product.getProductKey());
-                                values.put("email", user.getEmail());
-                                values.put("category", category);
-                                myRef.child(convertDateToString(curDate)).setValue(values);
-                            }
-
+                            //if the product is added to the database
+                            Date curDate = new Date();
+                            dataSnapshot1.getRef().child("visit").setValue(convertDateToString(curDate));
+                            dataSnapshot1.getRef().child("order").setValue("-" + convertDateToString(curDate));
+                            exists[0] = true;
+                            break;
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                    if(!exists[0]){
+                        Date curDate = new Date();
+                        Map<String, String> values = new HashMap<>();
+                        values.put("key", product.getKey());
+                        values.put("email", user.getEmail());
+                        values.put("category", category);
+                        values.put("order", "-" + convertDateToString(curDate)); //order the elements in descending date
+                        myRef.child(convertDateToString(curDate)).setValue(values);
+                    }
 
-                        }
-                    });
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 
+    private void getProducts(FirebaseUser user, String productCategory, final String productKey){
+
+        //Query to the product category database
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
+
+        if(user != null){
+            Query query = myRef.orderByChild(productKey);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot product : dataSnapshot.getChildren()) {
+
+                            Product p = product.getValue(Product.class);
+                            //If the key of the product found is equal to the recent product key
+                            if (Objects.equals(product.getKey(), productKey)) {
+
+                                recentProducts.add(0, new CategoryProduct(p.getProductName(), p.getPrice(),
+                                        p.getBrand(), p.getBannerPictureUrl(), productKey));
+
+                                // Notify the adapter that an item was inserted in position = 0
+                                notifyItemInserted(0);
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+    }
+
+    /**
+     * Convert Date to String
+     * @param date
+     * @return Date formatted into a date
+     */
     private static String convertDateToString(Date date) {
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("yyyyMMddhhmmss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("ddhhmmss");
         return dateFormatter.format(date);
     }
+
 
     /**
      *  Provide a direct reference to each of the views

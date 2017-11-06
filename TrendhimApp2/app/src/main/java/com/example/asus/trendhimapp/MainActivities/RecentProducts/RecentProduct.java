@@ -2,14 +2,15 @@ package com.example.asus.trendhimapp.MainActivities.RecentProducts;
 
 public class RecentProduct {
 
-    private String email, category, key;
+    private String email, category, key, visit;
 
     public RecentProduct(){}
 
-    RecentProduct(String key, String email, String category) {
+    RecentProduct(String key, String email, String category, String visit) {
         this.email = email;
         this.category = category;
         this.key = key;
+        this.visit = visit;
     }
 
     public String getEmail() {
@@ -24,4 +25,7 @@ public class RecentProduct {
         return key;
     }
 
+    public String getVisit(){
+        return visit;
+    }
 }
