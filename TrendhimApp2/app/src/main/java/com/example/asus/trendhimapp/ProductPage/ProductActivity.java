@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.MainActivities.BaseActivity;
+import com.example.asus.trendhimapp.ProductPage.WishlistActivity.WishlistProduct;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 import com.example.asus.trendhimapp.Util.Constants;
@@ -104,39 +104,18 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void addToWishlist() {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("wishlist");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Intent intent = getIntent();
-        if(intent != null){
+        if (intent != null) {
+            WishlistProduct wishlistProduct;
+            String userEmail = user.getEmail();
             String productKey = intent.getStringExtra("productKey");
-            Log.i(this.getLocalClassName(), "pro" + productKey);
-            WishlistProduct wishlistProduct = null;
-            if (productKey != null) {
-                String userEmail = user.getEmail();
-                if (productKey.startsWith("tie")) {
-                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_TIES, productKey);
-                } else if (productKey.startsWith("bracelet")) {
-                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BRACELETS, productKey);
-                } else if (productKey.startsWith("bow_tie")) {
-                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BOW_TIES, productKey);
-                } else if (productKey.startsWith("beard_care")) {
-                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BEARD_CARE, productKey);
-                } else if (productKey.startsWith("necklace")) {
-                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_NECKLACES, productKey);
-                } else if (productKey.startsWith("watch")) {
-                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_WATCHES, productKey);
-                } else {
-                    wishlistProduct = new WishlistProduct(userEmail, Constants.TABLE_NAME_BAGS, productKey);
-                }
-                myRef.push().setValue(wishlistProduct);
-                Toast.makeText(this, "Item successfuly added to wishlist!", Toast.LENGTH_SHORT).show();
-            } else
-                Log.d(this.getLocalClassName(), "Better safe than sorry");
-
-            } else {
-                Log.d(this.getLocalClassName(), "Intent was null");
-
-            }
+            String entityName = productKey.replaceAll("\\d", "s"); // replace digits with s
+            wishlistProduct = new WishlistProduct(productKey, entityName, userEmail);
+            myRef.push().setValue(wishlistProduct);
+            Toast.makeText(this, "Item successfuly added to wishlist!", Toast.LENGTH_SHORT).show();
         }
+    }
 
 }

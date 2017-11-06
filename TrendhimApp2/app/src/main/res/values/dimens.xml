@@ -9,4 +9,8 @@
     <!--  ProductActivity.java font size  !-->
     <dimen name="product_activity_text_size">7sp</dimen>
 
+    <!--  WishlistActivity.java font size  !-->
+    <dimen name="item_wishlist_button_width">160dp</dimen>
+    <dimen name="item_wishlist_button_height">30dp</dimen>
+    <dimen name="item_wishlist_textview_height">25dp</dimen>
 </resources>

@@ -11,5 +11,5 @@ public final class Constants {
     public static final String TABLE_NAME_NECKLACES = "necklaces";
     public static final String TABLE_NAME_TIES = "ties";
     public static final String TABLE_NAME_WATCHES = "watches";
-
+    public static final String TABLE_NAME_WISHLIST = "wishlist";
 }
