@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.categoryPage;
+package com.example.asus.trendhimapp.CategoryPage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
-import com.example.asus.trendhimapp.productPage.Product;
-import com.example.asus.trendhimapp.productPage.ProductActivity;
+import com.example.asus.trendhimapp.MainActivities.RecentProducts.RecentProductsAdapter;
+import com.example.asus.trendhimapp.ProductPage.Product;
+import com.example.asus.trendhimapp.ProductPage.ProductActivity;
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.util.BitmapFlyweight;
+import com.example.asus.trendhimapp.Util.BitmapFlyweight;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
