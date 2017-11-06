@@ -9,20 +9,20 @@
         android:roundIcon="@drawable/iconlogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivities.MainActivity">
+        <activity android:name=".mainActivities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CategoryPage.CategoryProductActivity" />
-        <activity android:name=".MainActivities.BaseActivity" />
+        <activity android:name=".categoryPage.CategoryProductActivity" />
+        <activity android:name=".mainActivities.BaseActivity" />
         <activity
-            android:name=".ProductPage.ProductActivity"
-            android:parentActivityName=".CategoryPage.CategoryProductActivity" />
-        <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Login.SignupActivity" />
-        <activity android:name=".WishlistPage.WishlistActivity"></activity>
+            android:name=".productPage.ProductActivity"
+            android:parentActivityName=".categoryPage.CategoryProductActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.SignupActivity" />
+        <activity android:name=".wishlistPage.WishlistActivity"></activity>
     </application>
 
 </manifest>

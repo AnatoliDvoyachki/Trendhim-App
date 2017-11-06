@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.MainActivities;
+package com.example.asus.trendhimapp.mainActivities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
-import com.example.asus.trendhimapp.MainActivities.RecentProducts.RecentProductsAdapter;
+import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
+import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
 import com.example.asus.trendhimapp.R;
 
 import java.util.ArrayList;

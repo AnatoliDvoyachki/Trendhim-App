@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.MainActivities;
+package com.example.asus.trendhimapp.mainActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.CategoryPage.CategoryProductActivity;
-import com.example.asus.trendhimapp.Login.LoginActivity;
-import com.example.asus.trendhimapp.WishlistPage.WishlistActivity;
-import com.example.asus.trendhimapp.Util.Constants;
+import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
+import com.example.asus.trendhimapp.login.LoginActivity;
+import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
+import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

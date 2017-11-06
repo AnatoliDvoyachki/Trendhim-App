@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.Login;
+package com.example.asus.trendhimapp.login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.MainActivities.BaseActivity;
-import com.example.asus.trendhimapp.MainActivities.MainActivity;
+import com.example.asus.trendhimapp.mainActivities.BaseActivity;
+import com.example.asus.trendhimapp.mainActivities.MainActivity;
 import com.example.asus.trendhimapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
