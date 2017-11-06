@@ -266,7 +266,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     }
 
     private static String convertDateToString(Date date) {
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("yyyyMMddhhmmss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("ddhhmmss");
         return dateFormatter.format(date);
     }
 

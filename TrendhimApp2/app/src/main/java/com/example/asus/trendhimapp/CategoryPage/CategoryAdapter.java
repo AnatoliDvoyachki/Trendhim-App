@@ -140,7 +140,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                                 if(Objects.equals(recentProduct.getKey(), product.getKey())) {
                                     //if the product is in the recent_product database
                                     Date curDate = new Date();
-                                    dataSnapshot1.getRef().child("visit_date").setValue(convertDateToString(curDate));
+                                    dataSnapshot1.getRef().child("visit").setValue(convertDateToString(curDate));
                                     MainActivity.adapter.notifyDataSetChanged();
                                     exists[0] = true;
                                 }
@@ -173,7 +173,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
      * @return Date formatted into a date
      */
     private static String convertDateToString(Date date) {
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("yyyyMMddhhmmss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("ddhhmmss");
         return dateFormatter.format(date);
     }
 

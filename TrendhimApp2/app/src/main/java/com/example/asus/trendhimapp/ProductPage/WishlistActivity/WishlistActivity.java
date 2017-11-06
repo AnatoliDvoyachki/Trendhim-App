@@ -2,35 +2,25 @@ package com.example.asus.trendhimapp.ProductPage.WishlistActivity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
 
+import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.MainActivities.BaseActivity;
-import com.example.asus.trendhimapp.ProductPage.Product;
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.Util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WishlistActivity extends BaseActivity {
     private WishlistAdapter wishlistAdapter;
-    private List<WishlistProduct> wishList;
-    private List<Product> productList;
+    private List<CategoryProduct> wishList;
+    private List<CategoryProduct> productList;
     private String userEmail;
     private RecyclerView recyclerView;
 
@@ -42,14 +32,19 @@ public class WishlistActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_wishlist, null, false);
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+
         setTitle(getString(R.string.wishlist_activity_title));
+
         recyclerView = findViewById(R.id.recycler_view);
+
         recyclerView.setNestedScrollingEnabled(true);
+
         setEmail();
         wishList = new ArrayList<>();
         productList = new ArrayList<>();
@@ -66,10 +61,11 @@ public class WishlistActivity extends BaseActivity {
 //        productList.add(product1);
 //        productList.add(product2);
         wishlistAdapter = new WishlistAdapter(this, productList, userEmail);
+
         recyclerView.setAdapter(wishlistAdapter);
+        wishlistAdapter.addData();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        getWishList();
-        getProductList();
+
     }
 
     private void setEmail() {
@@ -81,10 +77,11 @@ public class WishlistActivity extends BaseActivity {
         }
     }
 
-    /**
+
+   /* /**
      * Get all wishlist products of the user
      **/
-    private void getWishList() {
+    /*private void getWishList() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -99,6 +96,7 @@ public class WishlistActivity extends BaseActivity {
                             WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
                             Log.d(getLocalClassName(), wishProd.toString());
                             wishList.add(wishProd);
+
                         }
                     }
                 }
@@ -107,12 +105,12 @@ public class WishlistActivity extends BaseActivity {
                 public void onCancelled(DatabaseError databaseError) {}
             });
         }
-    }
+    }*/
 
     /**
      * Get the real products
      **/
-    private void getProductList() {
+   /* private void getProductList() {
         for (int i = 0; i < wishList.size(); i++) {
             final WishlistProduct wishProd = wishList.get(i);
             final String entityName = wishProd.getEntityName(), productKey = wishProd.getProductKey();
@@ -138,5 +136,5 @@ public class WishlistActivity extends BaseActivity {
             });
 
         }
-    }
+    }*/
 }
