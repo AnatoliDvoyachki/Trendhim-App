@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:orientation="horizontal"
     android:background="@drawable/item_wishlist_border"
+    android:orientation="horizontal"
     android:paddingStart="10dp"
     android:paddingTop="10dp">
 
@@ -21,28 +21,28 @@
     <TextView
         android:id="@+id/product_name_text_view"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="@dimen/item_wishlist_textview_height"
         android:layout_alignParentTop="true"
         android:layout_marginStart="18dp"
         android:layout_toEndOf="@+id/banner_image_view"
         android:gravity="center"
-        android:text="ProductName"
+        android:text="@string/placeholder"
         android:textAlignment="textStart" />
 
     <TextView
         android:id="@+id/price_text_view"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="@dimen/item_wishlist_textview_height"
         android:layout_alignStart="@+id/product_name_text_view"
         android:layout_below="@+id/product_name_text_view"
         android:gravity="center"
-        android:text="PriceField"
+        android:text="@string/placeholder"
         android:textAlignment="textStart" />
 
     <ImageButton
         android:id="@+id/remove_button"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/item_wishlist_button_width"
+        android:layout_height="@dimen/item_wishlist_button_height"
         android:layout_alignBottom="@+id/add_to_cart_button"
         android:layout_alignStart="@+id/banner_image_view"
         android:background="@drawable/remove_button"
@@ -51,8 +51,8 @@
 
     <ImageButton
         android:id="@+id/add_to_cart_button"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/item_wishlist_button_width"
+        android:layout_height="@dimen/item_wishlist_button_height"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="11dp"
         android:layout_marginStart="24dp"
@@ -74,6 +74,6 @@
         android:layout_height="25dp"
         android:layout_below="@+id/price_text_view"
         android:layout_toEndOf="@+id/product_name_text_view"
-        android:text="Placeholder" />
+        android:text="@string/placeholder" />
 
 </RelativeLayout>
