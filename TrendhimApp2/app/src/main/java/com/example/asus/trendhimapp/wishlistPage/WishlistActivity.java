@@ -11,8 +11,6 @@ import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.R;
 
 public class WishlistActivity extends BaseActivity {
-    private WishlistAdapter wishlistAdapter;
-    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +25,11 @@ public class WishlistActivity extends BaseActivity {
 
         setTitle(getString(R.string.wishlist_activity_title));
 
-        recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
         recyclerView.setNestedScrollingEnabled(true);
 
-        wishlistAdapter = new WishlistAdapter(this);
+        WishlistAdapter wishlistAdapter = new WishlistAdapter(this);
         wishlistAdapter.populateRecyclerView();
 
         recyclerView.setAdapter(wishlistAdapter);

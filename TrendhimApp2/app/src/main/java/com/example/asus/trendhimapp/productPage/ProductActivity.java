@@ -111,9 +111,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             String productKey = intent.getStringExtra("productKey");
             String entityName;
             if (productKey.startsWith("watch")) {
-                entityName = productKey.replace("\\d", "es");
+                entityName = productKey.replaceAll("\\d", "es");
             } else {
-                entityName = productKey.replace("\\d", "s");
+                entityName = productKey.replaceAll("\\d", "s");
             }
             myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
             Toast.makeText(this, "Item successfuly added to wishlist!", Toast.LENGTH_SHORT).show();
