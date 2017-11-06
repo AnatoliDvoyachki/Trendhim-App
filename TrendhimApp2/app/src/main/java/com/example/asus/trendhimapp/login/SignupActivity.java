@@ -44,7 +44,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
         View contentView = inflater.inflate(R.layout.activity_signup, null, false);
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        setTitle("Sign up");
+        setTitle(R.string.sign_up);
 
         auth = FirebaseAuth.getInstance();
 

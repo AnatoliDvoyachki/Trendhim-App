@@ -187,13 +187,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                             Intent intent = new Intent(context, ProductActivity.class);
 
-                            intent.putExtra("productKey", product.getKey());
+                            intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
                             intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
-                            intent.putExtra("brand", foundProduct.getBrand());
-                            intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
+                            intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                            intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
                             intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
-                            intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
-                            intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
+                            intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                            intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
                             context.startActivity(intent);
                         }
