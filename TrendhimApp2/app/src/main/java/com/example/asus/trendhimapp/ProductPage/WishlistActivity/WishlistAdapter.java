@@ -79,7 +79,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return productList.size();
     }
 
-    public void populateRecyclerView() {
+    private void populateRecyclerView() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -125,7 +125,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     private void removeItem(final CategoryProduct categoryProduct) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
-        final String productKey = categoryProduct.getProductKey();
+        final String productKey = categoryProduct.getKey();
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

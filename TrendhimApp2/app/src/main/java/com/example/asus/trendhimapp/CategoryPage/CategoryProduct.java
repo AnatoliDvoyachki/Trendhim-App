@@ -2,15 +2,15 @@ package com.example.asus.trendhimapp.CategoryPage;
 
 public class CategoryProduct {
 
-    private String name, brand, bannerPictureURL, productKey;
+    private String name, brand, bannerPictureURL, key;
     private int price;
 
-    public CategoryProduct(String name, int price, String brand, String bannerPictureURL, String productKey) {
+    public CategoryProduct(String name, int price, String brand, String bannerPictureURL, String key) {
         this.name = name;
         this.price = price;
         this.brand = brand;
         this.bannerPictureURL = bannerPictureURL;
-        this.productKey = productKey;
+        this.key = key;
     }
 
     public String getName() {
@@ -29,8 +29,8 @@ public class CategoryProduct {
         return bannerPictureURL;
     }
 
-    public String getProductKey() {
-        return productKey;
+    public String getKey() {
+        return key;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CategoryProduct {
                 "name='" + name + '\'' +
                 ", brand='" + brand + '\'' +
                 ", bannerPictureURL='" + bannerPictureURL + '\'' +
-                ", productKey='" + productKey + '\'' +
+                ", key='" + key + '\'' +
                 ", price=" + price +
                 '}';
     }

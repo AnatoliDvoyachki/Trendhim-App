@@ -28,6 +28,5 @@ public class WishlistActivity extends BaseActivity {
         wishlistAdapter = new WishlistAdapter(this);
         recyclerView.setAdapter(wishlistAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        wishlistAdapter.populateRecyclerView();
     }
 }
