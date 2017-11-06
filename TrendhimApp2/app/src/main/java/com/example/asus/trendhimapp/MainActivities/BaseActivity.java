@@ -37,28 +37,6 @@ public class BaseActivity  extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.shopping_cart_icon: {
-                        Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                    case R.id.wishList_icon: {
-                        if (isUserOnline()) {
-                            Intent toWishlist = new Intent(BaseActivity.this, WishlistActivity.class);
-                            startActivity(toWishlist);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                    default:
-                        return false;
-                }
-            }
-        });
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -162,6 +140,8 @@ public class BaseActivity  extends AppCompatActivity
         if(!isUserOnline()) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
+        } else if(isUserOnline()){
+            Toast.makeText(getApplicationContext(), "You are already logged in", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -177,11 +157,24 @@ public class BaseActivity  extends AppCompatActivity
 
         if (currentUser != null) {
             // User already logged in
-            Toast.makeText(getApplicationContext(), "You are already logged in", Toast.LENGTH_LONG).show();
             isLoggedIn = true;
         }
 
         return isLoggedIn;
     }
 
+    public void openWishList(View view) {
+        if (isUserOnline()) {
+            Intent toWishList = new Intent(BaseActivity.this, WishlistActivity.class);
+            startActivity(toWishList);
+        } else {
+            Toast.makeText(getApplicationContext(), "You need to login", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    public void openShoppingCart(View view) {
+        Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
+    }
+    
 }
