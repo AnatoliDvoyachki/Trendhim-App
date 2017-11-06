@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.ProductPage.WishlistActivity;
+package com.example.asus.trendhimapp.WishlistPage;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
