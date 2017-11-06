@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.CategoryPage.CategoryProductActivity;
+import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.Login.LoginActivity;
 import com.example.asus.trendhimapp.WishlistPage.WishlistActivity;
 import com.example.asus.trendhimapp.Util.Constants;

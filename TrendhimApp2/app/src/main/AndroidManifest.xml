@@ -15,11 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CategoryPage.CategoryProductActivity" />
+        <activity android:name=".categoryPage.CategoryProductActivity" />
         <activity android:name=".MainActivities.BaseActivity" />
         <activity
             android:name=".ProductPage.ProductActivity"
-            android:parentActivityName=".CategoryPage.CategoryProductActivity" />
+            android:parentActivityName=".categoryPage.CategoryProductActivity" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Login.SignupActivity" />
         <activity android:name=".WishlistPage.WishlistActivity"></activity>

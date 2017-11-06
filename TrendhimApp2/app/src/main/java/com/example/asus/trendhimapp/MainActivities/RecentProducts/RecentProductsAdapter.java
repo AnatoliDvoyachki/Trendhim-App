@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
+import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.MainActivities.MainActivity;
 import com.example.asus.trendhimapp.ProductPage.Product;
 import com.example.asus.trendhimapp.ProductPage.ProductActivity;

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
+import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.MainActivities.RecentProducts.RecentProductsAdapter;
 import com.example.asus.trendhimapp.R;
 

@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.CategoryPage;
+package com.example.asus.trendhimapp.categoryPage;
 
 import android.content.Context;
 import android.content.Intent;

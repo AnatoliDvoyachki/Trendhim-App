@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.CategoryPage.CategoryProduct;
+import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.ProductPage.Product;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.Util.BitmapFlyweight;
