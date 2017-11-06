@@ -142,7 +142,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
                         if (userEmail.equals(wishProd.getUserEmail()) && productKey.equals(wishProd.getProductKey())) {
-                            count++;
+                            ++count;
                         }
                     }
                 }
