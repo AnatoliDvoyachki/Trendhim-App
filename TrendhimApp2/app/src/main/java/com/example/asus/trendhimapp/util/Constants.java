@@ -26,5 +26,5 @@ public final class Constants {
     public static final String KEY_PRODUCT_KEY = "productKey";
 
     public static final String WATCH_PREFIX = "watch";
-    public static final String ALL_NUMBERS_REGEX = "\\d";
+    public static final String ALL_NUMBERS_REGEX = "\\d+";
 }
