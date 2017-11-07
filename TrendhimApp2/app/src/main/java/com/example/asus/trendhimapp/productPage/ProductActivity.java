@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
     private ImageView bannerImageView, leftImageView, rightImageView;
     private TextView brandTextView, priceTextView, productNameTextView;
-    private int count = 0;
+    private int instanceCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initializeComponents() {
+        this.instanceCount = 0;
         bannerImageView = findViewById(R.id.bannerImageView);
         leftImageView = findViewById(R.id.leftImageView);
         rightImageView = findViewById(R.id.rightImageView);
@@ -58,8 +59,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         brandTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
 
         priceTextView = findViewById(R.id.priceTextView);
-        priceTextView.setTypeface(null, Typeface.BOLD); // make the text bold
-        priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
+        priceTextView.setTypeface(null, Typeface.BOLD);
+        priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size));
 
         productNameTextView = findViewById(R.id.productNameTextView);
     }
@@ -74,8 +75,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             String leftPictureUrl = intent.getStringExtra(Constants.KEY_LEFT_PIC_URL);
             String rightPictureUrl = intent.getStringExtra(Constants.KEY_RIGHT_PIC_URL);
             String brand = intent.getStringExtra(Constants.KEY_BRAND_NAME);
-            if (productName != null && price != null && bannerPictureUrl != null && leftPictureUrl != null
-                    && rightPictureUrl != null && brand != null) {
+            if (productName != null && price != null && bannerPictureUrl != null &&
+                    leftPictureUrl != null && rightPictureUrl != null && brand != null) {
                 // set all the values & pictures
                 brandTextView.setText(brand);
                 priceTextView.setText(price + " €");
@@ -115,7 +116,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             if (!wishlistItemExists(userEmail, productKey)) {
                 String entityName;
                 // get the entity name from the product key ;)
-                if (productKey.startsWith(Constants.WATCH_PREFIX)) {
+                if (productKey.startsWith(Constants.WATCH_REGEX)) {
                     entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "es");
                 } else {
                     entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "s");
@@ -125,21 +126,25 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             } else {
                 Toast.makeText(this, R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
             }
-            count = 0;
+            this.instanceCount = 0;
         }
     }
 
+    /**
+     * Returns true, if the wishlist contains an item with the email and key passed as parameters. Otherwise, fase.
+     **/
     private boolean wishlistItemExists(final String userEmail, final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
-                        if (userEmail.equals(wishProd.getUserEmail()) && productKey.equals(wishProd.getProductKey())) {
-                            count++;
+                        if (userEmail.equals(wishProd.getUserEmail()) &&
+                                productKey.equals(wishProd.getProductKey())) {
+                            ++instanceCount;
                         }
                     }
                 }
@@ -148,7 +153,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-        return count != 0;
+        return instanceCount != 0;
     }
 
 }

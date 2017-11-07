@@ -1,13 +1,18 @@
 package com.example.asus.trendhimapp.wishlistPage;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +38,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private Context context;
     private List<CategoryProduct> productList;
 
-    WishlistAdapter(Context context) {
+    public WishlistAdapter(Context context) {
         this.productList = new ArrayList<>();
         this.context = context;
         setEmail();
@@ -51,20 +56,17 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         final CategoryProduct currentProduct = productList.get(position);
-        BitmapFlyweight.getPicture(currentProduct.getBannerPictureURL(), viewHolder.bannerImageView);
         viewHolder.productNameTextView.setText(currentProduct.getName());
         viewHolder.priceTextView.setText(currentProduct.getPrice() + "€");
         viewHolder.emailTextView.setText(userEmail);
-        viewHolder.removeProductImageButton.setOnClickListener(new View.OnClickListener() {
+        BitmapFlyweight.getPicture(currentProduct.getBannerPictureURL(), viewHolder.bannerImageView);
+        viewHolder.removeProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeItem(currentProduct);
-                productList.remove(currentProduct);
-                notifyDataSetChanged();
-                Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
+                executeRemoveItem(currentProduct);
             }
         });
-        viewHolder.addToCartImageButton.setOnClickListener(new View.OnClickListener() {
+        viewHolder.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "TODO ADD TO CART", Toast.LENGTH_SHORT).show();
@@ -78,7 +80,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return productList.size();
     }
 
-    void populateRecyclerView() {
+    public void populateRecyclerView() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -122,11 +124,44 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         }
     }
 
-    private void setEmail() {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            this.userEmail = firebaseUser.getEmail();
-        }
+    /**
+     * Starts a sequence for the removal of an item from the Wishlist
+     **/
+    private void executeRemoveItem(final CategoryProduct categoryProduct) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setMessage("Remove " + categoryProduct.getName() + " from wishlist?");
+        builder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        removeItem(categoryProduct); // Item is attempted to be removed
+                        productList.remove(categoryProduct); // Item is also removed from the RecyclerView
+                        notifyDataSetChanged(); // Refresh the view
+                        Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        builder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); // If cancel is pressed, dialog is closed
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Customize button text
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnPositive.setTextColor(ContextCompat.getColor(context, R.color.black));
+        Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+        // Allign the buttons in the center of the dialog window
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
     }
 
     /**
@@ -140,10 +175,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
-                        if (productKey.equals(wishProd.getProductKey()) && userEmail.equals(wishProd.getUserEmail())) {
-                            ds.getRef().removeValue();
-                            notifyDataSetChanged();
+                        WishlistProduct currentProd = ds.getValue(WishlistProduct.class);
+                        if (productKey.equals(currentProd.getProductKey()) &&
+                                userEmail.equals(currentProd.getUserEmail())) {
+                            ds.getRef().removeValue(); // If found, remove the item from teh wishlist
+                            notifyDataSetChanged(); // Update the UI
                         }
                     }
                 }
@@ -155,6 +191,16 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     }
 
     /**
+     * Sets the email of the current user
+     **/
+    private void setEmail() {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            this.userEmail = firebaseUser.getEmail();
+        }
+    }
+
+    /**
      * View holder pattern implementation
      **/
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -162,8 +208,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         TextView productNameTextView;
         TextView priceTextView;
         TextView emailTextView;
-        ImageButton removeProductImageButton;
-        ImageButton addToCartImageButton;
+        ImageButton removeProductButton;
+        ImageButton addToCartButton;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -171,8 +217,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             productNameTextView = itemView.findViewById(R.id.product_name_text_view);
             priceTextView = itemView.findViewById(R.id.price_text_view);
             emailTextView = itemView.findViewById(R.id.email_text_field);
-            removeProductImageButton = itemView.findViewById(R.id.remove_button);
-            addToCartImageButton = itemView.findViewById(R.id.add_to_cart_button);
+            removeProductButton = itemView.findViewById(R.id.remove_button);
+            addToCartButton = itemView.findViewById(R.id.add_to_cart_button);
         }
     }
 }

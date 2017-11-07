@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/banner_image_view"
-        android:layout_width="84dp"
-        android:layout_height="87dp"
+        android:layout_width="@dimen/item_wishlist_banner_dimen"
+        android:layout_height="@dimen/item_wishlist_banner_dimen"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="12dp"

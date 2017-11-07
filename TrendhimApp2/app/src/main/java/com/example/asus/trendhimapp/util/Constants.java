@@ -1,5 +1,8 @@
 package com.example.asus.trendhimapp.util;
 
+/**
+ * Utility class, used for storing constants that are used throughout the project
+ **/
 public final class Constants {
     private Constants() {}
 
@@ -24,9 +27,6 @@ public final class Constants {
     public static final String KEY_BRAND_NAME = "brand";
     public static final String KEY_PRODUCT_KEY = "productKey";
 
-    public static final String WATCH_PREFIX = "watch";
-    public static final String ALL_NUMBERS_REGEX = "[^A-Za-z]";
-
     //Attribute names for Weekly Look objects
     public static final String KEY_LOOK_MAIN_PICTURE_URL = "mainPictureUrl";
     public static final String KEY_LOOK_SECOND_PICTURE_URL = "secondPictureUrl";
@@ -36,4 +36,7 @@ public final class Constants {
     public static final String KEY_LOOK_PHRASE = "phrase";
     public static final String KEY_LOOK_KEY = "lookKey";
 
+    // Regex for the add to wishlist functionality
+    public static final String WATCH_REGEX = "watch";
+    public static final String ALL_NUMBERS_REGEX = "\\d+";
 }

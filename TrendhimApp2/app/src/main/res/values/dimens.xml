@@ -11,6 +11,7 @@
 
     <!--  WishlistActivity.java font size  !-->
     <dimen name="item_wishlist_button_width">160dp</dimen>
+    <dimen name="item_wishlist_banner_dimen">87dp</dimen>
     <dimen name="item_wishlist_button_height">30dp</dimen>
     <dimen name="item_wishlist_textview_height">25dp</dimen>
 </resources>

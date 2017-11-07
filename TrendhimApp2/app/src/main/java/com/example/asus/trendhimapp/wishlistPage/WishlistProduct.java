@@ -23,12 +23,4 @@ public class WishlistProduct {
         return userEmail;
     }
 
-    @Override
-    public String toString() {
-        return "WishlistProduct{" +
-                "productKey='" + productKey + '\'' +
-                ", entityName='" + entityName + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                '}';
-    }
 }
