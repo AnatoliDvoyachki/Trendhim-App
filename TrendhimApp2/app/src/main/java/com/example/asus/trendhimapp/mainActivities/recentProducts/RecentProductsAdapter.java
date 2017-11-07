@@ -223,6 +223,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
                             //if the product is added to the database
                             Date curDate = new Date();
+
                             dataSnapshot1.getRef().child("visit").setValue(convertDateToString(curDate));
                             dataSnapshot1.getRef().child("order").setValue("-" + convertDateToString(curDate));
                             exists[0] = true;
