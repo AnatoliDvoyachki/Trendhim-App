@@ -1,13 +1,20 @@
 package com.example.asus.trendhimapp.wishlistPage;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +40,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private Context context;
     private List<CategoryProduct> productList;
 
+    @SuppressWarnings("")
     public WishlistAdapter(Context context) {
         this.productList = new ArrayList<>();
         this.context = context;
@@ -58,10 +66,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         viewHolder.removeProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeItem(currentProduct);
-                productList.remove(currentProduct);
-                notifyDataSetChanged();
-                Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
+                removeSequence(currentProduct);
             }
         });
         viewHolder.addToCartButton.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +83,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return productList.size();
     }
 
+    @SuppressWarnings("")
     public void populateRecyclerView() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -155,6 +161,42 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+    }
+
+    private void removeSequence(final CategoryProduct categoryProduct) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setMessage("Remove " + categoryProduct.getName() + " from wishlist?");
+        builder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        removeItem(categoryProduct); // If Yes is pressed, item is attempted to be removed
+                        productList.remove(categoryProduct);
+                        notifyDataSetChanged();
+                        Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        builder.setNegativeButton(android.R.string.cancel,
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); // If cancel is pressed, dialog is closed
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Customize buttons
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnPositive.setTextColor(ContextCompat.getColor(context, R.color.black));
+        Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
     }
 
     /**
