@@ -84,7 +84,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      */
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recommended_products");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+        myRef.orderByChild("order").addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
@@ -194,7 +194,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                                                 }
                                             }
 
-                                           RecentProductsAdapter.addToRecent(product, newProduct.getCategory());
+                                           RecentProductsAdapter.addToRecent(product);
 
                                         }
                                     }

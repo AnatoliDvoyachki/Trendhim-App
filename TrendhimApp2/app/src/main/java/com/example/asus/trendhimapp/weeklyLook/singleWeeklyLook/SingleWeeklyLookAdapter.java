@@ -259,7 +259,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
 
                     }
                     //Add product to recent activity
-                    RecentProductsAdapter.addToRecent(product, getCategory(product.getKey()));
+                    RecentProductsAdapter.addToRecent(product);
                 }
 
             }

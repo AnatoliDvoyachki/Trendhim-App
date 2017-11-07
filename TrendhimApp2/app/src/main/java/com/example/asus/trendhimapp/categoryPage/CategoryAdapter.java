@@ -200,7 +200,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                     }
                     //Add product to recent activity
-                    RecentProductsAdapter.addToRecent(product, category);
+                    RecentProductsAdapter.addToRecent(product);
                 }
 
             }
