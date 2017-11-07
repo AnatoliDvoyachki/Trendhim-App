@@ -24,6 +24,8 @@
         <activity android:name=".login.SignupActivity" />
         <activity android:name=".wishlistPage.WishlistActivity"/>
 
+        <activity android:name=".weeklyLook.WeeklyLookActivity"/>
+        <activity android:name=".weeklyLook.singleWeeklyLook.SingleWeeklyLookActivity"/>
     </application>
 
 </manifest>

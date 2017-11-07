@@ -1,6 +1,7 @@
 package com.example.asus.trendhimapp.mainActivities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -16,6 +17,7 @@ import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.newProducts.NewProductsAdapter;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
+import com.example.asus.trendhimapp.weeklyLook.WeeklyLookActivity;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class MainActivity extends BaseActivity {
     ImageView recentProductImage, recommendedProductsImage;
     int i = 0, i1= 0;
     public NewProductsAdapter newProductAdapter;
+    public ImageView weeklyLookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +119,16 @@ public class MainActivity extends BaseActivity {
         recyclerViewNewProducts.setLayoutManager(layoutManagerNew);
 
         helperNew.attachToRecyclerView(recyclerViewNewProducts);
+
+        weeklyLookImage = findViewById(R.id.weeklyLookImage);
+
+        weeklyLookImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WeeklyLookActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

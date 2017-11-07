@@ -34,5 +34,11 @@
     <!--  WishlistActivity.java strings-->
     <string name="wishlist_activity_title">My Wishlist</string>
     <string name="remove_success_message">Item successfuly removed!</string>
+    <string name="weekly_look">weekly look</string>
+    <string name="main_look">Main Look</string>
+    <string name="second_look">Second Look</string>
+    <string name="third_look">Third Look</string>
+    <string name="fourth_look">Fourth Look</string>
+    <string name="fifth_look">Fifth Look</string>
 
 </resources>
