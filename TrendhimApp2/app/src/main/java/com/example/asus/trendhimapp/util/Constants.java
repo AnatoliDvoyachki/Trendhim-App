@@ -25,6 +25,7 @@ public final class Constants {
     public static final String KEY_BRAND_NAME = "brand";
     public static final String KEY_PRODUCT_KEY = "productKey";
 
-    public static final String WATCH_PREFIX = "watch";
+    // Regex for the add to wishlist functionality
+    public static final String WATCH_REGEX = "watch";
     public static final String ALL_NUMBERS_REGEX = "\\d+";
 }

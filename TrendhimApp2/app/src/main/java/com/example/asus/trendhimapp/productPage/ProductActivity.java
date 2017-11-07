@@ -75,8 +75,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             String leftPictureUrl = intent.getStringExtra(Constants.KEY_LEFT_PIC_URL);
             String rightPictureUrl = intent.getStringExtra(Constants.KEY_RIGHT_PIC_URL);
             String brand = intent.getStringExtra(Constants.KEY_BRAND_NAME);
-            if (productName != null && price != null && bannerPictureUrl != null && leftPictureUrl != null
-                    && rightPictureUrl != null && brand != null) {
+            if (productName != null && price != null && bannerPictureUrl != null &&
+                    leftPictureUrl != null && rightPictureUrl != null && brand != null) {
                 // set all the values & pictures
                 brandTextView.setText(brand);
                 priceTextView.setText(price + " €");
@@ -116,7 +116,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             if (!wishlistItemExists(userEmail, productKey)) {
                 String entityName;
                 // get the entity name from the product key ;)
-                if (productKey.startsWith(Constants.WATCH_PREFIX)) {
+                if (productKey.startsWith(Constants.WATCH_REGEX)) {
                     entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "es");
                 } else {
                     entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "s");
@@ -142,7 +142,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
-                        if (userEmail.equals(wishProd.getUserEmail()) && productKey.equals(wishProd.getProductKey())) {
+                        if (userEmail.equals(wishProd.getUserEmail()) &&
+                                productKey.equals(wishProd.getProductKey())) {
                             ++instanceCount;
                         }
                     }
