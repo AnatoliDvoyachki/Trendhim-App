@@ -128,8 +128,8 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
                             else {
                               for(int i = 0; i < products.size(); i++){
                                   String category = getCategory(products.get(i));
-                                  Log.i("shit", "  " + category);
-
+                                  Log.i("shit", " " + category);
+                                  queryGetProducts(category, products.get(i));
                               }
 
                             }
@@ -214,12 +214,14 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         }
     }
 
-    String getCategory(String productKey){
-        String[] separated = productKey.split("\\d");
-        if(separated[0].startsWith("watch"))
-            return separated[0] + "es";
+    private String getCategory(String productKey){
+        String entityName;
+        if (productKey.startsWith(Constants.WATCH_REGEX))
+            entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "es");
         else
-            return separated[0] + "s";
+            entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "s");
+
+        return entityName;
     }
 
     /**
@@ -228,7 +230,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
      */
     private void getProduct(final CategoryProduct product) {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("bags");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(getCategory(product.getKey()));
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -257,7 +259,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
 
                     }
                     //Add product to recent activity
-                    RecentProductsAdapter.addToRecent(product, "bags");
+                    RecentProductsAdapter.addToRecent(product, getCategory(product.getKey()));
                 }
 
             }

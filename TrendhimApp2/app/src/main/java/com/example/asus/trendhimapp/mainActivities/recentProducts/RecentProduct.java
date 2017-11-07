@@ -23,5 +23,5 @@ public class RecentProduct {
     public String getKey() {
         return key;
     }
-
+    
 }

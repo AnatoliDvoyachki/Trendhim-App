@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
 
     ArrayList<CategoryProduct> recentProducts, recommendedProducts;
-    public RecentProductsAdapter adapter;
+    public static RecentProductsAdapter adapter;
     public static TextView noRecentProducts;
     ImageView recentProductImage, recommendedProductsImage;
     int i = 0, i1= 0;

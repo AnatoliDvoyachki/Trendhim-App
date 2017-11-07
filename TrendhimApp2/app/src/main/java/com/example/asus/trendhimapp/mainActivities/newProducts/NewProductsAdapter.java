@@ -155,7 +155,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      */
     private void getProduct(final CategoryProduct product) {
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recommended_product");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recommended_products");
         //get product which key is equal to the one clicked
         databaseReference.orderByChild("key").equalTo(product.getKey())
                 .addListenerForSingleValueEvent(new ValueEventListener() {

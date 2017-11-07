@@ -135,7 +135,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
      **/
     private boolean wishlistItemExists(final String userEmail, final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
