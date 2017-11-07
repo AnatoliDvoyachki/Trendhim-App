@@ -59,7 +59,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         brandTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
 
         priceTextView = findViewById(R.id.priceTextView);
-        priceTextView.setTypeface(null, Typeface.BOLD); 
+        priceTextView.setTypeface(null, Typeface.BOLD);
         priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size));
 
         productNameTextView = findViewById(R.id.productNameTextView);
