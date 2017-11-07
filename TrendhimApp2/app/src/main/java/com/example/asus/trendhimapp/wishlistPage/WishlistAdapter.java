@@ -4,10 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +64,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         viewHolder.removeProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeSequence(currentProduct);
+                executeRemoveItem(currentProduct);
             }
         });
         viewHolder.addToCartButton.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +161,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         });
     }
 
-    private void removeSequence(final CategoryProduct categoryProduct) {
+    private void executeRemoveItem(final CategoryProduct categoryProduct) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
         builder.setMessage("Remove " + categoryProduct.getName() + " from wishlist?");
