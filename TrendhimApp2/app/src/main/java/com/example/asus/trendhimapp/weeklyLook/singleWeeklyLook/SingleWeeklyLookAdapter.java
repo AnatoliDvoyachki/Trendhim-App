@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
@@ -46,7 +47,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View categoryProductsView = inflater.inflate(R.layout.item_category, parent, false);
+        View categoryProductsView = inflater.inflate(R.layout.item_look, parent, false);
 
         // Return a new holder instance
         return new SingleWeeklyLookAdapter.ViewHolder(categoryProductsView);
@@ -60,36 +61,23 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         final CategoryProduct product = productsWishList.get(position);
 
         // Set item views based on the views and data model
+
+        TextView productPrice = viewHolder.productPriceTextView;
+        productPrice.setText(String.valueOf(product.getPrice() + "€"));
+
         TextView productName = viewHolder.productNameTextView;
         productName.setText(product.getName());
 
-        TextView productBrand = viewHolder.productBrandTextView;
-        productBrand.setText(product.getBrand());
-
-        TextView productPrice = viewHolder.productPriceTextView;
-        productPrice.setText(String.valueOf(product.getPrice()));
+        Button addToCart = viewHolder.addToCart;
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Add item to the sopping cart!", Toast.LENGTH_LONG).show();
+            }
+        });
 
         final ImageView productImage = viewHolder.productImage;
         BitmapFlyweight.getPicture(product.getBannerPictureURL(), productImage);
-
-        /*
-         * Handle touch events - Change the image alpha
-         */
-        viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_UP:
-                        productImage.animate().alpha(1f);
-                        getProduct(product); //Redirect the user to the product activity
-                        break;
-                    case MotionEvent.ACTION_DOWN:
-                        productImage.animate().alpha(0.7f);
-                        break;
-                }
-                return true;
-            }
-        });
 
         /*
          * Handle click events - Redirect to the selected product
@@ -101,6 +89,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
             }
         });
 
+
     }
 
     @Override
@@ -111,7 +100,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
     /**
      * Populate the recycler view. Get data from the database which name is equal to the parameter.
      */
-    void addData(final String productKey) {
+    public void addData(final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
             @Override
@@ -191,9 +180,8 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
      */
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView productNameTextView;
-        TextView productPriceTextView;
-        TextView productBrandTextView;
+        TextView productPriceTextView, productNameTextView;
+        Button addToCart;
         ImageView productImage;
 
         /**
@@ -206,10 +194,10 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
              */
             super(itemView);
 
-            productNameTextView = itemView.findViewById(R.id.product_name_category);
-            productPriceTextView = itemView.findViewById(R.id.product_price_category);
-            productBrandTextView = itemView.findViewById(R.id.brand_name_category);
-            productImage = itemView.findViewById(R.id.product_image_category);
+            productPriceTextView = itemView.findViewById(R.id.product_price_look);
+            addToCart = itemView.findViewById(R.id.addLookToCart);
+            productImage = itemView.findViewById(R.id.product_image_look);
+            productNameTextView = itemView.findViewById(R.id.product_name_look);
 
         }
     }

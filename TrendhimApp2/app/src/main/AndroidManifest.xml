@@ -25,7 +25,12 @@
         <activity android:name=".wishlistPage.WishlistActivity"/>
 
         <activity android:name=".weeklyLook.WeeklyLookActivity"/>
-        <activity android:name=".weeklyLook.singleWeeklyLook.SingleWeeklyLookActivity"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".weeklyLook.singleWeeklyLook.SecondWeeklyLookActivity"/>
     </application>
 
 </manifest>

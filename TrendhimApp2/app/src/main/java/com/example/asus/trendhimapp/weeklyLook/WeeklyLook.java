@@ -7,8 +7,8 @@ public class WeeklyLook {
     private String key, phrase, mainPictureUrl, secondPictureUrl, thirdPictureUrl, fourthPictureUrl, fifthPictureUrl;
     private ArrayList<String> products;
 
-    WeeklyLook(String key, String phrase, String mainPictureUrl, String secondPictureUrl,
-               String thirdPictureURl, String fourthPictureUrl, String fifthPictureUrl) {
+    public WeeklyLook(String key, String phrase, String mainPictureUrl, String secondPictureUrl,
+                      String thirdPictureURl, String fourthPictureUrl, String fifthPictureUrl) {
         this.key = key;
         this.mainPictureUrl = mainPictureUrl;
         this.secondPictureUrl = secondPictureUrl;

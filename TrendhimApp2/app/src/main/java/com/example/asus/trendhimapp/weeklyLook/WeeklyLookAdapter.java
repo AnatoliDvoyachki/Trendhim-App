@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.weeklyLook.singleWeeklyLook.SingleWeeklyLookActivity;
+import com.example.asus.trendhimapp.weeklyLook.singleWeeklyLook.SecondWeeklyLookActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -162,17 +162,9 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
 
                         if(Objects.equals(look.getKey(), dataSnapshot1.getKey())) {
 
-                            WeeklyLook foundWeeklyLook = dataSnapshot1.getValue(WeeklyLook.class);
-
-                            Intent intent = new Intent(context, SingleWeeklyLookActivity.class);
+                            Intent intent = new Intent(context, SecondWeeklyLookActivity.class);
 
                             intent.putExtra(Constants.KEY_LOOK_KEY, look.getKey());
-                            intent.putExtra(Constants.KEY_LOOK_MAIN_PICTURE_URL, foundWeeklyLook.getMainPictureUrl());
-                            intent.putExtra(Constants.KEY_LOOK_SECOND_PICTURE_URL, foundWeeklyLook.getSecondPictureUrl());
-                            intent.putExtra(Constants.KEY_LOOK_THIRD_PICTURE_URL, foundWeeklyLook.getThirdPictureUrl());
-                            intent.putExtra(Constants.KEY_LOOK_FOURTH_PICTURE_URL, foundWeeklyLook.getFourthPictureUrl());
-                            intent.putExtra(Constants.KEY_LOOK_FIFTH_PICTURE_URL, foundWeeklyLook.getFifthPictureUrl());
-                            intent.putExtra(Constants.KEY_LOOK_PHRASE, foundWeeklyLook.getPhrase());
 
                             context.startActivity(intent);
                         }
