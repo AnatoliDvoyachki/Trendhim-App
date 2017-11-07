@@ -55,7 +55,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         viewHolder.productNameTextView.setText(currentProduct.getName());
         viewHolder.priceTextView.setText(currentProduct.getPrice() + "€");
         viewHolder.emailTextView.setText(userEmail);
-        viewHolder.removeProductImageButton.setOnClickListener(new View.OnClickListener() {
+        viewHolder.removeProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeItem(currentProduct);
@@ -64,7 +64,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
             }
         });
-        viewHolder.addToCartImageButton.setOnClickListener(new View.OnClickListener() {
+        viewHolder.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "TODO ADD TO CART", Toast.LENGTH_SHORT).show();
@@ -165,8 +165,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         TextView productNameTextView;
         TextView priceTextView;
         TextView emailTextView;
-        ImageButton removeProductImageButton;
-        ImageButton addToCartImageButton;
+        ImageButton removeProductButton;
+        ImageButton addToCartButton;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -174,8 +174,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             productNameTextView = itemView.findViewById(R.id.product_name_text_view);
             priceTextView = itemView.findViewById(R.id.price_text_view);
             emailTextView = itemView.findViewById(R.id.email_text_field);
-            removeProductImageButton = itemView.findViewById(R.id.remove_button);
-            addToCartImageButton = itemView.findViewById(R.id.add_to_cart_button);
+            removeProductButton = itemView.findViewById(R.id.remove_button);
+            addToCartButton = itemView.findViewById(R.id.add_to_cart_button);
         }
     }
 }
