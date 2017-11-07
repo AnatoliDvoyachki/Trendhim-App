@@ -33,7 +33,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private Context context;
     private List<CategoryProduct> productList;
 
-    WishlistAdapter(Context context) {
+    public WishlistAdapter(Context context) {
         this.productList = new ArrayList<>();
         this.context = context;
         setEmail();
@@ -78,7 +78,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return productList.size();
     }
 
-    void populateRecyclerView() {
+    public void populateRecyclerView() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -122,6 +122,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         }
     }
 
+    /**
+     * Sets the email of the current user
+     **/
     private void setEmail() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
@@ -140,8 +143,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
-                        if (productKey.equals(wishProd.getProductKey()) && userEmail.equals(wishProd.getUserEmail())) {
+                        WishlistProduct currentProd = ds.getValue(WishlistProduct.class);
+                        if (productKey.equals(currentProd.getProductKey()) && userEmail.equals(currentProd.getUserEmail())) {
                             ds.getRef().removeValue();
                             notifyDataSetChanged();
                         }

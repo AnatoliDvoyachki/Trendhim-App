@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
     private ImageView bannerImageView, leftImageView, rightImageView;
     private TextView brandTextView, priceTextView, productNameTextView;
-    private int count = 0;
+    private int instanceCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initializeComponents() {
+        this.instanceCount = 0;
         bannerImageView = findViewById(R.id.bannerImageView);
         leftImageView = findViewById(R.id.leftImageView);
         rightImageView = findViewById(R.id.rightImageView);
@@ -125,7 +126,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             } else {
                 Toast.makeText(this, R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
             }
-            count = 0;
+            this.instanceCount = 0;
         }
     }
 
@@ -134,7 +135,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
      **/
     private boolean wishlistItemExists(final String userEmail, final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -142,7 +143,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
                         if (userEmail.equals(wishProd.getUserEmail()) && productKey.equals(wishProd.getProductKey())) {
-                            ++count;
+                            ++instanceCount;
                         }
                     }
                 }
@@ -151,7 +152,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-        return count != 0;
+        return instanceCount != 0;
     }
 
 }

@@ -1,5 +1,8 @@
 package com.example.asus.trendhimapp.util;
 
+/**
+ * Utility class, used for storing constants that are used throughout the project
+ **/
 public final class Constants {
     private Constants() {}
 
