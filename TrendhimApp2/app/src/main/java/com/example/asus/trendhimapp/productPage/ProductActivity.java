@@ -3,7 +3,6 @@ package com.example.asus.trendhimapp.productPage;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.mainActivities.BaseActivity;
-import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
+import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
+
     private ImageView bannerImageView, leftImageView, rightImageView;
     private TextView brandTextView, priceTextView, productNameTextView;
     private int instanceCount;
@@ -39,6 +39,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         View contentView = inflater.inflate(R.layout.activity_product, null, false);
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+
         initializeComponents();
         loadProduct();
     }
@@ -55,12 +56,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         addToWishlistButton.setOnClickListener(this);
 
         brandTextView = findViewById(R.id.brandTextView);
-        brandTextView.setTypeface(null, Typeface.BOLD); // make the text bold
-        brandTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size)); // font size: 7sp
 
         priceTextView = findViewById(R.id.priceTextView);
-        priceTextView.setTypeface(null, Typeface.BOLD);
-        priceTextView.setTextSize(getResources().getDimension(R.dimen.product_activity_text_size));
 
         productNameTextView = findViewById(R.id.productNameTextView);
     }

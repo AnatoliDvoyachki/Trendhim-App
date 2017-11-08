@@ -44,5 +44,7 @@
     <string name="add">Add</string>
     <string name="complete_payment">Complete payment</string>
     <string name="missing_something_add_it">Missing something? Add it!</string>
+    <string name="left_image">Left Image</string>
+    <string name="right_image">Right Image</string>
 
 </resources>
