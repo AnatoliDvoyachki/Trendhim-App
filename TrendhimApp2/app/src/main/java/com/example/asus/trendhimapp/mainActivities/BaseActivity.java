@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.login.LoginActivity;
+import com.example.asus.trendhimapp.weeklyLook.WeeklyLookActivity;
 import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
 import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.R;
@@ -105,13 +106,17 @@ public class BaseActivity  extends AppCompatActivity
                 intent.putExtra("category", Constants.TABLE_NAME_BOW_TIES);
                 startActivity(intent);
                 break;
+            case R.id.weeklyLook:
+                intent = new Intent(this, WeeklyLookActivity.class);
+                startActivity(intent);
+                break;
             case R.id.logOut:
                 if(user != null) {
                     auth.signOut();
                     Toast.makeText(getApplicationContext(), "You have successfully logged out", Toast.LENGTH_LONG).show();
                 } else
                   Toast.makeText(getApplicationContext(), "You need to log in first", Toast.LENGTH_LONG).show();
-
+                break;
 
         }
 

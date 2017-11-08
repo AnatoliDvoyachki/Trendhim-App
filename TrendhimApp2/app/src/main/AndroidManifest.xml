@@ -10,27 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".mainActivities.MainActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".categoryPage.CategoryProductActivity" />
         <activity android:name=".mainActivities.BaseActivity" />
         <activity
             android:name=".productPage.ProductActivity"
-            android:parentActivityName=".categoryPage.CategoryProductActivity">
-
-        </activity>
+            android:parentActivityName=".categoryPage.CategoryProductActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.SignupActivity" />
-        <activity android:name=".wishlistPage.WishlistActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".wishlistPage.WishlistActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".shoppingCartActivity.ShoppingCartActivity">
+        <activity android:name=".weeklyLook.WeeklyLookActivity"/>
 
-        </activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".weeklyLook.singleWeeklyLook.SecondWeeklyLookActivity"/>
     </application>
 
 </manifest>

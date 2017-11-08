@@ -34,6 +34,18 @@
     <!--  WishlistActivity.java strings-->
     <string name="wishlist_activity_title">My Wishlist</string>
     <string name="remove_success_message">Item successfuly removed!</string>
+    <string name="weekly_look">weekly look</string>
+    <string name="main_look">Main Look</string>
+    <string name="second_look">Second Look</string>
+    <string name="third_look">Third Look</string>
+    <string name="fourth_look">Fourth Look</string>
+    <string name="fifth_look">Fifth Look</string>
+    <string name="shop_the_products_from_the_look">Shop the products from the look</string>
+    <string name="add">Add</string>
+    <string name="complete_payment">Complete payment</string>
+    <string name="missing_something_add_it">Missing something? Add it!</string>
+    <string name="left_image">Left Image</string>
+    <string name="right_image">Right Image</string>
 
 
     <!-- ShoppingCartActivity.java strings-->

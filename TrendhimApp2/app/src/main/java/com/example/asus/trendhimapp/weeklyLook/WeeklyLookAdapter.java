@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.categoryPage;
+package com.example.asus.trendhimapp.weeklyLook;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,14 +9,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
-import com.example.asus.trendhimapp.productPage.Product;
-import com.example.asus.trendhimapp.productPage.ProductActivity;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
+import com.example.asus.trendhimapp.weeklyLook.singleWeeklyLook.SecondWeeklyLookActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,49 +23,39 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 import java.util.Objects;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.ViewHolder> {
 
     private Context context;
-    private List<CategoryProduct> categoryPageList;
-    private String category;
+    private List<WeeklyLook> weeklyLooks;
 
-    CategoryAdapter(Context context, List<CategoryProduct> categories, String category) {
-        this.categoryPageList = categories;
+    WeeklyLookAdapter(Context context, List<WeeklyLook> weeklyLooks) {
+        this.weeklyLooks = weeklyLooks;
         this.context = context;
-        this.category = category;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WeeklyLookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View categoryProductsView = inflater.inflate(R.layout.item_category, parent, false);
+        View looksProductsView = inflater.inflate(R.layout.item_weeklylook, parent, false);
 
         // Return a new holder instance
-        return new ViewHolder(categoryProductsView);
+        return new WeeklyLookAdapter.ViewHolder(looksProductsView);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(WeeklyLookAdapter.ViewHolder viewHolder, final int position) {
 
         // Get the data model based on position
-        final CategoryProduct product = categoryPageList.get(position);
+        final WeeklyLook product = weeklyLooks.get(position);
 
         // Set item views based on the views and data model
-        TextView productName = viewHolder.productNameTextView;
-        productName.setText(product.getName());
 
-        TextView productBrand = viewHolder.productBrandTextView;
-        productBrand.setText(product.getBrand());
-
-        TextView productPrice = viewHolder.productPriceTextView;
-        productPrice.setText(String.valueOf(product.getPrice()));
-
-        final ImageView productImage = viewHolder.productImage;
-        BitmapFlyweight.getPicture(product.getBannerPictureURL(), productImage);
+        final ImageView productImage = viewHolder.weeklyLookImage;
+        BitmapFlyweight.getPicture(product.getMainPictureUrl(), productImage);
 
         /*
          * Handle touch events - Change the image alpha
@@ -103,24 +90,23 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return categoryPageList.size();
+        return weeklyLooks.size();
     }
 
     /**
      * Populate the recycler view. Get data from the database which name is equal to the parameter.
-     * @param category
      */
-    void addData(String category) {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(category);
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    void addData() {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
+        myRef.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    for(DataSnapshot product : dataSnapshot.getChildren()) {
-                        String productKey = product.getKey();
-                        Product p = product.getValue(Product.class);
-                        categoryPageList.add(new CategoryProduct(
-                                p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), productKey));
+                    for(DataSnapshot look : dataSnapshot.getChildren()) {
+                        String lookKey = look.getKey();
+                        WeeklyLook weeklyLook = look.getValue(WeeklyLook.class);
+                        weeklyLooks.add(new WeeklyLook(lookKey,weeklyLook.getPhrase(), weeklyLook.getMainPictureUrl(), weeklyLook.getSecondPictureUrl(),
+                                weeklyLook.getThirdPictureUrl(), weeklyLook.getFourthPictureUrl(), weeklyLook.getFifthPictureUrl()));
                         // Notify the adapter that an item was inserted in position = getItemCount()
                         notifyItemInserted(getItemCount());
 
@@ -132,20 +118,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             public void onCancelled(DatabaseError databaseError) {
 
             }
-
         });
     }
 
     /**
      *  Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access
-    */
+     */
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView productNameTextView;
-        TextView productPriceTextView;
-        TextView productBrandTextView;
-        ImageView productImage;
+        ImageView weeklyLookImage;
 
         /**
          *  We also create a constructor that does the view lookups to find each subview
@@ -157,21 +139,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
              */
             super(itemView);
 
-            productNameTextView = itemView.findViewById(R.id.product_name_category);
-            productPriceTextView = itemView.findViewById(R.id.product_price_category);
-            productBrandTextView = itemView.findViewById(R.id.brand_name_category);
-            productImage = itemView.findViewById(R.id.product_image_category);
+            weeklyLookImage = itemView.findViewById(R.id.weeklyLookImage);
 
         }
     }
 
     /**
      * Redirect the user to the correct Product
-     * @param product
+     * @param look
      */
-    private void getProduct(final CategoryProduct product) {
+    private void getProduct(final WeeklyLook look) {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(category);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -181,26 +160,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                        if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
+                        if(Objects.equals(look.getKey(), dataSnapshot1.getKey())) {
 
-                            Product foundProduct = dataSnapshot1.getValue(Product.class);
+                            Intent intent = new Intent(context, SecondWeeklyLookActivity.class);
 
-                            Intent intent = new Intent(context, ProductActivity.class);
-
-                            intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
-                            intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
-                            intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
-                            intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
-                            intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
-                            intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
-                            intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+                            intent.putExtra(Constants.KEY_LOOK_KEY, look.getKey());
 
                             context.startActivity(intent);
                         }
 
                     }
-                    //Add product to recent activity
-                    RecentProductsAdapter.addToRecent(product);
+
                 }
 
             }

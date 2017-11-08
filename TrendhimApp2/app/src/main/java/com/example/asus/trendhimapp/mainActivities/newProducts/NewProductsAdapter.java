@@ -40,7 +40,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View newProductsView = inflater.inflate(R.layout.item_new_product, parent, false);
+        View newProductsView = inflater.inflate(R.layout.item_category, parent, false);
 
         // Return a new holder instance
         return new ViewHolder(newProductsView);
@@ -84,7 +84,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      */
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recommended_products");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+        myRef.orderByChild("order").addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
@@ -155,7 +155,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      */
     private void getProduct(final CategoryProduct product) {
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recommended_product");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recommended_products");
         //get product which key is equal to the one clicked
         databaseReference.orderByChild("key").equalTo(product.getKey())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -194,7 +194,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                                                 }
                                             }
 
-                                           RecentProductsAdapter.addToRecent(product, newProduct.getCategory());
+                                           RecentProductsAdapter.addToRecent(product);
 
                                         }
                                     }
@@ -235,10 +235,10 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
          */
             super(itemView);
 
-            productNameTextView = itemView.findViewById(R.id.product_name_newProduct);
-            productPriceTextView = itemView.findViewById(R.id.product_price_newProduct);
-            productBrandTextView = itemView.findViewById(R.id.brand_name_newProduct);
-            productImage = itemView.findViewById(R.id.product_image_newProduct);
+            productNameTextView = itemView.findViewById(R.id.product_name_category);
+            productPriceTextView = itemView.findViewById(R.id.product_price_category);
+            productBrandTextView = itemView.findViewById(R.id.brand_name_category);
+            productImage = itemView.findViewById(R.id.product_image_category);
         }
     }
 

@@ -1,101 +1,147 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
-    <!-- Product banner !-->
-    <ImageView
-        android:id="@+id/bannerImageView"
-        android:layout_width="240dp"
-        android:layout_height="250dp"
-        android:layout_above="@+id/leftImageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:cropToPadding="true"
-        android:scaleType="centerCrop" />
-
-    <!-- Left product picture !-->
-    <ImageView
-        android:id="@+id/leftImageView"
-        android:layout_width="120dp"
+    <!-- Footer aligned to bottom -->
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/rightImageView"
-        android:layout_marginStart="27dp"
-        android:cropToPadding="true"
-        android:padding="1dp"
-        android:scaleType="centerCrop" />
+        android:layout_alignParentBottom="true" >
 
-    <!-- Right product picture !-->
-    <ImageView
-        android:id="@+id/rightImageView"
-        android:layout_width="190dp"
-        android:layout_height="65dp"
-        android:layout_above="@+id/addToCartButton"
-        android:layout_marginBottom="125dp"
-        android:layout_toEndOf="@+id/addToWishlistButton"
-        android:cropToPadding="true"
-        android:padding="1dp"
-        android:scaleType="centerCrop" />
+        <!-- Add to cart button !-->
+        <Button
+            android:id="@+id/addToCartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/priceTextView"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="13dp"
+            android:background="@drawable/rect"
+            android:gravity="left"
+            android:padding="15dp"
+            android:text="@string/add_to_cart_button_name" />
 
-    <!-- Add to cart button !-->
-    <Button
-        android:id="@+id/addToCartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="31dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="10dp"
-        android:padding="10dp"
-        android:background="@color/buttonGreen"
-        android:text="@string/add_to_cart_button_name"
-        android:textColor="@color/white" />
+        <!-- Price text view !-->
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="17dp"
+            android:paddingBottom="15dp"
+            android:gravity="right"
+            android:text="300$"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
-    <!-- Add to wishlist !-->
-    <Button
-        android:id="@+id/addToWishlistButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/brandTextView"
-        android:layout_alignTop="@+id/addToCartButton"
-        android:layout_marginStart="5dp"
-        android:padding="10dp"
-        android:background="@color/buttonGreen"
-        android:text="@string/add_to_wishlist_button_name"
-        android:textColor="@color/white" />
+    <!-- Scrollable Content below header and above footer -->
+    <ScrollView
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footer">
 
-    <!-- Brand name !-->
-    <TextView
-        android:id="@+id/brandTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignStart="@+id/leftImageView"
-        android:layout_below="@+id/leftImageView"
-        android:layout_marginTop="23dp"
-        android:gravity="center"
-        android:textSize="10sp" />
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:columnCount="2"
+            android:rowCount="6">
 
-    <!-- Product name !-->
-    <TextView
-        android:id="@+id/productNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignStart="@+id/brandTextView"
-        android:layout_below="@+id/priceTextView"
-        android:gravity="center" />
+            <!-- Brand name !-->
+            <TextView
+                android:id="@+id/brandTextView"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="96dp"
+                android:layout_row="0"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-    <!-- Price text view !-->
-    <TextView
-        android:id="@+id/priceTextView"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_alignBaseline="@+id/brandTextView"
-        android:layout_alignBottom="@+id/brandTextView"
-        android:layout_alignEnd="@+id/rightImageView"
-        android:gravity="center" />
+            <!-- Product name !-->
+            <TextView
+                android:id="@+id/productNameTextView"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_row="1"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Product banner !-->
+            <ImageView
+                android:id="@+id/bannerImageView"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_row="2"
+                android:contentDescription="@string/banner_image"
+                android:cropToPadding="true"
+                android:scaleType="centerCrop" />
+
+            <!-- Left product picture !-->
+            <ImageView
+                android:id="@+id/leftImageView"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_row="3"
+                android:contentDescription="@string/left_image"
+                android:cropToPadding="true"
+                android:scaleType="centerCrop" />
+
+            <!-- Right product picture !-->
+            <ImageView
+                android:id="@+id/rightImageView"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_row="4"
+                android:contentDescription="@string/right_image"
+                android:cropToPadding="true"
+                android:scaleType="centerCrop" />
+
+            <!-- Add to wishlist !-->
+            <Button
+                android:id="@+id/addToWishlistButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_row="5"
+                android:layout_columnSpan="2"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/rect"
+                android:padding="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/add_to_wishlist_button_name" />
+
+
+        </GridLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
