@@ -19,10 +19,11 @@
         android:id="@+id/brand_name_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
         android:paddingTop="10dp"
         android:text="@string/brand_name"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -30,6 +31,7 @@
         android:id="@+id/product_name_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
         android:paddingTop="10dp"
         android:text="@string/product_name"
         android:textSize="16sp" />
@@ -38,6 +40,7 @@
         android:id="@+id/product_price_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
         android:paddingTop="10dp"
         android:textSize="18sp"
         android:textStyle="bold" />
