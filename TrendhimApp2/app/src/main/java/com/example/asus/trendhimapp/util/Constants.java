@@ -16,6 +16,8 @@ public final class Constants {
     public static final String TABLE_NAME_WATCHES = "watches";
     public static final String TABLE_NAME_WISHLIST = "wishlist";
     public static final String TABLE_NAME_SHOPPING_CART = "shopping_cart";
+    public static final String TABLE_NAME_WEEKLY_LOOK = "weekly_look";
+    public static final String TABLE_NAME_RECENT_PRODUCTS = "recent_products";
 
     // Attribute name for the Product object
     public static final String KEY_PRODUCT_NAME = "productName";
@@ -25,6 +27,11 @@ public final class Constants {
     public static final String KEY_RIGHT_PIC_URL = "rightPictureUrl";
     public static final String KEY_BRAND_NAME = "brand";
     public static final String KEY_PRODUCT_KEY = "productKey";
+
+
+    //Attribute names for Weekly Look objects
+    public static final String KEY_LOOK_KEY = "lookKey";
+
 
     // Regex for the add to wishlist functionality
     public static final String WATCH_REGEX = "watch";
