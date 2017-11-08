@@ -25,6 +25,9 @@ public class ShoppingCartActivity extends BaseActivity {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_shopping_cart, null, false);
         BaseActivity.drawer.addView(contentView, 0);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+        setTitle("Shopping Cart");
         initializeComponents();
 
     }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.login.LoginActivity;
+import com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartActivity;
 import com.example.asus.trendhimapp.weeklyLook.WeeklyLookActivity;
 import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
 import com.example.asus.trendhimapp.util.Constants;
@@ -179,7 +180,8 @@ public class BaseActivity  extends AppCompatActivity
 
 
     public void openShoppingCart(View view) {
-        Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), ShoppingCartActivity.class);
+        startActivity(intent);
     }
     
 }
