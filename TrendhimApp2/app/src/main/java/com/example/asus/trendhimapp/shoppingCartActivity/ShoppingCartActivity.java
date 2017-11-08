@@ -12,6 +12,7 @@ import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 
 public class ShoppingCartActivity extends BaseActivity {
+
     private RecyclerView recyclerView;
     private TextView productNameTextView, quantityTextView, priceTextView,
             shippingLabelTextView, subtotalLabelTextView;
