@@ -15,6 +15,7 @@ public final class Constants {
     public static final String TABLE_NAME_TIES = "ties";
     public static final String TABLE_NAME_WATCHES = "watches";
     public static final String TABLE_NAME_WISHLIST = "wishlist";
+    public static final String TABLE_NAME_SHOPPING_CART = "shopping_cart";
 
     // Attribute name for the Product object
     public static final String KEY_PRODUCT_NAME = "productName";

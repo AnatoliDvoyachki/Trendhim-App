@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,10 +39,12 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private String userEmail;
     private Context context;
     private List<CategoryProduct> productList;
+    private int instanceCount;
 
     public WishlistAdapter(Context context) {
         this.productList = new ArrayList<>();
         this.context = context;
+        this.instanceCount = 0;
         setEmail();
     }
 
@@ -69,7 +73,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         viewHolder.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "TODO ADD TO CART", Toast.LENGTH_SHORT).show();
+                executeAddToCart(currentProduct);
             }
         });
 
@@ -122,6 +126,51 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 public void onCancelled(DatabaseError databaseError) {}
             });
         }
+    }
+
+    public boolean shoppingCartProductExists(final String userEmail, final String productKey) {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+        this.instanceCount = 0;
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        ShoppingCartProduct product = ds.getValue(ShoppingCartProduct.class);
+                        if (userEmail.equals(product.getUserEmail()) &&
+                                productKey.equals(product.getProductKey())) {
+                            ++instanceCount;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+        return instanceCount != 0;
+    }
+
+    private void executeAddToCart(CategoryProduct categoryProduct) {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+        if (!shoppingCartProductExists(userEmail, categoryProduct.getKey())) {
+            String productKey = categoryProduct.getKey();
+            String entityName;
+            if (productKey.startsWith(Constants.WATCH_REGEX)) {
+                entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "es");
+            } else {
+                entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "s");
+            }
+            ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(productKey,entityName, userEmail);
+            myRef.push().setValue(shoppingCartProduct);
+            removeItem(categoryProduct);
+            productList.remove(categoryProduct);
+            notifyDataSetChanged();
+            Toast.makeText(context, "Item added to the shopping list", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Item is already in the shopping cart!", Toast.LENGTH_SHORT).show();
+        }
+        this.instanceCount = 0;
     }
 
     /**

@@ -12,7 +12,7 @@ public final class BitmapFlyweight {
 
     private BitmapFlyweight() {}
 
-    private final static HashMap<String, Bitmap> PICTURE_CACHE = new HashMap<>();
+    private static final HashMap<String, Bitmap> PICTURE_CACHE = new HashMap<>();
 
     /**
      * Used to get a picture for the ImageViews.

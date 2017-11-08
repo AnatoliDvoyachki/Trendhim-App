@@ -35,4 +35,16 @@
     <string name="wishlist_activity_title">My Wishlist</string>
     <string name="remove_success_message">Item successfuly removed!</string>
 
+
+    <!-- ShoppingCartActivity.java strings-->
+    <string name="product_text_view_label">Product</string>
+    <string name="quantity_text_view_label">Quantity</string>
+    <string name="price_text_view_label_text">Price</string>
+    <string name="subtotal_text_view_label_text">Subtotal</string>
+    <string name="shipping_text_View_label_text">Shipping</string>
+    <string name="grand_total_text_view_label_text">Grand total</string>
+    <string name="checkout_button_label_text">Go to checkout</string>
+    <string name="plus_sign">+</string>
+    <string name="minus_sign">-</string>
+    <string name="initial_value">0</string>
 </resources>

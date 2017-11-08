@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="130dp">
+
+
+    <ImageView
+        android:id="@+id/banner_image_view_shopping_cart"
+        android:layout_width="80dp"
+        android:layout_height="@dimen/item_wishlist_banner_dimen"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="22dp"
+        android:background="@color/darkGrey" />
+
+    <TextView
+        android:id="@+id/product_name_text_view"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/banner_image_view_shopping_cart"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/banner_image_view_shopping_cart"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/quantity_text_view"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/product_name_text_view"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/product_name_text_view"
+        android:gravity="center"
+        android:text="@string/initial_value" />
+
+    <Button
+        android:id="@+id/increment_button"
+        android:layout_width="30dp"
+        android:layout_height="23dp"
+        android:layout_alignTop="@+id/quantity_text_view"
+        android:layout_toEndOf="@+id/quantity_text_view"
+        android:background="@color/lightGrey"
+        android:text="@string/plus_sign"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/decrement_button"
+        android:layout_width="30dp"
+        android:layout_height="23dp"
+        android:layout_alignBottom="@+id/total_products_price_text_view"
+        android:layout_toEndOf="@+id/quantity_text_view"
+        android:background="@color/lightGrey"
+        android:text="@string/minus_sign"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/total_products_price_text_view"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/increment_button"
+        android:gravity="center"
+        android:text="0" />
+
+    <ImageButton
+        android:id="@+id/remove_item_button"
+        android:layout_width="@dimen/item_wishlist_button_width"
+        android:layout_height="@dimen/item_wishlist_button_height"
+        android:layout_alignBottom="@+id/banner_image_view_shopping_cart"
+        android:layout_alignEnd="@+id/decrement_button"
+        android:background="@drawable/remove_button"
+        android:padding="2dp"
+        android:src="@drawable/remove_icon" />
+</RelativeLayout>
