@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".mainActivities.MainActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 
@@ -31,12 +34,7 @@
 
         <activity android:name=".weeklyLook.singleWeeklyLook.SecondWeeklyLookActivity"/>
         <activity android:name=".shoppingCartActivity.ShoppingCartActivity"/>
-        <activity android:name=".shoppingCartActivity.credentials.CredentialsActivity" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+        <activity android:name=".shoppingCartActivity.credentials.CredentialsActivity" />
     </application>
 
 </manifest>
