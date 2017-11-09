@@ -20,7 +20,6 @@ import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProduct;
 import com.example.asus.trendhimapp.productPage.Product;
-import com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,12 +41,10 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private String userEmail;
     private Context context;
     private List<CategoryProduct> productList;
-    private int instanceCount;
 
-    public WishlistAdapter(Context context) {
+    WishlistAdapter(Context context) {
         this.productList = new ArrayList<>();
         this.context = context;
-        this.instanceCount = 0;
         setEmail();
     }
 
@@ -87,7 +84,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return productList.size();
     }
 
-    public void populateRecyclerView() {
+    void populateRecyclerView() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -131,29 +128,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         }
     }
 
-    public boolean shoppingCartProductExists(final String userEmail, final String productKey) {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
-        this.instanceCount = 0;
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        ShoppingCartProduct product = ds.getValue(ShoppingCartProduct.class);
-                        if (userEmail.equals(product.getUserEmail()) &&
-                                productKey.equals(product.getProductKey())) {
-                            ++instanceCount;
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-        return instanceCount != 0;
-    }
-
     /**
      * Adds an item to the shopping list
      **/
@@ -182,18 +156,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                     }
 
                     if(!exists[0]){
-                        String entityName;
-                        if (categoryProduct.getKey().startsWith(Constants.WATCH_REGEX)) {
-                            entityName = categoryProduct.getKey().replaceAll(Constants.ALL_DIGITS_REGEX, "es");
-                        } else {
-                            entityName = categoryProduct.getKey().replaceAll(Constants.ALL_DIGITS_REGEX, "s");
-                        }
 
-                        Map<String, String> values = new HashMap<>();
+                        Map<String, Object> values = new HashMap<>();
                         values.put("productKey", categoryProduct.getKey());
-                        values.put("email", user.getEmail());
-                        values.put("quantity", "0");
-                        values.put("entityName", entityName);
+                        values.put("userEmail", user.getEmail());
+                        values.put("quantity", 1);
                         myRef.push().setValue(values);
                     }
 
@@ -205,7 +172,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 }
             });
         }
-        this.instanceCount = 0;
     }
 
     /**

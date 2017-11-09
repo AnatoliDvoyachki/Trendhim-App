@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.productPage.Product;
+import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -101,7 +102,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     private String getCategory(String productKey){
         String entityName;
-        if (productKey.startsWith(Constants.WATCH_REGEX))
+        if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
         else
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
@@ -126,6 +127,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
                             DatabaseReference myRef1 =
                                     FirebaseDatabase.getInstance().getReference(getCategory(scp.getProductKey()));
+
                             myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -136,7 +138,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
                                                 Product product = ds1.getValue(Product.class);
 
-                                                shoppingCartProducts.add(0, new CategoryProduct(product.getProductName(), product.getPrice(),
+                                                shoppingCartProducts.add(new CategoryProduct(product.getProductName(), product.getPrice(),
                                                         product.getBrand(), product.getBannerPictureUrl(), ds1.getKey()));
 
                                                 notifyItemInserted(getItemCount());
