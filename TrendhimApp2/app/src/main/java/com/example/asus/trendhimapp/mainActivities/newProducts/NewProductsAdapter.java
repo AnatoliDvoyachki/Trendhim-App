@@ -15,6 +15,7 @@ import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProducts
 import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.productPage.ProductActivity;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
+import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,7 +84,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      * Populate the recycler view. Get data from the database which name is equal to the parameter.
      */
     public void addData() {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recommended_products");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMENDED_PRODUCTS);
         myRef.orderByChild("order").addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
@@ -103,9 +104,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
 
         });
 
@@ -142,9 +141,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
 
     }
@@ -181,13 +178,13 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
                                                     Intent intent = new Intent(context, ProductActivity.class);
 
-                                                    intent.putExtra("productKey", product.getKey());
-                                                    intent.putExtra("productName", foundProduct.getProductName());
-                                                    intent.putExtra("brand", foundProduct.getBrand());
-                                                    intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
-                                                    intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
-                                                    intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
-                                                    intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
+                                                    intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
+                                                    intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
+                                                    intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                                                    intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+                                                    intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
+                                                    intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                                                    intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
                                                     context.startActivity(intent);
 
@@ -200,18 +197,14 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                                     }
 
                                     @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
+                                    public void onCancelled(DatabaseError databaseError) {}
                                 });
                             }
                         }
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
+                    public void onCancelled(DatabaseError databaseError) {}
                 });
     }
     /**

@@ -14,16 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.login.LoginActivity;
 import com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartActivity;
+import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.weeklyLook.WeeklyLookActivity;
 import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
-import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,37 +74,37 @@ public class BaseActivity extends AppCompatActivity
         switch (id) {
             case R.id.bracelets:
                 intent = new Intent(this, CategoryProductActivity.class);
-                intent.putExtra("category", Constants.TABLE_NAME_BRACELETS);
+                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BRACELETS);
                 startActivity(intent);
                 break;
             case R.id.bags:
                 intent = new Intent(this, CategoryProductActivity.class);
-                intent.putExtra("category", Constants.TABLE_NAME_BAGS);
+                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BAGS);
                 startActivity(intent);
                 break;
             case R.id.watches:
                 intent = new Intent(this, CategoryProductActivity.class);
-                intent.putExtra("category", Constants.TABLE_NAME_WATCHES);
+                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_WATCHES);
                 startActivity(intent);
                 break;
             case R.id.beardCare:
                 intent = new Intent(this, CategoryProductActivity.class);
-                intent.putExtra("category", Constants.TABLE_NAME_BEARD_CARE);
+                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BEARD_CARE);
                 startActivity(intent);
                 break;
             case R.id.necklaces:
                 intent = new Intent(this, CategoryProductActivity.class);
-                intent.putExtra("category", Constants.TABLE_NAME_NECKLACES);
+                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_NECKLACES);
                 startActivity(intent);
                 break;
             case R.id.ties:
                 intent = new Intent(this, CategoryProductActivity.class);
-                intent.putExtra("category", Constants.TABLE_NAME_TIES);
+                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_TIES);
                 startActivity(intent);
                 break;
             case R.id.bowTies:
                 intent = new Intent(this, CategoryProductActivity.class);
-                intent.putExtra("category", Constants.TABLE_NAME_BOW_TIES);
+                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BOW_TIES);
                 startActivity(intent);
                 break;
             case R.id.weeklyLook:
@@ -115,9 +114,9 @@ public class BaseActivity extends AppCompatActivity
             case R.id.logOut:
                 if (user != null) {
                     auth.signOut();
-                    Toast.makeText(getApplicationContext(), "You have successfully logged out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.log_out_success_message, Toast.LENGTH_LONG).show();
                 } else
-                    Toast.makeText(getApplicationContext(), "You need to log in first", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.need_to_log_in_first_message, Toast.LENGTH_LONG).show();
                 break;
 
         }
@@ -150,7 +149,7 @@ public class BaseActivity extends AppCompatActivity
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
         } else if (isUserOnline()) {
-            Toast.makeText(getApplicationContext(), "You are already logged in", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.already_logged_in_message, Toast.LENGTH_LONG).show();
         }
     }
 

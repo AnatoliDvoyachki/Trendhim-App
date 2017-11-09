@@ -18,11 +18,9 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
     private String pictureUrl;
 
     /**
-     * Constructs the Thread.
-     *
      * @param pictureUrl url reference to the picture
      * @param imageView  the view to which the picture will be assigned after execution
-     */
+     **/
     public DownloadTask(String pictureUrl, ImageView imageView) {
         this.pictureUrl = pictureUrl;
         this.imageView = imageView;
@@ -47,12 +45,13 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
      * @return a bitmap of the image
      */
     private Bitmap downloadImage(String urlString) {
+        if (urlString == null) return null;
         HttpURLConnection con = null;
         InputStream inFromInternet = null;
         Bitmap bitmap = null;
         try {
             URL url = new URL(urlString);
-            con = (HttpURLConnection) url.openConnection();
+            if (url != null) con = (HttpURLConnection) url.openConnection();
             if (con != null) inFromInternet = con.getInputStream();
             if (inFromInternet != null) bitmap = BitmapFactory.decodeStream(inFromInternet);
         } catch (IOException e) {

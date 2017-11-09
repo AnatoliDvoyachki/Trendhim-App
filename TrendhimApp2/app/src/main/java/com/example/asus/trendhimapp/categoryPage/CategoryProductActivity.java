@@ -8,8 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.util.Constants;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class CategoryProductActivity extends BaseActivity {
     public String getCategory(){
         Intent intent = getIntent();
         if(intent != null){
-            String category = intent.getStringExtra("category");
+            String category = intent.getStringExtra(Constants.KEY_CATEGORY);
             if(category != null)
                 return category;
         }

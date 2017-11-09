@@ -14,9 +14,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.mainActivities.MainActivity;
-import com.example.asus.trendhimapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -79,7 +79,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(getApplicationContext(), "Incorrect email or password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.incorrect_credentials_message, Toast.LENGTH_LONG).show();
                         Log.d(TAG, "sign in failed", task.getException());
                     }
                 }

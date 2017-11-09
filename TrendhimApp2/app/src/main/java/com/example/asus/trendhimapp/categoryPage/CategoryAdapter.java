@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
 import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.productPage.ProductActivity;
-import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.database.DataSnapshot;
@@ -65,7 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         productBrand.setText(product.getBrand());
 
         TextView productPrice = viewHolder.productPriceTextView;
-        productPrice.setText(String.valueOf(product.getPrice()));
+        productPrice.setText(String.valueOf(product.getPrice()) + "€");
 
         final ImageView productImage = viewHolder.productImage;
         BitmapFlyweight.getPicture(product.getBannerPictureURL(), productImage);
@@ -129,9 +129,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
 
         });
     }
@@ -206,9 +204,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
     }
 
