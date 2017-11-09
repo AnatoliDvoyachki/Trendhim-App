@@ -65,7 +65,7 @@ public class CategoryProductActivity extends BaseActivity {
     public String getCategory(){
         Intent intent = getIntent();
         if(intent != null){
-            String category = intent.getStringExtra("category");
+            String category = intent.getStringExtra(Constants.KEY_CATEGORY);
             if(category != null)
                 return category;
         }

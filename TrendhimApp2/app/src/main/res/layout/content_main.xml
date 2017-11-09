@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/you_don_t_have_recent_products"
+                android:text="@string/no_recent_products_message"
                 android:visibility="gone" />
 
             <LinearLayout

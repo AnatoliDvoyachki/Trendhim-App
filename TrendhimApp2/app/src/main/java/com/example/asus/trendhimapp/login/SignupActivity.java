@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.util.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -70,9 +71,9 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
 
         assert passwordEditText != null;
         if (!(passwordEditText.getText().toString().equals(confirmEditText.getText().toString())))
-            confirmEditText.setError("Passwords don't match");
+            confirmEditText.setError(getString(R.string.password_mismatch_message));
         if (!isEmailValid(emailEditText.getText().toString()))
-            emailEditText.setError("Invalid Email");
+            emailEditText.setError(getString(R.string.email_invalid_message));
         else {
             if (passwordEditText.getText().toString().equals(confirmEditText.getText().toString())) {
                 auth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
@@ -91,20 +92,20 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
                                         editText.setText(null);
                                 } else {
                                     if(!task.isSuccessful()) {
-                                        Toast.makeText(SignupActivity.this, "Ups! Authentication failed.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignupActivity.this, R.string.authentication_fail_message, Toast.LENGTH_SHORT).show();
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
                                         // If sign in fails, display a message to the user.
                                         try {
                                             throw task.getException();
                                         } catch(FirebaseAuthWeakPasswordException e) {
-                                            passwordEditText.setError("Password has to be at least 6 characters");
+                                            passwordEditText.setError(getString(R.string.short_password_message));
                                             passwordEditText.requestFocus();
                                         } catch(FirebaseAuthInvalidCredentialsException e) {
-                                            emailEditText.setError("Invalid email format");
+                                            emailEditText.setError(getString(R.string.email_format_error_message));
                                             emailEditText.requestFocus();
                                         } catch(FirebaseAuthUserCollisionException e) {
-                                            emailEditText.setError("User already exists");
+                                            emailEditText.setError(getString(R.string.existing_user_message));
                                             emailEditText.requestFocus();
                                         } catch(Exception e) {
                                             Log.w("SignInLog", "createUserWithEmail:failure", task.getException());
@@ -128,7 +129,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
         boolean complete = true;
         for (EditText currentField : fields) {
             if (currentField.getText().toString().matches("")) {
-                currentField.setError("This field cannot be empty");
+                currentField.setError(getString(R.string.must_be_filled_message));
                 complete = false;
             }
         }
@@ -142,8 +143,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
      * @return true for valid - false for invalid
      */
     public static boolean isEmailValid (String email) {
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(Constants.VALID_EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }

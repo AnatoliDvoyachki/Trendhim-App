@@ -120,9 +120,7 @@ public class SecondWeeklyLookAdapter extends RecyclerView.Adapter<SecondWeeklyLo
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
 
         });
 

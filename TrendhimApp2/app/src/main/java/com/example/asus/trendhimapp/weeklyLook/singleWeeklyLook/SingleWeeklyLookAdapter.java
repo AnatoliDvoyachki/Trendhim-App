@@ -200,7 +200,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
 
     private String getCategory(String productKey){
         String entityName;
-        if (productKey.startsWith(Constants.WATCH_REGEX))
+        if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
         else
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");

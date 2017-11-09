@@ -19,6 +19,7 @@ public final class Constants {
     public static final String TABLE_NAME_WEEKLY_LOOK = "weekly_look";
     public static final String TABLE_NAME_RECENT_PRODUCTS = "recent_products";
     public static final String TABLE_NAME_USER_CREDENIALS = "user_credentials";
+    public static final String TABLE_NAME_RECOMENDED_PRODUCTS = "recommended_products";
 
     // Attribute name for the Product object
     public static final String KEY_PRODUCT_NAME = "productName";
@@ -30,11 +31,12 @@ public final class Constants {
     public static final String KEY_PRODUCT_KEY = "productKey";
 
 
-    //Attribute names for Weekly Look objects
+    // Attribute names for Weekly Look objects
     public static final String KEY_LOOK_KEY = "lookKey";
+    public static final String KEY_CATEGORY = "category";
 
-
-    // Regex for the add to wishlist functionality
-    public static final String WATCH_REGEX = "watch";
+    // Regex
+    public static final String WATCH_PREFIX = "watch";
     public static final String ALL_DIGITS_REGEX = "\\d+";
+    public static final String VALID_EMAIL_REGEX = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
 }

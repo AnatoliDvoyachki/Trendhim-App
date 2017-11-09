@@ -1,4 +1,5 @@
 <resources>
+
     <!-- General strings -->
     <string name="app_name">Trendhim</string>
     <string name="title_activity_main">Main</string>
@@ -7,17 +8,27 @@
     <string name="action_settings">Settings</string>
     <string name="placeholder">Placeholder</string>
 
+    <!-- WeeklyLookActivity.java strings -->
+    <string name="weekly_look_title">Weekly Looks</string>
+
+    <!-- BaseActivity.java strings-->
+    <string name="already_logged_in_message">You are already logged in!</string>
+    <string name="log_out_success_message">You have successfully logged out</string>
+    <string name="need_to_log_in_first_message">You need to log in first</string>
+
     <!--- ProductActivity.java strings -->
     <string name="not_logged_in_unsuccess_message">You must be logged in to access these features!</string>
     <string name="added_to_wishlist_success_message">Item successfuly added to wishlist!</string>
     <string name="add_to_cart_button_name">Add to Cart</string>
     <string name="add_to_wishlist_button_name">Add to Wishlist</string>
     <string name="item_already_in_the_wishlist_message">This item is already in the wishlist!</string>
+    <string name="item_added_to_cart_message">Item added to the cart</string>
+    <string name="item_already_in_cart_message">Item added to the cart</string>
 
     <!--MainActivity.java strings-->
     <string name="banner_image">bannerImage</string>
     <string name="recent_products">Recent productList</string>
-    <string name="you_don_t_have_recent_products">You don\'t have recent productList</string>
+    <string name="no_recent_products_message">You don\'t have recent productList</string>
     <string name="brand_name">Brand name</string>
     <string name="product_name">Product name</string>
     <string name="logo">logo</string>
@@ -28,13 +39,14 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account">Create Account</string>
     <string name="sign_up">Sign up</string>
+    <string name="incorrect_credentials_message">Incorrect email or password</string>
     <string name="not_a_member">Not a member?</string>
     <string name="log_in">Log in</string>
 
     <!--  WishlistActivity.java strings-->
     <string name="wishlist_activity_title">My Wishlist</string>
     <string name="remove_success_message">Item successfuly removed!</string>
-    <string name="weekly_look">weekly look</string>
+    <string name="weekly_look">Weekly look</string>
     <string name="main_look">Main Look</string>
     <string name="second_look">Second Look</string>
     <string name="third_look">Third Look</string>
@@ -47,8 +59,8 @@
     <string name="left_image">Left Image</string>
     <string name="right_image">Right Image</string>
 
-
     <!-- ShoppingCartActivity.java strings-->
+    <string name="shopping_cart_title">Shopping cart</string>
     <string name="product_text_view_label">Product</string>
     <string name="quantity_text_view_label">Quantity</string>
     <string name="price_text_view_label_text">Price</string>
@@ -63,4 +75,17 @@
     <string name="the_trendhim_philosophy_of_awesomeness">The Trendhim philosophy of awesomeness</string>
     <string name="introduction_about_us">Awesomeness is the main deciding factor in all we do at Trendhim. We only sell products we believe are awesome. We only deliver a service we believe is awesome. We only hire people we think are awesome. We give customers 365 days to return products because we believe this is awesome. We want our customers to have the best possible shopping experience and fall in love with their new product. It’s as simple as that.</string>
     <string name="second_about_us">Read this short story about how Trendhim came to be, from the cradle to adulthood (almost), as we best recall it.</string>
+
+    <!-- AboutUs.java strings -->
+    <string name="about_us_title">About us</string>
+
+    <!-- SignupActivity.java strings -->
+    <string name="must_be_filled_message">This field cannot be empty</string>
+    <string name="authentication_fail_message">Ups! Authentication failed.</string>
+    <string name="short_password_message">Password has to be at least 6 characters</string>
+    <string name="email_format_error_message">Invalid email format</string>
+    <string name="email_invalid_message">Invalid email</string>
+    <string name="existing_user_message">User already exists</string>
+    <string name="password_mismatch_message">Passwords don\'t match</string>
+
 </resources>

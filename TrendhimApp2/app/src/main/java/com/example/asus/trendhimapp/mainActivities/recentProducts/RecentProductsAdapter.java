@@ -107,13 +107,13 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                                 Product foundProduct = dataSnapshot1.getValue(Product.class);
                                                                 Intent intent = new Intent(context, ProductActivity.class);
 
-                                                                intent.putExtra("productKey", product.getKey());
-                                                                intent.putExtra("productName", foundProduct.getProductName());
-                                                                intent.putExtra("brand", foundProduct.getBrand());
-                                                                intent.putExtra("bannerPictureUrl", foundProduct.getBannerPictureUrl());
-                                                                intent.putExtra("price", String.valueOf(foundProduct.getPrice()));
-                                                                intent.putExtra("leftPictureUrl", foundProduct.getLeftPictureUrl());
-                                                                intent.putExtra("rightPictureUrl", foundProduct.getRightPictureUrl());
+                                                                intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
+                                                                intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
+                                                                intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                                                                intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+                                                                intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
+                                                                intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                                                                intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
                                                                 context.startActivity(intent);
 
@@ -127,9 +127,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                 }
 
                                                 @Override
-                                                public void onCancelled(DatabaseError databaseError) {
-
-                                                }
+                                                public void onCancelled(DatabaseError databaseError) {}
                                             });
                                         }
 
@@ -138,9 +136,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                             }
 
                             @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
+                            public void onCancelled(DatabaseError databaseError) {}
                         });
             }
         });
@@ -154,7 +150,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
     private String getCategory(String productKey){
         String entityName;
-        if (productKey.startsWith(Constants.WATCH_REGEX))
+        if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
         else
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
@@ -193,9 +189,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
+                public void onCancelled(DatabaseError databaseError) {}
 
             });
         }
@@ -232,20 +226,18 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                     }
 
                     if(!exists[0]){
-                        Date curDate = new Date();
+                        Date today = new Date();
                         Map<String, String> values = new HashMap<>();
                         values.put("key", product.getKey());
                         values.put("email", user.getEmail());
-                        values.put("order", "-" + convertDateToString(curDate)); //order the elements in descending date
+                        values.put("order", "-" + convertDateToString(today)); //order the elements in descending date
                         myRef.push().setValue(values);
                     }
 
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
+                public void onCancelled(DatabaseError databaseError) {}
             });
         }
     }
@@ -276,9 +268,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
+                public void onCancelled(DatabaseError databaseError) {}
             });
         }
 

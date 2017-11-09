@@ -31,7 +31,7 @@ public class WeeklyLookActivity extends BaseActivity {
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        setTitle("Weekly Looks");
+        setTitle(R.string.weekly_look_title);
 
         // Lookup the recycler view in activity layout
         recyclerView = findViewById(R.id.recyclerViewWeeklyLook);

@@ -22,18 +22,17 @@ public class ShoppingCartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeComponents();
+    }
+
+
+    private void initializeComponents() {
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_shopping_cart, null, false);
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-        setTitle("Shopping Cart");
-        initializeComponents();
-
-    }
-
-    private void initializeComponents() {
+        setTitle(R.string.shopping_cart_title);
         recyclerView = findViewById(R.id.the_recycler_view);
         productNameTextView = findViewById(R.id.product_name_text_view);
         quantityTextView = findViewById(R.id.quantity_text_view);

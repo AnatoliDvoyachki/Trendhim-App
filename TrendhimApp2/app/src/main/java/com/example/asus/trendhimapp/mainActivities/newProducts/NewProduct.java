@@ -2,21 +2,21 @@ package com.example.asus.trendhimapp.mainActivities.newProducts;
 
 public class NewProduct {
 
-        private String category, key;
+    private String category, key;
 
-        public NewProduct(){}
+    public NewProduct() {}
 
-        NewProduct(String key, String category){
-            this.category = category;
-            this.key = key;
-        }
+    NewProduct(String key, String category) {
+        this.category = category;
+        this.key = key;
+    }
 
-        String getCategory() {
-            return category;
-        }
+    String getCategory() {
+        return category;
+    }
 
-        public String getKey() {
-            return key;
-        }
+    public String getKey() {
+        return key;
+    }
 
 }

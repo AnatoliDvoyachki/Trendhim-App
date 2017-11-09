@@ -155,7 +155,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         if (!shoppingCartProductExists(userEmail, categoryProduct.getKey())) {
             String productKey = categoryProduct.getKey();
             String entityName;
-            if (productKey.startsWith(Constants.WATCH_REGEX)) {
+            if (productKey.startsWith(Constants.WATCH_PREFIX)) {
                 entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
             } else {
                 entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
