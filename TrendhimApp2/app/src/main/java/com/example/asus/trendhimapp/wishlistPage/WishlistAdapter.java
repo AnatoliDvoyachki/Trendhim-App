@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.productPage.Product;
-import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
@@ -75,7 +75,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 executeAddToCart(currentProduct);
             }
         });
-
     }
 
     @Override
@@ -127,6 +126,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         }
     }
 
+    /**
+     * @param userEmail
+     * @param productKey
+     * @return true, if a product that matches the credentials exists in Firebase. Otherwise, false.
+     **/
     public boolean shoppingCartProductExists(final String userEmail, final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
         this.instanceCount = 0;
@@ -150,26 +154,59 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return instanceCount != 0;
     }
 
-    private void executeAddToCart(CategoryProduct categoryProduct) {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
-        if (!shoppingCartProductExists(userEmail, categoryProduct.getKey())) {
-            String productKey = categoryProduct.getKey();
-            String entityName;
-            if (productKey.startsWith(Constants.WATCH_PREFIX)) {
-                entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
-            } else {
-                entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
+    /**
+     * Starts a sequence for the addition of a product in the shopping cart
+     **/
+    private void executeAddToCart(final CategoryProduct categoryProduct) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setMessage("Add " + categoryProduct.getName() + " to shopping cart?");
+        builder.setPositiveButton(R.string.positive_option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+                // Check if the shopping cart item already exists
+                if (!shoppingCartProductExists(userEmail, categoryProduct.getKey())) {
+                    String productKey = categoryProduct.getKey();
+                    String entityName;
+                    // Get the name of the entity from the product key
+                    if (productKey.startsWith(Constants.WATCH_PREFIX)) {
+                        entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+                    } else {
+                        entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
+                    }
+                    ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(productKey,entityName, userEmail);
+                    myRef.push().setValue(shoppingCartProduct); // Add the item to the shopping cart
+                    removeItem(categoryProduct); // Remove it from the user's wishlist
+                    productList.remove(categoryProduct); // Update the UI
+                    notifyDataSetChanged(); // Notify for the change
+                    Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, R.string.item_already_in_cart_message, Toast.LENGTH_SHORT).show();
+                }
             }
-            ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(productKey,entityName, userEmail);
-            myRef.push().setValue(shoppingCartProduct);
-            removeItem(categoryProduct);
-            productList.remove(categoryProduct);
-            notifyDataSetChanged();
-            Toast.makeText(context, "Item added to the shopping list", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Item is already in the shopping cart!", Toast.LENGTH_SHORT).show();
-        }
-        this.instanceCount = 0;
+        });
+        builder.setNegativeButton(R.string.negative_option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Customize button text
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnPositive.setTextColor(ContextCompat.getColor(context, R.color.black));
+        Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+        // Allign the buttons in the center of the dialog window
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
+        this.instanceCount = 0; // Reset instance counter
     }
 
     /**
@@ -179,7 +216,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
         builder.setMessage("Remove " + categoryProduct.getName() + " from wishlist?");
-        builder.setPositiveButton("Yes",
+        builder.setPositiveButton(R.string.positive_option,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -189,7 +226,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                         Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
                     }
                 });
-        builder.setNegativeButton("Cancel",
+        builder.setNegativeButton(R.string.negative_option,
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -22,8 +22,8 @@
     <string name="add_to_cart_button_name">Add to Cart</string>
     <string name="add_to_wishlist_button_name">Add to Wishlist</string>
     <string name="item_already_in_the_wishlist_message">This item is already in the wishlist!</string>
-    <string name="item_added_to_cart_message">Item added to the cart</string>
-    <string name="item_already_in_cart_message">Item added to the cart</string>
+    <string name="item_added_to_cart_message">Item added to the shopping cart</string>
+    <string name="item_already_in_cart_message">Item is already in the shopping cart</string>
 
     <!--MainActivity.java strings-->
     <string name="banner_image">bannerImage</string>
@@ -53,11 +53,14 @@
     <string name="fourth_look">Fourth Look</string>
     <string name="fifth_look">Fifth Look</string>
     <string name="shop_the_products_from_the_look">Shop the products from the look</string>
+    <string name="item_already_in_wishlist">This item is already in the shopping!</string>
     <string name="add">Add</string>
     <string name="complete_payment">Complete payment</string>
     <string name="missing_something_add_it">Missing something? Add it!</string>
     <string name="left_image">Left Image</string>
     <string name="right_image">Right Image</string>
+    <string name="positive_option">Yes</string>
+    <string name="negative_option">Cancel</string>
 
     <!-- ShoppingCartActivity.java strings-->
     <string name="shopping_cart_title">Shopping cart</string>

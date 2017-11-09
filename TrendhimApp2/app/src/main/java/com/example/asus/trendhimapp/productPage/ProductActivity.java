@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartProduct;
-import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
-import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
+import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -113,6 +113,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     private void executeAddToShoppingCart() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        this.instanceCount = 0;
         Intent intent = getIntent();
         if (intent != null) {
             String userEmail = user.getEmail();
@@ -123,6 +124,10 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                     entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
                 } else {
                     entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
+                }
+                this.instanceCount = 0;
+                if (wishlistProductExists(userEmail, productKey)) {
+                    removeWishlistProduct(userEmail, productKey);
                 }
                 ShoppingCartProduct product = new ShoppingCartProduct(productKey, entityName, userEmail);
                 myRef.push().setValue(product);
@@ -140,24 +145,27 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     private void executeAddToWishlist() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        this.instanceCount = 0;
         Intent intent = getIntent();
         if (intent != null) {
             String userEmail = user.getEmail();
             String productKey = intent.getStringExtra(Constants.KEY_PRODUCT_KEY);
-            if (!wishlistProductExists(userEmail, productKey)) {
-                String entityName;
-                if (productKey.startsWith(Constants.WATCH_PREFIX)) {
-                    entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+            if (userEmail != null && productKey != null) {
+                if (!wishlistProductExists(userEmail, productKey)) {
+                    String entityName;
+                    if (productKey.startsWith(Constants.WATCH_PREFIX)) {
+                        entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+                    } else {
+                        entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
+                    }
+                    myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
+                    Toast.makeText(this, R.string.added_to_wishlist_success_message, Toast.LENGTH_SHORT).show();
                 } else {
-                    entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
+                    Toast.makeText(this, R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
                 }
-                myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
-                Toast.makeText(this, R.string.added_to_wishlist_success_message, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
             }
-            this.instanceCount = 0;
         }
+        this.instanceCount = 0;
     }
 
     /**
@@ -166,7 +174,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
      *
      * @return
      *      true, if the shopping cart contains an item
-     *      with the email and key passed as parameters. Otherwise, false.
+     *      that matches the criteria. Otherwise, false.
      **/
     private boolean shoppingCartProductExists(final String userEmail, final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
@@ -219,5 +227,30 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             public void onCancelled(DatabaseError databaseError) {}
         });
         return instanceCount != 0;
+    }
+
+    /**
+     * @param userEmail
+     * @param productKey
+     **/
+    private void removeWishlistProduct(final String userEmail, final String productKey) {
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
+                        if (userEmail.equals(wishProd.getUserEmail()) &&
+                                productKey.equals(wishProd.getProductKey())) {
+                            ds.getRef().removeValue();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
     }
 }
