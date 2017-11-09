@@ -6,18 +6,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 
-public class ShoppingCartActivity extends BaseActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    private RecyclerView recyclerView;
-    private TextView productNameTextView, quantityTextView, priceTextView,
-            shippingLabelTextView, subtotalLabelTextView;
-    private Button checkoutButton;
+public class ShoppingCartActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +31,15 @@ public class ShoppingCartActivity extends BaseActivity {
     }
 
     private void initializeComponents() {
-        recyclerView = findViewById(R.id.the_recycler_view);
-        productNameTextView = findViewById(R.id.product_name_text_view);
-        quantityTextView = findViewById(R.id.quantity_text_view);
-        priceTextView = findViewById(R.id.price_text_view);
-        shippingLabelTextView = findViewById(R.id.shipping_value_text_view);
-        subtotalLabelTextView = findViewById(R.id.subtotal_value_text_view);
-        checkoutButton = findViewById(R.id.checkout_button);
-        ShoppingCartAdapter sca = new ShoppingCartAdapter(this);
-        sca.populateRecyclerView();
-        sca.notifyDataSetChanged();
+        RecyclerView recyclerView = findViewById(R.id.the_recycler_view);
+        List<CategoryProduct> shoppingCartProducts = new ArrayList<>();
+        ShoppingCartAdapter sca = new ShoppingCartAdapter(this, shoppingCartProducts);
         recyclerView.setAdapter(sca);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        sca.populateRecyclerView();
+
+        // Set layout manager to position the items
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false));
     }
+
 }

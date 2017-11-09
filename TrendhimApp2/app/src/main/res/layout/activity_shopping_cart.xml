@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="90dp">
 
     <!-- Footer aligned to bottom -->
     <RelativeLayout
@@ -72,6 +74,11 @@
                 android:text="@string/price_text_view_label_text"
                 android:textStyle="bold" />
 
+            <LinearLayout
+                android:id="@+id/layoutRV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/the_recycler_view"
                 android:layout_width="match_parent"
@@ -80,12 +87,13 @@
                 android:layout_below="@+id/product_name_text_view"
                 android:layout_marginStart="10dp"
                 android:scrollbars="vertical" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/subtotal_label_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/the_recycler_view"
+                android:layout_below="@+id/layoutRV"
                 android:layout_marginTop="32dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:text="@string/subtotal_text_view_label_text"

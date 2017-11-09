@@ -3,14 +3,17 @@ package com.example.asus.trendhimapp.shoppingCartActivity;
 import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
 
 public class ShoppingCartProduct extends WishlistProduct {
+
     private int quantity;
-    private String productName, bannerImageUrl;
+
+    private String productKey, userEmail;
 
     public ShoppingCartProduct() {}
 
-    public ShoppingCartProduct(String productKey, String entityName, String userEmail) {
-        super(productKey, entityName, userEmail);
-        setQuantity(0);
+    public ShoppingCartProduct(String productKey, String userEmail, int quantity) {
+        this.productKey = productKey;
+        this.userEmail = userEmail;
+        this.quantity = quantity;
     }
 
     public int getQuantity() {
@@ -21,8 +24,21 @@ public class ShoppingCartProduct extends WishlistProduct {
         this.quantity = quantity;
     }
 
+    public String getProductKey() {
+        return productKey;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
     @Override
     public String toString() {
-        return super.getUserEmail() + " " + super.getProductKey();
+        return "ShoppingCartProduct{" +
+                "quantity=" + quantity +
+                ", productKey='" + productKey + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                '}';
     }
+
 }

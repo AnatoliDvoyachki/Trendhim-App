@@ -167,7 +167,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
      * Populate the recycler view. Get data from the database which name is equal to the parameter.
      */
     public void addData() {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("recent_products");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECENT_PRODUCTS);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) { //Add products to the recent products recycler view if the user is logged in
             Query query = myRef.orderByChild("order");

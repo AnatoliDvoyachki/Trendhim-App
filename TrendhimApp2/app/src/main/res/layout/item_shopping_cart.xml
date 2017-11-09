@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="130dp">
-
+    android:layout_height="130dp"
+    android:layout_marginTop="80dp">
 
     <ImageView
         android:id="@+id/banner_image_view_shopping_cart"
@@ -12,8 +11,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="22dp"
-        android:background="@color/darkGrey" />
+        android:layout_marginTop="22dp" />
 
     <TextView
         android:id="@+id/product_name_text_view"

@@ -127,7 +127,10 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                 } else {
                     entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
                 }
-                ShoppingCartProduct product = new ShoppingCartProduct(productKey, entityName, userEmail);
+                ShoppingCartProduct product =
+                        new ShoppingCartProduct(productKey,
+                                userEmail, 1);
+
                 myRef.push().setValue(product);
                 Toast.makeText(this, "Item added to the cart", Toast.LENGTH_SHORT).show();
             } else {

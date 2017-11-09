@@ -16,9 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
-import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
+import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProduct;
+import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
@@ -32,7 +33,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHolder> {
     private String userEmail;
@@ -150,24 +154,56 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return instanceCount != 0;
     }
 
-    private void executeAddToCart(CategoryProduct categoryProduct) {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
-        if (!shoppingCartProductExists(userEmail, categoryProduct.getKey())) {
-            String productKey = categoryProduct.getKey();
-            String entityName;
-            if (productKey.startsWith(Constants.WATCH_REGEX)) {
-                entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
-            } else {
-                entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
-            }
-            ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(productKey,entityName, userEmail);
-            myRef.push().setValue(shoppingCartProduct);
-            removeItem(categoryProduct);
-            productList.remove(categoryProduct);
-            notifyDataSetChanged();
-            Toast.makeText(context, "Item added to the shopping list", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Item is already in the shopping cart!", Toast.LENGTH_SHORT).show();
+    /**
+     * Adds an item to the shopping list
+     **/
+    private void executeAddToCart(final CategoryProduct categoryProduct) {
+
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final boolean[] exists = {false};
+
+        if(user != null){ //if the user is logged in
+
+            myRef.orderByChild("productKey").equalTo(categoryProduct.getKey())
+                    .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+
+                        if(Objects.equals(recentProduct.getEmail(), user.getEmail())) {
+                            Toast.makeText(context, "Item is already in the shopping cart!", Toast.LENGTH_LONG).show();
+                            exists[0] = true;
+                            break;
+                        }
+                    }
+
+                    if(!exists[0]){
+                        String entityName;
+                        if (categoryProduct.getKey().startsWith(Constants.WATCH_REGEX)) {
+                            entityName = categoryProduct.getKey().replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+                        } else {
+                            entityName = categoryProduct.getKey().replaceAll(Constants.ALL_DIGITS_REGEX, "s");
+                        }
+
+                        Map<String, String> values = new HashMap<>();
+                        values.put("productKey", categoryProduct.getKey());
+                        values.put("email", user.getEmail());
+                        values.put("quantity", "0");
+                        values.put("entityName", entityName);
+                        myRef.push().setValue(values);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
         this.instanceCount = 0;
     }
