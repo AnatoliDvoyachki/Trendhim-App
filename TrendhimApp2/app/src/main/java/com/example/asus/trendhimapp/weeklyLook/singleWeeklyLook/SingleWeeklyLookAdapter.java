@@ -129,9 +129,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
 
         });
     }
@@ -167,9 +165,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
 
     }
@@ -205,9 +201,9 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
     private String getCategory(String productKey){
         String entityName;
         if (productKey.startsWith(Constants.WATCH_REGEX))
-            entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "es");
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
         else
-            entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "s");
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
 
         return entityName;
     }
@@ -253,9 +249,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
     }
 

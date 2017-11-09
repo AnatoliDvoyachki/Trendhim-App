@@ -35,7 +35,7 @@ public final class BitmapFlyweight {
      * @param url    the url of the picture - KEY
      * @param bitmap the bitmap of the picture - VALUE
      **/
-    public static void savePicture(String url, Bitmap bitmap) {
+    public static void cachePicture(String url, Bitmap bitmap) {
         PICTURE_CACHE.put(url, bitmap);
     }
 

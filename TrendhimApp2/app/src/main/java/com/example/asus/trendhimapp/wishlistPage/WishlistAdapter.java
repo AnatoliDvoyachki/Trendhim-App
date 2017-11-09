@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -157,9 +156,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             String productKey = categoryProduct.getKey();
             String entityName;
             if (productKey.startsWith(Constants.WATCH_REGEX)) {
-                entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "es");
+                entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
             } else {
-                entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "s");
+                entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
             }
             ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(productKey,entityName, userEmail);
             myRef.push().setValue(shoppingCartProduct);
