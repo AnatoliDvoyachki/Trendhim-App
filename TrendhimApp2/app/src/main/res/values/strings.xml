@@ -59,8 +59,23 @@
     <string name="plus_sign">+</string>
     <string name="minus_sign">-</string>
     <string name="initial_value">0</string>
+
+    <!-- About us Activity -->
     <string name="trendhim_story_and_core_values">Trendhim story and core values</string>
     <string name="the_trendhim_philosophy_of_awesomeness">The Trendhim philosophy of awesomeness</string>
-    <string name="introduction_about_us">Awesomeness is the main deciding factor in all we do at Trendhim. We only sell products we believe are awesome. We only deliver a service we believe is awesome. We only hire people we think are awesome. We give customers 365 days to return products because we believe this is awesome. We want our customers to have the best possible shopping experience and fall in love with their new product. It’s as simple as that.</string>
+    <string name="introduction_about_us">Awesomeness is the main deciding factor in all we do at Trendhim. \n\n We only sell products we believe are awesome. We only deliver a service we believe is awesome.\n\n We only hire people we think are awesome.\n\n We give customers 365 days to return products because we believe this is awesome.\n\nWe want our customers to have the best possible shopping experience and fall in love with their new product. \n\nAs simple as that.</string>
     <string name="second_about_us">Read this short story about how Trendhim came to be, from the cradle to adulthood (almost), as we best recall it.</string>
+    <string name="header1">All good stories start at the beginning... but not at 4AM</string>
+    <string name="about_us_one">About us one</string>
+    <string name="body_one">Trendhim was founded in late 2007 by Sebastian and myself (Mikkel). We were just 18 and finishing up our last year of high school. We were young, energetic, burning with the desire to start our own business… and fortunately, naive enough to actually go for it.\n\n
+
+We came up with 2 ideas for what we thought would be a good business. A home delivery service for bread on Saturdays and Sundays, and an online store with accessories and jewelry for men.\n\n
+
+You know how they say entrepreneurs need to do whatever it takes to make their business succeed? Well. As much as we would love to agree, we quickly decided that the whole getting up at 4AM to deliver bread thing wasn't really our cup of tea.\n\n
+And that was it! Morning bread suffered a swift death, and from the charcoaled ashes of waking up early… rose Trendhim.</string>
+    <string name="body_two">With about 4000 euro of hard earned money doing paper routes and binding flowers (A story for another time), we started this great adventure.\n\n
+
+With our naiveté only surpassed by our drive, we dived head first into everything E-commerce. Coding websites, buying products, taking good care of customers, insurances, accounting, product photography and so much more.\n\n
+
+We had fire in our stomachs, and wanted to build something awesome!</string>
 </resources>
