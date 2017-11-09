@@ -59,4 +59,8 @@
     <string name="plus_sign">+</string>
     <string name="minus_sign">-</string>
     <string name="initial_value">0</string>
+    <string name="trendhim_story_and_core_values">Trendhim story and core values</string>
+    <string name="the_trendhim_philosophy_of_awesomeness">The Trendhim philosophy of awesomeness</string>
+    <string name="introduction_about_us">Awesomeness is the main deciding factor in all we do at Trendhim. We only sell products we believe are awesome. We only deliver a service we believe is awesome. We only hire people we think are awesome. We give customers 365 days to return products because we believe this is awesome. We want our customers to have the best possible shopping experience and fall in love with their new product. It’s as simple as that.</string>
+    <string name="second_about_us">Read this short story about how Trendhim came to be, from the cradle to adulthood (almost), as we best recall it.</string>
 </resources>
