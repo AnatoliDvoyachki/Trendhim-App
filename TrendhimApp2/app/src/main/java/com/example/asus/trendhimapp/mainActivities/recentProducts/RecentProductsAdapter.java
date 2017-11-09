@@ -155,9 +155,9 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     private String getCategory(String productKey){
         String entityName;
         if (productKey.startsWith(Constants.WATCH_REGEX))
-            entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "es");
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
         else
-            entityName = productKey.replaceAll(Constants.ALL_NUMBERS_REGEX, "s");
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
 
         return entityName;
     }

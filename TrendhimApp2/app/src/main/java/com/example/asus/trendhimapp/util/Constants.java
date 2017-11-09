@@ -36,5 +36,5 @@ public final class Constants {
 
     // Regex for the add to wishlist functionality
     public static final String WATCH_REGEX = "watch";
-    public static final String ALL_NUMBERS_REGEX = "\\d+";
+    public static final String ALL_DIGITS_REGEX = "\\d+";
 }

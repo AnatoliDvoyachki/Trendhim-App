@@ -23,9 +23,10 @@ import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class BaseActivity  extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener  {
+public class BaseActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     public static DrawerLayout drawer;
     private FirebaseAuth auth;
@@ -112,11 +113,11 @@ public class BaseActivity  extends AppCompatActivity
                 startActivity(intent);
                 break;
             case R.id.logOut:
-                if(user != null) {
+                if (user != null) {
                     auth.signOut();
                     Toast.makeText(getApplicationContext(), "You have successfully logged out", Toast.LENGTH_LONG).show();
                 } else
-                  Toast.makeText(getApplicationContext(), "You need to log in first", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "You need to log in first", Toast.LENGTH_LONG).show();
                 break;
 
         }
@@ -128,9 +129,10 @@ public class BaseActivity  extends AppCompatActivity
 
     /**
      * Start Main Activity whenever the navigation header is clicked
+     *
      * @param view
      */
-    public void backToHomePage(View view){
+    public void backToHomePage(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
@@ -139,26 +141,27 @@ public class BaseActivity  extends AppCompatActivity
      * Start Log In Activity whenever the Log In button is clicked
      * and the user is not signed in.
      * If the user is signed in - Display Toast
+     *
      * @param view
      */
-    public void main_to_login(View view){
+    public void main_to_login(View view) {
 
-        if(!isUserOnline()) {
+        if (!isUserOnline()) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
-        } else if(isUserOnline()){
+        } else if (isUserOnline()) {
             Toast.makeText(getApplicationContext(), "You are already logged in", Toast.LENGTH_LONG).show();
         }
     }
 
     /**
      * Display Toast if the user is already signed in
+     *
      * @return true if the user is signed in - false if not
      */
-    public boolean isUserOnline(){
+    public boolean isUserOnline() {
         //Check track of the current user
         FirebaseUser currentUser = auth.getCurrentUser();
-
         boolean isLoggedIn = false;
 
         if (currentUser != null) {
@@ -180,8 +183,12 @@ public class BaseActivity  extends AppCompatActivity
 
 
     public void openShoppingCart(View view) {
-        Intent intent = new Intent(getApplicationContext(), ShoppingCartActivity.class);
-        startActivity(intent);
+        if (isUserOnline()) {
+            Intent intent = new Intent(getApplicationContext(), ShoppingCartActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
+        }
     }
-    
+
 }

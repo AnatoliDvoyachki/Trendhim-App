@@ -2,6 +2,7 @@ package com.example.asus.trendhimapp.shoppingCartActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,5 +41,10 @@ public class ShoppingCartActivity extends BaseActivity {
         shippingLabelTextView = findViewById(R.id.shipping_value_text_view);
         subtotalLabelTextView = findViewById(R.id.subtotal_value_text_view);
         checkoutButton = findViewById(R.id.checkout_button);
+        ShoppingCartAdapter sca = new ShoppingCartAdapter(this);
+        sca.populateRecyclerView();
+        sca.notifyDataSetChanged();
+        recyclerView.setAdapter(sca);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
