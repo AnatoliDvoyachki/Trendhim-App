@@ -83,7 +83,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 //Query the recent_product database to get the product category
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECENT_PRODUCTS);
                 //get product which key is equal to the one clicked
-                databaseReference.orderByChild("order")
+                databaseReference.orderByChild(Constants.KEY_ORDER)
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -166,7 +166,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECENT_PRODUCTS);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) { //Add products to the recent products recycler view if the user is logged in
-            Query query = myRef.orderByChild("order");
+            Query query = myRef.orderByChild(Constants.KEY_ORDER);
             query.addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
                 @Override
                 public void onDataChange(final DataSnapshot dataSnapshot) {
@@ -205,7 +205,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
         if(user != null){ //if the user is logged in
 
-            myRef.orderByChild("order").addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+            myRef.orderByChild(Constants.KEY_ORDER).addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
 
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -218,8 +218,8 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                             //if the product is added to the database
                             Date curDate = new Date();
 
-                            dataSnapshot1.getRef().child("visit").setValue(convertDateToString(curDate));
-                            dataSnapshot1.getRef().child("order").setValue("-" + convertDateToString(curDate));
+                            dataSnapshot1.getRef().child(Constants.KEY_VISIT_TIME).setValue(convertDateToString(curDate));
+                            dataSnapshot1.getRef().child(Constants.KEY_ORDER).setValue("-" + convertDateToString(curDate));
                             exists[0] = true;
                             break;
                         }
@@ -228,9 +228,9 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                     if(!exists[0]){
                         Date today = new Date();
                         Map<String, String> values = new HashMap<>();
-                        values.put("key", product.getKey());
+                        values.put(Constants.KEY_ATTR_KEY, product.getKey());
                         values.put(Constants.KEY_EMAIL, user.getEmail());
-                        values.put("order", "-" + convertDateToString(today)); //order the elements in descending date
+                        values.put(Constants.KEY_ORDER, "-" + convertDateToString(today)); //order the elements in descending date
                         myRef.push().setValue(values);
                     }
 

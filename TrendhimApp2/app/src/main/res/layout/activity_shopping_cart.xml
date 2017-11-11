@@ -123,7 +123,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="11dp"
                 android:fontFamily="sans-serif-smallcaps"
-                android:gravity="right"
+                android:gravity="center"
                 android:text="0" />
 
             <TextView
@@ -134,7 +134,7 @@
                 android:layout_alignEnd="@+id/subtotal_value_text_view"
                 android:layout_below="@+id/subtotal_value_text_view"
                 android:fontFamily="sans-serif-smallcaps"
-                android:gravity="right"
+                android:gravity="center"
                 android:text="0" />
 
             <TextView
@@ -155,7 +155,7 @@
                 android:layout_alignEnd="@+id/subtotal_value_text_view"
                 android:layout_alignParentBottom="true"
                 android:fontFamily="sans-serif-smallcaps"
-                android:gravity="right"
+                android:gravity="center"
                 android:text="0" />
 
         </RelativeLayout>

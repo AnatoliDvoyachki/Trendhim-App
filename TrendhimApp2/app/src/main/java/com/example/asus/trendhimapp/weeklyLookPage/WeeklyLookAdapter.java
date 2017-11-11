@@ -160,11 +160,11 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
 
                         if(Objects.equals(look.getKey(), dataSnapshot1.getKey())) {
 
-                            Intent intent = new Intent(context, SecondWeeklyLookActivity.class);
+                            Intent toSecondWeeklyLook = new Intent(context, SecondWeeklyLookActivity.class);
 
-                            intent.putExtra(Constants.KEY_LOOK_KEY, look.getKey());
+                            toSecondWeeklyLook.putExtra(Constants.KEY_LOOK_KEY, look.getKey());
 
-                            context.startActivity(intent);
+                            context.startActivity(toSecondWeeklyLook);
                         }
 
                     }

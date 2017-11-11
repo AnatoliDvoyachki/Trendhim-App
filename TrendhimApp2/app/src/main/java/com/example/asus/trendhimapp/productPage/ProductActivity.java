@@ -78,16 +78,16 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     @SuppressLint("SetTextI18n")
     public void loadProduct() {
 
-        Intent intent = getIntent();
+        Intent fromCategoryPage = getIntent();
 
-        if (intent != null) {
+        if (fromCategoryPage != null) {
 
-            String productName = intent.getStringExtra(Constants.KEY_PRODUCT_NAME);
-            String price = intent.getStringExtra(Constants.KEY_PRICE);
-            String bannerPictureUrl = intent.getStringExtra(Constants.KEY_BANNER_PIC_URL);
-            String leftPictureUrl = intent.getStringExtra(Constants.KEY_LEFT_PIC_URL);
-            String rightPictureUrl = intent.getStringExtra(Constants.KEY_RIGHT_PIC_URL);
-            String brand = intent.getStringExtra(Constants.KEY_BRAND_NAME);
+            String productName = fromCategoryPage.getStringExtra(Constants.KEY_PRODUCT_NAME);
+            String price = fromCategoryPage.getStringExtra(Constants.KEY_PRICE);
+            String bannerPictureUrl = fromCategoryPage.getStringExtra(Constants.KEY_BANNER_PIC_URL);
+            String leftPictureUrl = fromCategoryPage.getStringExtra(Constants.KEY_LEFT_PIC_URL);
+            String rightPictureUrl = fromCategoryPage.getStringExtra(Constants.KEY_RIGHT_PIC_URL);
+            String brand = fromCategoryPage.getStringExtra(Constants.KEY_BRAND_NAME);
 
             if (productName != null && price != null && bannerPictureUrl != null &&
                     leftPictureUrl != null && rightPictureUrl != null && brand != null) {
@@ -207,9 +207,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
      **/
     private void addToShoppingCart() {
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            String productKey = intent.getStringExtra(Constants.KEY_PRODUCT_KEY);
+        Intent fromCategoryPage = getIntent();
+        if (fromCategoryPage != null) {
+            String productKey = fromCategoryPage.getStringExtra(Constants.KEY_PRODUCT_KEY);
             executeAddToCart(productKey);
         }
         this.instanceCount = 0;

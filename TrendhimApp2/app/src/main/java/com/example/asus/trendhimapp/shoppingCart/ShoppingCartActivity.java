@@ -65,7 +65,8 @@ public class ShoppingCartActivity extends BaseActivity {
 
     @SuppressLint("SetTextI18n")
     public static void setSubtotal(int newSubtotal) {
-        subtotalTextView.setText(String.valueOf(newSubtotal) + "€");
+        String value = String.format("%d€", newSubtotal);
+        subtotalTextView.setText(value);
     }
 
     /**
@@ -79,7 +80,8 @@ public class ShoppingCartActivity extends BaseActivity {
 
     @SuppressLint("SetTextI18n")
     public static void setShippingCost(int shippingCost) {
-        shippingTextView.setText(String.valueOf(shippingCost) + "€");
+        String value = String.format("%d€", shippingCost);
+        shippingTextView.setText(value);
     }
 
     /**
@@ -93,7 +95,8 @@ public class ShoppingCartActivity extends BaseActivity {
 
     @SuppressLint("SetTextI18n")
     public static void setGrandTotalCost(int totalCost) {
-        totalTextView.setText(String.valueOf(totalCost) + "€");
+        String value = String.format("%d€", totalCost);
+        totalTextView.setText(value);
     }
 
     /**

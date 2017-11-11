@@ -65,7 +65,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if(currentUser != null) {
-            userCredentialsDatabase.orderByChild("email").equalTo(currentUser.getEmail())
+            userCredentialsDatabase.orderByChild(Constants.KEY_EMAIL).equalTo(currentUser.getEmail())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

@@ -29,15 +29,19 @@ public final class Constants {
     public static final String KEY_RIGHT_PIC_URL = "rightPictureUrl";
     public static final String KEY_BRAND_NAME = "brand";
     public static final String KEY_PRODUCT_KEY = "productKey";
+
+    // Keys for passing objects from one intent to another
     public static final String KEY_EMAIL = "email";
+    public static final String KEY_VISIT_TIME = "visit";
     public static final String KEY_USER_EMAIL = "userEmail";
+    public static final String KEY_ORDER = "order";
+    public static final String KEY_ATTR_KEY = "key";
+    public static final String KEY_PRODUCTS = "products";
+    public static final String KEY_LOOK_KEY = "lookKey";
+    public static final String KEY_CATEGORY = "category";
 
     // Shipping cost
     public static final int SINGLE_ITEM_SHIPPING_COST = 7;
-
-    // Attribute names for Weekly Look objects
-    public static final String KEY_LOOK_KEY = "lookKey";
-    public static final String KEY_CATEGORY = "category";
 
     // Regex
     public static final String WATCH_PREFIX = "watch";

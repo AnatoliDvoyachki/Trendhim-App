@@ -77,8 +77,8 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
+                        Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(toMain);
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.incorrect_credentials_message, Toast.LENGTH_LONG).show();
                         Log.d(TAG, "Sign in failed", task.getException());
@@ -93,8 +93,8 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
      * @param view
      */
     public void goToSignUp(View view){
-        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-        startActivity(intent);
+        Intent toSignUp = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivity(toSignUp);
     }
 
     /**

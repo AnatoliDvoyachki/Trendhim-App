@@ -125,8 +125,8 @@ public class MainActivity extends BaseActivity {
         weeklyLookImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WeeklyLookActivity.class);
-                startActivity(intent);
+                Intent toWeeklyLook = new Intent(getApplicationContext(), WeeklyLookActivity.class);
+                startActivity(toWeeklyLook);
             }
         });
 

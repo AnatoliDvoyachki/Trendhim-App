@@ -132,8 +132,8 @@ public class BaseActivity extends AppCompatActivity
      * @param view
      */
     public void backToHomePage(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+        Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(toMain);
     }
 
     /**
@@ -146,8 +146,8 @@ public class BaseActivity extends AppCompatActivity
     public void main_to_login(View view) {
 
         if (!isUserOnline()) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
+            Intent toLogin = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(toLogin);
         } else if (isUserOnline()) {
             Toast.makeText(getApplicationContext(), R.string.already_logged_in_message, Toast.LENGTH_LONG).show();
         }
