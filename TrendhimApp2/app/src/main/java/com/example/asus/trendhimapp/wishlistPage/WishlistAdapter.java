@@ -94,7 +94,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
         if (user != null) {
             String email = user.getEmail();
-            Query query = myRef.orderByChild("userEmail").equalTo(email);
+            Query query = myRef.orderByChild(Constants.KEY_USER_EMAIL).equalTo(email);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -172,7 +172,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                                     if(!exists[0]){
                                         Map<String, Object> values = new HashMap<>();
                                         values.put(Constants.KEY_PRODUCT_KEY, categoryProduct.getKey());
-                                        values.put("userEmail", user.getEmail());
+                                        values.put(Constants.KEY_USER_EMAIL, user.getEmail());
                                         myRef.push().setValue(values);
                                         Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_SHORT).show();
                                     }

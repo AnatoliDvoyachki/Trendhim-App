@@ -18,8 +18,8 @@ public final class Constants {
     public static final String TABLE_NAME_SHOPPING_CART = "shopping_cart";
     public static final String TABLE_NAME_WEEKLY_LOOK = "weekly_look";
     public static final String TABLE_NAME_RECENT_PRODUCTS = "recent_products";
-    public static final String TABLE_NAME_USER_CREDENIALS = "user_credentials";
-    public static final String TABLE_NAME_RECOMENDED_PRODUCTS = "recommended_products";
+    public static final String TABLE_NAME_USER_CREDENTIALS = "user_credentials";
+    public static final String TABLE_NAME_RECOMMENDED_PRODUCTS = "recommended_products";
 
     // Attribute name for the Product object
     public static final String KEY_PRODUCT_NAME = "productName";

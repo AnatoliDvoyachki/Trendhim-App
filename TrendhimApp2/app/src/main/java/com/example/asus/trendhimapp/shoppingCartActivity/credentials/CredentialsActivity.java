@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.util.Constants;
+import com.example.asus.trendhimapp.util.GMailSender;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -60,7 +61,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
     private void getUserCredentials(){
         DatabaseReference userCredentialsDatabase =
-                FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENIALS);
+                FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if(currentUser != null) {

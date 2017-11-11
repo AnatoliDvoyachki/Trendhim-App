@@ -37,6 +37,7 @@ public class ShoppingCartActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         setTitle(R.string.shopping_cart_title);
 
+        // Static TextViews so they can be updated from the adapter
         subtotalTextView = findViewById(R.id.subtotal_value_text_view);
         shippingTextView = findViewById(R.id.shipping_value_text_view);
         totalTextView = findViewById(R.id.grand_total_value_text_view);

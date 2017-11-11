@@ -81,6 +81,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         Intent intent = getIntent();
 
         if (intent != null) {
+
             String productName = intent.getStringExtra(Constants.KEY_PRODUCT_NAME);
             String price = intent.getStringExtra(Constants.KEY_PRICE);
             String bannerPictureUrl = intent.getStringExtra(Constants.KEY_BANNER_PIC_URL);
@@ -147,7 +148,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                     Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
                     btnNegative.setTextColor(ContextCompat.getColor(ProductActivity.this, R.color.black));
 
-                    // Allign the buttons in the center of the dialog window
+                    // Align the buttons in the center of the dialog window
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
                     layoutParams.weight = 10;
                     btnPositive.setLayoutParams(layoutParams);
@@ -189,7 +190,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                     Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
                     btnNegative.setTextColor(ContextCompat.getColor(ProductActivity.this, R.color.black));
 
-                    // Allign the buttons in the center of the dialog window
+                    // Align the buttons in the center of the dialog window
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
                     layoutParams.weight = 10;
                     btnPositive.setLayoutParams(layoutParams);
@@ -292,7 +293,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
     /**
      * @return  true, if the wishlist contains an item that matches the criteria.
-     * Otherwise, fase.
+     * Otherwise, false.
      **/
     private boolean wishlistProductExists(final String userEmail, final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);

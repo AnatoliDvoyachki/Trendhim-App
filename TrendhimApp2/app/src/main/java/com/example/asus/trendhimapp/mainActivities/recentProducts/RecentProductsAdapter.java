@@ -81,7 +81,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
             @Override
             public void onClick(View view) {
                 //Query the recent_product database to get the product category
-                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recent_products");
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECENT_PRODUCTS);
                 //get product which key is equal to the one clicked
                 databaseReference.orderByChild("order")
                         .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -105,17 +105,17 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                             if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
 
                                                                 Product foundProduct = dataSnapshot1.getValue(Product.class);
-                                                                Intent intent = new Intent(context, ProductActivity.class);
+                                                                Intent toProductPage = new Intent(context, ProductActivity.class);
 
-                                                                intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
-                                                                intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
-                                                                intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
-                                                                intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
-                                                                intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
-                                                                intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
-                                                                intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+                                                                toProductPage.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
+                                                                toProductPage.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
+                                                                toProductPage.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                                                                toProductPage.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+                                                                toProductPage.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
+                                                                toProductPage.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                                                                toProductPage.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
-                                                                context.startActivity(intent);
+                                                                context.startActivity(toProductPage);
 
                                                             }
                                                         }
@@ -229,7 +229,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                         Date today = new Date();
                         Map<String, String> values = new HashMap<>();
                         values.put("key", product.getKey());
-                        values.put("email", user.getEmail());
+                        values.put(Constants.KEY_EMAIL, user.getEmail());
                         values.put("order", "-" + convertDateToString(today)); //order the elements in descending date
                         myRef.push().setValue(values);
                     }

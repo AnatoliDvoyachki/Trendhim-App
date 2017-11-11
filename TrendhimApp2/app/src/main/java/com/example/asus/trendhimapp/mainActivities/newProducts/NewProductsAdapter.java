@@ -84,7 +84,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      * Populate the recycler view. Get data from the database which name is equal to the parameter.
      */
     public void addData() {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMENDED_PRODUCTS);
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMMENDED_PRODUCTS);
         myRef.orderByChild("order").addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {

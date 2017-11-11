@@ -72,7 +72,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Add item to the sopping cart!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Add item to the shopping cart!", Toast.LENGTH_LONG).show();
             }
         });
 

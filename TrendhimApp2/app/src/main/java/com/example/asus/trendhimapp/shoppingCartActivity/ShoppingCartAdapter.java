@@ -55,15 +55,19 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final CategoryProduct currentProduct = shoppingCartProducts.get(position);
 
+        // Set banner image
         ImageView bannerImageView = holder.bannerImageView;
         BitmapFlyweight.getPicture(currentProduct.getBannerPictureURL(), bannerImageView);
 
+        // Set product name text field
         TextView productNameTextView = holder.productNameTextView;
         productNameTextView.setText(currentProduct.getName());
 
+        // Set initial quantity
         final TextView quantityTextView = holder.quantityTextView;
         quantityTextView.setText("1");
 
+        // Set initial price
         final TextView currentProductPriceTextView = holder.totalPriceTextView;
         currentProductPriceTextView.setText(String.valueOf(currentProduct.getPrice() + "€"));
 
@@ -76,64 +80,16 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         int currentShippingCost = ShoppingCartActivity.getShippingCost();
         ShoppingCartActivity.setGrandTotalCost(currentShippingCost + currentSubtotal);
 
+        // Initialize the remove button
         ImageButton removeItemButton = holder.removeItemButton;
         removeItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Create the confirmation dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setCancelable(true);
-                builder.setMessage("Remove " + currentProduct.getName() + " from the shopping cart?");
-
-                // Yes option
-                builder.setPositiveButton(R.string.positive_option, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        removeItem(currentProduct); // Remove the product from Firebase
-                        shoppingCartProducts.remove(currentProduct); // Remove the item from the recycler view
-
-                        // Update the shipping cost
-                        int shippingCost = getItemCount() * Constants.SINGLE_ITEM_SHIPPING_COST;
-                        ShoppingCartActivity.setShippingCost(shippingCost);
-
-                        // Reset subtotal and grand total so
-                        // they can be recalculated by notifyDataSetChanged()
-                        ShoppingCartActivity.setSubtotal(0);
-                        ShoppingCartActivity.setGrandTotalCost(0);
-
-                        notifyDataSetChanged(); // Notify for the change
-
-                        Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show(); // Notify the user
-                    }
-                });
-
-                // Cancel option
-                builder.setNegativeButton(R.string.negative_option, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                // Show the dialog window to the user
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-                // Customize button text
-                Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                btnPositive.setTextColor(ContextCompat.getColor(context, R.color.black));
-                Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-                btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
-
-                // Allign the buttons in the center of the dialog window
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-                layoutParams.weight = 10;
-                btnPositive.setLayoutParams(layoutParams);
-                btnNegative.setLayoutParams(layoutParams);
+                initializeRemoveButton(currentProduct);
             }
         });
 
+        // Setup the plus button
         Button incrementButton = holder.incrementButton;
         incrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +115,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             }
         });
 
+        // Setup the minus button
         Button decrementButton = holder.decrementButton;
         decrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +143,62 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     }
 
+    private void initializeRemoveButton(final CategoryProduct currentProduct) {
+        // Create the confirmation dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setMessage("Remove " + currentProduct.getName() + " from the shopping cart?");
+
+        // Yes option
+        builder.setPositiveButton(R.string.positive_option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                removeItem(currentProduct); // Remove the product from Firebase
+                shoppingCartProducts.remove(currentProduct); // Remove the item from the recycler view
+
+                // Update the shipping cost
+                int shippingCost = getItemCount() * Constants.SINGLE_ITEM_SHIPPING_COST;
+                ShoppingCartActivity.setShippingCost(shippingCost);
+
+                // Reset subtotal and grand total so
+                // they can be recalculated by notifyDataSetChanged()
+                ShoppingCartActivity.setSubtotal(0);
+                ShoppingCartActivity.setGrandTotalCost(0);
+
+                notifyDataSetChanged(); // Notify for the change
+
+                Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show(); // Notify the user
+            }
+        });
+
+        // Cancel option
+        builder.setNegativeButton(R.string.negative_option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        // Show the dialog window to the user
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Customize button text
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnPositive.setTextColor(ContextCompat.getColor(context, R.color.black));
+        Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+        // Allign the buttons in the center of the dialog window
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
+    }
+
+    /**
+     *  @return the entity name of the product with @param productKey
+     **/
     private String getCategory(String productKey) {
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
@@ -195,6 +208,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return entityName;
     }
 
+    /**
+     * Removes an item from Firebase that matches the product key of @param product
+     **/
     private void removeItem(CategoryProduct product) {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
@@ -221,6 +237,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     }
 
+    /**
+     * Retrieves all shopping cart items for the current user and fills the RecyclerView
+     **/
     void populateRecyclerView() {
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
