@@ -1,7 +1,10 @@
 package com.example.asus.trendhimapp.shoppingCartActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +52,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final CategoryProduct currentProduct = shoppingCartProducts.get(position);
 
         ImageView bannerImageView = holder.bannerImageView;
@@ -59,29 +63,98 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         final TextView quantityTextView = holder.quantityTextView;
         quantityTextView.setText("1");
-       // quantityTextView.setText(String.valueOf(currentProduct.getQuantity()));
 
-        final TextView total_products_price = holder.totalPriceTextView;
-        total_products_price.setText(String.valueOf(currentProduct.getPrice()) + "€");
+        final TextView currentProductPriceTextView = holder.totalPriceTextView;
+        currentProductPriceTextView.setText(String.valueOf(currentProduct.getPrice() + "€"));
+
+        // Update the subtotal
+        int currentSubtotal = ShoppingCartActivity.getSubtotalCost();
+        currentSubtotal += currentProduct.getPrice();
+        ShoppingCartActivity.setSubtotal(currentSubtotal);
+
+        // Update the total cost
+        int currentShippingCost = ShoppingCartActivity.getShippingCost();
+        ShoppingCartActivity.setGrandTotalCost(currentShippingCost + currentSubtotal);
 
         ImageButton removeItemButton = holder.removeItemButton;
         removeItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                   Toast.makeText(context, "UNIMPLEMENTED", Toast.LENGTH_SHORT).show();
-              }
-            });
 
-        //TextView totalPriceTextView = holder.totalPriceTextView;
+                // Create the confirmation dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setCancelable(true);
+                builder.setMessage("Remove " + currentProduct.getName() + " from the shopping cart?");
+
+                // Yes option
+                builder.setPositiveButton(R.string.positive_option, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        removeItem(currentProduct); // Remove the product from Firebase
+                        shoppingCartProducts.remove(currentProduct); // Remove the item from the recycler view
+
+                        // Update the shipping cost
+                        int shippingCost = getItemCount() * Constants.SINGLE_ITEM_SHIPPING_COST;
+                        ShoppingCartActivity.setShippingCost(shippingCost);
+
+                        // Reset subtotal and grand total so
+                        // they can be recalculated by notifyDataSetChanged()
+                        ShoppingCartActivity.setSubtotal(0);
+                        ShoppingCartActivity.setGrandTotalCost(0);
+
+                        notifyDataSetChanged(); // Notify for the change
+
+                        Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show(); // Notify the user
+                    }
+                });
+
+                // Cancel option
+                builder.setNegativeButton(R.string.negative_option, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                // Show the dialog window to the user
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                // Customize button text
+                Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                btnPositive.setTextColor(ContextCompat.getColor(context, R.color.black));
+                Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+                // Allign the buttons in the center of the dialog window
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+                layoutParams.weight = 10;
+                btnPositive.setLayoutParams(layoutParams);
+                btnNegative.setLayoutParams(layoutParams);
+            }
+        });
+
         Button incrementButton = holder.incrementButton;
         incrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int currentQuantity = Integer.parseInt(quantityTextView.getText().toString());
                 if (currentQuantity + 1 < Integer.MAX_VALUE) {
+
+                    // Update current item total price
                     quantityTextView.setText(String.valueOf(++currentQuantity));
-                    double totalPrice = currentQuantity * currentProduct.getPrice();
-                    total_products_price.setText(String.valueOf(totalPrice));
+                    int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
+                    currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
+
+                    // Update subtotal price
+                    int currentSubtotal = ShoppingCartActivity.getSubtotalCost();
+                    currentSubtotal += currentProduct.getPrice();
+                    ShoppingCartActivity.setSubtotal(currentSubtotal);
+
+                    // Update grand total price
+                    int currentGrandCost = ShoppingCartActivity.getGrandTotalCost();
+                    currentGrandCost += currentProduct.getPrice();
+                    ShoppingCartActivity.setGrandTotalCost(currentGrandCost);
                 }
             }
         });
@@ -92,22 +165,60 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             public void onClick(View v) {
                 int currentQuantity = Integer.parseInt(quantityTextView.getText().toString());
                 if (currentQuantity - 1 >= 1) {
+
+                    // Update current item total price
                     quantityTextView.setText(String.valueOf(--currentQuantity));
-                    double totalPrice = currentQuantity * currentProduct.getPrice();
-                    total_products_price.setText(String.valueOf(totalPrice));
+                    int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
+                    currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
+
+                    // Update subtotal price
+                    int currentSubtotal = ShoppingCartActivity.getSubtotalCost();
+                    currentSubtotal -= currentProduct.getPrice();
+                    ShoppingCartActivity.setSubtotal(currentSubtotal);
+
+                    // Update grand total price
+                    int currentGrandCost = ShoppingCartActivity.getGrandTotalCost();
+                    currentGrandCost -= currentProduct.getPrice();
+                    ShoppingCartActivity.setGrandTotalCost(currentGrandCost);
                 }
             }
         });
+
     }
 
-    private String getCategory(String productKey){
+    private String getCategory(String productKey) {
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
         else
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
-
         return entityName;
+    }
+
+    private void removeItem(CategoryProduct product) {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+
+        final String productKey = product.getKey(), userEmail = user.getEmail();
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        ShoppingCartProduct scp = ds.getValue(ShoppingCartProduct.class);
+                        if (productKey.equals(scp.getProductKey()) &&
+                                userEmail.equals(scp.getUserEmail())) {
+                            ds.getRef().removeValue(); // If found, remove it
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
     }
 
     void populateRecyclerView() {
@@ -117,41 +228,45 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String email = user.getEmail();
 
-        myRef.orderByChild("userEmail").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.orderByChild(Constants.KEY_USER_EMAIL).equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                        final ShoppingCartProduct scp = ds.getValue(ShoppingCartProduct.class);
+                        final ShoppingCartProduct currentProduct = ds.getValue(ShoppingCartProduct.class);
 
-                            DatabaseReference myRef1 =
-                                    FirebaseDatabase.getInstance().getReference(getCategory(scp.getProductKey()));
+                        DatabaseReference myRef1 =
+                                FirebaseDatabase.getInstance().getReference(getCategory(currentProduct.getProductKey()));
 
-                            myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.exists()) {
-                                        for (DataSnapshot ds1 : dataSnapshot.getChildren()) {
+                        myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    for (DataSnapshot ds1 : dataSnapshot.getChildren()) {
 
-                                            if (scp.getProductKey().equals(ds1.getKey())) {
+                                        if (currentProduct.getProductKey().equals(ds1.getKey())) {
 
-                                                Product product = ds1.getValue(Product.class);
+                                            Product product = ds1.getValue(Product.class);
 
-                                                shoppingCartProducts.add(new CategoryProduct(product.getProductName(), product.getPrice(),
-                                                        product.getBrand(), product.getBannerPictureUrl(), ds1.getKey()));
+                                            shoppingCartProducts.add(new CategoryProduct(product.getProductName(), product.getPrice(),
+                                                    product.getBrand(), product.getBannerPictureUrl(), ds1.getKey()));
 
-                                                notifyItemInserted(getItemCount());
-                                            }
+                                            notifyItemInserted(getItemCount());
 
+                                            // Update the shipping cost
+                                            int currentShippingCost = ShoppingCartActivity.getShippingCost();
+                                            currentShippingCost += Constants.SINGLE_ITEM_SHIPPING_COST;
+                                            ShoppingCartActivity.setShippingCost(currentShippingCost);
                                         }
+
                                     }
-
                                 }
+                            }
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {}
-                            });
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {}
+                        });
                     }
                 }
             }
@@ -166,6 +281,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return shoppingCartProducts.size();
     }
 
+    /**
+     * View holder pattern implementation
+     **/
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView bannerImageView;
         TextView productNameTextView;

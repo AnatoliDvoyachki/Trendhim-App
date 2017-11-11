@@ -24,7 +24,7 @@ public class Product {
         return productKey;
     }
 
-    public  String getProductName(){
+    public String getProductName(){
         return productName;
     }
 

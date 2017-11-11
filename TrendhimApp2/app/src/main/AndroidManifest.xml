@@ -15,8 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity android:name=".categoryPage.CategoryProductActivity" />
         <activity android:name=".mainActivities.BaseActivity" />
         <activity
@@ -24,19 +22,17 @@
             android:parentActivityName=".categoryPage.CategoryProductActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".login.SignupActivity" />
-        <activity android:name=".wishlistPage.WishlistActivity"/>
-
-        <activity android:name=".weeklyLook.WeeklyLookActivity"/>
+        <activity android:name=".wishlistPage.WishlistActivity" />
+        <activity android:name=".weeklyLook.WeeklyLookActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".weeklyLook.singleWeeklyLook.SecondWeeklyLookActivity"/>
-        <activity android:name=".shoppingCartActivity.ShoppingCartActivity"/>
+        <activity android:name=".weeklyLook.singleWeeklyLook.SecondWeeklyLookActivity" />
+        <activity android:name=".shoppingCartActivity.ShoppingCartActivity" />
         <activity android:name=".shoppingCartActivity.credentials.CredentialsActivity" />
-
-        <activity android:name=".aboutUs.AboutUs"/>
+        <activity android:name=".aboutUs.AboutUs" />
     </application>
 
 </manifest>

@@ -29,7 +29,11 @@ public final class Constants {
     public static final String KEY_RIGHT_PIC_URL = "rightPictureUrl";
     public static final String KEY_BRAND_NAME = "brand";
     public static final String KEY_PRODUCT_KEY = "productKey";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_USER_EMAIL = "userEmail";
 
+    // Shipping cost
+    public static final int SINGLE_ITEM_SHIPPING_COST = 7;
 
     // Attribute names for Weekly Look objects
     public static final String KEY_LOOK_KEY = "lookKey";

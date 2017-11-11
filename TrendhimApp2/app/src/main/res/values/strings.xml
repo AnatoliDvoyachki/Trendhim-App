@@ -26,7 +26,7 @@
     <string name="item_already_in_cart_message">Item is already in the shopping cart</string>
 
     <!--MainActivity.java strings-->
-    <string name="banner_image">bannerImage</string>
+    <string name="banner_image">BannerImage</string>
     <string name="recent_products">Recent productList</string>
     <string name="no_recent_products_message">You don\'t have recent productList</string>
     <string name="brand_name">Brand name</string>
@@ -110,4 +110,7 @@ Today she is probably our biggest fan, and spots tiny mistakes on the website be
     <string name="existing_user_message">User already exists</string>
     <string name="password_mismatch_message">Passwords don\'t match</string>
 
+
+    <!-- CredentialsActivity.java strings -->
+    <string name="credentials_title">Check out</string>
 </resources>

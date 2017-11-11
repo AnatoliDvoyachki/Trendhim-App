@@ -13,10 +13,6 @@ public class AboutUs extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeComponents();
-    }
-
-    private void initializeComponents() {
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_about_us, null, false);
@@ -24,4 +20,5 @@ public class AboutUs extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         setTitle(R.string.about_us_title);
     }
+
 }

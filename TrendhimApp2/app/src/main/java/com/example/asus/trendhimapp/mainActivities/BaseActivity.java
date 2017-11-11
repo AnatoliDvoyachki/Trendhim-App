@@ -183,8 +183,8 @@ public class BaseActivity extends AppCompatActivity
 
     public void openShoppingCart(View view) {
         if (isUserOnline()) {
-            Intent intent = new Intent(getApplicationContext(), ShoppingCartActivity.class);
-            startActivity(intent);
+            Intent toShoppingCart = new Intent(getApplicationContext(), ShoppingCartActivity.class);
+            startActivity(toShoppingCart);
         } else {
             Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
         }

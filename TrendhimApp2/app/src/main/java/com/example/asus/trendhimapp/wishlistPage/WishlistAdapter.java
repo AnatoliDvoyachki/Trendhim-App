@@ -53,6 +53,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View wishlistProducts = inflater.inflate(R.layout.item_wishlist, parent, false);
+
         return new ViewHolder(wishlistProducts);
     }
 
@@ -84,9 +85,13 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         return productList.size();
     }
 
+    /**
+     * Loads all wishlist items in the Recycler view
+     **/
     void populateRecyclerView() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user != null) {
             String email = user.getEmail();
             Query query = myRef.orderByChild("userEmail").equalTo(email);
@@ -94,34 +99,38 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
+
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
                             final String entityName = wishProd.getEntityName(), productKey = wishProd.getProductKey();
                             DatabaseReference myRef1 = FirebaseDatabase.getInstance().getReference(entityName);
                             myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
+
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
+
                                     if (dataSnapshot.exists()) {
+
                                         for (DataSnapshot ds1 : dataSnapshot.getChildren()) {
+
                                             if (productKey.equals(ds1.getKey())) {
+
                                                 Product currentProduct = ds1.getValue(Product.class);
                                                 CategoryProduct categoryProduct = new CategoryProduct(currentProduct.getProductName(),
                                                         currentProduct.getPrice(), currentProduct.getBrand(),
-                                                        currentProduct.getBannerPictureUrl(), ds1.getKey());
-                                                productList.add(categoryProduct);
-                                                notifyDataSetChanged();
+                                                        currentProduct.getBannerPictureUrl(), ds1.getKey()); // Create the category product
+                                                productList.add(categoryProduct); // Add it to the list
+                                                notifyDataSetChanged(); // Update UI
                                             }
                                         }
                                     }
                                 }
-
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {}
                             });
                         }
                     }
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {}
             });
@@ -133,55 +142,85 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
      **/
     private void executeAddToCart(final CategoryProduct categoryProduct) {
 
-        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setMessage("Add " + categoryProduct.getName() + " to shopping cart?");
 
-        final boolean[] exists = {false};
+        // Yes option
+        builder.setPositiveButton(R.string.positive_option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-        if(user != null){ //if the user is logged in
+                final DatabaseReference myRef = FirebaseDatabase.getInstance()
+                        .getReference(Constants.TABLE_NAME_SHOPPING_CART);
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final boolean[] exists = {false};
 
-            myRef.orderByChild("productKey").equalTo(categoryProduct.getKey())
-                    .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
-
-                        if(Objects.equals(recentProduct.getEmail(), user.getEmail())) {
-                            Toast.makeText(context, "Item is already in the shopping cart!", Toast.LENGTH_LONG).show();
-                            exists[0] = true;
-                            break;
-                        }
-                    }
-
-                    if(!exists[0]){
-
-                        Map<String, Object> values = new HashMap<>();
-                        values.put("productKey", categoryProduct.getKey());
-                        values.put("userEmail", user.getEmail());
-                        values.put("quantity", 1);
-                        myRef.push().setValue(values);
-                    }
-
+                if(user != null){ //if the user is logged in
+                    myRef.orderByChild(Constants.KEY_PRODUCT_KEY).equalTo(categoryProduct.getKey())
+                            .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                        RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+                                        if(Objects.equals(recentProduct.getEmail(), user.getEmail())) {
+                                            Toast.makeText(context, R.string.item_already_in_cart_message, Toast.LENGTH_LONG).show();
+                                            exists[0] = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!exists[0]){
+                                        Map<String, Object> values = new HashMap<>();
+                                        values.put(Constants.KEY_PRODUCT_KEY, categoryProduct.getKey());
+                                        values.put("userEmail", user.getEmail());
+                                        myRef.push().setValue(values);
+                                        Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {}
+                            });
                 }
+            }
+        });
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+        // Cancel option
+        builder.setNegativeButton(R.string.negative_option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
-                }
-            });
-        }
+        // Show the dialog window
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Customize button text
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnPositive.setTextColor(ContextCompat.getColor(context, R.color.black));
+        Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+        // Allign the buttons in the center of the dialog window
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
+
     }
 
     /**
      * Starts a sequence for the removal of an item from the Wishlist
      **/
     private void executeRemoveItem(final CategoryProduct categoryProduct) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
         builder.setMessage("Remove " + categoryProduct.getName() + " from wishlist?");
-        builder.setPositiveButton("Yes",
+
+        // Yes option
+        builder.setPositiveButton(R.string.positive_option,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -191,13 +230,15 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                         Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
                     }
                 });
-        builder.setNegativeButton("Cancel",
+
+        // Cancel option
+        builder.setNegativeButton(R.string.negative_option,
                 new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss(); // If cancel is pressed, dialog is closed
-            }
-        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); // If cancel is pressed, dialog is closed
+                    }
+                });
         AlertDialog dialog = builder.create();
         dialog.show();
 
@@ -218,14 +259,18 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
      * Removes a product from the user's wishlist
      **/
     private void removeItem(final CategoryProduct categoryProduct) {
+
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         final String productKey = categoryProduct.getKey();
+
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         WishlistProduct currentProd = ds.getValue(WishlistProduct.class);
+
                         if (productKey.equals(currentProd.getProductKey()) &&
                                 userEmail.equals(currentProd.getUserEmail())) {
                             ds.getRef().removeValue(); // If found, remove the item from teh wishlist
@@ -234,7 +279,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                     }
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
@@ -249,7 +293,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             this.userEmail = firebaseUser.getEmail();
         }
     }
-    
+
     /**
      * View holder pattern implementation
      **/

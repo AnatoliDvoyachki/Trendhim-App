@@ -27,8 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 public class CredentialsActivity extends BaseActivity implements View.OnClickListener, View.OnKeyListener {
 
     EditText name, email, streetAddress, city, zipcode, country;
-    String GMail = "trendhimaps@gmail.com"; //replace with you GMail
-    String GMailPass = "android11"; // replace with you GMail Password
+    String GMail = "trendhimaps@gmail.com"; //replace with your GMail
+    String GMailPass = "android11"; // replace with your GMail Password
     String str_subject, str_to, str_message;
 
     @Override
@@ -42,7 +42,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        setTitle("Check out");
+        setTitle(R.string.credentials_title);
 
         name = findViewById(R.id.name_credentials);
         email = findViewById(R.id.email_credentials);
@@ -85,9 +85,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
+                public void onCancelled(DatabaseError databaseError) {}
             });
         }
     }

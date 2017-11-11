@@ -1,14 +1,18 @@
 package com.example.asus.trendhimapp.productPage;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ProductActivity extends BaseActivity implements View.OnClickListener {
+
     private ImageView bannerImageView, leftImageView, rightImageView;
     private TextView brandTextView, priceTextView, productNameTextView;
     private int instanceCount;
@@ -38,16 +43,17 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = (LayoutInflater) this
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.activity_product, null, false);
-        BaseActivity.drawer.addView(contentView, 0);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
         initializeComponents();
         loadProduct();
     }
 
     private void initializeComponents() {
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_product, null, false);
+        BaseActivity.drawer.addView(contentView, 0);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
         this.instanceCount = 0;
         bannerImageView = findViewById(R.id.bannerImageView);
         leftImageView = findViewById(R.id.leftImageView);
@@ -71,7 +77,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
     @SuppressLint("SetTextI18n")
     public void loadProduct() {
+
         Intent intent = getIntent();
+
         if (intent != null) {
             String productName = intent.getStringExtra(Constants.KEY_PRODUCT_NAME);
             String price = intent.getStringExtra(Constants.KEY_PRICE);
@@ -79,8 +87,10 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             String leftPictureUrl = intent.getStringExtra(Constants.KEY_LEFT_PIC_URL);
             String rightPictureUrl = intent.getStringExtra(Constants.KEY_RIGHT_PIC_URL);
             String brand = intent.getStringExtra(Constants.KEY_BRAND_NAME);
+
             if (productName != null && price != null && bannerPictureUrl != null &&
                     leftPictureUrl != null && rightPictureUrl != null && brand != null) {
+
                 // set all the values & pictures
                 brandTextView.setText(brand);
                 priceTextView.setText(price + " €");
@@ -99,11 +109,92 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         final int id = v.getId();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
         if (currentUser != null) {
             if (id == R.id.addToWishlistButton) {
-                addToWishlist();
+                Intent intent = getIntent();
+
+                if (intent != null) {
+
+                    String productName = intent.getStringExtra(Constants.KEY_PRODUCT_NAME);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(ProductActivity.this);
+                    builder.setCancelable(true);
+                    builder.setMessage("Add " + productName + " to wishlist?");
+
+                    // Yes option
+                    builder.setPositiveButton(R.string.positive_option, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            addToWishlist();
+                        }
+                    });
+
+                    // Cancel option
+                    builder.setNegativeButton(R.string.negative_option, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    // Show the message
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                    // Customize button text
+                    Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                    btnPositive.setTextColor(ContextCompat.getColor(ProductActivity.this, R.color.black));
+                    Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                    btnNegative.setTextColor(ContextCompat.getColor(ProductActivity.this, R.color.black));
+
+                    // Allign the buttons in the center of the dialog window
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+                    layoutParams.weight = 10;
+                    btnPositive.setLayoutParams(layoutParams);
+                    btnNegative.setLayoutParams(layoutParams);
+                }
             } else {
-                addToShoppingCart();
+                Intent intent = getIntent();
+
+                if (intent != null) {
+
+                    String productName = intent.getStringExtra(Constants.KEY_PRODUCT_NAME);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(ProductActivity.this);
+                    builder.setCancelable(true);
+                    builder.setMessage("Add " + productName + " to shopping cart?");
+
+                    // Yes option
+                    builder.setPositiveButton(R.string.positive_option, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            addToShoppingCart();
+                        }
+                    });
+
+                    // Cancel option
+                    builder.setNegativeButton(R.string.negative_option, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    // Show the message
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                    // Customize button text
+                    Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                    btnPositive.setTextColor(ContextCompat.getColor(ProductActivity.this, R.color.black));
+                    Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                    btnNegative.setTextColor(ContextCompat.getColor(ProductActivity.this, R.color.black));
+
+                    // Allign the buttons in the center of the dialog window
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+                    layoutParams.weight = 10;
+                    btnPositive.setLayoutParams(layoutParams);
+                    btnNegative.setLayoutParams(layoutParams);
+                }
             }
         } else {
             Toast.makeText(this, R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
@@ -120,7 +211,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             String productKey = intent.getStringExtra(Constants.KEY_PRODUCT_KEY);
             executeAddToCart(productKey);
         }
-            this.instanceCount = 0;
+        this.instanceCount = 0;
 
     }
 
@@ -136,7 +227,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
         if(user != null){ //if the user is logged in
 
-            myRef.orderByChild("productKey").equalTo(categoryProductKey)
+            myRef.orderByChild(Constants.KEY_PRODUCT_KEY).equalTo(categoryProductKey)
                     .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
 
                         @Override
@@ -145,7 +236,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                                 RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
 
                                 if(Objects.equals(recentProduct.getEmail(), user.getEmail())) {
-                                    Toast.makeText(getApplicationContext(), "Item is already in the shopping cart!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), R.string.item_already_in_cart_message,
+                                            Toast.LENGTH_SHORT).show();
                                     exists[0] = true;
                                     break;
                                 }
@@ -154,18 +246,15 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                             if(!exists[0]){
 
                                 Map<String, Object> values = new HashMap<>();
-                                values.put("productKey", categoryProductKey);
-                                values.put("userEmail", user.getEmail());
-                                values.put("quantity", 1);
+                                values.put(Constants.KEY_PRODUCT_KEY, categoryProductKey);
+                                values.put(Constants.KEY_USER_EMAIL, user.getEmail());
                                 myRef.push().setValue(values);
                             }
 
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
+                        public void onCancelled(DatabaseError databaseError) {}
                     });
         }
         this.instanceCount = 0;
@@ -174,14 +263,18 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
      * Adds an item to the user's wishlist
      **/
     private void addToWishlist() {
+
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Intent intent = getIntent();
+
         if (intent != null) {
             String userEmail = user.getEmail();
             String productKey = intent.getStringExtra(Constants.KEY_PRODUCT_KEY);
+
             if (!wishlistProductExists(userEmail, productKey)) {
                 String entityName;
+
                 if (productKey.startsWith(Constants.WATCH_PREFIX)) {
                     entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
                 } else {
@@ -189,6 +282,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                 }
                 myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
                 Toast.makeText(this, R.string.added_to_wishlist_success_message, Toast.LENGTH_SHORT).show();
+
             } else {
                 Toast.makeText(this, R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
             }
@@ -197,17 +291,22 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
-     * Returns true, if the wishlist contains an item with the
-     * email and key passed as parameters. Otherwise, fase.
+     * @return  true, if the wishlist contains an item that matches the criteria.
+     * Otherwise, fase.
      **/
     private boolean wishlistProductExists(final String userEmail, final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
+
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 if (dataSnapshot.exists()) {
+
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
                         WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
+
                         if (userEmail.equals(wishProd.getUserEmail()) &&
                                 productKey.equals(wishProd.getProductKey())) {
                             ++instanceCount;
