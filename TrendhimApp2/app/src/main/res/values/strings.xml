@@ -80,23 +80,23 @@
     <string name="the_trendhim_philosophy_of_awesomeness">The Trendhim philosophy of awesomeness</string>
     <string name="introduction_about_us">Awesomeness is the main deciding factor in all we do at Trendhim. \n\n We only sell products we believe are awesome. We only deliver a service we believe is awesome.\n\n We only hire people we think are awesome.\n\n We give customers 365 days to return products because we believe this is awesome.\n\nWe want our customers to have the best possible shopping experience and fall in love with their new product. \n\nAs simple as that.</string>
     <string name="second_about_us">Read this short story about how Trendhim came to be, from the cradle to adulthood (almost), as we best recall it.</string>
-    <string name="header1">All good stories start at the beginning... but not at 4AM</string>
+    <string name="header1">All good stories start at the \nbeginning… but not at 4AM</string>
     <string name="about_us_one">About us one</string>
-    <string name="body_one">Trendhim was founded in late 2007 by Sebastian and myself (Mikkel). We were just 18 and finishing up our last year of high school. We were young, energetic, burning with the desire to start our own business… and fortunately, naive enough to actually go for it.\n\n
+    <string name="body_one">Trendhim was founded in late 2007 by Sebastian and myself (Mikkel). We were just 18 and finishing up our last year of high school.\n We were young, energetic, burning with the desire to start our own business… and fortunately, naive enough to actually go for it.\n\n
 
-We came up with 2 ideas for what we thought would be a good business. A home delivery service for bread on Saturdays and Sundays, and an online store with accessories and jewelry for men.\n\n
+        We came up with 2 ideas for what we thought would be a good business.\n A home delivery service for bread on Saturdays and Sundays, and an online store with accessories and jewelry for men.\n\n
 
-You know how they say entrepreneurs need to do whatever it takes to make their business succeed? Well. As much as we would love to agree, we quickly decided that the whole getting up at 4AM to deliver bread thing wasn't really our cup of tea.\n\n
-And that was it! Morning bread suffered a swift death, and from the charcoaled ashes of waking up early… rose Trendhim.</string>
+        You know how they say entrepreneurs need to do whatever it takes to make their business succeed? \n Well. As much as we would love to agree, we quickly decided that the whole getting up at 4AM to deliver bread thing wasn\'t really our cup of tea.\n\n
+        And that was it! Morning bread suffered a swift death, and from the charcoaled ashes of waking up early… rose Trendhim.</string>
     <string name="body_two">With about 4000 euro of hard earned money doing paper routes and binding flowers (A story for another time), we started this great adventure.\n\n
 
-With our naiveté only surpassed by our drive, we dived head first into everything E-commerce. Coding websites, buying products, taking good care of customers, insurances, accounting, product photography and so much more.\n\n
+        With our naiveté only surpassed by our drive, we dived head first into everything E-commerce. Coding websites, buying products, taking good care of customers, insurances, accounting, product photography and so much more.\n\n
 
-We had fire in our stomachs, and wanted to build something awesome!\n\n\n
-    The people closest to us, family and friends, didn't always get what we were doing. Some took every opportunity at hand to comment on how great an education is, and how what we were doing was risky.\n\n\n
-Eventually though, even Sebastian's mom, who despite her better gut feeling about her son's future, accepted that we were two young people with a quest in our heart, and we weren't going to stop.\n\n
+        We had fire in our stomachs, and wanted to build something awesome!\n\n
+            Our closest ones, family and friends, didn\'t always get what we were doing. Some took every opportunity at hand to comment on how great an education is, and how what we were doing was risky.\n\n
+        Eventually though, even Sebastian\'s mom, who despite her better gut feeling about her son\'s future, accepted that we were two young people with a quest in our heart, and we weren\'t going to stop.\n\n
 
-Today she is probably our biggest fan, and spots tiny mistakes on the website before we do.</string>
+        Today she is probably our biggest fan, and spots tiny mistakes on the website before we do.</string>
 
     <!-- AboutUs.java strings -->
     <string name="about_us_title">About us</string>
@@ -109,5 +109,92 @@ Today she is probably our biggest fan, and spots tiny mistakes on the website be
     <string name="email_invalid_message">Invalid email</string>
     <string name="existing_user_message">User already exists</string>
     <string name="password_mismatch_message">Passwords don\'t match</string>
+    <string name="about_us_two">About us two</string>
+    <string name="about_us_three">83m2 of Rome</string>
+    <string name="body_three">If someone had told us beforehand that we’d have to work 16 hour days, 7 days a week, invest another 10.000 Euro and give up most of our social lives for about 2 years, our expectations about starting a business may have been a bit different. But that\'s where the naivité of two young entrepreneurs with burning desire comes in handy.\n\n
+        From 2007 until 2010 we both still had a part-time job at the post office, allowing us to put bread (and sometimes even milk) on the table. \n\n
+        Both Sebastian and I, our beds, bathroom, kitchen, inventory and office were situated in an 83m² apartment.\n\n
+        Rome wasn\'t built in a day, we knew that.\n\n
 
+        At the end of 2009, we were finally making enough money to quit our jobs and focus on Trendhim full-time. Wow, what a feeling!\n\n
+
+        "I can still vividly remember the strange feeling in my stomach on the way home after I quit my post office job. It was that awkward combination of extreme happiness, excitement, stress, anxiety and an imminent nervous breakdown.
+        Was this the right decision? Trendhim would now have to provide full-time salaries for the both of us, with money that might not be there in 6 months.
+        At the same time I knew, that now we\'d have even more time to make Trendhim truly amazing."</string>
+    <string name="about_us_four">Who needs a bedroom</string>
+
+    <string name="body_four">Things started growing fast. We expanded into new product categories, new countries, and by this point we needed more space, and we needed it badly. We literally had boxes of products in every corner of the apartment, and both slept on small mattresses in the living room.\n\n
+
+        Being two young single guys, we rented a huge villa in a family neighbourhood. Obviously. We thought it was the perfect solution, because then we still wouldn\'t have to drive to work everyday, and could kick ass from morning till sundown at home.</string>
+    <string name="about_us_five">A new era</string>
+    <string name="body_five">The year 2011 came rolling by, and we needed to move the business again because the owner of the villa was gonna sell it and, for reasons unknown to us, found it very awkward having us there while the new owner moved in.\n\n
+
+        A bit older, a bit wiser, and still very much passionate about building something awesome, we decided to rent a proper 200m² business space.\n\n
+       </string>
+    <string name="body_five_two"> Me and Sebastian still lived together though. Nothing felt better than working together at home, while the rest of the world was sleeping.</string>
+    <string name="about_us_six">A rocket is made to go fast, not straight</string>
+
+    <string name="body_six">We always knew we wanted to be something more than just a web shop retailer. In 2012 we set out on another quest, to build the most awesome brand of accessories for men. Lucleon was born. We worked our asses off for a few years, to create something truly unique down to the last detail.\n\n
+
+    Looking back, we should\'ve kept the focus on Trendhim as a regular store for a little while longer. But when you have so much fire in you, that you become like a rocket, it can be hard to keep that rocket on a straight course.\n\n
+
+    Eventually, we found the perfect balance between Trendhim and Lucleon, and now Lucleon is an integrated part of who we are, and a great statement to what we want to build in the future.\n\n
+    However at that time, we simply put too much in our mouths for us to chew at the same time</string>
+    <string name="about_us_seven">Redbull and fire makes perfect</string>
+    <string name="body_seven">When 2013/2014 came around, things started to move really fast.\n\n
+
+    The Trendhim team grew and Martin joined us as a 3rd partner in the business. He was a bit of an energy drink alcoholic. And we loved it!\n\n
+    </string>
+
+    <string name="body_seven_two"> \n\nAs you can imagine Martin fit in perfectly, and we all had some great late night work sessions. Sleeping on a mattress I actually remember waking up one morning, by the sound of Martin opening a can of red bull.\n\n
+        We also went from packing every single order ourselves, to hiring young students that did all of that, so we could focus on growth.\n\n
+
+    At the end of 2014 Trendhim had grown more than recently watered bamboo shoots. Expanding to Norway, Sweden, Finland and Netherlands. At the same time, we also doubled the selection of products that year. No wonder we felt busy.</string>
+    <string name="_2007">2007</string>
+    <string name="_2010">2010</string>
+    <string name="_2012">2012</string>
+    <string name="about_us_eight">An amazing experience</string>
+
+    <string name="body_eight">Karina and Kristof joined the team, inventory grew, and the 200m² warehouse literally became so cramped, that you had to walk sideways to pick and pack the orders. We had practically turned most of the warehouse into one-way streets.\n\n
+
+So we had a team meeting, took a big decision, pulled our roots from the ground, said goodbye to our beloved home.
+… And moved to the other side of the street</string>
+
+    <string name="body_eight_two">  We moved into our current headquarters with space for go-cart races, ping pong tables and room for big thinking.\n\n
+
+The days of the bachelor pad and sleeping in the living room on a mattress were over.\n\n
+
+One could think that "this is the point where they become professionals". However quite the opposite. In the traditional sense anyway.\n\n
+
+One of our core values is Loosey Goosey, and this is something that everyone at Trendhim holds close to the heart. We decided a long time ago, that we never wanted to become professional just for the sake of professionalism. Not as a company, and not as individuals. That we were always going to talk to our customers on a down to earth level, human to human. That our employees were going to be part of a team. That we would always try to grow as humans and as a company.\n\n
+
+We want to build the most awesome company, both for our customers and our employees.</string>
+    <string name="about_us_nine">Well, that escalated quickly!</string>
+
+    <string name="body_nine">Aahh, 2016, what a year to be working at Trendhim. So many amazing, and challenging things happened, it\'s hard to pick which ones to tell you about.\n\n
+
+    But I\'ll start with the countries. At the beginning of February, after we\'d spent a month recovering from Christmas and doing research on our lovely European neighbours, we all sat around our lunch room table. We were making the final decision about which 2 countries, out of the 11 candidates we came up with in our research, to open. When someone said "Well, why can\'t we open all of them?".\n\n
+
+    So that\'s what we did. 2 weeks later, 43 translators were working on translating the entire website, including 3.000 products, into 8 languages, covering 11 markets. \n\n
+
+    While opening the countries, our customers told us they needed more items to choose from, so we set a goal of going from 3.000 to 5.000 unique items online before the end of the year. After all, we now had all that warehouse space we needed to fill up. We reached the goal in the middle of November. Needless to say, the warehouse is now filled to the brim. It\'s pretty funny how we thought the 1000m2 would keep us covered for years. Boy were we wrong!\n\n
+
+    But wait, there\'s more! At the beginning of September, we decided to open a physical store before Christmas. To say that was more difficult than we expected, would be a ginormous understatement! Designing the place, getting the displays, shelves, racks, glass covers, and everything else produced. Finding the right location, deciding on products for the store, actually setting up the items in a presentable way, hiring staff. Everything just required time like you wouldn\'t believe, I almost get exhausted thinking about it. But we managed to pull it off, and the store was very well received by our home town Horsens.\n\n </string>
+
+
+    <string name="body_nine_two">All the above being said, the most rewarding aspect of 2016 has been the people. We feel lucky to be surrounded by more hard working, caring, responsible, effective people than ever before. As a matter of fact, the total Trendhim team now consists of more than 50 amazing people. Some part time, some full time, all equally fantastic. We tried getting everyone to the office for picture day, but that task proved difficult, so you\'ll have to settle for just 26 of us for now :-)</string>
+    <string name="about_us_ten">Big plans, with a pinch of sillyness</string>
+    <string name="body_ten">We\'ve got big plans for 2017 :-) Among a bunch of other things, we want to build the world\'s best customer purchase experience.\n\n
+
+Does that mean we are going to work our asses off this year? Yes, it does, but that doesn\'t mean we can\'t have fun as well.\n\n
+    That\'s it for now. But stay tuned, because there is much, much more to come!
+</string>
+    <string name="_2009">2009</string>
+    <string name="_2014">2014</string>
+    <string name="_2015">2015</string>
+    <string name="thanks_mom">Thanks, mom</string>
+    <string name="_2008">2008</string>
+    <string name="_2011">2011</string>
+    <string name="_2016">2016</string>
+    <string name="_2017">2017</string>
 </resources>

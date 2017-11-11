@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.R;
+import com.example.asus.trendhimapp.aboutUs.AboutUs;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.newProducts.NewProductsAdapter;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
@@ -29,7 +30,7 @@ public class MainActivity extends BaseActivity {
     ImageView recentProductImage, recommendedProductsImage;
     int i = 0, i1= 0;
     public NewProductsAdapter newProductAdapter;
-    public ImageView weeklyLookImage;
+    public ImageView weeklyLookImage, aboutUsImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,15 @@ public class MainActivity extends BaseActivity {
                 if(i1 % 2 != 0)
                     recommendedProductsLayout.setVisibility(View.GONE);
                 i1++;
+            }
+        });
+
+        aboutUsImage = findViewById(R.id.trendhimStoryImage);
+        aboutUsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(getApplicationContext(), AboutUs.class);
+               startActivity(intent);
             }
         });
 

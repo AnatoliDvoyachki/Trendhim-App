@@ -249,7 +249,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             this.userEmail = firebaseUser.getEmail();
         }
     }
-    
+
     /**
      * View holder pattern implementation
      **/
