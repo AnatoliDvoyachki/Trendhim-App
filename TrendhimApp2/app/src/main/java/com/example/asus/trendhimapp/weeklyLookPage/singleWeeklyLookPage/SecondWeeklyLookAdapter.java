@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.weeklyLook.singleWeeklyLook;
+package com.example.asus.trendhimapp.weeklyLookPage.singleWeeklyLookPage;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,7 +13,7 @@ import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.weeklyLook.WeeklyLook;
+import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLook;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

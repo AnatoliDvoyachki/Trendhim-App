@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.weeklyLook.singleWeeklyLook;
+package com.example.asus.trendhimapp.weeklyLookPage.singleWeeklyLookPage;
 
 public class LookProduct {
 

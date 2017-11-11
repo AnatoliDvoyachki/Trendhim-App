@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.login;
+package com.example.asus.trendhimapp.loginPage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -86,7 +86,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
 
                                     FirebaseUser user = auth.getCurrentUser();
                                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                    intent.putExtra("email",user.getEmail());
+                                    intent.putExtra(Constants.KEY_EMAIL,user.getEmail());
                                     startActivity(intent);
                                     for (EditText editText : fields)
                                         editText.setText(null);

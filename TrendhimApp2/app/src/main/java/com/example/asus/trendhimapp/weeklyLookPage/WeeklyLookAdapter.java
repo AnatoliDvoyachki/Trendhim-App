@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.weeklyLook;
+package com.example.asus.trendhimapp.weeklyLookPage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.weeklyLook.singleWeeklyLook.SecondWeeklyLookActivity;
+import com.example.asus.trendhimapp.weeklyLookPage.singleWeeklyLookPage.SecondWeeklyLookActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -160,11 +160,11 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
 
                         if(Objects.equals(look.getKey(), dataSnapshot1.getKey())) {
 
-                            Intent intent = new Intent(context, SecondWeeklyLookActivity.class);
+                            Intent toSecondWeeklyLook = new Intent(context, SecondWeeklyLookActivity.class);
 
-                            intent.putExtra(Constants.KEY_LOOK_KEY, look.getKey());
+                            toSecondWeeklyLook.putExtra(Constants.KEY_LOOK_KEY, look.getKey());
 
-                            context.startActivity(intent);
+                            context.startActivity(toSecondWeeklyLook);
                         }
 
                     }

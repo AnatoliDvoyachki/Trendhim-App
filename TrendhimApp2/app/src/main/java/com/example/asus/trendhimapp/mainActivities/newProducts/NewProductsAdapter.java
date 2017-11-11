@@ -84,8 +84,8 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      * Populate the recycler view. Get data from the database which name is equal to the parameter.
      */
     public void addData() {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMENDED_PRODUCTS);
-        myRef.orderByChild("order").addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMMENDED_PRODUCTS);
+        myRef.orderByChild(Constants.KEY_ORDER).addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
@@ -152,9 +152,9 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      */
     private void getProduct(final CategoryProduct product) {
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recommended_products");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMMENDED_PRODUCTS);
         //get product which key is equal to the one clicked
-        databaseReference.orderByChild("key").equalTo(product.getKey())
+        databaseReference.orderByChild(Constants.KEY_ATTR_KEY).equalTo(product.getKey())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

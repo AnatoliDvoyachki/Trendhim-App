@@ -19,7 +19,8 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
 
     /**
      * @param pictureUrl url reference to the picture
-     * @param imageView  the view to which the picture will be assigned after execution
+     * @param imageView  the view to which the picture
+     *                   will be assigned after it has been downloaded
      **/
     public DownloadTask(String pictureUrl, ImageView imageView) {
         this.pictureUrl = pictureUrl;

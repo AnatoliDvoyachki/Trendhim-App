@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.login;
+package com.example.asus.trendhimapp.loginPage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.mainActivities.MainActivity;
+import com.example.asus.trendhimapp.util.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -37,7 +38,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         View contentView = inflater.inflate(R.layout.activity_login, null, false);
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        setTitle("Log in");
+        setTitle(R.string.log_in);
 
         emailEditText = findViewById(R.id.input_email_login);
         passwordEditText = findViewById(R.id.input_password_login);
@@ -52,7 +53,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         Intent intent = getIntent();
 
         if(intent != null){
-            String email = intent.getStringExtra("email");
+            String email = intent.getStringExtra(Constants.KEY_EMAIL);
 
             if(email != null)
                 emailEditText.setText(email);
@@ -76,11 +77,11 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
+                        Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(toMain);
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.incorrect_credentials_message, Toast.LENGTH_LONG).show();
-                        Log.d(TAG, "sign in failed", task.getException());
+                        Log.d(TAG, "Sign in failed", task.getException());
                     }
                 }
             });
@@ -92,8 +93,8 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
      * @param view
      */
     public void goToSignUp(View view){
-        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-        startActivity(intent);
+        Intent toSignUp = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivity(toSignUp);
     }
 
     /**

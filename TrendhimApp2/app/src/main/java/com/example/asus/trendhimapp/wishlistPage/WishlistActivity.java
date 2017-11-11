@@ -26,7 +26,7 @@ public class WishlistActivity extends BaseActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        setTitle(getString(R.string.wishlist_activity_title));
+        setTitle(R.string.wishlist_activity_title);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 

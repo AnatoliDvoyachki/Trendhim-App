@@ -183,17 +183,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                             Product foundProduct = dataSnapshot1.getValue(Product.class);
 
-                            Intent intent = new Intent(context, ProductActivity.class);
+                            Intent toProductPage = new Intent(context, ProductActivity.class);
 
-                            intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
-                            intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
-                            intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
-                            intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
-                            intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
-                            intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
-                            intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+                            toProductPage.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
+                            toProductPage.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
+                            toProductPage.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                            toProductPage.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+                            toProductPage.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
+                            toProductPage.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                            toProductPage.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
-                            context.startActivity(intent);
+                            context.startActivity(toProductPage);
                         }
 
                     }

@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCartActivity.credentials;
+package com.example.asus.trendhimapp.util;
 
 import java.security.AccessController;
 import java.security.Provider;

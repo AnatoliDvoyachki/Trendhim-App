@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.weeklyLook.singleWeeklyLook;
+package com.example.asus.trendhimapp.weeklyLookPage.singleWeeklyLookPage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -72,7 +72,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Add item to the sopping cart!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Add item to the shopping cart!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -110,7 +110,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
                         if(Objects.equals(product.getKey(), productKey)){
                             GenericTypeIndicator<List<String>> genericTypeIndicator =
                                     new GenericTypeIndicator<List<String>>() {};
-                            List<String> products = product.child("products").getValue(genericTypeIndicator);
+                            List<String> products = product.child(Constants.KEY_PRODUCTS).getValue(genericTypeIndicator);
                             if( products == null ) {
                                 Log.i(TAG, "no products");
                             }
@@ -228,17 +228,17 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
 
                             Product foundProduct = dataSnapshot1.getValue(Product.class);
 
-                            Intent intent = new Intent(context, ProductActivity.class);
+                            Intent toProductActivity = new Intent(context, ProductActivity.class);
 
-                            intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
-                            intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
-                            intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
-                            intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
-                            intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
-                            intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
-                            intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+                            toProductActivity.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
+                            toProductActivity.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
+                            toProductActivity.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                            toProductActivity.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+                            toProductActivity.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
+                            toProductActivity.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                            toProductActivity.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
-                            context.startActivity(intent);
+                            context.startActivity(toProductActivity);
                         }
 
                     }

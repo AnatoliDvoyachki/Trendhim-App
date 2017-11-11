@@ -30,12 +30,16 @@
         android:id="@+id/container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/footer">
+        android:layout_above="@id/footer"
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
 
         <RelativeLayout
+            android:id="@+id/relative"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartActivity">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            tools:context="com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity">
 
             <TextView
                 android:id="@+id/product_name_text_view"
@@ -76,17 +80,18 @@
 
             <LinearLayout
                 android:id="@+id/layoutRV"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/the_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="370dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/product_name_text_view"
-                android:layout_marginStart="10dp"
-                android:scrollbars="vertical" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/the_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="370dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/product_name_text_view"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="40dp"
+                    android:scrollbars="vertical" />
             </LinearLayout>
 
             <TextView
@@ -115,19 +120,22 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/subtotal_label_text_view"
                 android:layout_alignBottom="@+id/subtotal_label_text_view"
-                android:layout_alignStart="@+id/shipping_value_text_view"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="11dp"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/placeholder" />
+                android:gravity="center"
+                android:text="0" />
 
             <TextView
                 android:id="@+id/shipping_value_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/grand_total_label_text_view"
+                android:layout_alignEnd="@+id/subtotal_value_text_view"
                 android:layout_below="@+id/subtotal_value_text_view"
-                android:layout_marginEnd="23dp"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/placeholder" />
+                android:gravity="center"
+                android:text="0" />
 
             <TextView
                 android:id="@+id/grand_total_label_text_view"
@@ -144,11 +152,11 @@
                 android:id="@+id/grand_total_value_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/grand_total_label_text_view"
-                android:layout_alignBottom="@+id/grand_total_label_text_view"
-                android:layout_alignEnd="@+id/shipping_value_text_view"
+                android:layout_alignEnd="@+id/subtotal_value_text_view"
+                android:layout_alignParentBottom="true"
                 android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/placeholder" />
+                android:gravity="center"
+                android:text="0" />
 
         </RelativeLayout>
 

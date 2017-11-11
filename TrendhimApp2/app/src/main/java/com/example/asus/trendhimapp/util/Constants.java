@@ -18,8 +18,8 @@ public final class Constants {
     public static final String TABLE_NAME_SHOPPING_CART = "shopping_cart";
     public static final String TABLE_NAME_WEEKLY_LOOK = "weekly_look";
     public static final String TABLE_NAME_RECENT_PRODUCTS = "recent_products";
-    public static final String TABLE_NAME_USER_CREDENIALS = "user_credentials";
-    public static final String TABLE_NAME_RECOMENDED_PRODUCTS = "recommended_products";
+    public static final String TABLE_NAME_USER_CREDENTIALS = "user_credentials";
+    public static final String TABLE_NAME_RECOMMENDED_PRODUCTS = "recommended_products";
 
     // Attribute name for the Product object
     public static final String KEY_PRODUCT_NAME = "productName";
@@ -30,10 +30,18 @@ public final class Constants {
     public static final String KEY_BRAND_NAME = "brand";
     public static final String KEY_PRODUCT_KEY = "productKey";
 
-
-    // Attribute names for Weekly Look objects
+    // Keys for passing objects from one intent to another
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_VISIT_TIME = "visit";
+    public static final String KEY_USER_EMAIL = "userEmail";
+    public static final String KEY_ORDER = "order";
+    public static final String KEY_ATTR_KEY = "key";
+    public static final String KEY_PRODUCTS = "products";
     public static final String KEY_LOOK_KEY = "lookKey";
     public static final String KEY_CATEGORY = "category";
+
+    // Shipping cost
+    public static final int SINGLE_ITEM_SHIPPING_COST = 7;
 
     // Regex
     public static final String WATCH_PREFIX = "watch";

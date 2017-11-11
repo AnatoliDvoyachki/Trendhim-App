@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCartActivity.credentials;
+package com.example.asus.trendhimapp.shoppingCart.credentialsPage;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.util.Constants;
+import com.example.asus.trendhimapp.util.GMailSender;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,8 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 public class CredentialsActivity extends BaseActivity implements View.OnClickListener, View.OnKeyListener {
 
     EditText name, email, streetAddress, city, zipcode, country;
-    String GMail = "trendhimaps@gmail.com"; //replace with you GMail
-    String GMailPass = "android11"; // replace with you GMail Password
+    String GMail = "trendhimaps@gmail.com"; //replace with your GMail
+    String GMailPass = "android11"; // replace with your GMail Password
     String str_subject, str_to, str_message;
 
     @Override
@@ -42,7 +43,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        setTitle("Check out");
+        setTitle(R.string.credentials_title);
 
         name = findViewById(R.id.name_credentials);
         email = findViewById(R.id.email_credentials);
@@ -60,11 +61,11 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
     private void getUserCredentials(){
         DatabaseReference userCredentialsDatabase =
-                FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENIALS);
+                FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if(currentUser != null) {
-            userCredentialsDatabase.orderByChild("email").equalTo(currentUser.getEmail())
+            userCredentialsDatabase.orderByChild(Constants.KEY_EMAIL).equalTo(currentUser.getEmail())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -85,9 +86,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
+                public void onCancelled(DatabaseError databaseError) {}
             });
         }
     }

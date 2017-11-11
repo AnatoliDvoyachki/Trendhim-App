@@ -17,10 +17,10 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.aboutUs.AboutUs;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
-import com.example.asus.trendhimapp.login.LoginActivity;
-import com.example.asus.trendhimapp.shoppingCartActivity.ShoppingCartActivity;
+import com.example.asus.trendhimapp.loginPage.LoginActivity;
+import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
 import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.weeklyLook.WeeklyLookActivity;
+import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLookActivity;
 import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -137,8 +137,8 @@ public class BaseActivity extends AppCompatActivity
      * @param view
      */
     public void backToHomePage(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+        Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(toMain);
     }
 
     /**
@@ -151,8 +151,8 @@ public class BaseActivity extends AppCompatActivity
     public void main_to_login(View view) {
 
         if (!isUserOnline()) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
+            Intent toLogin = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(toLogin);
         } else if (isUserOnline()) {
             Toast.makeText(getApplicationContext(), R.string.already_logged_in_message, Toast.LENGTH_LONG).show();
         }
@@ -188,8 +188,8 @@ public class BaseActivity extends AppCompatActivity
 
     public void openShoppingCart(View view) {
         if (isUserOnline()) {
-            Intent intent = new Intent(getApplicationContext(), ShoppingCartActivity.class);
-            startActivity(intent);
+            Intent toShoppingCart = new Intent(getApplicationContext(), ShoppingCartActivity.class);
+            startActivity(toShoppingCart);
         } else {
             Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
         }
