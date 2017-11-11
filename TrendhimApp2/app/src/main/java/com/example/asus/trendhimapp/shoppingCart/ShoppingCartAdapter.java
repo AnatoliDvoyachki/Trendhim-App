@@ -78,7 +78,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         // Update the total cost
         int currentShippingCost = ShoppingCartActivity.getShippingCost();
-        ShoppingCartActivity.setGrandTotalCost(currentShippingCost + currentSubtotal);
+        int grandTotal = currentShippingCost + currentSubtotal;
+        ShoppingCartActivity.setGrandTotalCost(grandTotal);
 
         // Initialize the remove button
         ImageButton removeItemButton = holder.removeItemButton;
