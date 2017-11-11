@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.weeklyLook;
+package com.example.asus.trendhimapp.weeklyLookPage;
 
 import java.util.ArrayList;
 

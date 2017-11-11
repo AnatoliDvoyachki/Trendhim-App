@@ -239,6 +239,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                         dialog.dismiss(); // If cancel is pressed, dialog is closed
                     }
                 });
+
+        // Show the dialog window
         AlertDialog dialog = builder.create();
         dialog.show();
 

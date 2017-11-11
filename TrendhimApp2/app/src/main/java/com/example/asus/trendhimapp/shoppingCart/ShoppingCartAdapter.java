@@ -271,8 +271,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                             shoppingCartProducts.add(new CategoryProduct(product.getProductName(), product.getPrice(),
                                                     product.getBrand(), product.getBannerPictureUrl(), ds1.getKey()));
 
-                                            notifyItemInserted(getItemCount());
-
+                                            //notifyItemInserted(getItemCount());
+                                            notifyDataSetChanged();
                                             // Update the shipping cost
                                             int currentShippingCost = ShoppingCartActivity.getShippingCost();
                                             currentShippingCost += Constants.SINGLE_ITEM_SHIPPING_COST;

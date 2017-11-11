@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Utility class, used for obtaining Bitmap objects. Implemented using the Flyweight Design Pattern.
@@ -12,7 +13,7 @@ public final class BitmapFlyweight {
 
     private BitmapFlyweight() {}
 
-    private static final HashMap<String, Bitmap> PICTURE_CACHE = new HashMap<>();
+    private static final Map<String, Bitmap> PICTURE_CACHE = new HashMap<>();
 
     /**
      * Used to get a picture for the ImageViews.

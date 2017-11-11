@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.login;
+package com.example.asus.trendhimapp.loginPage;
 
 import android.content.Context;
 import android.content.Intent;

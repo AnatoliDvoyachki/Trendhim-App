@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.weeklyLook.singleWeeklyLook;
+package com.example.asus.trendhimapp.weeklyLookPage.singleWeeklyLookPage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.weeklyLook.WeeklyLook;
+import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLook;
 
 import java.util.ArrayList;
 import java.util.List;

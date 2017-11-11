@@ -16,10 +16,10 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
-import com.example.asus.trendhimapp.login.LoginActivity;
+import com.example.asus.trendhimapp.loginPage.LoginActivity;
 import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
 import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.weeklyLook.WeeklyLookActivity;
+import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLookActivity;
 import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

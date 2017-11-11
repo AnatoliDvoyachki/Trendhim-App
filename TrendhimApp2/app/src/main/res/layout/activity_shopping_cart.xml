@@ -31,7 +31,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@id/footer"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
 
         <RelativeLayout
             android:id="@+id/relative"
@@ -79,7 +80,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutRV"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.RecyclerView

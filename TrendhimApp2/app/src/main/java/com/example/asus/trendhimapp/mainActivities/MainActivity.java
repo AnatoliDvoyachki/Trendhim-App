@@ -17,7 +17,7 @@ import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.newProducts.NewProductsAdapter;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
-import com.example.asus.trendhimapp.weeklyLook.WeeklyLookActivity;
+import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLookActivity;
 
 import java.util.ArrayList;
 
