@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
+import com.example.asus.trendhimapp.shoppingCart.credentialsPage.CredentialsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class ShoppingCartActivity extends BaseActivity {
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toCredentials = new Intent();
+                Intent toCredentials = new Intent(ShoppingCartActivity.this, CredentialsActivity.class);
                 Toast.makeText(ShoppingCartActivity.this, "UNIMPLEMENTED", Toast.LENGTH_SHORT).show();
             }
         });
