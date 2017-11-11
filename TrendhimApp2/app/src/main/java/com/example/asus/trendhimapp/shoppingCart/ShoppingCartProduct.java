@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCartActivity;
+package com.example.asus.trendhimapp.shoppingCart;
 
 import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
 

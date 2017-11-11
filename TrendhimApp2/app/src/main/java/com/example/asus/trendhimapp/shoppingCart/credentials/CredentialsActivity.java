@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCartActivity.credentials;
+package com.example.asus.trendhimapp.shoppingCart.credentials;
 
 import android.content.Context;
 import android.os.Bundle;

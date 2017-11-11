@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCartActivity;
+package com.example.asus.trendhimapp.shoppingCart;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
