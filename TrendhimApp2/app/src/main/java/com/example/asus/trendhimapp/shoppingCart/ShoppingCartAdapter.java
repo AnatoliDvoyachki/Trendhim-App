@@ -173,6 +173,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
                                             ShoppingCartActivity.setSubtotal(currentSubtotal);
 
+                                            // Free shipping if you buy items for over 75 euro
                                             if(ShoppingCartActivity.getSubtotalCost() <= 75) {
                                                 ShoppingCartActivity.setShippingCost(5);
                                             } else {
@@ -193,9 +194,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
+                public void onCancelled(DatabaseError databaseError) {}
             });
 
         }
@@ -223,7 +222,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 }
 
                 // Reset subtotal and grand total so
-                // they can be recalculated by notifyDataSetChanged()
+                // they can be recalculated by notifyDataSetChanged() call
                 ShoppingCartActivity.setSubtotal(0);
                 ShoppingCartActivity.setGrandTotalCost(0);
 
@@ -251,7 +250,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
 
-        // Allign the buttons in the center of the dialog window
+        // Align the buttons in the center of the dialog window
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
         layoutParams.weight = 10;
         btnPositive.setLayoutParams(layoutParams);
