@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
-import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProduct;
 import com.example.asus.trendhimapp.productPage.Product;
+import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
@@ -164,9 +164,14 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                        RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
-                                        if(Objects.equals(recentProduct.getEmail(), user.getEmail())) {
-                                            Toast.makeText(context, R.string.item_already_in_cart_message, Toast.LENGTH_LONG).show();
+
+                                        ShoppingCartProduct shoppingCartProduct = dataSnapshot1.getValue(ShoppingCartProduct.class);
+
+                                        if(Objects.equals(shoppingCartProduct.getUserEmail(), user.getEmail())) {
+                                            int currentQuantity = Integer.parseInt(shoppingCartProduct.getQuantity()) + 1;
+                                            //Increase the product quantity
+                                            dataSnapshot1.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
+                                            Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_SHORT).show();
                                             exists[0] = true;
                                             break;
                                         }
@@ -175,6 +180,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                                         Map<String, Object> values = new HashMap<>();
                                         values.put(Constants.KEY_PRODUCT_KEY, categoryProduct.getKey());
                                         values.put(Constants.KEY_USER_EMAIL, user.getEmail());
+                                        values.put("quantity", "1");
                                         myRef.push().setValue(values);
                                         Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_SHORT).show();
                                     }
