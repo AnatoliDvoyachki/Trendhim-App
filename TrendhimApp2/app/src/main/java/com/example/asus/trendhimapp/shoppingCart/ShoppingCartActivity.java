@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
@@ -22,7 +21,6 @@ import java.util.List;
 
 public class ShoppingCartActivity extends BaseActivity {
     private static TextView subtotalTextView, shippingTextView, totalTextView;
-    private Button checkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +41,12 @@ public class ShoppingCartActivity extends BaseActivity {
         shippingTextView = findViewById(R.id.shipping_value_text_view);
         totalTextView = findViewById(R.id.grand_total_value_text_view);
 
-        checkoutButton = findViewById(R.id.checkout_button);
+        Button checkoutButton = findViewById(R.id.checkout_button);
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent toCredentials = new Intent(ShoppingCartActivity.this, CredentialsActivity.class);
-                Toast.makeText(ShoppingCartActivity.this, "UNIMPLEMENTED", Toast.LENGTH_SHORT).show();
+                startActivity(toCredentials);
             }
         });
 

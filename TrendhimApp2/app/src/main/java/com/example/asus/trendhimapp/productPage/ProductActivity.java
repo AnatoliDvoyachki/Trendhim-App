@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
-import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProduct;
+import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
@@ -234,10 +234,14 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
+                                ShoppingCartProduct shoppingCartProduct = dataSnapshot1.getValue(ShoppingCartProduct.class);
 
-                                if(Objects.equals(recentProduct.getEmail(), user.getEmail())) {
-                                    Toast.makeText(getApplicationContext(), R.string.item_already_in_cart_message,
+                                if(Objects.equals(shoppingCartProduct.getUserEmail(), user.getEmail())) {
+                                    int currentQuantity = Integer.parseInt(shoppingCartProduct.getQuantity()) + 1;
+                                    //Increase the product quantity
+                                    dataSnapshot1.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
+
+                                    Toast.makeText(getApplicationContext(), R.string.item_added_to_cart_message,
                                             Toast.LENGTH_SHORT).show();
                                     exists[0] = true;
                                     break;
@@ -249,7 +253,10 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                                 Map<String, Object> values = new HashMap<>();
                                 values.put(Constants.KEY_PRODUCT_KEY, categoryProductKey);
                                 values.put(Constants.KEY_USER_EMAIL, user.getEmail());
+                                values.put("quantity", "1");
                                 myRef.push().setValue(values);
+                                Toast.makeText(getApplicationContext(), R.string.item_added_to_cart_message,
+                                        Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -278,6 +285,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
                 if (productKey.startsWith(Constants.WATCH_PREFIX)) {
                     entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+                } else if (productKey.startsWith(Constants.BEARD_CARE_PREFIX)) {
+                    entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "");
                 } else {
                     entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
                 }

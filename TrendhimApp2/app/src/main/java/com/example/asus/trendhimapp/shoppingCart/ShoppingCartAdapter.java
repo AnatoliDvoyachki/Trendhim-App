@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,82 +66,139 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         // Set initial quantity
         final TextView quantityTextView = holder.quantityTextView;
-        quantityTextView.setText("1");
-
-        // Set initial price
         final TextView currentProductPriceTextView = holder.totalPriceTextView;
-        currentProductPriceTextView.setText(String.valueOf(currentProduct.getPrice() + "€"));
 
-        // Update the subtotal
-        int currentSubtotal = ShoppingCartActivity.getSubtotalCost();
-        currentSubtotal += currentProduct.getPrice();
-        ShoppingCartActivity.setSubtotal(currentSubtotal);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+        final String productKey = currentProduct.getKey(), userEmail = user.getEmail();
 
-        // Update the total cost
-        int currentShippingCost = ShoppingCartActivity.getShippingCost();
-        int grandTotal = currentShippingCost + currentSubtotal;
-        ShoppingCartActivity.setGrandTotalCost(grandTotal);
+        if(user != null){
+            myRef.orderByChild(Constants.KEY_USER_EMAIL)
+                    .equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (final DataSnapshot ds : dataSnapshot.getChildren()) {
+                            final ShoppingCartProduct scp = ds.getValue(ShoppingCartProduct.class);
 
-        // Initialize the remove button
-        ImageButton removeItemButton = holder.removeItemButton;
-        removeItemButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initializeRemoveButton(currentProduct);
-            }
-        });
+                            if (productKey.equals(scp.getProductKey())) {
+                                quantityTextView.setText(scp.getQuantity());
 
-        // Setup the plus button
-        Button incrementButton = holder.incrementButton;
-        incrementButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int currentQuantity = Integer.parseInt(quantityTextView.getText().toString());
-                if (currentQuantity + 1 < Integer.MAX_VALUE) {
+                                // Set initial price
+                                int price = currentProduct.getPrice() * Integer.parseInt(quantityTextView.getText().toString());
+                                currentProductPriceTextView.setText(String.valueOf(price) + "€");
 
-                    // Update current item total price
-                    quantityTextView.setText(String.valueOf(++currentQuantity));
-                    int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
-                    currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
+                                // Update the subtotal
+                                int currentSubtotal = ShoppingCartActivity.getSubtotalCost() + price;
+                                ShoppingCartActivity.setSubtotal(currentSubtotal);
 
-                    // Update subtotal price
-                    int currentSubtotal = ShoppingCartActivity.getSubtotalCost();
-                    currentSubtotal += currentProduct.getPrice();
-                    ShoppingCartActivity.setSubtotal(currentSubtotal);
+                                // Update the total cost
+                                if(ShoppingCartActivity.getSubtotalCost() <= 75) {
+                                    ShoppingCartActivity.setShippingCost(5);
+                                } else {
+                                    ShoppingCartActivity.setShippingCost(0);
+                                }
 
-                    // Update grand total price
-                    int currentGrandCost = ShoppingCartActivity.getGrandTotalCost();
-                    currentGrandCost += currentProduct.getPrice();
-                    ShoppingCartActivity.setGrandTotalCost(currentGrandCost);
+                                // Update the total cost
+                                int currentShippingCost = ShoppingCartActivity.getShippingCost();
+
+                                int grandTotal = currentShippingCost + currentSubtotal;
+                                ShoppingCartActivity.setGrandTotalCost(grandTotal);
+
+                                // Initialize the remove button
+                                ImageButton removeItemButton = holder.removeItemButton;
+                                removeItemButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        initializeRemoveButton(currentProduct);
+                                    }
+                                });
+
+                                // Setup the plus button
+                                Button incrementButton = holder.incrementButton;
+                                incrementButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        int currentQuantity = Integer.parseInt(quantityTextView.getText().toString());
+                                        Log.i("shit", "QUANTITY + " + currentQuantity);
+
+                                        // Update current item total price
+                                        quantityTextView.setText(String.valueOf(++currentQuantity));
+                                        int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
+                                        currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
+                                        Log.i("shit", "item total Price + " + currentItemTotalPrice);
+                                        ds.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
+
+
+                                        Log.i("shit", "shipping Price + " + ShoppingCartActivity.getShippingCost());
+
+                                        // Update subtotal price
+                                        Log.i("shit", "current subtotal Price + " + ShoppingCartActivity.getSubtotalCost());
+                                        int currentSubtotal = ShoppingCartActivity.getSubtotalCost() + (currentProduct.getPrice());
+                                        ShoppingCartActivity.setSubtotal(currentSubtotal);
+                                        Log.i("shit", "current subtotal Price + " + ShoppingCartActivity.getSubtotalCost());
+
+                                        if(ShoppingCartActivity.getSubtotalCost() <= 75) {
+                                            ShoppingCartActivity.setShippingCost(5);
+                                        } else {
+                                            ShoppingCartActivity.setShippingCost(0);
+                                        }
+                                        Log.i("shit", "shipping Price + " + ShoppingCartActivity.getShippingCost());
+
+                                        // Update grand total price
+                                        int grandTotal = ShoppingCartActivity.getSubtotalCost() + ShoppingCartActivity.getShippingCost();
+                                        ShoppingCartActivity.setGrandTotalCost(grandTotal);
+                                        Log.i("shit", "current grand total Price1 + " + ShoppingCartActivity.getGrandTotalCost());
+
+
+                                    }
+                                });
+
+                                // Setup the minus button
+                                Button decrementButton = holder.decrementButton;
+                                decrementButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        int currentQuantity = Integer.parseInt(quantityTextView.getText().toString());
+                                        if (currentQuantity - 1 >= 1) {
+
+                                            // Update current item total price
+                                            quantityTextView.setText(String.valueOf(--currentQuantity));
+                                            int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
+                                            currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
+                                            ds.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
+
+                                            // Update subtotal price
+                                            int currentSubtotal = ShoppingCartActivity.getSubtotalCost() - currentProduct.getPrice();
+
+                                            ShoppingCartActivity.setSubtotal(currentSubtotal);
+
+                                            if(ShoppingCartActivity.getSubtotalCost() <= 75) {
+                                                ShoppingCartActivity.setShippingCost(5);
+                                            } else {
+                                                ShoppingCartActivity.setShippingCost(0);
+                                            }
+
+                                            // Update grand total price
+                                            int grandTotal = ShoppingCartActivity.getSubtotalCost() + ShoppingCartActivity.getShippingCost();
+                                            ShoppingCartActivity.setGrandTotalCost(grandTotal);
+
+                                        }
+
+                                    }
+                                });
+                            }
+                        }
+                    }
                 }
-            }
-        });
 
-        // Setup the minus button
-        Button decrementButton = holder.decrementButton;
-        decrementButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int currentQuantity = Integer.parseInt(quantityTextView.getText().toString());
-                if (currentQuantity - 1 >= 1) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                    // Update current item total price
-                    quantityTextView.setText(String.valueOf(--currentQuantity));
-                    int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
-                    currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
-
-                    // Update subtotal price
-                    int currentSubtotal = ShoppingCartActivity.getSubtotalCost();
-                    currentSubtotal -= currentProduct.getPrice();
-                    ShoppingCartActivity.setSubtotal(currentSubtotal);
-
-                    // Update grand total price
-                    int currentGrandCost = ShoppingCartActivity.getGrandTotalCost();
-                    currentGrandCost -= currentProduct.getPrice();
-                    ShoppingCartActivity.setGrandTotalCost(currentGrandCost);
                 }
-            }
-        });
+            });
+
+        }
 
     }
 
@@ -158,8 +216,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 shoppingCartProducts.remove(currentProduct); // Remove the item from the recycler view
 
                 // Update the shipping cost
-                int shippingCost = getItemCount() * Constants.SINGLE_ITEM_SHIPPING_COST;
-                ShoppingCartActivity.setShippingCost(shippingCost);
+                if(ShoppingCartActivity.getSubtotalCost() <= 75) {
+                    ShoppingCartActivity.setShippingCost(5);
+                } else {
+                    ShoppingCartActivity.setShippingCost(0);
+                }
 
                 // Reset subtotal and grand total so
                 // they can be recalculated by notifyDataSetChanged()
@@ -204,8 +265,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+        else if (productKey.startsWith(Constants.BEARD_CARE_PREFIX))
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "");
         else
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
+
         return entityName;
     }
 
@@ -268,16 +332,21 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                         if (currentProduct.getProductKey().equals(ds1.getKey())) {
 
                                             Product product = ds1.getValue(Product.class);
+                                                CategoryProduct categoryProduct = new CategoryProduct(product.getProductName(), product.getPrice(),
+                                                        product.getBrand(), product.getBannerPictureUrl(), ds1.getKey());
 
-                                            shoppingCartProducts.add(new CategoryProduct(product.getProductName(), product.getPrice(),
-                                                    product.getBrand(), product.getBannerPictureUrl(), ds1.getKey()));
+                                            shoppingCartProducts.add(categoryProduct);
 
-                                            //notifyItemInserted(getItemCount());
-                                            notifyDataSetChanged();
+                                            notifyItemInserted(getItemCount());
+
                                             // Update the shipping cost
-                                            int currentShippingCost = ShoppingCartActivity.getShippingCost();
-                                            currentShippingCost += Constants.SINGLE_ITEM_SHIPPING_COST;
-                                            ShoppingCartActivity.setShippingCost(currentShippingCost);
+                                            if(ShoppingCartActivity.getSubtotalCost() <= 75) {
+                                                ShoppingCartActivity.setShippingCost(5);
+                                            } else {
+                                                ShoppingCartActivity.setShippingCost(0);
+                                            }
+
+
                                         }
 
                                     }

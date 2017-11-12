@@ -75,6 +75,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 executeAddToCart(currentProduct);
+                removeItem(currentProduct);
+
             }
         });
 
@@ -202,7 +204,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
 
-        // Allign the buttons in the center of the dialog window
+        // Align the buttons in the center of the dialog window
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
         layoutParams.weight = 10;
         btnPositive.setLayoutParams(layoutParams);

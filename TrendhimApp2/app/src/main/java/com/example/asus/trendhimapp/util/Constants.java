@@ -4,6 +4,7 @@ package com.example.asus.trendhimapp.util;
  * Utility class, used for storing constants that are used throughout the project
  **/
 public final class Constants {
+
     private Constants() {}
 
     // Entity names in Google Firebase
@@ -41,10 +42,12 @@ public final class Constants {
     public static final String KEY_CATEGORY = "category";
 
     // Shipping cost
-    public static final int SINGLE_ITEM_SHIPPING_COST = 7;
+    public static final double SINGLE_ITEM_SHIPPING_COST = 4.95;
 
     // Regex
     public static final String WATCH_PREFIX = "watch";
     public static final String ALL_DIGITS_REGEX = "\\d+";
     public static final String VALID_EMAIL_REGEX = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+    public static final String BEARD_CARE_PREFIX = "beard";
+
 }
