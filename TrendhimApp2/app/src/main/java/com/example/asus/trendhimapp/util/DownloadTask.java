@@ -59,8 +59,8 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
             e.printStackTrace();
         } finally {
             try {
-                if (con != null) con.disconnect();
                 if (inFromInternet != null) inFromInternet.close();
+                if (con != null) con.disconnect();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
