@@ -59,7 +59,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         final CategoryProduct currentProduct = productList.get(position);
         viewHolder.productNameTextView.setText(currentProduct.getName());
         viewHolder.priceTextView.setText(currentProduct.getPrice() + "€");
@@ -74,8 +74,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         viewHolder.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                executeAddToCart(currentProduct);
-                removeItem(currentProduct);
+                executeAddToCart(currentProduct, position);
+
 
             }
         });
@@ -142,7 +142,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     /**
      * Adds an item to the shopping list
      **/
-    private void executeAddToCart(final CategoryProduct categoryProduct) {
+    private void executeAddToCart(final CategoryProduct categoryProduct, final int position) {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
@@ -185,11 +185,16 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                                         Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_SHORT).show();
                                     }
                                 }
+
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {}
                             });
                 }
+                removeItem(categoryProduct);
+                productList.remove(position);
+                notifyItemRemoved(position);
             }
+
         });
 
         // Cancel option
