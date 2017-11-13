@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
         // Get the data model based on position
         final CategoryProduct product = recentProducts.get(position);
+
         // Set item views based on the views and data model
         TextView productName = viewHolder.productNameTextView;
         productName.setText(product.getName());
@@ -85,13 +87,17 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 //get product which key is equal to the one clicked
                 databaseReference.orderByChild(Constants.KEY_ORDER)
                         .addListenerForSingleValueEvent(new ValueEventListener() {
+
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.exists()){
+
                                     for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
                                         //Found product
                                         final RecentProduct recentProduct = dataSnapshot1.getValue(RecentProduct.class);
                                         if(Objects.equals(recentProduct.getKey(), product.getKey())) {
+
                                             //Query to the product category to get the product information
                                             DatabaseReference category_products_database =
                                                     FirebaseDatabase.getInstance().getReference(getCategory(recentProduct.getKey()));
@@ -148,16 +154,22 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         return recentProducts.size();
     }
 
+    /**
+     * Get product category - Used to query the database
+     * @param productKey
+     * @return
+     */
     private String getCategory(String productKey){
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+        else if (productKey.startsWith(Constants.BEARD_CARE_PREFIX))
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "");
         else
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
 
         return entityName;
     }
-
 
     /**
      * Populate the recycler view. Get data from the database which name is equal to the parameter.
@@ -172,13 +184,11 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 public void onDataChange(final DataSnapshot dataSnapshot) {
 
                     if (dataSnapshot.exists()) {
-
                         for (final DataSnapshot product : dataSnapshot.getChildren()) {
                             //Found product
                             final RecentProduct recentProduct = product.getValue(RecentProduct.class);
                             if (Objects.equals(recentProduct.getEmail(), user.getEmail())) {
                                 final String productKey = recentProduct.getKey(); //Product key
-
                                 getProducts(user, getCategory(productKey), productKey);
                             }
 
@@ -192,6 +202,9 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 public void onCancelled(DatabaseError databaseError) {}
 
             });
+        } else {
+            MainActivity.noRecentProducts.setText(R.string.not_logged_in_unsuccess_message);
+            MainActivity.noRecentProducts.setVisibility(View.VISIBLE);
         }
 
     }

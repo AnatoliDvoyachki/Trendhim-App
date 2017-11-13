@@ -28,7 +28,7 @@
     <!--MainActivity.java strings-->
     <string name="banner_image">BannerImage</string>
     <string name="recent_products">Recent productList</string>
-    <string name="no_recent_products_message">You don\'t have recent productList</string>
+    <string name="no_recent_products_message">You don\'t have recent products</string>
     <string name="brand_name">Brand name</string>
     <string name="product_name">Product name</string>
     <string name="logo">logo</string>
@@ -199,4 +199,5 @@ Does that mean we are going to work our asses off this year? Yes, it does, but t
     <string name="_2017">2017</string>
     <!-- CredentialsActivity.java strings -->
     <string name="credentials_title">Check out</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>

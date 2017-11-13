@@ -20,7 +20,7 @@
         <activity
             android:name=".productPage.ProductActivity"
             android:parentActivityName=".categoryPage.CategoryProductActivity" />
-        <activity android:name=".loginPage.LoginActivity" />
+        <activity android:name=".loginPage.LoginActivity"/>
         <activity android:name=".loginPage.SignupActivity" />
         <activity android:name=".wishlistPage.WishlistActivity" />
         <activity android:name=".weeklyLookPage.WeeklyLookActivity" />

@@ -84,12 +84,31 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
 
-                                    FirebaseUser user = auth.getCurrentUser();
-                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                    intent.putExtra(Constants.KEY_EMAIL,user.getEmail());
-                                    startActivity(intent);
-                                    for (EditText editText : fields)
-                                        editText.setText(null);
+                                    final FirebaseUser user = auth.getCurrentUser();
+                                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(SignupActivity.this,
+                                                        "Verification email sent to " + user.getEmail(),
+                                                        Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                                intent.putExtra(Constants.KEY_EMAIL, user.getEmail());
+                                                startActivity(intent);
+                                                for (EditText editText : fields)
+                                                    editText.setText(null);
+
+                                            } else {
+                                                Log.e(TAG, "sendEmailVerification", task.getException());
+                                                Toast.makeText(SignupActivity.this,
+                                                        "Failed to send verification email.",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+
+
+
                                 } else {
                                     if(!task.isSuccessful()) {
                                         Toast.makeText(SignupActivity.this, R.string.authentication_fail_message, Toast.LENGTH_SHORT).show();

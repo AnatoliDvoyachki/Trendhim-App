@@ -1,15 +1,20 @@
 package com.example.asus.trendhimapp.loginPage;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -22,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener {
 
@@ -73,18 +79,22 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         validate(editTextFields);
         if(validate(editTextFields)) {
             auth.signInWithEmailAndPassword(email, password).
-                    addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {
-                        Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(toMain);
+                        FirebaseUser user = auth.getCurrentUser();
+                        if(user.isEmailVerified()) {
+                            Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(toMain);
+                        } else if(!user.isEmailVerified())
+                            Toast.makeText(LoginActivity.this, "Please verify your email address", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.incorrect_credentials_message, Toast.LENGTH_LONG).show();
                         Log.d(TAG, "Sign in failed", task.getException());
                     }
                 }
-            });
+                });
         }
     }
 
@@ -141,5 +151,66 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
+    }
+
+    public void forgotPassword(View view) {
+        final EditText editText = new EditText(getApplicationContext());
+        editText.setHint("Email");
+        editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+        // Create the confirmation dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Reset Password");
+        builder.setMessage("Enter email to reset your password");
+
+        builder.setView(editText);
+
+        // Yes option
+        builder.setPositiveButton("Reset Password", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                auth.sendPasswordResetEmail(editText.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Reset password email has been sent to " + editText.getText().toString(),
+                                            Toast.LENGTH_SHORT).show();
+                                    Log.d(TAG, "Email sent.");
+                                } else {
+                                    Toast.makeText(LoginActivity.this,
+                                            "UPS! Something went wrong!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
+
+        // Cancel option
+        builder.setNegativeButton(R.string.negative_option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        // Show the dialog window to the user
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Customize button text
+        Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        btnPositive.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        btnNegative.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+
+        // Al   ign the buttons in the center of the dialog window
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
     }
 }
