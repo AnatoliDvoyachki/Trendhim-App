@@ -13,8 +13,8 @@ public final class BitmapFlyweight {
 
     private BitmapFlyweight() {}
 
+    public static final int MAX_CACHE_CAPACITY = 120;
     private static final Map<String, Bitmap> PICTURE_CACHE = new HashMap<>();
-
     /**
      * Used to get a picture for the ImageViews.
      *
@@ -37,6 +37,10 @@ public final class BitmapFlyweight {
      * @param bitmap the bitmap of the picture - VALUE
      **/
     public static void cachePicture(String url, Bitmap bitmap) {
+        if (PICTURE_CACHE.size() >= MAX_CACHE_CAPACITY) {
+            PICTURE_CACHE.clear(); // Control the size of the cache.
+            // If the HashMap over 120 entries, clear it to free up the memory
+        }
         PICTURE_CACHE.put(url, bitmap);
     }
 
