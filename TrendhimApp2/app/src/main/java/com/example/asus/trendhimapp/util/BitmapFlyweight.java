@@ -13,7 +13,7 @@ public final class BitmapFlyweight {
 
     private BitmapFlyweight() {}
 
-    public static final int MAX_CACHE_CAPACITY = 120;
+    private static final int MAX_CACHE_CAPACITY = 120;
     private static final Map<String, Bitmap> PICTURE_CACHE = new HashMap<>();
     /**
      * Used to get a picture for the ImageViews.
