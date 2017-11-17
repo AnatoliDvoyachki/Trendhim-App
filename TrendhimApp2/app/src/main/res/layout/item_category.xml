@@ -4,16 +4,14 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:layout_marginStart="10dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
     android:gravity="center">
 
     <ImageView
         android:id="@+id/product_image_category"
         android:layout_width="160dp"
-        android:paddingStart="10dp"
-        android:layout_height="160dp"
-        android:layout_weight="1"
+        android:layout_height="170dp"
         android:contentDescription="@string/banner_image" />
 
     <TextView
@@ -33,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:fontFamily="sans-serif-smallcaps"
         android:paddingTop="10dp"
         android:text="@string/product_name"
@@ -43,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:fontFamily="sans-serif-smallcaps"
         android:paddingTop="10dp"
         android:text="£300"

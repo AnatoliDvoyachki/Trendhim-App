@@ -93,19 +93,24 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             String rightPictureUrl = fromCategoryPage.getStringExtra(Constants.KEY_RIGHT_PIC_URL);
             String brand = fromCategoryPage.getStringExtra(Constants.KEY_BRAND_NAME);
 
-            if (productName != null && price != null && bannerPictureUrl != null &&
-                    leftPictureUrl != null && rightPictureUrl != null && brand != null) {
+            if (productName != null && price != null && brand != null) {
 
                 // set all the values & pictures
                 brandTextView.setText(brand);
                 priceTextView.setText(String.format("%s€", price));
                 productNameTextView.setText(productName);
-                BitmapFlyweight.getPicture(
-                        bannerPictureUrl, bannerImageView);
-                BitmapFlyweight.getPicture(
+
+                if(bannerPictureUrl != null)
+                    BitmapFlyweight.getPicture(
+                            bannerPictureUrl, bannerImageView);
+
+                if(leftPictureUrl != null)
+                    BitmapFlyweight.getPicture(
                         leftPictureUrl, leftImageView);
-                BitmapFlyweight.getPicture(
-                        rightPictureUrl, rightImageView);
+
+                if(rightPictureUrl != null)
+                    BitmapFlyweight.getPicture(
+                            rightPictureUrl, rightImageView);
             }
         }
     }

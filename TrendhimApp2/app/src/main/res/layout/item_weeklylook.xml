@@ -7,8 +7,10 @@
     <ImageView
         android:id="@+id/weeklyLookImage"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:contentDescription="@string/weekly_look">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/weekly_look"
+        android:layout_marginBottom="20dp">
 
     </ImageView>
 </LinearLayout>

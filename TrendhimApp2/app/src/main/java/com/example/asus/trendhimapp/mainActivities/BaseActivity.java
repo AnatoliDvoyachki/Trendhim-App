@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.aboutUs.AboutUs;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
-import com.example.asus.trendhimapp.loginPage.LoginActivity;
+import com.example.asus.trendhimapp.loginPage.TabbedActivity;
 import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
 import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLookActivity;
@@ -88,7 +88,7 @@ public class BaseActivity extends AppCompatActivity
              */
             case R.id.action_log_in:
                 if (!isUserOnline()) {
-                    Intent toLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent toLogin = new Intent(getApplicationContext(), TabbedActivity.class);
                     startActivity(toLogin);
                 } else if (isUserOnline())
                     Toast.makeText(getApplicationContext(), R.string.already_logged_in_message, Toast.LENGTH_LONG).show();

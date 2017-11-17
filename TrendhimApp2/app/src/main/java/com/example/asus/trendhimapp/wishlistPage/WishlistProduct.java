@@ -15,7 +15,7 @@ public class WishlistProduct {
         return productKey;
     }
 
-    public String getEntityName() {
+    String getEntityName() {
         return entityName;
     }
 

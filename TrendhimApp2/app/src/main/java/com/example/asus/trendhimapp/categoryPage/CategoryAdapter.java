@@ -191,10 +191,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                             toProductPage.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
                             toProductPage.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
                             toProductPage.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
-                            toProductPage.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
                             toProductPage.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
-                            toProductPage.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
-                            toProductPage.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+
+                            if(foundProduct.getBannerPictureUrl() != null)
+                                toProductPage.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+
+                            if(foundProduct.getLeftPictureUrl() != null)
+                                toProductPage.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+
+                            if(foundProduct.getRightPictureUrl() != null)
+                                toProductPage.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
                             context.startActivity(toProductPage);
                         }

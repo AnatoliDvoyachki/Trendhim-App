@@ -1,22 +1,22 @@
 package com.example.asus.trendhimapp.loginPage;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.mainActivities.BaseActivity;
-import com.example.asus.trendhimapp.util.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,43 +26,50 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignupActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener{
+public class SignupActivity extends Fragment implements View.OnKeyListener, View.OnClickListener{
 
     private EditText emailEditText, passwordEditText, confirmEditText;
     private FirebaseAuth auth;
     private static final String TAG = SignupActivity.class.getCanonicalName();
 
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View contentView = inflater.inflate(R.layout.activity_signup, null, false);
-        BaseActivity.drawer.addView(contentView, 0);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        setTitle(R.string.sign_up);
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View rootView = inflater.inflate(R.layout.activity_signup, container, false);
 
         auth = FirebaseAuth.getInstance();
 
-        emailEditText = findViewById(R.id.input_email_signUp);
-        passwordEditText = findViewById(R.id.input_password_signUp);
-        confirmEditText = findViewById(R.id.confirmPassword);
+        emailEditText = rootView.findViewById(R.id.input_email_signUp);
+        passwordEditText = rootView.findViewById(R.id.input_password_signUp);
+        confirmEditText = rootView.findViewById(R.id.confirmPassword);
 
         confirmEditText.setOnKeyListener(this);
 
-        LinearLayout signUpLayout = findViewById(R.id.signupLayout);
+        LinearLayout signUpLayout = rootView.findViewById(R.id.signupLayout);
         signUpLayout.setOnClickListener(this);
 
+        Button btn_signUp = rootView.findViewById(R.id.btn_signUp);
+        btn_signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signUp();
+            }
+        });
+
+        TextView link_log_in = rootView.findViewById(R.id.link_log_in);
+        link_log_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TabbedActivity.mViewPager.setCurrentItem(0, true);
+            }
+        });
+        return rootView;
     }
 
     /**
      * Method listening for sign up button clicks.
      * Sign up users with email and password and save its information the the database
-     * @param view
      */
-    public void signUp(View view) {
+    public void signUp() {
         final EditText[] fields = {passwordEditText, confirmEditText, emailEditText};
         validate(fields);
 
@@ -74,7 +81,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
         else {
             if (passwordEditText.getText().toString().equals(confirmEditText.getText().toString())) {
                 auth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -86,18 +93,17 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(SignupActivity.this,
+                                                Toast.makeText(getActivity(),
                                                         "Verification email sent to " + user.getEmail(),
                                                         Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                                intent.putExtra(Constants.KEY_EMAIL, user.getEmail());
-                                                startActivity(intent);
+                                                TabbedActivity.mViewPager.setCurrentItem(0, true);
+                                                LoginActivity.emailEditText.setText(emailEditText.getText().toString());
                                                 for (EditText editText : fields)
                                                     editText.setText(null);
 
                                             } else {
                                                 Log.e(TAG, "sendEmailVerification", task.getException());
-                                                Toast.makeText(SignupActivity.this,
+                                                Toast.makeText(getActivity(),
                                                         "Failed to send verification email.",
                                                         Toast.LENGTH_SHORT).show();
                                             }
@@ -108,7 +114,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
 
                                 } else {
                                     if(!task.isSuccessful()) {
-                                        Toast.makeText(SignupActivity.this, R.string.authentication_fail_message, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), R.string.authentication_fail_message, Toast.LENGTH_SHORT).show();
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
                                         // If sign in fails, display a message to the user.
@@ -135,6 +141,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
         }
     }
 
+
     /**
      * Check if all fields are filled in
      *
@@ -151,6 +158,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
         }
         return complete;
     }
+
 
     /**
      * Check if the email format is valid
@@ -173,7 +181,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)
-            signUp(v);
+            signUp();
 
         return false;
     }
@@ -186,8 +194,8 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
     @Override
     public void onClick(View v) {
 
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
     }
 }
