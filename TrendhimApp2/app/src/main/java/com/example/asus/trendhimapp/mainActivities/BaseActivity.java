@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -67,15 +68,74 @@ public class BaseActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks
+        int id = item.getItemId();
+
+        switch (id) {
+
+            /*
+             * Start Log In Activity whenever the Log In button is clicked
+             * and the user is not logged in.
+             * If the user is logged in - Display Toast
+             */
+            case R.id.action_log_in:
+                if (!isUserOnline()) {
+                    Intent toLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(toLogin);
+                } else if (isUserOnline())
+                    Toast.makeText(getApplicationContext(), R.string.already_logged_in_message, Toast.LENGTH_LONG).show();
+
+                break;
+
+            /*
+             * Start Wish list Activity whenever the wish list button is clicked
+             * and the user is logged in.
+             * If the user is not logged in - Display Toast
+             */
+            case R.id.action_wishlist:
+                if (isUserOnline()) {
+                    Intent toWishList = new Intent(BaseActivity.this, WishlistActivity.class);
+                    startActivity(toWishList);
+                } else
+                    Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
+
+                break;
+
+            /*
+             * Start Shopping cart Activity whenever the shopping cart button is clicked
+             * and the user is not logged in.
+             * If the user is logged in - Display Toast
+             */
+            case R.id.action_shopping_cart:
+                if (isUserOnline()) {
+                    Intent toShoppingCart = new Intent(getApplicationContext(), ShoppingCartActivity.class);
+                    startActivity(toShoppingCart);
+                } else
+                    Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle navigation view item clicks
         Intent intent;
         int id = item.getItemId();
 
         switch (id) {
             case R.id.bracelets:
                 intent = new Intent(this, CategoryProductActivity.class);
-                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BRACELETS);
+                intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BRACELETS); //send category to open the correct category page
                 startActivity(intent);
                 break;
             case R.id.bags:
@@ -142,57 +202,20 @@ public class BaseActivity extends AppCompatActivity
     }
 
     /**
-     * Start Log In Activity whenever the Log In button is clicked
-     * and the user is not signed in.
-     * If the user is signed in - Display Toast
+     * Check if the user is already logged in
      *
-     * @param view
-     */
-    public void main_to_login(View view) {
-
-        if (!isUserOnline()) {
-            Intent toLogin = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(toLogin);
-        } else if (isUserOnline()) {
-            Toast.makeText(getApplicationContext(), R.string.already_logged_in_message, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    /**
-     * Display Toast if the user is already signed in
-     *
-     * @return true if the user is signed in - false if not
+     * @return true if the user is logged in - false if not
      */
     public boolean isUserOnline() {
         //Check track of the current user
         FirebaseUser currentUser = auth.getCurrentUser();
         boolean isLoggedIn = false;
 
-        if (currentUser != null) {
-            // User already logged in
+        // User already logged in
+        if (currentUser != null)
             isLoggedIn = true;
-        }
 
         return isLoggedIn;
-    }
-
-    public void openWishList(View view) {
-        if (isUserOnline()) {
-            Intent toWishList = new Intent(BaseActivity.this, WishlistActivity.class);
-            startActivity(toWishList);
-        } else {
-            Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
-        }
-    }
-
-
-    public void openShoppingCart(View view) {
-        if (isUserOnline()) {
-            Intent toShoppingCart = new Intent(getApplicationContext(), ShoppingCartActivity.class);
-            startActivity(toShoppingCart);
-        } else {
-            Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
-        }
     }
 
 }

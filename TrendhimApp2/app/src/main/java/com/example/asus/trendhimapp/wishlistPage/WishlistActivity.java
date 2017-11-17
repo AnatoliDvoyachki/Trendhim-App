@@ -15,10 +15,7 @@ public class WishlistActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeComponents();
-    }
 
-    private void initializeComponents() {
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_wishlist, null, false);
@@ -28,6 +25,13 @@ public class WishlistActivity extends BaseActivity {
 
         setTitle(R.string.wishlist_activity_title);
 
+        initializeComponents();
+    }
+
+    /**
+     * Initialize wishlist components
+     */
+    private void initializeComponents() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
         recyclerView.setNestedScrollingEnabled(true);
@@ -39,4 +43,5 @@ public class WishlistActivity extends BaseActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
 }

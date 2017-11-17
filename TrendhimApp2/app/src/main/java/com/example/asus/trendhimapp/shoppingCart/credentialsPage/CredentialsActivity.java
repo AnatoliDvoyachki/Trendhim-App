@@ -11,25 +11,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.util.GMailSender;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CredentialsActivity extends BaseActivity implements View.OnClickListener, View.OnKeyListener {
 
     EditText name, email, streetAddress, city, zipcode, country;
-    String GMail = "trendhimaps@gmail.com"; //replace with your GMail
-    String GMailPass = "android11"; // replace with your GMail Password
+    String GMail = "trendhimaps@gmail.com"; // GMail address
+    String GMailPass = "android11"; // GMail Password
     String str_subject, str_to, str_message;
 
     @Override
@@ -45,6 +47,13 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
         setTitle(R.string.credentials_title);
 
+        initializeComponents();
+    }
+
+    /**
+     * Initialize credentials components
+     */
+    public void initializeComponents(){
         name = findViewById(R.id.name_credentials);
         email = findViewById(R.id.email_credentials);
         streetAddress = findViewById(R.id.address_credentials);
@@ -52,20 +61,24 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         country = findViewById(R.id.country_credentials);
         city = findViewById(R.id.city_credentials);
 
-        str_to = email.getText().toString();
-        str_subject = "Order Confirmation - Trendhim thinks you are amazing";
-        str_message = "To be implemented";
-
         getUserCredentials();
+
+        // Set the OnClickListener to the linear layout
+        LinearLayout linearLayout = findViewById(R.id.credentialsLayout);
+        linearLayout.setOnClickListener(this);
+
+        // Set the OnKeyListener to the last edit text view in the layout
+        country.setOnKeyListener(this);
     }
 
+    /**
+     * Get the user credentials from firebase if the customer is a returning customer
+     */
     private void getUserCredentials(){
         DatabaseReference userCredentialsDatabase =
                 FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
-        final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(currentUser != null) {
-            userCredentialsDatabase.orderByChild(Constants.KEY_EMAIL).equalTo(currentUser.getEmail())
+         userCredentialsDatabase.orderByChild(Constants.KEY_EMAIL).equalTo(email.getText().toString())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -78,7 +91,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                             streetAddress.setText(credentials.getAddress());
                             city.setText(credentials.getCity());
                             country.setText(credentials.getCountry());
-                            email.setText(currentUser.getEmail());
+                            email.setText(credentials.getUserEmail());
                             zipcode.setText(credentials.getZipcode());
 
                         }
@@ -88,13 +101,17 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                 @Override
                 public void onCancelled(DatabaseError databaseError) {}
             });
-        }
     }
 
+    /**
+     * Complete order if all the fields are filled in correctly
+     * If so, send confirmation email to the user
+     * @param view
+     */
     public void completeOrder(View view) {
         EditText[] fields = {name, email, streetAddress, country, zipcode, city};
 
-        if(validate(fields)) {
+        if(validate(fields) && isValidEmail(email.getText().toString())) {
             //Check if 'To:' field is a valid email
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
@@ -107,8 +124,19 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         }
 
     }
+
+    /**
+     * Send email based on the method parameter
+     * @param to
+     * @param subject
+     * @param message
+     */
     private void sendEmail(final String to, final String subject, final String message) {
         final EditText[] fields = {name, email, streetAddress, country, zipcode, city};
+
+        str_to = email.getText().toString();
+        str_subject = "Order Confirmation - Trendhim thinks you are amazing";
+        str_message = "To be implemented";
 
         new Thread(new Runnable() {
 
@@ -127,7 +155,8 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Email successfully sent!", Toast.LENGTH_LONG).show();
-                            for(EditText editText : fields)
+                            saveUserCredentials();
+                            for(EditText editText : fields) //Clean fields
                                 editText.setText("");
                         }
                     });
@@ -138,7 +167,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Email not sent. \n\n Error: " + e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Email not sent. \n\n Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -147,6 +176,34 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
             }
 
         }).start();
+    }
+
+    /**
+     * Save the user credentials in the credentials database when an order is successfully made
+     */
+    private void saveUserCredentials(){
+        final DatabaseReference credentialsDatabase = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
+        credentialsDatabase.orderByChild(Constants.KEY_USER_EMAIL).equalTo(email.getText().toString())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.exists()) {
+                            Map<String, String> values = new HashMap<>();
+                            values.put(Constants.KEY_USER_EMAIL, email.getText().toString());
+                            values.put(Constants.KEY_ADDRESS, streetAddress.getText().toString());
+                            values.put(Constants.KEY_ZIPCODE, zipcode.getText().toString());
+                            values.put(Constants.KEY_CITY, city.getText().toString());
+                            values.put(Constants.KEY_NAME, name.getText().toString());
+                            credentialsDatabase.push().setValue(values);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 
     /**
@@ -166,6 +223,12 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         return complete;
     }
 
+    /**
+     *  Check if parameter 'emailAddress' is a valid email
+     */
+    boolean isValidEmail(CharSequence emailAddress) {
+        return emailAddress != null && android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches();
+    }
 
     /**
      * Performs complete order operation when the user clicks the Enter button on the keyboard.

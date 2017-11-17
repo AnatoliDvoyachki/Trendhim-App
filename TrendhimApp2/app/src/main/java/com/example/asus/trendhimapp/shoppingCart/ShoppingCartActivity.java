@@ -20,21 +20,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartActivity extends BaseActivity {
+
+    //static because they are access from the Shopping Cart Adapter
     private static TextView subtotalTextView, shippingTextView, totalTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeComponents();
-    }
 
-    private void initializeComponents() {
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_shopping_cart, null, false);
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         setTitle(R.string.shopping_cart_title);
+
+        initializeComponents();
+    }
+
+    /**
+     * Initialize shopping cart components
+     */
+    private void initializeComponents() {
 
         // Static TextViews so they can be updated from the adapter
         subtotalTextView = findViewById(R.id.subtotal_value_text_view);
@@ -62,6 +69,10 @@ public class ShoppingCartActivity extends BaseActivity {
                 LinearLayoutManager.VERTICAL, false));
     }
 
+    /**
+     * set subtotal
+     * @param newSubtotal
+     */
     @SuppressLint("SetTextI18n")
     public static void setSubtotal(int newSubtotal) {
         String value = String.format("%d€", newSubtotal);
@@ -77,6 +88,10 @@ public class ShoppingCartActivity extends BaseActivity {
         return Integer.parseInt(value);
     }
 
+    /**
+     * set shipping cost
+     * @param shippingCost
+     */
     @SuppressLint("SetTextI18n")
     public static void setShippingCost(int shippingCost) {
         String value = String.format("%d€", shippingCost);
@@ -92,6 +107,10 @@ public class ShoppingCartActivity extends BaseActivity {
         return Integer.parseInt(value);
     }
 
+    /**
+     * set grand total cost
+     * @param totalCost
+     */
     @SuppressLint("SetTextI18n")
     public static void setGrandTotalCost(int totalCost) {
         String value = String.format("%d€", totalCost);

@@ -3,13 +3,10 @@ package com.example.asus.trendhimapp.util;
 import java.security.AccessController;
 import java.security.Provider;
 
-/**
- * @author Alexander Y. Kleymenov
- * @version $Revision$
- */
-public final class JSSEProvider extends Provider {
 
-    public JSSEProvider() {
+final class JSSEProvider extends Provider {
+
+    JSSEProvider() {
         super("HarmonyJSSE", 1.0, "Harmony JSSE Provider");
         AccessController.doPrivileged(new java.security.PrivilegedAction<Void>() {
             public Void run() {

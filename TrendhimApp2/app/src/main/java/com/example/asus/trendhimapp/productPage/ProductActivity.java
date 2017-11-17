@@ -1,6 +1,5 @@
 package com.example.asus.trendhimapp.productPage;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,6 +46,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         loadProduct();
     }
 
+    /**
+     * Initialize product activity components
+     */
     private void initializeComponents() {
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -75,7 +77,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         productNameTextView = findViewById(R.id.productNameTextView);
     }
 
-    @SuppressLint("SetTextI18n")
+    /**
+     * Loads products and sets its components
+     */
     public void loadProduct() {
 
         Intent fromCategoryPage = getIntent();
@@ -94,7 +98,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
                 // set all the values & pictures
                 brandTextView.setText(brand);
-                priceTextView.setText(price + " €");
+                priceTextView.setText(String.format("%s€", price));
                 productNameTextView.setText(productName);
                 BitmapFlyweight.getPicture(
                         bannerPictureUrl, bannerImageView);
@@ -106,6 +110,10 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    /**
+     * Handle wishlist and shopping cart on click listeners
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         final int id = v.getId();
@@ -217,7 +225,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
-     * Adds an item to the shopping list
+     * Adds an item to the shopping cart
      **/
     private void executeAddToCart(final String categoryProductKey) {
 
@@ -238,7 +246,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
                                 if(Objects.equals(shoppingCartProduct.getUserEmail(), user.getEmail())) {
                                     int currentQuantity = Integer.parseInt(shoppingCartProduct.getQuantity()) + 1;
-                                    //Increase the product quantity
+                                    //Increase the product quantity if the product is already in the shopping cart
                                     dataSnapshot1.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
 
                                     Toast.makeText(getApplicationContext(), R.string.item_added_to_cart_message,
@@ -248,8 +256,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                                 }
                             }
 
+                            //Add the product if the product is not in the shopping cart
                             if(!exists[0]){
-
                                 Map<String, Object> values = new HashMap<>();
                                 values.put(Constants.KEY_PRODUCT_KEY, categoryProductKey);
                                 values.put(Constants.KEY_USER_EMAIL, user.getEmail());
@@ -267,6 +275,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         }
         this.instanceCount = 0;
     }
+
     /**
      * Adds an item to the user's wishlist
      **/
@@ -282,7 +291,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
             if (!wishlistProductExists(userEmail, productKey)) {
                 String entityName;
-
+                //Get the product category - Used to query the wishlist database
                 if (productKey.startsWith(Constants.WATCH_PREFIX)) {
                     entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
                 } else if (productKey.startsWith(Constants.BEARD_CARE_PREFIX)) {
@@ -301,6 +310,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
+     * Checks if a product is already added to the wishlist when the user clicks the add to wishlist button
      * @return  true, if the wishlist contains an item that matches the criteria.
      * Otherwise, false.
      **/

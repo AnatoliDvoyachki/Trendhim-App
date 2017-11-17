@@ -56,6 +56,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         LinearLayout loginLayout = findViewById(R.id.loginLayout);
         loginLayout.setOnClickListener(this);
 
+        // Get the user's email from the Sign up activity - if exists
         Intent intent = getIntent();
 
         if(intent != null){
@@ -153,6 +154,10 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
 
     }
 
+    /**
+     * Send forget password email so the user can reset his password
+     * @param view
+     */
     public void forgotPassword(View view) {
         final EditText editText = new EditText(getApplicationContext());
         editText.setHint("Email");
@@ -207,7 +212,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         btnNegative.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
 
-        // Al   ign the buttons in the center of the dialog window
+        // Align the views in the center of the dialog window
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
         layoutParams.weight = 10;
         btnPositive.setLayoutParams(layoutParams);

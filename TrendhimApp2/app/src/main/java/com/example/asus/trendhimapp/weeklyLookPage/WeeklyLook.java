@@ -19,7 +19,7 @@ public class WeeklyLook {
         products = new ArrayList<>();
     }
 
-    WeeklyLook(){}; // Empty constructor for the database
+    WeeklyLook(){} // Empty constructor for firebase
 
     public String getKey() {
         return key;

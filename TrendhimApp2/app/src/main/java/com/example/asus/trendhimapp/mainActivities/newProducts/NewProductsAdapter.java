@@ -49,8 +49,10 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
 
     @Override
     public void onBindViewHolder(NewProductsAdapter.ViewHolder viewHolder, int position) {
+
         // Get the data model based on position
         final CategoryProduct product = newProducts.get(position);
+
         // Set item views based on the views and data model
         TextView productName = viewHolder.productNameTextView;
         productName.setText(product.getName());
@@ -81,7 +83,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
     }
 
     /**
-     * Populate the recycler view. Get data from the database which name is equal to the parameter.
+     * Populate the recycler view. Get data from the Recommended products database
      */
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMMENDED_PRODUCTS);
@@ -111,7 +113,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
     }
 
     /**
-     * Query to the product category database to get an specific product
+     * Query to the product category entity to get a specific product
      * @param productCategory
      * @param productKey
      */
@@ -127,13 +129,13 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                     for (DataSnapshot product : dataSnapshot.getChildren()) {
 
                         Product p = product.getValue(Product.class);
-                        //If the key of the product found is equal to the recent product key
+                        //If the key of the product found is equal to the product key
                         if (Objects.equals(product.getKey(), productKey)) {
 
                             newProducts.add(0, new CategoryProduct(p.getProductName(), p.getPrice(),
                                     p.getBrand(), p.getBannerPictureUrl(), productKey));
 
-                            // Notify the adapter that an item was inserted in position = 0
+                            // Notify the adapter that an item was inserted in the first position = 0
                             notifyItemInserted(0);
                         }
                     }
@@ -207,6 +209,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                     public void onCancelled(DatabaseError databaseError) {}
                 });
     }
+
     /**
      *  Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access

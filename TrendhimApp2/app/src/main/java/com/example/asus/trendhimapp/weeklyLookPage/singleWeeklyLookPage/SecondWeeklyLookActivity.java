@@ -37,6 +37,9 @@ public class SecondWeeklyLookActivity extends BaseActivity {
         initializeRecommendedProductsRecyclerView();
     }
 
+    /**
+     * Initialize weekly list components
+     */
     void initializeRecommendedProductsRecyclerView() {
 
         // Lookup the recycler view in the activity layout (new)
@@ -68,6 +71,9 @@ public class SecondWeeklyLookActivity extends BaseActivity {
 
     }
 
+    /**
+     * @return look id from the intent
+     */
     public String getLookId(){
         Intent intent = getIntent();
         String key;
