@@ -23,6 +23,7 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
      *                   will be assigned after it has been downloaded
      **/
     public DownloadTask(String pictureUrl, ImageView imageView) {
+        super();
         this.pictureUrl = pictureUrl;
         this.imageView = imageView;
     }

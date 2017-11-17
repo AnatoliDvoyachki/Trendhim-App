@@ -30,9 +30,10 @@
         <activity android:name=".weeklyLookPage.singleWeeklyLookPage.SecondWeeklyLookActivity" />
         <activity android:name=".shoppingCart.ShoppingCartActivity" />
         <activity android:name=".shoppingCart.credentialsPage.CredentialsActivity" />
-        <activity android:name=".aboutUs.AboutUs" />
+        <activity android:name=".aboutUsPage.AboutUs" />
 
         <activity android:name=".loginPage.TabbedActivity"/>
+
     </application>
 
 </manifest>

@@ -60,13 +60,14 @@ public class CategoryProductActivity extends BaseActivity {
 
     /**
      * Get category from the Navigation Bar - Used for the database queries
+     *
      * @return category title
      */
-    public String getCategory(){
+    public String getCategory() {
         Intent intent = getIntent();
-        if(intent != null){
+        if (intent != null) {
             String category = intent.getStringExtra(Constants.KEY_CATEGORY);
-            if(category != null)
+            if (category != null)
                 return category;
         }
         return null;
@@ -74,18 +75,19 @@ public class CategoryProductActivity extends BaseActivity {
 
     /**
      * Set Activity tile depending on the Category
+     *
      * @return category title
      */
-    public String setTitle(){
+    public String setTitle() {
         String category = null;
-        switch (getCategory()){
+        switch (getCategory()) {
             case Constants.TABLE_NAME_BAGS:
                 category = "Bags";
                 break;
             case Constants.TABLE_NAME_BRACELETS:
                 category = "Bracelets";
                 break;
-            case  Constants.TABLE_NAME_TIES:
+            case Constants.TABLE_NAME_TIES:
                 category = "Ties";
                 break;
             case Constants.TABLE_NAME_BOW_TIES:

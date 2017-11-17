@@ -122,13 +122,13 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                         quantityTextView.setText(String.valueOf(++currentQuantity));
                                         int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
                                         currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
-                                        ds.getRef().child("quantity").setValue(String.valueOf(currentQuantity)); //update the product quantity in the database
+                                        ds.getRef().child(Constants.KEY_QUANTITY).setValue(String.valueOf(currentQuantity)); //update the product quantity in the database
 
                                         // Update subtotal price
                                         int currentSubtotal = ShoppingCartActivity.getSubtotalCost() + (currentProduct.getPrice());
                                         ShoppingCartActivity.setSubtotal(currentSubtotal);
 
-                                        //Update shipping cost
+                                        // Update shipping cost
                                         // Free shipping if the items price is over 75 euros
                                         if(ShoppingCartActivity.getSubtotalCost() <= 75)
                                             ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
@@ -154,7 +154,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                             quantityTextView.setText(String.valueOf(--currentQuantity));
                                             int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
                                             currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
-                                            ds.getRef().child("quantity").setValue(String.valueOf(currentQuantity)); //update the product quantity in the database
+                                            ds.getRef().child(Constants.KEY_QUANTITY).setValue(String.valueOf(currentQuantity)); //update the product quantity in the database
 
                                             // Update subtotal price
                                             int currentSubtotal = ShoppingCartActivity.getSubtotalCost() - currentProduct.getPrice();
@@ -212,7 +212,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                     ShoppingCartActivity.setShippingCost(0);
                 }
 
-                // Reset subtotal and grand total so they can be recalculated
+                // Reset subtotal and grand total so they can be recalculated by notifyDataSetChanged() call
                 ShoppingCartActivity.setSubtotal(0);
                 ShoppingCartActivity.setGrandTotalCost(0);
 

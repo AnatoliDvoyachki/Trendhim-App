@@ -72,7 +72,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Add item to the shopping cart!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -149,12 +149,12 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot product : dataSnapshot.getChildren()) {
 
-                        Product p = product.getValue(Product.class);
+                        Product current = product.getValue(Product.class);
                         //If the key of the product found is equal to the recent product key
                         if (Objects.equals(product.getKey(), productKey)) {
 
-                            productsWishList.add(0, new CategoryProduct(p.getProductName(), p.getPrice(),
-                                    p.getBrand(), p.getBannerPictureUrl(), productKey));
+                            productsWishList.add(0, new CategoryProduct(current.getProductName(), current.getPrice(),
+                                    current.getBrand(), current.getBannerPictureUrl(), productKey));
 
                             // Notify the adapter that an item was inserted in position = 0
                             notifyItemInserted(0);
@@ -170,7 +170,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
     }
 
     /**
-     *  Provide a direct reference to each of the views
+     * Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access
      */
     class ViewHolder extends RecyclerView.ViewHolder {

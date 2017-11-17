@@ -16,7 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.aboutUs.AboutUs;
+import com.example.asus.trendhimapp.aboutUsPage.AboutUs;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.loginPage.TabbedActivity;
 import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
