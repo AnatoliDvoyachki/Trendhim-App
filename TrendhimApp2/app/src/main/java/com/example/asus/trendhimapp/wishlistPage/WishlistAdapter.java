@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHolder> {
+
     private String userEmail;
     private Context context;
     private List<CategoryProduct> productList;
@@ -59,11 +60,13 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
+
         final CategoryProduct currentProduct = productList.get(position);
         viewHolder.productNameTextView.setText(currentProduct.getName());
         viewHolder.priceTextView.setText(currentProduct.getPrice() + "€");
         viewHolder.emailTextView.setText(userEmail);
+
         BitmapFlyweight.getPicture(currentProduct.getBannerPictureURL(), viewHolder.bannerImageView);
         viewHolder.removeProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +74,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 executeRemoveItem(currentProduct);
             }
         });
+
         viewHolder.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 executeAddToCart(currentProduct, position);
-
-
             }
         });
 
@@ -117,12 +119,15 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
                                             if (productKey.equals(ds1.getKey())) {
 
-                                                Product currentProduct = ds1.getValue(Product.class);
+                                                Product currentProduct = ds1.getValue(Product.class); //get the right
+
+                                                // Create the category product
                                                 CategoryProduct categoryProduct = new CategoryProduct(currentProduct.getProductName(),
                                                         currentProduct.getPrice(), currentProduct.getBrand(),
-                                                        currentProduct.getBannerPictureUrl(), ds1.getKey()); // Create the category product
+                                                        currentProduct.getBannerPictureUrl(), ds1.getKey());
                                                 productList.add(categoryProduct); // Add it to the list
-                                                notifyDataSetChanged(); // Update UI
+
+                                                notifyItemInserted(getItemCount()); // Update UI - notify the adapter than an item has been inserted
                                             }
                                         }
                                     }
@@ -140,7 +145,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     }
 
     /**
-     * Adds an item to the shopping list
+     * Adds an item to the shopping cart
      **/
     private void executeAddToCart(final CategoryProduct categoryProduct, final int position) {
 
@@ -167,6 +172,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
                                         ShoppingCartProduct shoppingCartProduct = dataSnapshot1.getValue(ShoppingCartProduct.class);
 
+                                        //if the product is already in the shopping cart
                                         if(Objects.equals(shoppingCartProduct.getUserEmail(), user.getEmail())) {
                                             int currentQuantity = Integer.parseInt(shoppingCartProduct.getQuantity()) + 1;
                                             //Increase the product quantity
@@ -190,9 +196,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                                 public void onCancelled(DatabaseError databaseError) {}
                             });
                 }
-                removeItem(categoryProduct);
-                productList.remove(position);
-                notifyItemRemoved(position);
+                removeItem(categoryProduct); //Remove item from the wishlist firebase
+                productList.remove(position); //Remove item from the wishlist recycler view
+                notifyItemRemoved(position); //Notify the adapter that an item has been removed
             }
 
         });
@@ -263,7 +269,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         Button btnNegative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         btnNegative.setTextColor(ContextCompat.getColor(context, R.color.black));
 
-        // Allign the buttons in the center of the dialog window
+        // Align the buttons in the center of the dialog window
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
         layoutParams.weight = 10;
         btnPositive.setLayoutParams(layoutParams);
@@ -271,7 +277,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     }
 
     /**
-     * Removes a product from the user's wishlist
+     * Removes a product from the user's wishlist datbase - firebase
      **/
     private void removeItem(final CategoryProduct categoryProduct) {
 
@@ -310,9 +316,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     }
 
     /**
-     * View holder pattern implementation
-     **/
+     *  Provide a direct reference to each of the views
+     * used to cache the views within the layout for fast access
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
+
         ImageView bannerImageView;
         TextView productNameTextView;
         TextView priceTextView;
@@ -321,7 +329,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         ImageButton addToCartButton;
 
         ViewHolder(View itemView) {
+
             super(itemView);
+
             bannerImageView = itemView.findViewById(R.id.banner_image_view);
             productNameTextView = itemView.findViewById(R.id.product_name_text_view);
             priceTextView = itemView.findViewById(R.id.price_text_view);

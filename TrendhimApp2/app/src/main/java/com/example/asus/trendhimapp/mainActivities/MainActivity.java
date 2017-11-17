@@ -28,9 +28,9 @@ public class MainActivity extends BaseActivity {
     public static RecentProductsAdapter adapter;
     public static TextView noRecentProducts;
     ImageView recentProductImage, recommendedProductsImage;
-    int i = 0, i1= 0;
-    public NewProductsAdapter newProductAdapter;
-    public ImageView weeklyLookImage, aboutUsImage;
+    int i = 0, i1= 0; //handle image clicks
+    NewProductsAdapter newProductAdapter;
+    ImageView weeklyLookImage, aboutUsImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,14 @@ public class MainActivity extends BaseActivity {
         final LinearLayout recentProductsLayout = findViewById(R.id.recentProductsLayout);
 
         recentProductImage = findViewById(R.id.recentproductsImage);
+        weeklyLookImage = findViewById(R.id.weeklyLookImage);
+        noRecentProducts = findViewById(R.id.noRecentProducts);
+        recommendedProductsImage = findViewById(R.id.recommendedProductsImage);
+        final LinearLayout recommendedProductsLayout = findViewById(R.id.recommendedProductsLayout);
 
+        /*
+         * Hide or show recent products recycler view on image clicked
+         */
         recentProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,11 +63,9 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        noRecentProducts = findViewById(R.id.noRecentProducts);
-
-        final LinearLayout recommendedProductsLayout = findViewById(R.id.recommendedProductsLayout);
-
-        recommendedProductsImage = findViewById(R.id.recommendedProductsImage);
+        /*
+         * Hide or show recommended products recycler view on image clicked
+         */
         recommendedProductsImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +77,9 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        /*
+         * Open About us Activity on image clicked
+         */
         aboutUsImage = findViewById(R.id.trendhimStoryImage);
         aboutUsImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +89,24 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+         /*
+         * Open Weekly look Activity on image clicked
+         */
+        weeklyLookImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toWeeklyLook = new Intent(getApplicationContext(), WeeklyLookActivity.class);
+                startActivity(toWeeklyLook);
+            }
+        });
+
         initializeRecentProductRecyclerView();
         initializeRecommendedProductsRecyclerView();
     }
 
+    /**
+     * Initialize recent product recycler view
+     */
     void initializeRecentProductRecyclerView(){
         // Lookup the recycler view in activity layout
         RecyclerView recyclerView = findViewById(R.id.recyclerViewmain);
@@ -107,6 +129,9 @@ public class MainActivity extends BaseActivity {
         helper.attachToRecyclerView(recyclerView);
     }
 
+    /**
+     * Initialize recommended product recycler view
+     */
     void initializeRecommendedProductsRecyclerView() {
 
         // Lookup the recycler view in the activity layout (new)
@@ -129,17 +154,6 @@ public class MainActivity extends BaseActivity {
         recyclerViewNewProducts.setLayoutManager(layoutManagerNew);
 
         helperNew.attachToRecyclerView(recyclerViewNewProducts);
-
-        weeklyLookImage = findViewById(R.id.weeklyLookImage);
-
-        weeklyLookImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent toWeeklyLook = new Intent(getApplicationContext(), WeeklyLookActivity.class);
-                startActivity(toWeeklyLook);
-            }
-        });
-
     }
 
 }

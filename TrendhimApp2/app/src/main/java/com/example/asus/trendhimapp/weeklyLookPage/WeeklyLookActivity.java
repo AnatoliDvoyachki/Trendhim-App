@@ -33,6 +33,13 @@ public class WeeklyLookActivity extends BaseActivity {
 
         setTitle(R.string.weekly_look_title);
 
+        initializeComponents();
+    }
+
+    /**
+     * Initialize the weekly look components
+     */
+    void initializeComponents() {
         // Lookup the recycler view in activity layout
         recyclerView = findViewById(R.id.recyclerViewWeeklyLook);
 

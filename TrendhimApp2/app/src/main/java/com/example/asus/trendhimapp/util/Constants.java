@@ -42,12 +42,17 @@ public final class Constants {
     public static final String KEY_CATEGORY = "category";
 
     // Shipping cost
-    public static final double SINGLE_ITEM_SHIPPING_COST = 4.95;
+    public static final int SINGLE_ITEM_SHIPPING_COST = 5;
 
     // Regex
     public static final String WATCH_PREFIX = "watch";
     public static final String ALL_DIGITS_REGEX = "\\d+";
-    public static final String VALID_EMAIL_REGEX = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
     public static final String BEARD_CARE_PREFIX = "beard";
+
+    //Credentials
+    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_ZIPCODE = "zipcode";
+    public static final String KEY_CITY = "city";
+    public static final String KEY_NAME = "name";
 
 }

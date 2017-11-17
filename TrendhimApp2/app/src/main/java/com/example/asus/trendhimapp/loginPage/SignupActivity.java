@@ -26,9 +26,6 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class SignupActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener{
 
     private EditText emailEditText, passwordEditText, confirmEditText;
@@ -72,7 +69,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
         assert passwordEditText != null;
         if (!(passwordEditText.getText().toString().equals(confirmEditText.getText().toString())))
             confirmEditText.setError(getString(R.string.password_mismatch_message));
-        if (!isEmailValid(emailEditText.getText().toString()))
+        if (!isValidEmail(emailEditText.getText().toString()))
             emailEditText.setError(getString(R.string.email_invalid_message));
         else {
             if (passwordEditText.getText().toString().equals(confirmEditText.getText().toString())) {
@@ -156,15 +153,14 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
     }
 
     /**
-     * Check if the email format is valid .
+     * Check if the email format is valid
      *
-     * @param email
+     * @param emailAddress
      * @return true for valid - false for invalid
      */
-    public static boolean isEmailValid (String email) {
-        Pattern pattern = Pattern.compile(Constants.VALID_EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+    // Check if parameter 'emailAddress' is a valid email
+    boolean isValidEmail(CharSequence emailAddress) {
+        return emailAddress != null && android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches();
     }
 
     /**

@@ -28,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +124,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
                                                             }
                                                         }
-
+                                                        //Add the product to recent products
                                                         addToRecent(product);
                                                         MainActivity.adapter.notifyDataSetChanged();
 
@@ -172,7 +171,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     }
 
     /**
-     * Populate the recycler view. Get data from the database which name is equal to the parameter.
+     * Populate the recycler view. Get data from the recent producst database
      */
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECENT_PRODUCTS);
@@ -209,6 +208,10 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
     }
 
+    /**
+     * Add a product to the recent products database when the products is visited
+     * @param product
+     */
     public static void addToRecent(final CategoryProduct product) {
 
         final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECENT_PRODUCTS);
@@ -237,13 +240,13 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                             break;
                         }
                     }
-
+                    //if the product is not in the database
                     if(!exists[0]){
                         Date today = new Date();
                         Map<String, String> values = new HashMap<>();
                         values.put(Constants.KEY_ATTR_KEY, product.getKey());
                         values.put(Constants.KEY_EMAIL, user.getEmail());
-                        values.put(Constants.KEY_ORDER, "-" + convertDateToString(today)); //order the elements in descending date
+                        values.put(Constants.KEY_ORDER, "-" + convertDateToString(today)); //order the elements in descending visit date
                         myRef.push().setValue(values);
                     }
 
@@ -255,6 +258,12 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         }
     }
 
+    /**
+     *  Add required products to the recent products Array List
+     * @param user
+     * @param productCategory
+     * @param productKey
+     */
     private void getProducts(FirebaseUser user, String productCategory, final String productKey){
 
         //Query to the product category database
@@ -273,7 +282,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                 recentProducts.add(0, new CategoryProduct(p.getProductName(), p.getPrice(),
                                         p.getBrand(), p.getBannerPictureUrl(), productKey));
 
-                                // Notify the adapter that an item was inserted in position = 0
+                                // Notify the adapter that an item was inserted in the first position = 0
                                 notifyItemInserted(0);
                             }
                         }
@@ -290,7 +299,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     /**
      * Convert Date to String
      * @param date
-     * @return Date formatted into a date
+     * @return Date formatted into a string
      */
     private static String convertDateToString(Date date) {
         @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("ddhhmmss");

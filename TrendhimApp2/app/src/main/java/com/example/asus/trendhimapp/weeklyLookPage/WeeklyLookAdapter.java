@@ -82,7 +82,7 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getProduct(product); //Redirect the user to the product activity
+                getProduct(product); //Redirect the user to the right product activity
             }
         });
 
@@ -94,7 +94,7 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
     }
 
     /**
-     * Populate the recycler view. Get data from the database which name is equal to the parameter.
+     * Populate the recycler view.
      */
     void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
@@ -107,7 +107,7 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
                         WeeklyLook weeklyLook = look.getValue(WeeklyLook.class);
                         weeklyLooks.add(new WeeklyLook(lookKey,weeklyLook.getPhrase(), weeklyLook.getMainPictureUrl(), weeklyLook.getSecondPictureUrl(),
                                 weeklyLook.getThirdPictureUrl(), weeklyLook.getFourthPictureUrl(), weeklyLook.getFifthPictureUrl()));
-                        // Notify the adapter that an item was inserted in position = getItemCount()
+                        // Notify the adapter that an item was inserted in the last position = getItemCount()
                         notifyItemInserted(getItemCount());
 
                     }

@@ -95,7 +95,7 @@ public class SecondWeeklyLookAdapter extends RecyclerView.Adapter<SecondWeeklyLo
     }
 
     /**
-     * Populate the recycler view. Get data from the database which name is equal to the parameter.
+     * Populate the recycler view. Get data from the database which key is equal to one in the parameter.
      */
     public void addData(final String lookKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
@@ -135,6 +135,7 @@ public class SecondWeeklyLookAdapter extends RecyclerView.Adapter<SecondWeeklyLo
         ImageView mainLookImage, secondLookImage, thirdLookImage, fourthLookImage, fifthLookImage;
         TextView lookPhrase;
         RecyclerView recyclerView;
+
         /**
          *  We also create a constructor that does the view lookups to find each subview
          */

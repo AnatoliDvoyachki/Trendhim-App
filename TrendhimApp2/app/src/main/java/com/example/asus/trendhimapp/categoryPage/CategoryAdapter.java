@@ -90,7 +90,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         });
 
         /*
-         * Handle click events - Redirect to the selected product
+         * Handle click events - Redirect the user to the selected product
          */
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +107,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     /**
-     * Populate the recycler view. Get data from the database which name is equal to the parameter.
+     * Populate the recycler view. Get data from the database which entity name is equal to the parameter.
      * @param category
      */
     void addData(String category) {
@@ -117,11 +117,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for(DataSnapshot product : dataSnapshot.getChildren()) {
+
                         String productKey = product.getKey();
                         Product p = product.getValue(Product.class);
+
                         categoryPageList.add(new CategoryProduct(
                                 p.getProductName(), p.getPrice(), p.getBrand(), p.getBannerPictureUrl(), productKey));
-                        // Notify the adapter that an item was inserted in position = getItemCount()
+
+                        // Notify the adapter that an item was inserted in the last position = getItemCount()
                         notifyItemInserted(getItemCount());
 
                     }

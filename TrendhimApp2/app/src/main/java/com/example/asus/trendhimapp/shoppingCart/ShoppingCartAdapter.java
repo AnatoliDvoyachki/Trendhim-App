@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,10 +63,10 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         TextView productNameTextView = holder.productNameTextView;
         productNameTextView.setText(currentProduct.getName());
 
-        // Set initial quantity
         final TextView quantityTextView = holder.quantityTextView;
         final TextView currentProductPriceTextView = holder.totalPriceTextView;
 
+        // Set initial quantity and total price
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
         final String productKey = currentProduct.getKey(), userEmail = user.getEmail();
@@ -92,16 +91,14 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                 int currentSubtotal = ShoppingCartActivity.getSubtotalCost() + price;
                                 ShoppingCartActivity.setSubtotal(currentSubtotal);
 
-                                // Update the total cost
-                                if(ShoppingCartActivity.getSubtotalCost() <= 75) {
-                                    ShoppingCartActivity.setShippingCost(5);
-                                } else {
+                                // Update the shipping cost
+                                if(ShoppingCartActivity.getSubtotalCost() <= 75)
+                                    ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
+                                else
                                     ShoppingCartActivity.setShippingCost(0);
-                                }
 
                                 // Update the total cost
                                 int currentShippingCost = ShoppingCartActivity.getShippingCost();
-
                                 int grandTotal = currentShippingCost + currentSubtotal;
                                 ShoppingCartActivity.setGrandTotalCost(grandTotal);
 
@@ -114,47 +111,38 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                     }
                                 });
 
-                                // Setup the plus button
+                                // Setup the plus button and handle on click listener events
                                 Button incrementButton = holder.incrementButton;
                                 incrementButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         int currentQuantity = Integer.parseInt(quantityTextView.getText().toString());
-                                        Log.i("shit", "QUANTITY + " + currentQuantity);
 
-                                        // Update current item total price
+                                        // Update current item total price and the quantity
                                         quantityTextView.setText(String.valueOf(++currentQuantity));
                                         int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
                                         currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
-                                        Log.i("shit", "item total Price + " + currentItemTotalPrice);
-                                        ds.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
-
-
-                                        Log.i("shit", "shipping Price + " + ShoppingCartActivity.getShippingCost());
+                                        ds.getRef().child("quantity").setValue(String.valueOf(currentQuantity)); //update the product quantity in the database
 
                                         // Update subtotal price
-                                        Log.i("shit", "current subtotal Price + " + ShoppingCartActivity.getSubtotalCost());
                                         int currentSubtotal = ShoppingCartActivity.getSubtotalCost() + (currentProduct.getPrice());
                                         ShoppingCartActivity.setSubtotal(currentSubtotal);
-                                        Log.i("shit", "current subtotal Price + " + ShoppingCartActivity.getSubtotalCost());
 
-                                        if(ShoppingCartActivity.getSubtotalCost() <= 75) {
-                                            ShoppingCartActivity.setShippingCost(5);
-                                        } else {
+                                        //Update shipping cost
+                                        // Free shipping if the items price is over 75 euros
+                                        if(ShoppingCartActivity.getSubtotalCost() <= 75)
+                                            ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
+                                        else
                                             ShoppingCartActivity.setShippingCost(0);
-                                        }
-                                        Log.i("shit", "shipping Price + " + ShoppingCartActivity.getShippingCost());
 
                                         // Update grand total price
                                         int grandTotal = ShoppingCartActivity.getSubtotalCost() + ShoppingCartActivity.getShippingCost();
                                         ShoppingCartActivity.setGrandTotalCost(grandTotal);
-                                        Log.i("shit", "current grand total Price1 + " + ShoppingCartActivity.getGrandTotalCost());
-
 
                                     }
                                 });
 
-                                // Setup the minus button
+                                // Setup the minus button and handle on click listener events
                                 Button decrementButton = holder.decrementButton;
                                 decrementButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -162,30 +150,28 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                         int currentQuantity = Integer.parseInt(quantityTextView.getText().toString());
                                         if (currentQuantity - 1 >= 1) {
 
-                                            // Update current item total price
+                                            // Update current item total price and the quantity
                                             quantityTextView.setText(String.valueOf(--currentQuantity));
                                             int currentItemTotalPrice = currentQuantity * currentProduct.getPrice();
                                             currentProductPriceTextView.setText(String.valueOf(currentItemTotalPrice) + "€");
-                                            ds.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
+                                            ds.getRef().child("quantity").setValue(String.valueOf(currentQuantity)); //update the product quantity in the database
 
                                             // Update subtotal price
                                             int currentSubtotal = ShoppingCartActivity.getSubtotalCost() - currentProduct.getPrice();
 
                                             ShoppingCartActivity.setSubtotal(currentSubtotal);
 
-                                            // Free shipping if you buy items for over 75 euro
-                                            if(ShoppingCartActivity.getSubtotalCost() <= 75) {
-                                                ShoppingCartActivity.setShippingCost(5);
-                                            } else {
+                                            // Free shipping if the items price is over 75 euros
+                                            if(ShoppingCartActivity.getSubtotalCost() <= 75)
+                                                ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
+                                            else
                                                 ShoppingCartActivity.setShippingCost(0);
-                                            }
 
                                             // Update grand total price
                                             int grandTotal = ShoppingCartActivity.getSubtotalCost() + ShoppingCartActivity.getShippingCost();
                                             ShoppingCartActivity.setGrandTotalCost(grandTotal);
 
                                         }
-
                                     }
                                 });
                             }
@@ -201,8 +187,13 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     }
 
+    /**
+     * Handle on click listener events for the remove button
+     * Remove an item from the shopping cart - recycler view and firebase
+     * @param currentProduct
+     */
     private void initializeRemoveButton(final CategoryProduct currentProduct) {
-        // Create the confirmation dialog
+        // Create the delete confirmation dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true);
         builder.setMessage("Remove " + currentProduct.getName() + " from the shopping cart?");
@@ -216,17 +207,16 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
                 // Update the shipping cost
                 if(ShoppingCartActivity.getSubtotalCost() <= 75) {
-                    ShoppingCartActivity.setShippingCost(5);
+                    ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
                 } else {
                     ShoppingCartActivity.setShippingCost(0);
                 }
 
-                // Reset subtotal and grand total so
-                // they can be recalculated by notifyDataSetChanged() call
+                // Reset subtotal and grand total so they can be recalculated
                 ShoppingCartActivity.setSubtotal(0);
                 ShoppingCartActivity.setGrandTotalCost(0);
 
-                notifyDataSetChanged(); // Notify for the change
+                notifyDataSetChanged(); // Notify the adapter about the change
 
                 Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show(); // Notify the user
             }
@@ -258,7 +248,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     }
 
     /**
-     *  @return the entity name of the product with @param productKey
+     *  @return the given product entity name
+     *  Used to query the database
+     *  @param productKey
      **/
     private String getCategory(String productKey) {
         String entityName;
@@ -273,7 +265,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     }
 
     /**
-     * Removes an item from Firebase that matches the product key of @param product
+     * Removes an item from Firebase that matches the given product key
+     * @param product
      **/
     private void removeItem(CategoryProduct product) {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -334,18 +327,15 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                                 CategoryProduct categoryProduct = new CategoryProduct(product.getProductName(), product.getPrice(),
                                                         product.getBrand(), product.getBannerPictureUrl(), ds1.getKey());
 
-                                            shoppingCartProducts.add(categoryProduct);
+                                            shoppingCartProducts.add(categoryProduct); //add the product to the shopping cart
 
-                                            notifyItemInserted(getItemCount());
+                                            notifyItemInserted(getItemCount()); //notify the adapter than an item has been inserted in the last position
 
                                             // Update the shipping cost
-                                            if(ShoppingCartActivity.getSubtotalCost() <= 75) {
-                                                ShoppingCartActivity.setShippingCost(5);
-                                            } else {
+                                            if(ShoppingCartActivity.getSubtotalCost() <= 75)
+                                                ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
+                                            else
                                                 ShoppingCartActivity.setShippingCost(0);
-                                            }
-
-
                                         }
 
                                     }
@@ -370,9 +360,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     }
 
     /**
-     * View holder pattern implementation
-     **/
+     *  Provide a direct reference to each of the views
+     * used to cache the views within the layout for fast access
+     */
     static class ViewHolder extends RecyclerView.ViewHolder {
+
         ImageView bannerImageView;
         TextView productNameTextView;
         TextView quantityTextView;
@@ -380,9 +372,13 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         Button decrementButton;
         TextView totalPriceTextView;
         ImageButton removeItemButton;
-
+        /**
+         *  We also create a constructor that does the view lookups to find each subview
+         */
         ViewHolder(View itemView) {
+
             super(itemView);
+
             bannerImageView = itemView.findViewById(R.id.banner_image_view_shopping_cart);
             productNameTextView = itemView.findViewById(R.id.product_name_text_view);
             quantityTextView = itemView.findViewById(R.id.quantity_text_view);

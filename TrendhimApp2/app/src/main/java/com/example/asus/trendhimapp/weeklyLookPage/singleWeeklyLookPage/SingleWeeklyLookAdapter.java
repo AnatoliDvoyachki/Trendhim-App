@@ -98,7 +98,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
     }
 
     /**
-     * Populate the recycler view. Get data from the database which name is equal to the parameter.
+     * Populate the recycler view. Get data from the database which key is equal to one in the parameter.
      */
     public void addData(final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
@@ -117,7 +117,6 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
                             else {
                               for(int i = 0; i < products.size(); i++){
                                   String category = getCategory(products.get(i));
-                                  Log.i("shit", " " + category);
                                   queryGetProducts(category, products.get(i));
                               }
 
@@ -198,6 +197,10 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         }
     }
 
+    /**
+     * @param productKey
+     * @return product category based on the given product key
+     */
     private String getCategory(String productKey){
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
