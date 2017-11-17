@@ -176,7 +176,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                                         if(Objects.equals(shoppingCartProduct.getUserEmail(), user.getEmail())) {
                                             int currentQuantity = Integer.parseInt(shoppingCartProduct.getQuantity()) + 1;
                                             //Increase the product quantity
-                                            dataSnapshot1.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
+                                            dataSnapshot1.getRef().child(Constants.KEY_QUANTITY).setValue(String.valueOf(currentQuantity));
                                             Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_SHORT).show();
                                             exists[0] = true;
                                             break;
@@ -186,7 +186,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                                         Map<String, Object> values = new HashMap<>();
                                         values.put(Constants.KEY_PRODUCT_KEY, categoryProduct.getKey());
                                         values.put(Constants.KEY_USER_EMAIL, user.getEmail());
-                                        values.put("quantity", "1");
+                                        values.put(Constants.KEY_QUANTITY, "1");
                                         myRef.push().setValue(values);
                                         Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_SHORT).show();
                                     }

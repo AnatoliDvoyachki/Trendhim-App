@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignupActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener{
+public class SignupActivity extends BaseActivity implements View.OnKeyListener, View.OnClickListener {
 
     private EditText emailEditText, passwordEditText, confirmEditText;
     private FirebaseAuth auth;
@@ -60,6 +60,7 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
     /**
      * Method listening for sign up button clicks.
      * Sign up users with email and password and save its information the the database
+     *
      * @param view
      */
     public void signUp(View view) {
@@ -98,32 +99,31 @@ public class SignupActivity extends BaseActivity implements View.OnKeyListener, 
                                             } else {
                                                 Log.e(TAG, "sendEmailVerification", task.getException());
                                                 Toast.makeText(SignupActivity.this,
-                                                        "Failed to send verification email.",
+                                                        R.string.email_send_fail,
                                                         Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
 
 
-
                                 } else {
-                                    if(!task.isSuccessful()) {
+                                    if (!task.isSuccessful()) {
                                         Toast.makeText(SignupActivity.this, R.string.authentication_fail_message, Toast.LENGTH_SHORT).show();
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
                                         // If sign in fails, display a message to the user.
                                         try {
                                             throw task.getException();
-                                        } catch(FirebaseAuthWeakPasswordException e) {
+                                        } catch (FirebaseAuthWeakPasswordException e) {
                                             passwordEditText.setError(getString(R.string.short_password_message));
                                             passwordEditText.requestFocus();
-                                        } catch(FirebaseAuthInvalidCredentialsException e) {
+                                        } catch (FirebaseAuthInvalidCredentialsException e) {
                                             emailEditText.setError(getString(R.string.email_format_error_message));
                                             emailEditText.requestFocus();
-                                        } catch(FirebaseAuthUserCollisionException e) {
+                                        } catch (FirebaseAuthUserCollisionException e) {
                                             emailEditText.setError(getString(R.string.existing_user_message));
                                             emailEditText.requestFocus();
-                                        } catch(Exception e) {
+                                        } catch (Exception e) {
                                             Log.w("SignInLog", "createUserWithEmail:failure", task.getException());
                                         }
                                     }

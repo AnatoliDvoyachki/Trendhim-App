@@ -247,7 +247,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                                 if(Objects.equals(shoppingCartProduct.getUserEmail(), user.getEmail())) {
                                     int currentQuantity = Integer.parseInt(shoppingCartProduct.getQuantity()) + 1;
                                     //Increase the product quantity if the product is already in the shopping cart
-                                    dataSnapshot1.getRef().child("quantity").setValue(String.valueOf(currentQuantity));
+                                    dataSnapshot1.getRef().child(Constants.KEY_QUANTITY).setValue(String.valueOf(currentQuantity));
 
                                     Toast.makeText(getApplicationContext(), R.string.item_added_to_cart_message,
                                             Toast.LENGTH_SHORT).show();
@@ -261,7 +261,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                                 Map<String, Object> values = new HashMap<>();
                                 values.put(Constants.KEY_PRODUCT_KEY, categoryProductKey);
                                 values.put(Constants.KEY_USER_EMAIL, user.getEmail());
-                                values.put("quantity", "1");
+                                values.put(Constants.KEY_QUANTITY, "1");
                                 myRef.push().setValue(values);
                                 Toast.makeText(getApplicationContext(), R.string.item_added_to_cart_message,
                                         Toast.LENGTH_SHORT).show();

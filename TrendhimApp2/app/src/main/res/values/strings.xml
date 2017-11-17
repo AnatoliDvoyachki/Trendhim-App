@@ -34,13 +34,19 @@
     <string name="logo">logo</string>
 
     <!-- LoginActivity.java strings-->
-    <string name="email">Email:</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account">Create Account</string>
     <string name="sign_up">Sign up</string>
+    <string name="something_went_wrong">UPS! Something went wrong!</string>
     <string name="incorrect_credentials_message">Incorrect email or password</string>
     <string name="not_a_member">Not a member?</string>
+    <string name="email_verification_message">Please verify your email address</string>
+    <string name="must_fill_field_messave">This field cannot be empty</string>
+    <string name="email_hint">Email</string>
+    <string name="email_to_reset_password_message">Enter email to reset your password</string>
+    <string name="reset_password_message">Reset password</string>
     <string name="log_in">Log in</string>
 
     <!--  WishlistActivity.java strings-->
@@ -108,6 +114,7 @@
     <string name="email_format_error_message">Invalid email format</string>
     <string name="email_invalid_message">Invalid email</string>
     <string name="existing_user_message">User already exists</string>
+    <string name="email_send_fail">Failed to send verification email.</string>
     <string name="password_mismatch_message">Passwords don\'t match</string>
     <string name="about_us_two">About us two</string>
     <string name="about_us_three">83m2 of Rome</string>
@@ -197,7 +204,9 @@ Does that mean we are going to work our asses off this year? Yes, it does, but t
     <string name="_2011">2011</string>
     <string name="_2016">2016</string>
     <string name="_2017">2017</string>
+
     <!-- CredentialsActivity.java strings -->
     <string name="credentials_title">Check out</string>
     <string name="forgot_password">Forgot Password?</string>
+
 </resources>

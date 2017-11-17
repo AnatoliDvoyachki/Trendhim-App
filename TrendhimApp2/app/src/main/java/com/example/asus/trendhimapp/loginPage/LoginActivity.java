@@ -59,10 +59,10 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         // Get the user's email from the Sign up activity - if exists
         Intent intent = getIntent();
 
-        if(intent != null){
+        if (intent != null) {
             String email = intent.getStringExtra(Constants.KEY_EMAIL);
 
-            if(email != null)
+            if (email != null)
                 emailEditText.setText(email);
         }
     }
@@ -70,40 +70,41 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
     /**
      * Method listening for login button clicks.
      * Sign in users with email and password
+     *
      * @param view
      */
-    public void login(View view){
+    public void login(View view) {
 
         EditText[] editTextFields = {emailEditText, passwordEditText};
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         validate(editTextFields);
-        if(validate(editTextFields)) {
+        if (validate(editTextFields)) {
             auth.signInWithEmailAndPassword(email, password).
-                addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()) {
-                        FirebaseUser user = auth.getCurrentUser();
-                        if(user.isEmailVerified()) {
-                            Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(toMain);
-                        } else if(!user.isEmailVerified())
-                            Toast.makeText(LoginActivity.this, "Please verify your email address", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), R.string.incorrect_credentials_message, Toast.LENGTH_LONG).show();
-                        Log.d(TAG, "Sign in failed", task.getException());
-                    }
-                }
-                });
+                    addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = auth.getCurrentUser();
+                                if (user.isEmailVerified()) {
+                                    Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(toMain);
+                                } else if (!user.isEmailVerified())
+                                    Toast.makeText(LoginActivity.this, R.string.email_verification_message, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), R.string.incorrect_credentials_message, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
         }
     }
 
     /**
      * Redirect the user to the Sign Up Activity
+     *
      * @param view
      */
-    public void goToSignUp(View view){
+    public void goToSignUp(View view) {
         Intent toSignUp = new Intent(getApplicationContext(), SignupActivity.class);
         startActivity(toSignUp);
     }
@@ -118,7 +119,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
         boolean complete = true;
         for (EditText currentField : fields) {
             if (currentField.getText().toString().matches("")) {
-                currentField.setError("This field cannot be empty");
+                currentField.setError(getString(R.string.must_be_filled_message));
                 complete = false;
             }
         }
@@ -156,23 +157,24 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
 
     /**
      * Send forget password email so the user can reset his password
+     *
      * @param view
      */
     public void forgotPassword(View view) {
         final EditText editText = new EditText(getApplicationContext());
-        editText.setHint("Email");
+        editText.setHint(R.string.email_hint);
         editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
         // Create the confirmation dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
-        builder.setTitle("Reset Password");
-        builder.setMessage("Enter email to reset your password");
+        builder.setTitle(R.string.reset_password_message);
+        builder.setMessage(R.string.email_to_reset_password_message);
 
         builder.setView(editText);
 
         // Yes option
-        builder.setPositiveButton("Reset Password", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.reset_password_message, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 auth.sendPasswordResetEmail(editText.getText().toString())
@@ -186,7 +188,7 @@ public class LoginActivity extends BaseActivity implements View.OnKeyListener, V
                                     Log.d(TAG, "Email sent.");
                                 } else {
                                     Toast.makeText(LoginActivity.this,
-                                            "UPS! Something went wrong!",
+                                            R.string.something_went_wrong,
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
