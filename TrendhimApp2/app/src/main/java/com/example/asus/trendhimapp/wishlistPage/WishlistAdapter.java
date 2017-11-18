@@ -43,7 +43,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private Context context;
     private List<CategoryProduct> productList;
 
-    WishlistAdapter(Context context) {
+    public WishlistAdapter(Context context) {
         this.productList = new ArrayList<>();
         this.context = context;
         setEmail();

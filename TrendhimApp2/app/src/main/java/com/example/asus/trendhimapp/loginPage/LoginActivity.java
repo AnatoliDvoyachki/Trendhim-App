@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.MainActivity;
+import com.example.asus.trendhimapp.util.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,7 +33,6 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
 
     private FirebaseAuth auth;
     public static EditText emailEditText, passwordEditText;
-    private static final String TAG = LoginActivity.class.getCanonicalName();
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -100,10 +99,9 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
                             Intent toMain = new Intent(getActivity(), MainActivity.class);
                             startActivity(toMain);
                         } else if(!user.isEmailVerified())
-                            Toast.makeText(getActivity(), "Please verify your email address", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), R.string.email_verification_message, Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getActivity(), R.string.incorrect_credentials_message, Toast.LENGTH_LONG).show();
-                        Log.d(TAG, "Sign in failed", task.getException());
                     }
                 }
                 });
@@ -120,7 +118,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
         boolean complete = true;
         for (EditText currentField : fields) {
             if (currentField.getText().toString().matches("")) {
-                currentField.setError("This field cannot be empty");
+                currentField.setError(getString(R.string.must_fill_field_messave));
                 complete = false;
             }
         }
@@ -160,19 +158,19 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
      */
     public void forgotPassword() {
         final EditText editText = new EditText(getActivity());
-        editText.setHint("Email");
+        editText.setHint(Constants.HINT_EMAIL);
         editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
         // Create the confirmation dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true);
-        builder.setTitle("Reset Password");
-        builder.setMessage("Enter email to reset your password");
+        builder.setTitle(R.string.reset_password_title);
+        builder.setMessage(R.string.email_to_reset_password_message);
 
         builder.setView(editText);
 
         // Yes option
-        builder.setPositiveButton("Reset Password", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.reset_password_title, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 auth.sendPasswordResetEmail(editText.getText().toString())
@@ -183,10 +181,9 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
                                     Toast.makeText(getActivity(),
                                             "Reset password email has been sent to " + editText.getText().toString(),
                                             Toast.LENGTH_SHORT).show();
-                                    Log.d(TAG, "Email sent.");
                                 } else {
                                     Toast.makeText(getActivity(),
-                                            "UPS! Something went wrong!",
+                                            R.string.something_went_wrong,
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

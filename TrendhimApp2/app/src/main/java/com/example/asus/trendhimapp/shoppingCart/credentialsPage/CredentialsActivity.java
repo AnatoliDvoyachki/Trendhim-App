@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +29,8 @@ import java.util.Map;
 public class CredentialsActivity extends BaseActivity implements View.OnClickListener, View.OnKeyListener {
 
     EditText name, email, streetAddress, city, zipcode, country;
-    String GMail = "trendhimaps@gmail.com"; // GMail address
-    String GMailPass = "android11"; // GMail Password
-    String str_subject, str_to, str_message;
+
+    String subject, reciever, messageContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,10 +115,10 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                 @Override
                 public void run() {
 
-                    Toast.makeText(getApplicationContext(), "Sending... Please wait", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.email_being_sent, Toast.LENGTH_LONG).show();
                 }
             });
-            sendEmail(str_to, str_subject, str_message);
+            sendEmail(reciever, subject, messageContent);
         }
 
     }
@@ -134,27 +132,25 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
     private void sendEmail(final String to, final String subject, final String message) {
         final EditText[] fields = {name, email, streetAddress, country, zipcode, city};
 
-        str_to = email.getText().toString();
-        str_subject = "Order Confirmation - Trendhim thinks you are amazing";
-        str_message = "To be implemented";
+        reciever = email.getText().toString();
+//        subject = "Order Confirmation - Trendhim thinks you are amazing";
+//        messageContent = "To be implemented";
 
         new Thread(new Runnable() {
 
             @Override
             public void run() {
                 try {
-                    GMailSender sender = new GMailSender(GMail,
-                            GMailPass);
+                    GMailSender sender = new GMailSender(Constants.GMAIL_EMAIL,
+                            Constants.GMAIL_PASSWORD);
                     sender.sendMail(subject,
                             message,
-                            GMail,
+                            Constants.GMAIL_EMAIL,
                             to);
-                    Log.w("sendEmail","Email successfully sent!");
-
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Email successfully sent!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.email_sent_success, Toast.LENGTH_LONG).show();
                             saveUserCredentials();
                             for(EditText editText : fields) //Clean fields
                                 editText.setText("");
@@ -162,8 +158,6 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                     });
 
                 } catch (final Exception e) {
-                    Log.e("sendEmail", e.getMessage(), e);
-
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
@@ -199,9 +193,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
+                    public void onCancelled(DatabaseError databaseError) {}
                 });
 
     }
@@ -216,7 +208,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         boolean complete = true;
         for (EditText currentField : fields) {
             if (currentField.getText().toString().matches("")) {
-                currentField.setError("This field cannot be empty");
+                currentField.setError(getString(R.string.must_fill_field_messave));
                 complete = false;
             }
         }

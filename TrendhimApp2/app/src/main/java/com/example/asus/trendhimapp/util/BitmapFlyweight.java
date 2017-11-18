@@ -38,7 +38,7 @@ public final class BitmapFlyweight {
      * @param bitmap the bitmap of the picture - VALUE
      **/
     public static void cachePicture(String url, Bitmap bitmap) {
-        // If the HashMap contains over 120 entries, it is cleared to free up the memory
+        // If the HashMap contains 120 or over 120 entries, it is cleared to free up the memory
         if (PICTURE_CACHE.size() >= MAX_CACHE_CAPACITY) {
             PICTURE_CACHE.clear();
         }

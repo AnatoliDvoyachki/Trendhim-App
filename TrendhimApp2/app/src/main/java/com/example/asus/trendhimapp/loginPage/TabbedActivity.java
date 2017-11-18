@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
+import com.example.asus.trendhimapp.util.Constants;
 
 public class TabbedActivity extends BaseActivity {
 
@@ -66,9 +67,9 @@ public class TabbedActivity extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Month Calculations";
+                    return Constants.PAGE_TITLE_MONTH;
                 case 1:
-                    return "Hour Calculations";
+                    return Constants.PAGE_TITLE_HOUR;
             }
             return null;
         }

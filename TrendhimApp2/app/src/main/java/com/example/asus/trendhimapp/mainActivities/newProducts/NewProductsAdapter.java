@@ -178,17 +178,17 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                                                 if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
 
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
-                                                    Intent intent = new Intent(context, ProductActivity.class);
+                                                    Intent toProductActivity = new Intent(context, ProductActivity.class);
 
-                                                    intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
-                                                    intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
-                                                    intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
-                                                    intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
-                                                    intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
-                                                    intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
-                                                    intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+                                                    toProductActivity.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
+                                                    toProductActivity.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
+                                                    toProductActivity.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                                                    toProductActivity.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+                                                    toProductActivity.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
+                                                    toProductActivity.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                                                    toProductActivity.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
-                                                    context.startActivity(intent);
+                                                    context.startActivity(toProductActivity);
 
                                                 }
                                             }

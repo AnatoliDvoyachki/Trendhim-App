@@ -97,7 +97,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
                 // set all the values & pictures
                 brandTextView.setText(brand);
-                priceTextView.setText(String.format("%s€", price));
+                priceTextView.setText(String.format(Constants.PRICE_FORMAT, price));
                 productNameTextView.setText(productName);
 
                 if(bannerPictureUrl != null)

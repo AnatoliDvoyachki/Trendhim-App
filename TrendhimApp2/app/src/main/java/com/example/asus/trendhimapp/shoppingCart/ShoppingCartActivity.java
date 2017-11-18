@@ -15,6 +15,7 @@ import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.shoppingCart.credentialsPage.CredentialsActivity;
+import com.example.asus.trendhimapp.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class ShoppingCartActivity extends BaseActivity {
      */
     @SuppressLint("SetTextI18n")
     public static void setSubtotal(int newSubtotal) {
-        String value = String.format("%d€", newSubtotal);
+        String value = String.format(Constants.PRICE_FORMAT, newSubtotal);
         subtotalTextView.setText(value);
     }
 
@@ -94,7 +95,7 @@ public class ShoppingCartActivity extends BaseActivity {
      */
     @SuppressLint("SetTextI18n")
     public static void setShippingCost(int shippingCost) {
-        String value = String.format("%d€", shippingCost);
+        String value = String.format(Constants.PRICE_FORMAT, shippingCost);
         shippingTextView.setText(value);
     }
 
@@ -113,7 +114,7 @@ public class ShoppingCartActivity extends BaseActivity {
      */
     @SuppressLint("SetTextI18n")
     public static void setGrandTotalCost(int totalCost) {
-        String value = String.format("%d€", totalCost);
+        String value = String.format(Constants.PRICE_FORMAT, totalCost);
         totalTextView.setText(value);
     }
 
