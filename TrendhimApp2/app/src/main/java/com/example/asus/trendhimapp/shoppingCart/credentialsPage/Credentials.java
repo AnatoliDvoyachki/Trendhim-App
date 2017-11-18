@@ -23,15 +23,15 @@ public class Credentials {
         return address;
     }
 
-    String getCity() {
+    public String getCity() {
         return city;
     }
 
-    String getZipcode() {
+    public String getZipcode() {
         return zipcode;
     }
 
-    String getCountry() {
+    public String getCountry() {
         return country;
     }
 

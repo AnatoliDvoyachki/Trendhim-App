@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.settings.order.detailedOrder.DetailedOrderActivity;
@@ -81,49 +82,54 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_ORDERS);
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        myRef.orderByChild("userEmail").equalTo(currentUser.getEmail())
-                .addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
-            @Override
-            public void onDataChange(final DataSnapshot dataSnapshot) {
+        if(currentUser != null) {
+            myRef.orderByChild("userEmail").equalTo(currentUser.getEmail())
+                    .addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+                        @Override
+                        public void onDataChange(final DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()) {
+                            if (dataSnapshot.exists()) {
 
-                    for (final DataSnapshot product : dataSnapshot.getChildren()) {
-                        //Found product
-                        final UserOrder order = product.getValue(UserOrder.class);
-                        DatabaseReference myRef =
-                                FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
-                        myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get user address
-                                    @Override
-                                    public void onDataChange(final DataSnapshot dataSnapshot) {
+                                for (final DataSnapshot product : dataSnapshot.getChildren()) {
+                                    //Found product
+                                    final UserOrder order = product.getValue(UserOrder.class);
+                                    DatabaseReference myRef =
+                                            FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
+                                    myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get user address
+                                        @Override
+                                        public void onDataChange(final DataSnapshot dataSnapshot) {
 
-                                        if (dataSnapshot.exists()) {
+                                            if (dataSnapshot.exists()) {
 
-                                            for (final DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                                Credentials credentials =  dataSnapshot1.getValue(Credentials.class);
-                                                orders.add(0, new UserOrder(order.getDate(), credentials.getAddress(),
-                                                        order.getGrand_total(), product.getKey()));
-                                                notifyItemInserted(0);
+                                                for (final DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                                    Credentials credentials =  dataSnapshot1.getValue(Credentials.class);
+                                                    orders.add(0, new UserOrder(order.getDate(), credentials.getAddress(),
+                                                            order.getGrand_total(), product.getKey()));
+                                                    notifyItemInserted(0);
 
+                                                }
                                             }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {}
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {}
 
-                                });
-
+                                    });
 
 
-                    }
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
+                                }
+                            }
+                        }
 
-        });
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {}
+
+                    });
+
+        } else {
+            Toast.makeText(context, R.string.need_to_log_in_first_message, Toast.LENGTH_LONG).show();
+        }
 
     }
     /**

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
@@ -108,6 +109,8 @@ public class DetailedOrderAdapter extends RecyclerView.Adapter<DetailedOrderAdap
                 public void onCancelled(DatabaseError databaseError) {}
 
             });
+        } else {
+            Toast.makeText(context, R.string.need_to_log_in_first_message, Toast.LENGTH_LONG).show();
         }
 
     }

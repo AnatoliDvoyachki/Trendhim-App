@@ -234,5 +234,9 @@ Does that mean we are going to work our asses off this year? Yes, it does, but t
     <string name="sending_email">Sending... Please wait</string>
     <string name="order_successful_message">Order successfully made! Check your</string>
     <string name="notifications_test_settings">If you check this option, we will notify you of new products arrivals, stock availability and teh status of your purchases</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="surname">Surname</string>
+    <string name="street_address">Street address</string>
+    <string name="credentials_updated">Credentials updated</string>
 
 </resources>

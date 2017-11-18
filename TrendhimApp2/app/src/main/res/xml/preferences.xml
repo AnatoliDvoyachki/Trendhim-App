@@ -10,15 +10,9 @@
         </PreferenceScreen>
 
         <PreferenceScreen
-            android:title="Shipping Address"
-            android:summary="Your address">
-            <intent android:action=".settings.UserAddress"/>
-        </PreferenceScreen>
-
-        <PreferenceScreen
             android:title="Personal details"
-            android:summary="Your information">
-            <intent android:action=".settings.UserDetails"/>
+            android:summary="Your credentials">
+            <intent android:action=".settings.UserAddress"/>
         </PreferenceScreen>
 
     </PreferenceCategory>

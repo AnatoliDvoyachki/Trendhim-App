@@ -59,6 +59,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".settings.order.detailedOrder.DetailedOrderActivity" />
+        <activity android:name=".settings.shippingAddress.UserAddress" >
+            <intent-filter>
+                <action android:name=".settings.UserAddress" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".settings.shippingAddress.IndividualAddress" />
     </application>
 
 </manifest>
