@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCart.credentialsPage;
+package com.example.asus.trendhimapp.shoppingCartPage.credentialsPage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,9 +17,9 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
-import com.example.asus.trendhimapp.shoppingCart.Order;
-import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
-import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
+import com.example.asus.trendhimapp.shoppingCartPage.Order;
+import com.example.asus.trendhimapp.shoppingCartPage.ShoppingCartActivity;
+import com.example.asus.trendhimapp.shoppingCartPage.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.util.GMailSender;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.wishlist;
+package com.example.asus.trendhimapp.wishlistPage;
 
 import android.content.Context;
 import android.os.Bundle;

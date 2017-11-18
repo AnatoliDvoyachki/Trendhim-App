@@ -63,10 +63,6 @@ public final class Constants {
     public static final String KEY_QUANTITY = "quantity";
     public static final String KEY_COUNTRY = "country";
 
-
-    // Edit text hints
-    public static final String HINT_EMAIL = "Email";
-
     // Page titles
     public static final String PAGE_TITLE_MONTH = "Month Calculations";
     public static final String PAGE_TITLE_HOUR = "Hour Calculations";

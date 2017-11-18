@@ -20,7 +20,7 @@
         <activity
             android:name=".productPage.ProductActivity"
             android:parentActivityName=".categoryPage.CategoryProductActivity" />
-        <activity android:name=".wishlist.WishlistActivity" />
+        <activity android:name=".wishlistPage.WishlistActivity" />
         <activity android:name=".weeklyLookPage.WeeklyLookActivity" />
 
         <meta-data
@@ -28,9 +28,9 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".weeklyLookPage.singleWeeklyLookPage.SecondWeeklyLookActivity" />
-        <activity android:name=".shoppingCart.ShoppingCartActivity" />
-        <activity android:name=".shoppingCart.credentialsPage.CredentialsActivity" />
-        <activity android:name=".aboutUs.AboutUsActivity" >
+        <activity android:name=".shoppingCartPage.ShoppingCartActivity" />
+        <activity android:name=".shoppingCartPage.credentialsPage.CredentialsActivity" />
+        <activity android:name=".aboutUsPage.AboutUsActivity" >
             <intent-filter>
                 <action android:name=".aboutUs.AboutUsActivity" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -17,14 +17,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.aboutUs.AboutUsActivity;
+import com.example.asus.trendhimapp.aboutUsPage.AboutUsActivity;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.loginPage.TabbedActivity;
-import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
+import com.example.asus.trendhimapp.shoppingCartPage.ShoppingCartActivity;
 import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.settings.Settings;
 import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLookActivity;
-import com.example.asus.trendhimapp.wishlist.WishlistActivity;
+import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

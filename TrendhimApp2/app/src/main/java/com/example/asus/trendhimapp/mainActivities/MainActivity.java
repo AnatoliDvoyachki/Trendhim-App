@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.aboutUs.AboutUsActivity;
+import com.example.asus.trendhimapp.aboutUsPage.AboutUsActivity;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.newProducts.NewProductsAdapter;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;

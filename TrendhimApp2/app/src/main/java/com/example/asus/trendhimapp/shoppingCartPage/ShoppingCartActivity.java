@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCart;
+package com.example.asus.trendhimapp.shoppingCartPage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
-import com.example.asus.trendhimapp.shoppingCart.credentialsPage.CredentialsActivity;
+import com.example.asus.trendhimapp.shoppingCartPage.credentialsPage.CredentialsActivity;
 import com.example.asus.trendhimapp.util.Constants;
 
 import java.util.ArrayList;
