@@ -18,8 +18,11 @@ import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
 import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.productPage.ProductActivity;
+import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLookAdapter.ViewHolder> {
@@ -72,7 +77,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, R.string.item_added_to_cart_message, Toast.LENGTH_LONG).show();
+               executeAddToCart(product.getKey());
             }
         });
 
@@ -91,6 +96,58 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
 
 
     }
+
+    /**
+     * Adds an item to the shopping cart
+     **/
+    private void executeAddToCart(final String categoryProductKey) {
+
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final boolean[] exists = {false};
+
+        if(user != null){ //if the user is logged in
+
+            myRef.orderByChild(Constants.KEY_PRODUCT_KEY).equalTo(categoryProductKey)
+                    .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                ShoppingCartProduct shoppingCartProduct = dataSnapshot1.getValue(ShoppingCartProduct.class);
+
+                                if(Objects.equals(shoppingCartProduct.getUserEmail(), user.getEmail())) {
+                                    int currentQuantity = Integer.parseInt(shoppingCartProduct.getQuantity()) + 1;
+                                    //Increase the product quantity if the product is already in the shopping cart
+                                    dataSnapshot1.getRef().child(Constants.KEY_QUANTITY).setValue(String.valueOf(currentQuantity));
+
+                                    Toast.makeText(context, R.string.item_added_to_cart_message,
+                                            Toast.LENGTH_SHORT).show();
+                                    exists[0] = true;
+                                    break;
+                                }
+                            }
+
+                            //Add the product if the product is not in the shopping cart
+                            if(!exists[0]){
+                                Map<String, Object> values = new HashMap<>();
+                                values.put(Constants.KEY_PRODUCT_KEY, categoryProductKey);
+                                values.put(Constants.KEY_USER_EMAIL, user.getEmail());
+                                values.put(Constants.KEY_QUANTITY, "1");
+                                myRef.push().setValue(values);
+                                Toast.makeText(context, R.string.item_added_to_cart_message,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {}
+                    });
+        }
+    }
+
 
     @Override
     public int getItemCount() {

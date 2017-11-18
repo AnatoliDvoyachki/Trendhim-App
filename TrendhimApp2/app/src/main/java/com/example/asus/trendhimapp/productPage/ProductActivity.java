@@ -214,7 +214,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
-     * Adds an item to the shopping list
+     * Adds an item to the shopping cart
      **/
     private void addToShoppingCart() {
 
