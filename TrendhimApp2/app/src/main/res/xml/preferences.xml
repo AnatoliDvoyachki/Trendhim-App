@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="My Account">
+
+        <PreferenceScreen
+            android:title="Order placements"
+            android:summary="Your orders">
+            <intent android:action=".order.OrderActivity"/>
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="Shipping Address"
+            android:summary="Your address">
+            <intent android:action=".settings.UserAddress"/>
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="Personal details"
+            android:summary="Your information">
+            <intent android:action=".settings.UserDetails"/>
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:title="Info">
 
@@ -19,7 +41,7 @@
         <CheckBoxPreference
             android:key="notifications"
             android:title="Notifications"
-            android:summary="If you check this option, we will notify you of new products arrivals, stock availability and teh status of your purchases"
+            android:summary="@string/notifications_test_settings"
             android:defaultValue="true"/>
 
         <PreferenceScreen
@@ -29,10 +51,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Orders">
-        <PreferenceScreen
-            android:title="Order placements" >
-            <intent android:action=".order.OrderActivity"/>
-        </PreferenceScreen>
-    </PreferenceCategory>
 </PreferenceScreen>

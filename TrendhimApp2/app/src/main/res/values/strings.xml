@@ -233,5 +233,6 @@ Does that mean we are going to work our asses off this year? Yes, it does, but t
     <string name="your_order">YOUR ORDER</string>
     <string name="sending_email">Sending... Please wait</string>
     <string name="order_successful_message">Order successfully made! Check your</string>
+    <string name="notifications_test_settings">If you check this option, we will notify you of new products arrivals, stock availability and teh status of your purchases</string>
 
 </resources>
