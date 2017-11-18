@@ -34,7 +34,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private List<CategoryProduct> categoryPageList;
     private String category;
 
-    CategoryAdapter(Context context, List<CategoryProduct> categories, String category) {
+    public CategoryAdapter(Context context, List<CategoryProduct> categories, String category) {
         this.categoryPageList = categories;
         this.context = context;
         this.category = category;

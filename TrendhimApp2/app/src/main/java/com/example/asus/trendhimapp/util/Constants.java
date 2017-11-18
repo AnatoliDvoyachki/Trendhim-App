@@ -52,6 +52,8 @@ public final class Constants {
     public static final String WATCH_PREFIX = "watch";
     public static final String ALL_DIGITS_REGEX = "\\d+";
     public static final String BEARD_CARE_PREFIX = "beard";
+    public static final String PRICE_FORMAT = "%s€";
+    public static final String DATE_FORMAT = "ddhhmmss";
 
     //Credentials
     public static final String KEY_ADDRESS = "address";
@@ -61,5 +63,16 @@ public final class Constants {
     public static final String KEY_QUANTITY = "quantity";
     public static final String KEY_COUNTRY = "country";
 
+
+    // Edit text hints
+    public static final String HINT_EMAIL = "Email";
+
+    // Page titles
+    public static final String PAGE_TITLE_MONTH = "Month Calculations";
+    public static final String PAGE_TITLE_HOUR = "Hour Calculations";
+
+    // Trendhim email credentials
+    public static final String GMAIL_EMAIL = "trendhimaps@gmail.com"; // GMAIL_EMAIL address
+    public static final String GMAIL_PASSWORD = "android11"; // GMAIL_EMAIL Password
 
 }

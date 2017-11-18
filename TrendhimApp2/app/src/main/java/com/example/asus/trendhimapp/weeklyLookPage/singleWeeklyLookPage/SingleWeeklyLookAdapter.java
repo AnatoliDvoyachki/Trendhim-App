@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -168,9 +167,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
                             GenericTypeIndicator<List<String>> genericTypeIndicator =
                                     new GenericTypeIndicator<List<String>>() {};
                             List<String> products = product.child(Constants.KEY_PRODUCTS).getValue(genericTypeIndicator);
-                            if( products == null ) {
-                                Log.i(TAG, "no products");
-                            }
+                            if( products == null ) {}
                             else {
                               for(int i = 0; i < products.size(); i++){
                                   String category = getCategory(products.get(i));

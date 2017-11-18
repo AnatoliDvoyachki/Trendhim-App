@@ -280,12 +280,12 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         for (DataSnapshot product : dataSnapshot.getChildren()) {
-                            Product p = product.getValue(Product.class);
+                            Product current = product.getValue(Product.class);
                             //If the key of the product found is equal to the recent product key
                             if (Objects.equals(product.getKey(), productKey)) {
 
-                                recentProducts.add(0, new CategoryProduct(p.getProductName(), p.getPrice(),
-                                        p.getBrand(), p.getBannerPictureUrl(), productKey));
+                                recentProducts.add(0, new CategoryProduct(current.getProductName(), current.getPrice(),
+                                        current.getBrand(), current.getBannerPictureUrl(), productKey));
 
                                 // Notify the adapter that an item was inserted in the first position = 0
                                 notifyItemInserted(0);
@@ -307,7 +307,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
      * @return Date formatted into a string
      */
     private static String convertDateToString(Date date) {
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("ddhhmmss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat(Constants.DATE_FORMAT);
         return dateFormatter.format(date);
     }
 

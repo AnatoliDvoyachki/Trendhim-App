@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.aboutUs.AboutUs;
+import com.example.asus.trendhimapp.aboutUs.AboutUsActivity;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.loginPage.TabbedActivity;
 import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
@@ -188,7 +188,7 @@ public class BaseActivity extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), R.string.need_to_log_in_first_message, Toast.LENGTH_LONG).show();
                 break;
             case R.id.aboutUs:
-                intent = new Intent(getApplicationContext(), AboutUs.class);
+                intent = new Intent(getApplicationContext(), AboutUsActivity.class);
                 startActivity(intent, options.toBundle());
                 break;
 

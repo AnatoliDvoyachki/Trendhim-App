@@ -19,7 +19,7 @@ public class WeeklyLook {
         products = new ArrayList<>();
     }
 
-    WeeklyLook(){} // Empty constructor for firebase
+    public WeeklyLook(){} // Empty constructor for firebase
 
     public String getKey() {
         return key;
@@ -29,7 +29,7 @@ public class WeeklyLook {
         return mainPictureUrl;
     }
 
-     public String getSecondPictureUrl() {
+    public String getSecondPictureUrl() {
         return secondPictureUrl;
     }
 

@@ -6,7 +6,7 @@ public class RecentProduct {
 
     public RecentProduct(){}
 
-    RecentProduct(String key, String email, String category) {
+    public RecentProduct(String key, String email, String category) {
         this.email = email;
         this.category = category;
         this.key = key;

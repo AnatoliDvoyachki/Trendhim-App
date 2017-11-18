@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +29,6 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
 
     private EditText emailEditText, passwordEditText, confirmEditText;
     private FirebaseAuth auth;
-    private static final String TAG = SignupActivity.class.getCanonicalName();
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,8 +84,6 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "createUserWithEmail:success");
-
                                     final FirebaseUser user = auth.getCurrentUser();
                                     user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -102,9 +98,8 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
                                                     editText.setText(null);
 
                                             } else {
-                                                Log.e(TAG, "sendEmailVerification", task.getException());
                                                 Toast.makeText(getActivity(),
-                                                        "Failed to send verification email.",
+                                                        R.string.email_send_fail,
                                                         Toast.LENGTH_SHORT).show();
                                             }
                                         }
@@ -115,8 +110,6 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
                                 } else {
                                     if(!task.isSuccessful()) {
                                         Toast.makeText(getActivity(), R.string.authentication_fail_message, Toast.LENGTH_SHORT).show();
-                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-
                                         // If sign in fails, display a message to the user.
                                         try {
                                             throw task.getException();
@@ -130,7 +123,7 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
                                             emailEditText.setError(getString(R.string.existing_user_message));
                                             emailEditText.requestFocus();
                                         } catch(Exception e) {
-                                            Log.w("SignInLog", "createUserWithEmail:failure", task.getException());
+                                            e.printStackTrace();
                                         }
                                     }
                                 }
