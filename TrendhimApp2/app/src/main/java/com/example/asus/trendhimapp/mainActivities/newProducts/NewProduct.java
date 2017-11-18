@@ -6,12 +6,12 @@ public class NewProduct {
 
     public NewProduct() {}
 
-    NewProduct(String key, String category) {
+    public NewProduct(String key, String category) {
         this.category = category;
         this.key = key;
     }
 
-    String getCategory() {
+    public String getCategory() {
         return category;
     }
 

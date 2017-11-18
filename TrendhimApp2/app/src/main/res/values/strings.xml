@@ -81,7 +81,7 @@
     <string name="minus_sign">-</string>
     <string name="initial_value">0</string>
 
-    <!-- AboutUs.java strings -->
+    <!--AboutUsActivityUs.java strings -->
     <string name="trendhim_story_and_core_values">Trendhim story and core values</string>
     <string name="the_trendhim_philosophy_of_awesomeness">The Trendhim philosophy of awesomeness</string>
     <string name="introduction_about_us">Awesomeness is the main deciding factor in all we do at Trendhim. \n\n We only sell products we believe are awesome. We only deliver a service we believe is awesome.\n\n We only hire people we think are awesome.\n\n We give customers 365 days to return products because we believe this is awesome.\n\nWe want our customers to have the best possible shopping experience and fall in love with their new product. \n\nAs simple as that.</string>
