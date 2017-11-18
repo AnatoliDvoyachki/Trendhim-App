@@ -40,9 +40,7 @@ import java.util.Map;
 public class CredentialsActivity extends BaseActivity implements View.OnClickListener, View.OnKeyListener {
 
     EditText name, email, streetAddress, city, zipcode, country;
-    String GMail = "trendhimaps@gmail.com"; // GMail address
-    String GMailPass = "android11"; // GMail Password
-    String str_subject, str_to, str_message;
+    String subject, receiver, messageContent;
     ArrayList<Order> orders;
 
     @Override
@@ -87,9 +85,9 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         // Set the OnKeyListener to the last edit text view in the layout
         country.setOnKeyListener(this);
 
-        str_to = email.getText().toString();
-        str_subject = "Order Confirmation - Trendhim thinks you are amazing";
-        str_message = "Your order is on its way!";
+        receiver = email.getText().toString();
+        subject = "Order Confirmation - Trendhim thinks you are amazing";
+        messageContent = "Your order is on its way!";
     }
 
     /**
@@ -138,10 +136,10 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(), "Sending... Please wait", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.sending_email, Toast.LENGTH_LONG).show();
                 }
             });
-            sendEmail(str_to, str_subject, str_message);
+            sendEmail(receiver, subject, messageContent);
             saveUserCredentials();
             saveOrderInformation();
             removeItem();
@@ -162,13 +160,13 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void run() {
                 try {
-                    GMailSender sender = new GMailSender(GMail,
-                            GMailPass);
+                    GMailSender sender = new GMailSender(Constants.GMAIL_EMAIL,
+                            Constants.GMAIL_PASSWORD);
                     sender.sendMail(subject,
                             message,
-                            GMail,
+                            Constants.GMAIL_EMAIL,
                             to);
-                    Log.w("sendEmail","Email successfully sent!");
+                    Log.w("sendEmail",getString(R.string.order_successful_message));
 
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override

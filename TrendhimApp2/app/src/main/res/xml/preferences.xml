@@ -7,7 +7,7 @@
         <PreferenceScreen
             android:summary="Meet the team"
             android:title="About us" >
-            <intent android:action=".aboutUs.AboutUs"/>
+            <intent android:action=".aboutUs.AboutUsActivity"/>
         </PreferenceScreen>
 
         <PreferenceScreen

@@ -30,9 +30,9 @@
         <activity android:name=".weeklyLookPage.singleWeeklyLookPage.SecondWeeklyLookActivity" />
         <activity android:name=".shoppingCart.ShoppingCartActivity" />
         <activity android:name=".shoppingCart.credentialsPage.CredentialsActivity" />
-        <activity android:name=".aboutUs.AboutUs" >
+        <activity android:name=".aboutUs.AboutUsActivity" >
             <intent-filter>
-                <action android:name=".aboutUs.AboutUs" />
+                <action android:name=".aboutUs.AboutUsActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

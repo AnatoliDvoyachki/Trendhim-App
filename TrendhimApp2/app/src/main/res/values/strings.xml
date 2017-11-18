@@ -231,5 +231,7 @@ Does that mean we are going to work our asses off this year? Yes, it does, but t
     <string name="order_image">Order image</string>
     <string name="orders_placed">Orders placed</string>
     <string name="your_order">YOUR ORDER</string>
+    <string name="sending_email">Sending... Please wait</string>
+    <string name="order_successful_message">Order successfully made! Check your</string>
 
 </resources>
