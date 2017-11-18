@@ -1,10 +1,12 @@
 package com.example.asus.trendhimapp.shoppingCart;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -193,7 +195,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.bannerImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getProduct(currentProduct);
+                getProduct(currentProduct, view);
             }
         });
 
@@ -263,7 +265,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
      * Redirect the user to the right product when the banner picture is clicked
      * @param currentProduct
      */
-    private void getProduct(final CategoryProduct currentProduct) {
+    private void getProduct(final CategoryProduct currentProduct, final View view) {
         //Query the shopping cart database to get the product category
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
         //get product which key is equal to the one clicked
@@ -293,6 +295,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
                                                     Intent toProductPage = new Intent(context, ProductActivity.class);
 
+                                                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                                                            makeSceneTransitionAnimation((Activity) context, view, "profile");
+
                                                     toProductPage.putExtra(Constants.KEY_PRODUCT_KEY, currentProduct.getKey());
                                                     toProductPage.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
                                                     toProductPage.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
@@ -301,7 +306,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                                     toProductPage.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
                                                     toProductPage.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
-                                                    context.startActivity(toProductPage);
+                                                    context.startActivity(toProductPage, options.toBundle());
 
                                                 }
                                             }

@@ -3,6 +3,7 @@ package com.example.asus.trendhimapp.mainActivities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -85,7 +86,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                Intent intent = new Intent(getApplicationContext(), AboutUs.class);
-               startActivity(intent);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this, view, "profile");
+               startActivity(intent, options.toBundle());
             }
         });
 
@@ -96,7 +99,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent toWeeklyLook = new Intent(getApplicationContext(), WeeklyLookActivity.class);
-                startActivity(toWeeklyLook);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this, view, "profile");
+                startActivity(toWeeklyLook, options.toBundle());
             }
         });
 

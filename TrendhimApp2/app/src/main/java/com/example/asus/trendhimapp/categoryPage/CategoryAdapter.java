@@ -1,8 +1,10 @@
 package com.example.asus.trendhimapp.categoryPage;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -52,7 +54,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
         // Get the data model based on position
         final CategoryProduct product = categoryPageList.get(position);
@@ -79,10 +81,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_UP:
                         productImage.animate().alpha(1f);
-                        getProduct(product); //Redirect the user to the product activity
+                        getProduct(product, viewHolder.itemView); //Redirect the user to the product activity
                         break;
                     case MotionEvent.ACTION_DOWN:
                         productImage.animate().alpha(0.7f);
+                        productImage.animate().alpha(1f);
+
                         break;
                 }
                 return true;
@@ -95,7 +99,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getProduct(product); //Redirect the user to the product activity
+                getProduct(product, viewHolder.itemView); //Redirect the user to the product activity
             }
         });
 
@@ -170,7 +174,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
      * Redirect the user to the correct Product
      * @param product
      */
-    private void getProduct(final CategoryProduct product) {
+    private void getProduct(final CategoryProduct product, final View view) {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(category);
 
@@ -188,6 +192,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
                             Intent toProductPage = new Intent(context, ProductActivity.class);
 
+                            ActivityOptionsCompat options = ActivityOptionsCompat.
+                                    makeSceneTransitionAnimation((Activity) context, view, "profile");
+
                             toProductPage.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
                             toProductPage.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
                             toProductPage.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
@@ -202,7 +209,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                             if(foundProduct.getRightPictureUrl() != null)
                                 toProductPage.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
-                            context.startActivity(toProductPage);
+                            context.startActivity(toProductPage, options.toBundle());
                         }
 
                     }
