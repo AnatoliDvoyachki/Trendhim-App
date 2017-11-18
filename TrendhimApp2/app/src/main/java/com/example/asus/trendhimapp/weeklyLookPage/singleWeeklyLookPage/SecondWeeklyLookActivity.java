@@ -34,16 +34,16 @@ public class SecondWeeklyLookActivity extends BaseActivity {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_second_rv, null, false);
         BaseActivity.drawer.addView(contentView, 0);
-        initializeRecommendedProductsRecyclerView();
+        initializeWeeklyLookRecyclerView();
     }
 
     /**
      * Initialize weekly list components
      */
-    void initializeRecommendedProductsRecyclerView() {
+    void initializeWeeklyLookRecyclerView() {
 
         // Lookup the recycler view in the activity layout (new)
-        RecyclerView recyclerViewNewProducts = findViewById(R.id.recyclerViewWeeklyLookSecond);
+        RecyclerView recyclerViewWeeklyLooks = findViewById(R.id.recyclerViewWeeklyLookSecond);
 
         //Weekly looks initialize
         weeklyLooks = new ArrayList<>();
@@ -52,8 +52,8 @@ public class SecondWeeklyLookActivity extends BaseActivity {
         adapter = new SecondWeeklyLookAdapter(this, weeklyLooks, new SingleWeeklyLookAdapter(this, wishListProducts), getLookId());
 
         // Attach the adapter to the recycler view
-        recyclerViewNewProducts.setAdapter(adapter);
-
+        recyclerViewWeeklyLooks.setAdapter(adapter);
+        recyclerViewWeeklyLooks.setNestedScrollingEnabled(true);
         Intent intent = getIntent();
         if(intent != null) {
             //Populate the recycler view
@@ -65,11 +65,12 @@ public class SecondWeeklyLookActivity extends BaseActivity {
 
         SnapHelper helperNew = new LinearSnapHelper();
         LinearLayoutManager layoutManagerNew = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewNewProducts.setLayoutManager(layoutManagerNew);
+        recyclerViewWeeklyLooks.setLayoutManager(layoutManagerNew);
 
-        helperNew.attachToRecyclerView(recyclerViewNewProducts);
+        helperNew.attachToRecyclerView(recyclerViewWeeklyLooks);
 
     }
+
 
     /**
      * @return look id from the intent

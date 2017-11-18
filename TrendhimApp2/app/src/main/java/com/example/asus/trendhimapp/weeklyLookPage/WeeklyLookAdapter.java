@@ -1,8 +1,10 @@
 package com.example.asus.trendhimapp.weeklyLookPage;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -39,7 +41,7 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View looksProductsView = inflater.inflate(R.layout.item_weeklylook, parent, false);
+        View looksProductsView = inflater.inflate(R.layout.item_weekly_look, parent, false);
 
         // Return a new holder instance
         return new WeeklyLookAdapter.ViewHolder(looksProductsView);
@@ -66,10 +68,11 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_UP:
                         productImage.animate().alpha(1f);
-                        getProduct(product); //Redirect the user to the product activity
+                        getLook(product, view); //Redirect the user to the product activity
                         break;
                     case MotionEvent.ACTION_DOWN:
                         productImage.animate().alpha(0.7f);
+                        productImage.animate().alpha(1f);
                         break;
                 }
                 return true;
@@ -82,7 +85,7 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getProduct(product); //Redirect the user to the right product activity
+                getLook(product, view); //Redirect the user to the right product activity
             }
         });
 
@@ -143,14 +146,14 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
     }
 
     /**
-     * Redirect the user to the correct Product
+     * Redirect the user to the correct Look
      * @param look
      */
-    private void getProduct(final WeeklyLook look) {
+    private void getLook(final WeeklyLook look, final View view) {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
+        DatabaseReference weeklyLookReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        weeklyLookReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -162,9 +165,12 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
 
                             Intent toSecondWeeklyLook = new Intent(context, SecondWeeklyLookActivity.class);
 
+                            ActivityOptionsCompat options = ActivityOptionsCompat.
+                                    makeSceneTransitionAnimation((Activity) context, view, "profile");
+
                             toSecondWeeklyLook.putExtra(Constants.KEY_LOOK_KEY, look.getKey());
 
-                            context.startActivity(toSecondWeeklyLook);
+                            context.startActivity(toSecondWeeklyLook, options.toBundle());
                         }
 
                     }

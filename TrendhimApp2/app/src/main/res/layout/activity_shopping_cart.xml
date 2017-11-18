@@ -3,25 +3,144 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="90dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_goneMarginTop="?attr/actionBarSize"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="?attr/actionBarSize">
 
-    <!-- Footer aligned to bottom -->
+    <!-- Header aligned to the top -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/product_name_text_view"
+            android:layout_width="220dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/quantity_text_view"
+            android:layout_toStartOf="@+id/quantity_text_view"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="@string/product_text_view_label"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="85dp" />
+
+        <TextView
+            android:id="@+id/quantity_text_view"
+            android:layout_width="75dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/price_text_view"
+            android:layout_toStartOf="@+id/price_text_view"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="@string/quantity_text_view_label"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/price_text_view"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="52dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="@string/price_text_view_label_text"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <!-- Footer aligned to the bottom -->
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="130dp"
+        android:layout_marginStart="10dp"
         android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/checkout_button"
+        <TextView
+            android:id="@+id/subtotal_label_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rect"
-            android:padding="17dp"
-            android:text="@string/checkout_button_label_text" />
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/subtotal_text_view_label_text"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/shipping_label_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/subtotal_label_text_view"
+            android:layout_below="@+id/subtotal_label_text_view"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/shipping_text_View_label_text"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/subtotal_value_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/subtotal_label_text_view"
+            android:layout_alignBottom="@+id/subtotal_label_text_view"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="@string/_0" />
+
+        <TextView
+            android:id="@+id/shipping_value_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/grand_total_label_text_view"
+            android:layout_alignEnd="@+id/subtotal_value_text_view"
+            android:layout_below="@+id/subtotal_value_text_view"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="@string/_0"/>
+
+        <TextView
+            android:id="@+id/grand_total_label_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/shipping_label_text_view"
+            android:layout_below="@+id/shipping_label_text_view"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/grand_total_text_view_label_text"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/grand_total_value_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shipping_value_text_view"
+            android:layout_alignEnd="@+id/shipping_value_text_view"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="@string/_0" />
+
+        <!-- Check out Button -->
+        <Button
+            android:id="@+id/checkout_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@+id/subtotal_label_text_view"
+            android:background="@drawable/ripple_effect_second"
+            android:fontFamily="sans-serif"
+            android:padding="12dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/checkout_button_label_text"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/darkGrey"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -31,134 +150,21 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@id/footer"
+        android:layout_below="@id/header"
         android:layout_marginBottom="10dp"
         android:gravity="center">
 
-        <RelativeLayout
-            android:id="@+id/relative"
+        <LinearLayout
+            android:id="@+id/layoutRV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            tools:context="com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/product_name_text_view"
-                android:layout_width="220dp"
-                android:layout_height="20dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/quantity_text_view"
-                android:layout_toStartOf="@+id/quantity_text_view"
-                android:fontFamily="sans-serif-smallcaps"
-                android:gravity="center"
-                android:text="@string/product_text_view_label"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="85dp" />
-
-            <TextView
-                android:id="@+id/quantity_text_view"
-                android:layout_width="75dp"
-                android:layout_height="20dp"
-                android:layout_alignBottom="@+id/price_text_view"
-                android:layout_toStartOf="@+id/price_text_view"
-                android:fontFamily="sans-serif-smallcaps"
-                android:gravity="center"
-                android:text="@string/quantity_text_view_label"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/price_text_view"
-                android:layout_width="80dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="52dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:gravity="center"
-                android:text="@string/price_text_view_label_text"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/layoutRV"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/the_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/the_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="370dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/product_name_text_view"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="40dp"
-                    android:scrollbars="vertical" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/subtotal_label_text_view"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layoutRV"
-                android:layout_marginTop="32dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/subtotal_text_view_label_text"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/shipping_label_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/subtotal_label_text_view"
-                android:layout_below="@+id/subtotal_label_text_view"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/shipping_text_View_label_text"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/subtotal_value_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/subtotal_label_text_view"
-                android:layout_alignBottom="@+id/subtotal_label_text_view"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="11dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:gravity="center"
-                android:text="0" />
-
-            <TextView
-                android:id="@+id/shipping_value_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/grand_total_label_text_view"
-                android:layout_alignEnd="@+id/subtotal_value_text_view"
-                android:layout_below="@+id/subtotal_value_text_view"
-                android:fontFamily="sans-serif-smallcaps"
-                android:gravity="center"
-                android:text="0" />
-
-            <TextView
-                android:id="@+id/grand_total_label_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/shipping_label_text_view"
-                android:layout_below="@+id/shipping_label_text_view"
-                android:layout_marginTop="17dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/grand_total_text_view_label_text"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/grand_total_value_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/subtotal_value_text_view"
-                android:layout_alignParentBottom="true"
-                android:fontFamily="sans-serif-smallcaps"
-                android:gravity="center"
-                android:text="0" />
-
-        </RelativeLayout>
+                android:scrollbars="vertical" />
+        </LinearLayout>
 
     </ScrollView>
 

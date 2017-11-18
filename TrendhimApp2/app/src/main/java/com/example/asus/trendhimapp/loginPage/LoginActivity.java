@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
@@ -52,7 +53,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                login(view);
             }
         });
 
@@ -79,7 +80,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
      * Method listening for login button clicks.
      * Sign in users with email and password
      */
-    public void login(){
+    public void login(final View view){
         //Hide the keyboard
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
@@ -97,7 +98,9 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
                         FirebaseUser user = auth.getCurrentUser();
                         if(user.isEmailVerified()) {
                             Intent toMain = new Intent(getActivity(), MainActivity.class);
-                            startActivity(toMain);
+                            ActivityOptionsCompat options = ActivityOptionsCompat.
+                                    makeSceneTransitionAnimation(getActivity(), view, "profile");
+                            startActivity(toMain, options.toBundle());
                         } else if(!user.isEmailVerified())
                             Toast.makeText(getActivity(), R.string.email_verification_message, Toast.LENGTH_LONG).show();
                     } else {
@@ -135,7 +138,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)
-            login();
+            login(v);
 
         return false;
     }

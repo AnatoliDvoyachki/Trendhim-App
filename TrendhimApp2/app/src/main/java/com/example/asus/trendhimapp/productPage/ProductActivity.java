@@ -37,7 +37,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
     private ImageView bannerImageView, leftImageView, rightImageView;
     private TextView brandTextView, priceTextView, productNameTextView;
-    private int instanceCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         BaseActivity.drawer.addView(contentView, 0);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        this.instanceCount = 0;
         bannerImageView = findViewById(R.id.bannerImageView);
         leftImageView = findViewById(R.id.leftImageView);
         rightImageView = findViewById(R.id.rightImageView);
@@ -216,7 +214,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     }
 
     /**
-     * Adds an item to the shopping list
+     * Adds an item to the shopping cart
      **/
     private void addToShoppingCart() {
 
@@ -225,8 +223,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
             String productKey = fromCategoryPage.getStringExtra(Constants.KEY_PRODUCT_KEY);
             executeAddToCart(productKey);
         }
-        this.instanceCount = 0;
-
     }
 
     /**
@@ -278,7 +274,6 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                         public void onCancelled(DatabaseError databaseError) {}
                     });
         }
-        this.instanceCount = 0;
     }
 
     /**
@@ -286,63 +281,73 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
      **/
     private void addToWishlist() {
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final boolean[] exists = {false};
+
         Intent intent = getIntent();
 
         if (intent != null) {
-            String userEmail = user.getEmail();
-            String productKey = intent.getStringExtra(Constants.KEY_PRODUCT_KEY);
+            final String userEmail = user.getEmail();
+            final String productKey = intent.getStringExtra(Constants.KEY_PRODUCT_KEY);
 
-            if (!wishlistProductExists(userEmail, productKey)) {
-                String entityName;
-                //Get the product category - Used to query the wishlist database
-                if (productKey.startsWith(Constants.WATCH_PREFIX)) {
-                    entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
-                } else if (productKey.startsWith(Constants.BEARD_CARE_PREFIX)) {
-                    entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "");
-                } else {
-                    entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
+            //Checks if a product is already added to the wishlist
+            // when the user clicks the add to wishlist button
+            myRef.orderByChild(Constants.KEY_PRODUCT_KEY).equalTo(productKey)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        WishlistProduct wishlistProduct = dataSnapshot1.getValue(WishlistProduct.class);
+
+                        if(Objects.equals(wishlistProduct.getUserEmail(), userEmail)) {
+
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
+                            exists[0] = true;
+
+                            break;
+                        }
+                    }
+                    //Add the product if the product is not in the wishlist
+                    if(!exists[0]){
+                        Map<String, Object> values = new HashMap<>();
+                        values.put(Constants.KEY_PRODUCT_KEY, productKey);
+                        values.put(Constants.KEY_USER_EMAIL,userEmail);
+                        values.put(Constants.KEY_ENTITY_NAME, getCategory(productKey));
+                        myRef.push().setValue(values);
+                        Toast.makeText(getApplicationContext(), R.string.added_to_wishlist_success_message, Toast.LENGTH_SHORT).show();
+
+                    }
+
                 }
-                myRef.push().setValue(new WishlistProduct(productKey, entityName, userEmail));
-                Toast.makeText(this, R.string.added_to_wishlist_success_message, Toast.LENGTH_SHORT).show();
 
-            } else {
-                Toast.makeText(this, R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
-            }
-            this.instanceCount = 0;
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
         }
     }
 
     /**
-     * Checks if a product is already added to the wishlist when the user clicks the add to wishlist button
-     * @return  true, if the wishlist contains an item that matches the criteria.
-     * Otherwise, false.
-     **/
-    private boolean wishlistProductExists(final String userEmail, final String productKey) {
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
+     * Get the product category - Used to query the wishlist database
+     * @param productKey
+     * @return
+     */
+    String getCategory(String productKey){
+        String entityName;
+        if (productKey.startsWith(Constants.WATCH_PREFIX))
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+        else if (productKey.startsWith(Constants.BEARD_CARE_PREFIX))
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "");
+        else
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.exists()) {
-
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                        WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
-
-                        if (userEmail.equals(wishProd.getUserEmail()) &&
-                                productKey.equals(wishProd.getProductKey())) {
-                            ++instanceCount;
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-        return instanceCount != 0;
+        return entityName;
     }
+
 }

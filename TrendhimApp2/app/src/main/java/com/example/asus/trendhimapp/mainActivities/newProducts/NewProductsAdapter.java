@@ -1,7 +1,9 @@
 package com.example.asus.trendhimapp.mainActivities.newProducts;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +74,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getProduct(product);
+                getProduct(product, view);
             }
         });
     }
@@ -152,7 +154,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      * Redirect the user to the correct Product
      * @param product
      */
-    private void getProduct(final CategoryProduct product) {
+    private void getProduct(final CategoryProduct product, final View view) {
 
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMMENDED_PRODUCTS);
         //get product which key is equal to the one clicked
@@ -178,17 +180,20 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                                                 if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
 
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
-                                                    Intent toProductActivity = new Intent(context, ProductActivity.class);
+                                                    Intent intent = new Intent(context, ProductActivity.class);
 
-                                                    toProductActivity.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
-                                                    toProductActivity.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
-                                                    toProductActivity.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
-                                                    toProductActivity.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
-                                                    toProductActivity.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
-                                                    toProductActivity.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
-                                                    toProductActivity.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+                                                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                                                            makeSceneTransitionAnimation((Activity) context, view, "profile");
 
-                                                    context.startActivity(toProductActivity);
+                                                    intent.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
+                                                    intent.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
+                                                    intent.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                                                    intent.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+                                                    intent.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
+                                                    intent.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                                                    intent.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+
+                                                    context.startActivity(intent, options.toBundle());
 
                                                 }
                                             }

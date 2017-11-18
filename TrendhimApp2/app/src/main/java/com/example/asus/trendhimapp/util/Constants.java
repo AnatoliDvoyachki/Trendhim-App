@@ -30,6 +30,7 @@ public final class Constants {
     public static final String KEY_RIGHT_PIC_URL = "rightPictureUrl";
     public static final String KEY_BRAND_NAME = "brand";
     public static final String KEY_PRODUCT_KEY = "productKey";
+    public static final String KEY_ENTITY_NAME = "entityName";
 
     // Keys for passing objects from one intent to another
     public static final String KEY_EMAIL = "email";

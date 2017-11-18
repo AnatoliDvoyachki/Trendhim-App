@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -54,7 +55,9 @@ public class ShoppingCartActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent toCredentials = new Intent(ShoppingCartActivity.this, CredentialsActivity.class);
-                startActivity(toCredentials);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(ShoppingCartActivity.this, v, "profile");
+                startActivity(toCredentials, options.toBundle());
             }
         });
 

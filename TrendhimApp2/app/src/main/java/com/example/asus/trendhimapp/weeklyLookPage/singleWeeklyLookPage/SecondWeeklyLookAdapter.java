@@ -109,11 +109,11 @@ public class SecondWeeklyLookAdapter extends RecyclerView.Adapter<SecondWeeklyLo
                         //Found product
                         final WeeklyLook newLook = product.getValue(WeeklyLook.class);
 
-                        looks.add(0, new WeeklyLook(lookKey, newLook.getPhrase(), newLook.getMainPictureUrl(),
+                        looks.add(new WeeklyLook(lookKey, newLook.getPhrase(), newLook.getMainPictureUrl(),
                                 newLook.getSecondPictureUrl(), newLook.getThirdPictureUrl(), newLook.getFourthPictureUrl(),
                                 newLook.getFifthPictureUrl()));
 
-                        notifyItemInserted(0);
+                        notifyItemInserted(getItemCount());
 
                     }
                 }

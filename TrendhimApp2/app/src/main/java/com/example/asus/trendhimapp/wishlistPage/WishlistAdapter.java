@@ -1,9 +1,12 @@
 package com.example.asus.trendhimapp.wishlistPage;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +21,10 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
+import com.example.asus.trendhimapp.mainActivities.MainActivity;
+import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
 import com.example.asus.trendhimapp.productPage.Product;
+import com.example.asus.trendhimapp.productPage.ProductActivity;
 import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
@@ -82,11 +88,86 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             }
         });
 
+        viewHolder.bannerImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              getProduct(currentProduct, view);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return productList.size();
+    }
+
+    /**
+     * Redirect the user to the right product when the banner picture is clicked
+     * @param currentProduct
+     */
+    private void getProduct(final CategoryProduct currentProduct, final View view) {
+        //Query the wishlist database to get the product category
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WISHLIST);
+        //get product which key is equal to the one clicked
+        databaseReference.orderByChild(Constants.KEY_PRODUCT_KEY).equalTo(currentProduct.getKey())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+
+                            for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                                //Found product
+                                final WishlistProduct wishlistProduct = dataSnapshot1.getValue(WishlistProduct.class);
+                                //Query to the product category to get the product information
+                                DatabaseReference category_products_database =
+                                        FirebaseDatabase.getInstance().getReference(wishlistProduct.getEntityName());
+
+                                category_products_database.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                                //If the object key is correct
+                                                if(Objects.equals(currentProduct.getKey(), dataSnapshot1.getKey())) {
+
+                                                    Product foundProduct = dataSnapshot1.getValue(Product.class);
+                                                    Intent toProductPage = new Intent(context, ProductActivity.class);
+
+                                                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                                                            makeSceneTransitionAnimation((Activity) context, view, "profile");
+
+                                                    toProductPage.putExtra(Constants.KEY_PRODUCT_KEY, currentProduct.getKey());
+                                                    toProductPage.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
+                                                    toProductPage.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
+                                                    toProductPage.putExtra(Constants.KEY_BANNER_PIC_URL, foundProduct.getBannerPictureUrl());
+                                                    toProductPage.putExtra(Constants.KEY_PRICE, String.valueOf(foundProduct.getPrice()));
+                                                    toProductPage.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
+                                                    toProductPage.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
+
+                                                    context.startActivity(toProductPage, options.toBundle());
+
+                                                }
+                                            }
+                                            //Add the product to recent products
+                                            RecentProductsAdapter.addToRecent(currentProduct);
+                                            MainActivity.adapter.notifyDataSetChanged();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {}
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
     }
 
     /**

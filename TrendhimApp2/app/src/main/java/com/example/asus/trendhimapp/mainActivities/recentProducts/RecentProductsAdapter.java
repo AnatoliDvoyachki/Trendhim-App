@@ -1,8 +1,10 @@
 package com.example.asus.trendhimapp.mainActivities.recentProducts;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +82,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
         */
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 //Query the recent_product database to get the product category
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECENT_PRODUCTS);
                 //get product which key is equal to the one clicked
@@ -112,6 +114,9 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                                 Product foundProduct = dataSnapshot1.getValue(Product.class);
                                                                 Intent toProductPage = new Intent(context, ProductActivity.class);
 
+                                                                ActivityOptionsCompat options = ActivityOptionsCompat.
+                                                                        makeSceneTransitionAnimation((Activity) context, view, "profile");
+
                                                                 toProductPage.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
                                                                 toProductPage.putExtra(Constants.KEY_PRODUCT_NAME, foundProduct.getProductName());
                                                                 toProductPage.putExtra(Constants.KEY_BRAND_NAME, foundProduct.getBrand());
@@ -120,7 +125,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                                 toProductPage.putExtra(Constants.KEY_LEFT_PIC_URL, foundProduct.getLeftPictureUrl());
                                                                 toProductPage.putExtra(Constants.KEY_RIGHT_PIC_URL, foundProduct.getRightPictureUrl());
 
-                                                                context.startActivity(toProductPage);
+                                                                context.startActivity(toProductPage, options.toBundle());
 
                                                             }
                                                         }

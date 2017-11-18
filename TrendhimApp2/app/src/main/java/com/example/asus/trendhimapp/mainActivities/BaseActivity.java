@@ -1,5 +1,6 @@
 package com.example.asus.trendhimapp.mainActivities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.aboutUsPage.AboutUs;
+import com.example.asus.trendhimapp.aboutUs.AboutUs;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.loginPage.TabbedActivity;
 import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
@@ -103,6 +104,7 @@ public class BaseActivity extends AppCompatActivity
             case R.id.action_wishlist:
                 if (isUserOnline()) {
                     Intent toWishList = new Intent(BaseActivity.this, WishlistActivity.class);
+
                     startActivity(toWishList);
                 } else
                     Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
@@ -131,46 +133,47 @@ public class BaseActivity extends AppCompatActivity
         // Handle navigation view item clicks
         Intent intent;
         int id = item.getItemId();
-
+        ActivityOptions options =
+                ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.enter, R.anim.exit);
         switch (id) {
             case R.id.bracelets:
                 intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BRACELETS); //send category to open the correct category page
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
             case R.id.bags:
                 intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BAGS);
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
             case R.id.watches:
                 intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_WATCHES);
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
             case R.id.beardCare:
                 intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BEARD_CARE);
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
             case R.id.necklaces:
                 intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_NECKLACES);
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
             case R.id.ties:
                 intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_TIES);
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
             case R.id.bowTies:
                 intent = new Intent(this, CategoryProductActivity.class);
                 intent.putExtra(Constants.KEY_CATEGORY, Constants.TABLE_NAME_BOW_TIES);
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
             case R.id.weeklyLook:
                 intent = new Intent(this, WeeklyLookActivity.class);
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
             case R.id.logOut:
                 if (user != null) {
@@ -181,7 +184,7 @@ public class BaseActivity extends AppCompatActivity
                 break;
             case R.id.aboutUs:
                 intent = new Intent(getApplicationContext(), AboutUs.class);
-                startActivity(intent);
+                startActivity(intent, options.toBundle());
                 break;
 
         }
@@ -217,5 +220,6 @@ public class BaseActivity extends AppCompatActivity
 
         return isLoggedIn;
     }
+
 
 }

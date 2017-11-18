@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -13,27 +14,40 @@
         <!-- Add to cart button !-->
         <Button
             android:id="@+id/addToCartButton"
+            style="@android:style/Widget.Button.Toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/priceTextView"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="13dp"
-            android:background="@drawable/rect"
-            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ripple_effect_second"
+            android:fontFamily="sans-serif-smallcaps"
             android:padding="12dp"
-            android:text="@string/add_to_cart_button_name" />
+            android:text="@string/add_to_cart_button_name"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/darkGrey"
+            android:textSize="14sp" />
 
         <!-- Add to wishlist !-->
         <Button
             android:id="@+id/addToWishlistButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@android:style/Widget.Button.Toggle"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:layout_marginStart="30dp"
+            android:textColor="@color/darkGrey"
+            android:textSize="14sp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/ripple_effect_second"
+            android:fontFamily="sans-serif-smallcaps"
             android:layout_alignBaseline="@+id/addToCartButton"
             android:layout_alignBottom="@+id/addToCartButton"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="23dp"
             android:layout_toEndOf="@+id/addToCartButton"
-            android:background="@drawable/rect"
             android:padding="12dp"
             android:text="@string/add_to_wishlist_button_name" />
 
@@ -45,12 +59,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="18dp"
-            android:gravity="right"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
             android:padding="12dp"
-            android:text="300$"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
 
@@ -71,7 +85,7 @@
             <!-- Brand name !-->
             <TextView
                 android:id="@+id/brandTextView"
-                android:layout_width="160dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
@@ -85,7 +99,7 @@
             <!-- Product name !-->
             <TextView
                 android:id="@+id/productNameTextView"
-                android:layout_width="170dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
@@ -115,7 +129,6 @@
                 android:layout_height="250dp"
                 android:layout_column="0"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="320dp"
                 android:layout_row="3"
                 android:contentDescription="@string/left_image"
                 android:cropToPadding="true"
