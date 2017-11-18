@@ -24,7 +24,7 @@ public class ShoppingCartActivity extends BaseActivity {
 
     //static because they are access from the Shopping Cart Adapter
     private static TextView subtotalTextView, shippingTextView, totalTextView;
-
+    public static ShoppingCartAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,7 @@ public class ShoppingCartActivity extends BaseActivity {
         // Setup the recycler view
         RecyclerView recyclerView = findViewById(R.id.the_recycler_view);
         List<CategoryProduct> shoppingCartProducts = new ArrayList<>();
-        ShoppingCartAdapter adapter = new ShoppingCartAdapter(this, shoppingCartProducts);
+        adapter = new ShoppingCartAdapter(this, shoppingCartProducts);
         recyclerView.setAdapter(adapter);
         adapter.populateRecyclerView();
 

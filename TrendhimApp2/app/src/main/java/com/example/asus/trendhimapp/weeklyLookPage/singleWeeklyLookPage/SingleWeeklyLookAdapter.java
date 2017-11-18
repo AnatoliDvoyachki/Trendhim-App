@@ -159,7 +159,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
      */
     public void addData(final String productKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get looks
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -262,11 +262,14 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
+        else if(productKey.startsWith(Constants.BEARD_CARE_PREFIX))
+            entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "");
         else
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "s");
 
         return entityName;
     }
+
 
     /**
      * Redirect the user to the correct Product

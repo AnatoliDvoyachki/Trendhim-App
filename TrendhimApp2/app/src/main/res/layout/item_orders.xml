@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:background="@drawable/item_wishlist_border"
+    android:orientation="horizontal"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="12dp"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/price_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="18dp"
+        android:gravity="center"
+        android:text="@string/placeholder"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/date_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/price_order"
+        android:layout_alignBottom="@+id/price_order"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="28dp"
+        android:text="@string/placeholder"
+        android:textAlignment="textStart"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/address_order"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/item_wishlist_textview_height"
+        android:layout_alignStart="@+id/price_order"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="@string/placeholder"
+        android:textAlignment="textStart"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/online_order"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/item_wishlist_textview_height"
+        android:layout_alignStart="@+id/address_order"
+        android:layout_below="@+id/address_order"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/online_purchase"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.wishlistPage;
+package com.example.asus.trendhimapp.wishlist;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

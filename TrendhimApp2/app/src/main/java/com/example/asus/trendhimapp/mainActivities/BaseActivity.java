@@ -22,8 +22,9 @@ import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.loginPage.TabbedActivity;
 import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
 import com.example.asus.trendhimapp.util.Constants;
+import com.example.asus.trendhimapp.settings.Settings;
 import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLookActivity;
-import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
+import com.example.asus.trendhimapp.wishlist.WishlistActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -173,6 +174,10 @@ public class BaseActivity extends AppCompatActivity
                 break;
             case R.id.weeklyLook:
                 intent = new Intent(this, WeeklyLookActivity.class);
+                startActivity(intent, options.toBundle());
+                break;
+            case R.id.settings:
+                intent = new Intent(this, Settings.class);
                 startActivity(intent, options.toBundle());
                 break;
             case R.id.logOut:

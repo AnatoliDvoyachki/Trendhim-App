@@ -219,5 +219,17 @@ Does that mean we are going to work our asses off this year? Yes, it does, but t
     <string name="zipcode">Zipcode</string>
     <string name="city">City</string>
     <string name="country">Country</string>
+    <string name="subject">Subject</string>
+    <string name="question">Question</string>
+    <string name="order_number_if_needed">Order number (if needed)</string>
+    <string name="submit">Submit</string>
+    <string name="contact_us">Contact us</string>
+    <string name="about_the_app">This is the Trendhim app for Android. It can be use to buy Trendhim\'s products.\n\nThe application version is 1.0.0</string>
+    <string name="about_the_app_title">About the app</string>
+    <string name="send_us_an_email">Send us an email</string>
+    <string name="online_purchase">Online purchase</string>
+    <string name="order_image">Order image</string>
+    <string name="orders_placed">Orders placed</string>
+    <string name="your_order">YOUR ORDER</string>
 
 </resources>

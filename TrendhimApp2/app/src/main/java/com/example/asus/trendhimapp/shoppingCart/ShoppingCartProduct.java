@@ -1,6 +1,6 @@
 package com.example.asus.trendhimapp.shoppingCart;
 
-import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
+import com.example.asus.trendhimapp.wishlist.WishlistProduct;
 
 public class ShoppingCartProduct extends WishlistProduct {
 

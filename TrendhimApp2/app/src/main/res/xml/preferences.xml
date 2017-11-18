@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Info">
+
+        <PreferenceScreen
+            android:summary="Meet the team"
+            android:title="About us" >
+            <intent android:action=".aboutUs.AboutUs"/>
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:summary="Send us an email"
+            android:title="Contact Us" >
+            <intent android:action=".settings.Contact"/>
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:key="notifications"
+            android:title="Notifications"
+            android:summary="If you check this option, we will notify you of new products arrivals, stock availability and teh status of your purchases"
+            android:defaultValue="true"/>
+
+        <PreferenceScreen
+            android:title="About the app" >
+            <intent android:action=".settings.AboutTheApp"/>
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Orders">
+        <PreferenceScreen
+            android:title="Order placements" >
+            <intent android:action=".order.OrderActivity"/>
+        </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>

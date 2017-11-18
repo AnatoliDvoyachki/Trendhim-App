@@ -20,7 +20,7 @@ import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.wishlistPage.WishlistProduct;
+import com.example.asus.trendhimapp.wishlist.WishlistProduct;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

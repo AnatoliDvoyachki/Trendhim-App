@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.wishlistPage;
+package com.example.asus.trendhimapp.wishlist;
 
 public class WishlistProduct {
     private String productKey, entityName, userEmail;

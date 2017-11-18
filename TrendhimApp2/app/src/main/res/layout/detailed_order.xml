@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/item_wishlist_border"
+    android:layout_margin="12dp"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/detailed_order_image"
+        android:layout_width="@dimen/item_wishlist_banner_dimen"
+        android:layout_height="@dimen/item_wishlist_banner_dimen"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/order_image"
+        app:srcCompat="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/brand_detailed_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/detailed_order_image"
+        android:layout_marginStart="18dp"
+        android:layout_toEndOf="@+id/detailed_order_image"
+        android:gravity="center"
+        android:text="@string/placeholder"
+        android:textAlignment="textStart"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/product_name_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/brand_detailed_order"
+        android:layout_below="@+id/brand_detailed_order"
+        android:layout_marginTop="20dp"
+        android:text="@string/placeholder" />
+
+    <TextView
+        android:id="@+id/detailed_price_order"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/item_wishlist_textview_height"
+        android:layout_alignBottom="@+id/detailed_order_image"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"
+        android:gravity="end"
+        android:text="@string/placeholder"
+        android:textAlignment="textStart"
+        android:textStyle="bold" />
+
+</RelativeLayout>

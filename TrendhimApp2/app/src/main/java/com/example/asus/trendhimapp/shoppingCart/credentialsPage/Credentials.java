@@ -19,7 +19,7 @@ public class Credentials {
         return userEmail;
     }
 
-    String getAddress() {
+    public String getAddress() {
         return address;
     }
 

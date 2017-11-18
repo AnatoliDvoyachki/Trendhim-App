@@ -21,6 +21,7 @@ public final class Constants {
     public static final String TABLE_NAME_RECENT_PRODUCTS = "recent_products";
     public static final String TABLE_NAME_USER_CREDENTIALS = "user_credentials";
     public static final String TABLE_NAME_RECOMMENDED_PRODUCTS = "recommended_products";
+    public static final String TABLE_NAME_ORDERS = "orders";
 
     // Attribute name for the Product object
     public static final String KEY_PRODUCT_NAME = "productName";
@@ -42,8 +43,10 @@ public final class Constants {
     public static final String KEY_LOOK_KEY = "lookKey";
     public static final String KEY_CATEGORY = "category";
 
-    // Shipping cost
+    // Shopping cart
     public static final int SINGLE_ITEM_SHIPPING_COST = 5;
+    public static final String ORDER_DATE = "date";
+    public static final String GRAND_TOTAL = "grand_total";
 
     // Regex
     public static final String WATCH_PREFIX = "watch";
@@ -56,5 +59,7 @@ public final class Constants {
     public static final String KEY_CITY = "city";
     public static final String KEY_NAME = "name";
     public static final String KEY_QUANTITY = "quantity";
+    public static final String KEY_COUNTRY = "country";
+
 
 }

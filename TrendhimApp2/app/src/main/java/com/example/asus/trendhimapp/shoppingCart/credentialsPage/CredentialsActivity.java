@@ -1,5 +1,6 @@
 package com.example.asus.trendhimapp.shoppingCart.credentialsPage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,14 +17,23 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
+import com.example.asus.trendhimapp.shoppingCart.Order;
+import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
+import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.util.GMailSender;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +43,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
     String GMail = "trendhimaps@gmail.com"; // GMail address
     String GMailPass = "android11"; // GMail Password
     String str_subject, str_to, str_message;
+    ArrayList<Order> orders;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +58,8 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
         setTitle(R.string.credentials_title);
 
+        orders = new ArrayList<>();
+
         initializeComponents();
     }
 
@@ -60,6 +73,10 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         zipcode = findViewById(R.id.zipcode_credentials);
         country = findViewById(R.id.country_credentials);
         city = findViewById(R.id.city_credentials);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser != null && currentUser.getEmail() != null)
+            email.setText(currentUser.getEmail());
 
         getUserCredentials();
 
@@ -69,6 +86,10 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
         // Set the OnKeyListener to the last edit text view in the layout
         country.setOnKeyListener(this);
+
+        str_to = email.getText().toString();
+        str_subject = "Order Confirmation - Trendhim thinks you are amazing";
+        str_message = "Your order is on its way!";
     }
 
     /**
@@ -78,7 +99,8 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         DatabaseReference userCredentialsDatabase =
                 FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
 
-         userCredentialsDatabase.orderByChild(Constants.KEY_EMAIL).equalTo(email.getText().toString())
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+         userCredentialsDatabase.orderByChild(Constants.KEY_USER_EMAIL).equalTo(user.getEmail())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -116,11 +138,13 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
-
                     Toast.makeText(getApplicationContext(), "Sending... Please wait", Toast.LENGTH_LONG).show();
                 }
             });
             sendEmail(str_to, str_subject, str_message);
+            saveUserCredentials();
+            saveOrderInformation();
+            removeItem();
         }
 
     }
@@ -132,11 +156,6 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
      * @param message
      */
     private void sendEmail(final String to, final String subject, final String message) {
-        final EditText[] fields = {name, email, streetAddress, country, zipcode, city};
-
-        str_to = email.getText().toString();
-        str_subject = "Order Confirmation - Trendhim thinks you are amazing";
-        str_message = "To be implemented";
 
         new Thread(new Runnable() {
 
@@ -155,11 +174,11 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Email successfully sent!", Toast.LENGTH_LONG).show();
-                            saveUserCredentials();
-                            for(EditText editText : fields) //Clean fields
-                                editText.setText("");
+
                         }
                     });
+
+
 
                 } catch (final Exception e) {
                     Log.e("sendEmail", e.getMessage(), e);
@@ -179,9 +198,21 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
     }
 
     /**
+     * Convert Date to String
+     * @param date
+     * @return Date formatted into a string
+     */
+    private static String convertDateToString(Date date) {
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormatter = new SimpleDateFormat("dd MMM yyyy");
+        return dateFormatter.format(date);
+    }
+
+
+    /**
      * Save the user credentials in the credentials database when an order is successfully made
      */
     private void saveUserCredentials(){
+
         final DatabaseReference credentialsDatabase = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
         credentialsDatabase.orderByChild(Constants.KEY_USER_EMAIL).equalTo(email.getText().toString())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -194,7 +225,9 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                             values.put(Constants.KEY_ZIPCODE, zipcode.getText().toString());
                             values.put(Constants.KEY_CITY, city.getText().toString());
                             values.put(Constants.KEY_NAME, name.getText().toString());
+                            values.put(Constants.KEY_COUNTRY, country.getText().toString());
                             credentialsDatabase.push().setValue(values);
+
                         }
                     }
 
@@ -204,6 +237,86 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                     }
                 });
 
+    }
+
+    /**
+     * Save the order information in the order database when an order is successfully made
+     */
+    private void saveOrderInformation() {
+
+        //Query the shopping cart database to get the product category
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+        //get user email to save the order in the order entity
+        databaseReference.orderByChild(Constants.KEY_USER_EMAIL).equalTo(email.getText().toString())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+
+                            DatabaseReference orderDatabase
+                                    = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_ORDERS);
+
+                            final Map<String, Object> values = new HashMap<>();
+
+                            values.put(Constants.KEY_USER_EMAIL, email.getText().toString());
+                            values.put(Constants.ORDER_DATE,
+                                    convertDateToString(new Date())); //save current order date
+                            values.put(Constants.GRAND_TOTAL,
+                                    String.valueOf(ShoppingCartActivity.getGrandTotalCost()));
+
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                                ShoppingCartProduct shoppingCartProduct
+                                        = dataSnapshot1.getValue(ShoppingCartProduct.class);
+                                Order order = new Order(shoppingCartProduct.getProductKey(),
+                                        shoppingCartProduct.getQuantity());
+
+                                orders.add(order);
+                            }
+
+                            //save shopping cart products as an array in firebase
+                            final Map<String, Object> values1 = new HashMap<>();
+                            for (int i = 0; i < orders.size(); i++)
+                                values1.put(String.valueOf(i),orders.get(i));
+                            values.put(Constants.KEY_PRODUCTS, values1);
+
+                            orderDatabase.push().setValue(values);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+    }
+
+    /**
+     * Removes a product from the user's wishlist datbase - firebase
+     **/
+    private void removeItem() {
+
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
+
+        dbRef.orderByChild(Constants.KEY_USER_EMAIL).equalTo(email.getText().toString())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                        ds.getRef().removeValue(); // If found, remove the item from the shopping cart
+                        ShoppingCartActivity.adapter.notifyDataSetChanged(); // Update the UI
+
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
     }
 
     /**

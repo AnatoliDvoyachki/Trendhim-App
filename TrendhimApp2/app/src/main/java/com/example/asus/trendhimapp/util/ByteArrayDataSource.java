@@ -9,8 +9,8 @@ import javax.activation.DataSource;
 
 
 public class ByteArrayDataSource implements DataSource {
-    private byte[] data;
-    private String type;
+    public byte[] data;
+    public String type;
 
     public ByteArrayDataSource(byte[] data, String type) {
         super();
