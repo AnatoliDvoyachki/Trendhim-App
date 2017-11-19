@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCart.credentialsPage;
+package com.example.asus.trendhimapp.shoppingCartPage.credentialsPage;
 
 public class Credentials {
 

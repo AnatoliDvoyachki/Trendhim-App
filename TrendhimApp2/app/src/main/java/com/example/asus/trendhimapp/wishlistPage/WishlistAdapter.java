@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.wishlist;
+package com.example.asus.trendhimapp.wishlistPage;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,7 +25,7 @@ import com.example.asus.trendhimapp.mainActivities.MainActivity;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
 import com.example.asus.trendhimapp.productPage.Product;
 import com.example.asus.trendhimapp.productPage.ProductActivity;
-import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
+import com.example.asus.trendhimapp.shoppingCartPage.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.BitmapFlyweight;
 import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="com.example.asus.trendhimapp.wishlist.WishlistActivity">
+    tools:context="com.example.asus.trendhimapp.wishlistPage.WishlistActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

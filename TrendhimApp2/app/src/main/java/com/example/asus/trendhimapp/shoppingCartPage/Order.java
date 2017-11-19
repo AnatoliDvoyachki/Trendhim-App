@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCart;
+package com.example.asus.trendhimapp.shoppingCartPage;
 
 public class Order {
 

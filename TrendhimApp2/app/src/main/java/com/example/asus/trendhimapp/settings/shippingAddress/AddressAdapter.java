@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.shoppingCart.credentialsPage.Credentials;
+import com.example.asus.trendhimapp.shoppingCartPage.credentialsPage.Credentials;
 
 import java.util.ArrayList;
 

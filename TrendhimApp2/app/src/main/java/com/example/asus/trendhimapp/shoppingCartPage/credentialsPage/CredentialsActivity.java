@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.shoppingCart.credentialsPage;
+package com.example.asus.trendhimapp.shoppingCartPage.credentialsPage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,9 +17,9 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
-import com.example.asus.trendhimapp.shoppingCart.Order;
-import com.example.asus.trendhimapp.shoppingCart.ShoppingCartActivity;
-import com.example.asus.trendhimapp.shoppingCart.ShoppingCartProduct;
+import com.example.asus.trendhimapp.shoppingCartPage.Order;
+import com.example.asus.trendhimapp.shoppingCartPage.ShoppingCartActivity;
+import com.example.asus.trendhimapp.shoppingCartPage.ShoppingCartProduct;
 import com.example.asus.trendhimapp.util.Constants;
 import com.example.asus.trendhimapp.util.GMailSender;
 import com.google.firebase.auth.FirebaseAuth;
@@ -171,7 +171,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Email successfully sent!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.email_sent_success, Toast.LENGTH_LONG).show();
 
                         }
                     });
@@ -327,7 +327,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         boolean complete = true;
         for (EditText currentField : fields) {
             if (currentField.getText().toString().matches("")) {
-                currentField.setError("This field cannot be empty");
+                currentField.setError(getString(R.string.must_be_filled_message));
                 complete = false;
             }
         }

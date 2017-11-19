@@ -161,7 +161,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
      */
     public void forgotPassword() {
         final EditText editText = new EditText(getActivity());
-        editText.setHint(Constants.HINT_EMAIL);
+        editText.setHint(R.string.email_hint);
         editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
         // Create the confirmation dialog

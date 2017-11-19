@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
-import com.example.asus.trendhimapp.shoppingCart.credentialsPage.Credentials;
+import com.example.asus.trendhimapp.shoppingCartPage.credentialsPage.Credentials;
 import com.example.asus.trendhimapp.util.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

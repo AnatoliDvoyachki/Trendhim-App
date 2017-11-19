@@ -1,4 +1,4 @@
-package com.example.asus.trendhimapp.aboutUs;
+package com.example.asus.trendhimapp.aboutUsPage;
 
 import android.content.Context;
 import android.os.Bundle;
