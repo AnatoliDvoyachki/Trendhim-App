@@ -68,7 +68,7 @@ public final class Constants {
     public static final String PAGE_TITLE_HOUR = "Hour Calculations";
 
     // Trendhim email credentials
-    public static final String GMAIL_EMAIL = "trendhimaps@gmail.com"; // GMAIL_EMAIL address
-    public static final String GMAIL_PASSWORD = "android11"; // GMAIL_EMAIL Password
+    public static final String GMAIL_EMAIL = "trendhimaps@gmail.com"; // GMAIL address
+    public static final String GMAIL_PASSWORD = "android11"; // GMAIL Password
 
 }
