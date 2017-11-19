@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.R;
-import com.example.asus.trendhimapp.aboutUsPage.AboutUsActivity;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.newProducts.NewProductsAdapter;
 import com.example.asus.trendhimapp.mainActivities.recentProducts.RecentProductsAdapter;
@@ -31,7 +30,7 @@ public class MainActivity extends BaseActivity {
     ImageView recentProductImage, recommendedProductsImage;
     int i = 0, i1= 0; //handle image clicks
     NewProductsAdapter newProductAdapter;
-    ImageView weeklyLookImage, aboutUsImage;
+    ImageView weeklyLookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +77,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        /*
-         * Open About us Activity on image clicked
-         */
-        aboutUsImage = findViewById(R.id.trendhimStoryImage);
-        aboutUsImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Intent intent = new Intent(getApplicationContext(), AboutUsActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(MainActivity.this, view, "profile");
-               startActivity(intent, options.toBundle());
-            }
-        });
 
          /*
          * Open Weekly look Activity on image clicked

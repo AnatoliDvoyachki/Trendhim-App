@@ -108,10 +108,10 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
                     for(DataSnapshot look : dataSnapshot.getChildren()) {
                         String lookKey = look.getKey();
                         WeeklyLook weeklyLook = look.getValue(WeeklyLook.class);
-                        weeklyLooks.add(new WeeklyLook(lookKey,weeklyLook.getPhrase(), weeklyLook.getMainPictureUrl(), weeklyLook.getSecondPictureUrl(),
+                        weeklyLooks.add(0,new WeeklyLook(lookKey,weeklyLook.getPhrase(), weeklyLook.getMainPictureUrl(), weeklyLook.getSecondPictureUrl(),
                                 weeklyLook.getThirdPictureUrl(), weeklyLook.getFourthPictureUrl(), weeklyLook.getFifthPictureUrl()));
                         // Notify the adapter that an item was inserted in the last position = getItemCount()
-                        notifyItemInserted(getItemCount());
+                        notifyItemInserted(0);
 
                     }
                 }
