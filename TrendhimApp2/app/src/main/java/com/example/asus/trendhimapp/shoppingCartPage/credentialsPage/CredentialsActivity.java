@@ -171,7 +171,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Email successfully sent!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.email_sent_success, Toast.LENGTH_LONG).show();
 
                         }
                     });
@@ -327,7 +327,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         boolean complete = true;
         for (EditText currentField : fields) {
             if (currentField.getText().toString().matches("")) {
-                currentField.setError("This field cannot be empty");
+                currentField.setError(getString(R.string.must_be_filled_message));
                 complete = false;
             }
         }
