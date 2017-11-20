@@ -59,13 +59,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         address.setText(order.getAddress());
 
         TextView productPrice = viewHolder.price;
-        productPrice.setText(String.format("%s €", order.getGrand_total()));
+        productPrice.setText(String.format(Constants.PRICE_FORMAT, order.getGrandTotal()));
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent toOrder = new Intent(context, DetailedOrderActivity.class);
-                toOrder.putExtra("key", order.getKey());
+                toOrder.putExtra(Constants.KEY_ATTR_KEY, order.getKey());
                 context.startActivity(toOrder);
             }
         });
@@ -83,7 +83,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_ORDERS);
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null) {
-            myRef.orderByChild("userEmail").equalTo(currentUser.getEmail())
+            myRef.orderByChild(Constants.KEY_USER_EMAIL).equalTo(currentUser.getEmail())
                     .addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
                         @Override
                         public void onDataChange(final DataSnapshot dataSnapshot) {
@@ -104,7 +104,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                                                 for (final DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                                     Credentials credentials =  dataSnapshot1.getValue(Credentials.class);
                                                     orders.add(0, new UserOrder(order.getDate(), credentials.getAddress(),
-                                                            order.getGrand_total(), product.getKey()));
+                                                            order.getGrandTotal(), product.getKey()));
                                                     notifyItemInserted(0);
 
                                                 }

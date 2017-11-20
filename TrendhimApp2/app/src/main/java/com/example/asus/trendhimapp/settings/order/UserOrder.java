@@ -21,7 +21,7 @@ public class UserOrder {
         return address;
     }
 
-    public String getGrand_total() {
+    public String getGrandTotal() {
         return grand_total;
     }
 

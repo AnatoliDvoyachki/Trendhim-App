@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
+import com.example.asus.trendhimapp.util.Constants;
 
 public class Contact extends BaseActivity {
 
@@ -34,11 +35,11 @@ public class Contact extends BaseActivity {
         Log.i("Send email", "");
 
         Intent mail = new Intent(Intent.ACTION_SEND);
-        mail.putExtra(Intent.EXTRA_EMAIL,new String[]{"trendhimaps@gmail.com"});
+        mail.putExtra(Intent.EXTRA_EMAIL,new String[]{Constants.GMAIL_EMAIL});
         mail.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
         mail.putExtra(Intent.EXTRA_TEXT, message.getText().toString());
         mail.setType("message/rfc822");
-        startActivity(Intent.createChooser(mail, "Send email via:"));
+        startActivity(Intent.createChooser(mail, getString(R.string.send_email_via)));
     }
 
 }

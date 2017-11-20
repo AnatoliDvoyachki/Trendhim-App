@@ -44,12 +44,12 @@ public class IndividualAddress extends BaseActivity {
         Intent intent = getIntent();
 
         if(intent != null){
-            String name = intent.getStringExtra("name");
-            String email = intent.getStringExtra("email");
-            String city = intent.getStringExtra("city");
-            String address = intent.getStringExtra("address");
-            String zipcode = intent.getStringExtra("zipcode");
-            String country = intent.getStringExtra("country");
+            String name = intent.getStringExtra(Constants.KEY_NAME);
+            String email = intent.getStringExtra(Constants.KEY_EMAIL);
+            String city = intent.getStringExtra(Constants.KEY_CITY);
+            String address = intent.getStringExtra(Constants.KEY_ADDRESS);
+            String zipcode = intent.getStringExtra(Constants.KEY_ZIPCODE);
+            String country = intent.getStringExtra(Constants.KEY_COUNTRY);
 
             if(name != null && email != null && city != null
                     && address != null &&  zipcode != null && country != null) {
@@ -68,22 +68,22 @@ public class IndividualAddress extends BaseActivity {
 
     public void updateCredentials(View view) {
         DatabaseReference credentialsReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
-        credentialsReference.orderByChild("userEmail").equalTo(emailTextView.getText().toString())
+        credentialsReference.orderByChild(Constants.KEY_USER_EMAIL).equalTo(emailTextView.getText().toString())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()) {
                             for (DataSnapshot credentials : dataSnapshot.getChildren()) {
-                                credentials.getRef().child("userEmail").setValue(emailTextView.getText().toString());
-                                credentials.getRef().child("address").setValue(addressTextView.getText().toString());
-                                credentials.getRef().child("city").setValue(cityTextView.getText().toString());
-                                credentials.getRef().child("name").setValue(nameTextView.getText().toString());
-                                credentials.getRef().child("zipcode").setValue(zipcodeTextView.getText().toString());
-                                credentials.getRef().child("country").setValue(countryTextView.getText().toString());
+                                credentials.getRef().child(Constants.KEY_USER_EMAIL).setValue(emailTextView.getText().toString());
+                                credentials.getRef().child(Constants.KEY_ADDRESS).setValue(addressTextView.getText().toString());
+                                credentials.getRef().child(Constants.KEY_CITY).setValue(cityTextView.getText().toString());
+                                credentials.getRef().child(Constants.KEY_NAME).setValue(nameTextView.getText().toString());
+                                credentials.getRef().child(Constants.KEY_ZIPCODE).setValue(zipcodeTextView.getText().toString());
+                                credentials.getRef().child(Constants.KEY_COUNTRY).setValue(countryTextView.getText().toString());
 
                                 Toast.makeText(IndividualAddress.this, R.string.credentials_updated, Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), UserAddress.class);
-                                startActivity(intent);
+                                Intent toUserAddress = new Intent(getApplicationContext(), UserAddress.class);
+                                startActivity(toUserAddress);
 
                             }
 
@@ -91,9 +91,7 @@ public class IndividualAddress extends BaseActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
+                    public void onCancelled(DatabaseError databaseError) {}
                 });
     }
 }

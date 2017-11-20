@@ -238,5 +238,7 @@ Does that mean we are going to work our asses off this year? Yes, it does, but t
     <string name="surname">Surname</string>
     <string name="street_address">Street address</string>
     <string name="credentials_updated">Credentials updated</string>
+    <string name="no_address">No address</string>
+    <string name="send_email_via">Send email via:</string>
 
 </resources>

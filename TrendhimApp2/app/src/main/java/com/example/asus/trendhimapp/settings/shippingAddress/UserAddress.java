@@ -79,7 +79,7 @@ public class UserAddress extends BaseActivity {
 
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "No address", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), R.string.no_address, Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -107,14 +107,14 @@ public class UserAddress extends BaseActivity {
 
                                         Credentials credentials = dataSnapshot1.getValue(Credentials.class);
 
-                                        Intent intent = new Intent(getApplicationContext(), IndividualAddress.class);
-                                        intent.putExtra("name",credentials.getName());
-                                        intent.putExtra("address",credentials.getAddress());
-                                        intent.putExtra("city",credentials.getCity());
-                                        intent.putExtra("country",credentials.getCountry());
-                                        intent.putExtra("email",credentials.getUserEmail());
-                                        intent.putExtra("zipcode",credentials.getZipcode());
-                                        startActivity(intent);
+                                        Intent toIndividualAddress = new Intent(getApplicationContext(), IndividualAddress.class);
+                                        toIndividualAddress.putExtra(Constants.KEY_NAME,credentials.getName());
+                                        toIndividualAddress.putExtra(Constants.KEY_ADDRESS,credentials.getAddress());
+                                        toIndividualAddress.putExtra(Constants.KEY_CITY,credentials.getCity());
+                                        toIndividualAddress.putExtra(Constants.KEY_COUNTRY,credentials.getCountry());
+                                        toIndividualAddress.putExtra(Constants.KEY_EMAIL,credentials.getUserEmail());
+                                        toIndividualAddress.putExtra(Constants.KEY_ZIPCODE,credentials.getZipcode());
+                                        startActivity(toIndividualAddress);
 
                                     }
                                 }

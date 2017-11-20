@@ -11,6 +11,7 @@ import android.view.View;
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.categoryPage.CategoryProduct;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
+import com.example.asus.trendhimapp.util.Constants;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class DetailedOrderActivity extends BaseActivity {
 
         Intent intent = getIntent();
         if(intent != null) {
-            String key = intent.getStringExtra("key");
+            String key = intent.getStringExtra(Constants.KEY_ATTR_KEY);
             if(key != null) {
                 //Populate the recycler view
                 adapter.addData(key);

@@ -230,9 +230,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
+                    public void onCancelled(DatabaseError databaseError) {}
                 });
 
     }
@@ -284,9 +282,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
+                    public void onCancelled(DatabaseError databaseError) {}
                 });
 
     }
