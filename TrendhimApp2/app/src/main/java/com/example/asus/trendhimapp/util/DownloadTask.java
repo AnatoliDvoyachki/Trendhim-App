@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Used to handle the downloads from the GoogleFirebase storage service.
+ * Utility class, used to handle the downloads from the GoogleFirebase storage service.
  **/
 public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
