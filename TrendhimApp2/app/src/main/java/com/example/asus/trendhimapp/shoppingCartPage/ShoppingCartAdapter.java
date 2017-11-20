@@ -99,7 +99,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                 ShoppingCartActivity.setSubtotal(currentSubtotal);
 
                                 // Update the shipping cost
-                                if(ShoppingCartActivity.getSubtotalCost() <= 75)
+                                if(ShoppingCartActivity.getSubtotalCost() <= Constants.DISCOUNT_QUALIFIER)
                                     ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
                                 else
                                     ShoppingCartActivity.setShippingCost(0);
@@ -137,7 +137,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
                                         // Update shipping cost
                                         // Free shipping if the items price is over 75 euros
-                                        if(ShoppingCartActivity.getSubtotalCost() <= 75)
+                                        if(ShoppingCartActivity.getSubtotalCost() <= Constants.DISCOUNT_QUALIFIER)
                                             ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
                                         else
                                             ShoppingCartActivity.setShippingCost(0);
@@ -169,7 +169,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                             ShoppingCartActivity.setSubtotal(currentSubtotal);
 
                                             // Free shipping if the items price is over 75 euros
-                                            if(ShoppingCartActivity.getSubtotalCost() <= 75)
+                                            if(ShoppingCartActivity.getSubtotalCost() <= Constants.DISCOUNT_QUALIFIER)
                                                 ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
                                             else
                                                 ShoppingCartActivity.setShippingCost(0);
