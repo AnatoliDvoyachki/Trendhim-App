@@ -220,7 +220,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 shoppingCartProducts.remove(currentProduct); // Remove the item from the recycler view
 
                 // Update the shipping cost
-                if(ShoppingCartActivity.getSubtotalCost() <= 75) {
+                if(ShoppingCartActivity.getSubtotalCost() <= Constants.DISCOUNT_QUALIFIER) {
                     ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
                 } else {
                     ShoppingCartActivity.setShippingCost(0);
@@ -414,7 +414,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                             notifyItemInserted(getItemCount()); //notify the adapter than an item has been inserted in the last position
 
                                             // Update the shipping cost
-                                            if(ShoppingCartActivity.getSubtotalCost() <= 75)
+                                            if(ShoppingCartActivity.getSubtotalCost() <= Constants.DISCOUNT_QUALIFIER)
                                                 ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
                                             else
                                                 ShoppingCartActivity.setShippingCost(0);
