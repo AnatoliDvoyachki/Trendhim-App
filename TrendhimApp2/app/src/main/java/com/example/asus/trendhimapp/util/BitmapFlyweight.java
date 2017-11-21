@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Utility class, used for obtaining Bitmap objects. Implemented using the Flyweight Design Pattern.
+ * Utility class, used for obtaining and storing Bitmap objects.
+ * Implemented using the Flyweight Design Pattern.
  **/
 public final class BitmapFlyweight {
 
