@@ -14,7 +14,7 @@ import com.example.asus.trendhimapp.util.Constants;
 
 public class Contact extends BaseActivity {
 
-    EditText subject, message;
+    private EditText subject, message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,6 @@ public class Contact extends BaseActivity {
 
 
     public void submitContact(View view){
-        Log.i("Send email", "");
 
         Intent mail = new Intent(Intent.ACTION_SEND);
         mail.putExtra(Intent.EXTRA_EMAIL,new String[]{Constants.GMAIL_EMAIL});

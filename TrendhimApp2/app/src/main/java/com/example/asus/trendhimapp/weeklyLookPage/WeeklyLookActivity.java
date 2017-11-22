@@ -17,9 +17,9 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class WeeklyLookActivity extends BaseActivity {
 
-    ArrayList<WeeklyLook> weeklyLooks;
-    WeeklyLookAdapter adapter;
-    RecyclerView recyclerView;
+    private ArrayList<WeeklyLook> weeklyLooks;
+    private WeeklyLookAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

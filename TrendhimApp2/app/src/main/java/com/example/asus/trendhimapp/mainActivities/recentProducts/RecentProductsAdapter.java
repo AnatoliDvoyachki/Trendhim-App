@@ -237,21 +237,21 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                 && Objects.equals(recentProduct.getEmail(), user.getEmail())) {
 
                             //if the product is added to the database
-                            Date curDate = new Date();
+                            Date now = new Date();
 
-                            dataSnapshot1.getRef().child(Constants.KEY_VISIT_TIME).setValue(convertDateToString(curDate));
-                            dataSnapshot1.getRef().child(Constants.KEY_ORDER).setValue("-" + convertDateToString(curDate));
+                            dataSnapshot1.getRef().child(Constants.KEY_VISIT_TIME).setValue(convertDateToString(now));
+                            dataSnapshot1.getRef().child(Constants.KEY_ORDER).setValue("-" + convertDateToString(now));
                             exists[0] = true;
                             break;
                         }
                     }
                     //if the product is not in the database
                     if(!exists[0]){
-                        Date today = new Date();
+                        Date now = new Date();
                         Map<String, String> values = new HashMap<>();
                         values.put(Constants.KEY_ATTR_KEY, product.getKey());
                         values.put(Constants.KEY_EMAIL, user.getEmail());
-                        values.put(Constants.KEY_ORDER, "-" + convertDateToString(today)); //order the elements in descending visit date
+                        values.put(Constants.KEY_ORDER, "-" + convertDateToString(now)); //order the elements in descending visit date
                         myRef.push().setValue(values);
                     }
 

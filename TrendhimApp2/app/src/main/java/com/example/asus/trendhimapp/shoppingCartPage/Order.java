@@ -4,7 +4,7 @@ public class Order {
 
     private String productKey, quantity;
 
-    Order(){};
+    public Order(){};
 
     public Order(String productKey, String quantity){
         this.productKey = productKey;

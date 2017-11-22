@@ -12,6 +12,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * Utility class, used for sending emails to the customers.
+ **/
 public class GMailSender extends Authenticator {
     private String mailhost = "smtp.gmail.com";
     private String user;

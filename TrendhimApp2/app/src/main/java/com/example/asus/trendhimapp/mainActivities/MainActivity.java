@@ -24,13 +24,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
 
-    ArrayList<CategoryProduct> recentProducts, recommendedProducts;
+    private ArrayList<CategoryProduct> recentProducts, recommendedProducts;
     public static RecentProductsAdapter adapter;
     public static TextView noRecentProducts;
-    ImageView recentProductImage, recommendedProductsImage;
-    int i = 0, i1= 0; //handle image clicks
-    NewProductsAdapter newProductAdapter;
-    ImageView weeklyLookImage;
+    private ImageView recentProductImage, recommendedProductsImage;
+    private int i = 0, i1= 0; //handle image clicks
+    private NewProductsAdapter newProductAdapter;
+    private ImageView weeklyLookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

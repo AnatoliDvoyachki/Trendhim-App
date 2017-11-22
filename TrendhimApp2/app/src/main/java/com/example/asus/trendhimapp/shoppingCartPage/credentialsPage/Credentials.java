@@ -4,9 +4,9 @@ public class Credentials {
 
     private String userEmail, address, city, zipcode, country, name;
 
-    Credentials(){};
+    public Credentials(){};
 
-    Credentials(String userEmail, String address, String city, String zipcode, String country, String name){
+    public Credentials(String userEmail, String address, String city, String zipcode, String country, String name){
         this.name = name;
         this.userEmail = userEmail;
         this.address = address;
