@@ -6,11 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
 
 public class WishlistActivity extends BaseActivity {
+
+    public static RelativeLayout emptyWishlistLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,9 @@ public class WishlistActivity extends BaseActivity {
      * Initialize wishlist components
      */
     private void initializeComponents() {
+
+        emptyWishlistLayout = findViewById(R.id.emptyWishlistLayout);
+
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
         recyclerView.setNestedScrollingEnabled(true);

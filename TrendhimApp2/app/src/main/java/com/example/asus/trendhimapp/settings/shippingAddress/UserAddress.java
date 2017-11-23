@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
@@ -28,6 +28,7 @@ public class UserAddress extends BaseActivity {
     ListView listView;
     ArrayList<Credentials> addresses;
     AddressAdapter addressAdapter;
+    RelativeLayout noAddressesLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class UserAddress extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         setTitle(getString(R.string.shipping_address));
+
+        noAddressesLayout = findViewById(R.id.noAddressesLayout);
 
         listView = findViewById(R.id.shipping_addresses_listView);
         addresses = new ArrayList<>();
@@ -70,6 +73,7 @@ public class UserAddress extends BaseActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if(dataSnapshot.exists()){
+                                noAddressesLayout.setVisibility(View.INVISIBLE);
                                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
                                     Credentials credentials = dataSnapshot1.getValue(Credentials.class);
@@ -79,7 +83,7 @@ public class UserAddress extends BaseActivity {
 
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), R.string.no_address, Toast.LENGTH_LONG).show();
+                               noAddressesLayout.setVisibility(View.VISIBLE);
                             }
                         }
 

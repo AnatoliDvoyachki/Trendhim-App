@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context="com.example.asus.trendhimapp.settings.order.OrderActivity">
+
+    <RelativeLayout
+        android:id="@+id/noOrdersLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageNoOrders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/barcode"
+            android:contentDescription="@string/shopping_cart_title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/noOrdersTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ups_you_haven_t_bought_anything_yey"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/imageNoOrders"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ordersRecyclerView"
@@ -11,4 +44,6 @@
         android:layout_height="match_parent"
         android:paddingTop="50dp" />
 
-</LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

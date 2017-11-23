@@ -50,7 +50,7 @@
     <string name="log_in">Log in</string>
 
     <!--  WishlistActivity strings-->
-    <string name="wishlist_activity_title">My Wishlist</string>
+    <string name="wishlist_activity_title">Wishlist</string>
     <string name="remove_success_message">Item successfuly removed!</string>
     <string name="weekly_look">Weekly look</string>
     <string name="main_look">Main Look</string>
@@ -240,5 +240,12 @@ Does that mean we are going to work our asses off this year? Yes, it does, but t
     <string name="credentials_updated">Credentials updated</string>
     <string name="no_address">No address</string>
     <string name="send_email_via">Send email via:</string>
+    <string name="about_us">About us</string>
+    <string name="settings">Settings</string>
+    <string name="log_out">Log out</string>
+    <string name="your_basket_is_empty">Your basket is empty</string>
+    <string name="ups_you_don_t_have_any_items_in_your_wishlist">UPS! You don\'t have any items in your wishlist</string>
+    <string name="ups_you_haven_t_bought_anything_yey">UPS! You haven\'t bought anything yey</string>
+    <string name="ups_you_don_t_have_any_addresses_yet">Ups! You don\'t have any addresses yet!</string>
 
 </resources>

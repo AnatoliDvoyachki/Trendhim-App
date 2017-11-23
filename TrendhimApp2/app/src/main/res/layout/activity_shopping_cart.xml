@@ -13,7 +13,8 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/product_name_text_view"
@@ -60,7 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_marginStart="10dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/subtotal_label_text_view"
@@ -123,24 +125,52 @@
             android:gravity="center"
             android:text="@string/_0" />
 
-        <!-- Check out Button -->
-        <Button
-            android:id="@+id/checkout_button"
-            android:layout_width="250dp"
+    </RelativeLayout>
+
+    <!-- Check out Button -->
+    <Button
+        android:id="@+id/checkout_button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:background="@drawable/ripple_effect_second"
+        android:fontFamily="sans-serif"
+        android:layout_centerHorizontal="true"
+        android:onClick="toCheckOut"
+        android:padding="12dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/checkout_button_label_text"
+        android:textAlignment="center"
+        android:textColor="@color/darkGrey"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/emptyBasketLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageEmptyBasket"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            android:layout_toEndOf="@+id/subtotal_label_text_view"
-            android:background="@drawable/ripple_effect_second"
-            android:fontFamily="sans-serif"
-            android:padding="12dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/checkout_button_label_text"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/darkGrey"
-            android:textSize="14sp" />
+            android:src="@drawable/shopping_bag"
+            android:contentDescription="@string/shopping_cart_title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/emptyBasketTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_basket_is_empty"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/imageEmptyBasket"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 
@@ -149,13 +179,14 @@
         android:id="@+id/container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/footer"
-        android:layout_below="@id/header"
-        android:layout_marginBottom="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="?attr/actionBarSize"
         android:gravity="center">
 
         <LinearLayout
             android:id="@+id/layoutRV"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

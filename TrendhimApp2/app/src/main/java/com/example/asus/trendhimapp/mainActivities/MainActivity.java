@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity {
         /*
          * Hide or show recommended products recycler view on image clicked
          */
-        recommendedProductsImage.setOnClickListener(new View.OnClickListener() {
+            recommendedProductsImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(i1 % 2 == 0)

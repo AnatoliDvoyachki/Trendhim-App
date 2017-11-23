@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="com.example.asus.trendhimapp.wishlistPage.WishlistActivity">
+
+    <RelativeLayout
+        android:id="@+id/emptyWishlistLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageEmptyWishlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wishlist"
+            android:contentDescription="@string/shopping_cart_title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/emptyWishlistTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ups_you_don_t_have_any_items_in_your_wishlist"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/imageEmptyWishlist"
+            android:layout_centerHorizontal="true"/>
+
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

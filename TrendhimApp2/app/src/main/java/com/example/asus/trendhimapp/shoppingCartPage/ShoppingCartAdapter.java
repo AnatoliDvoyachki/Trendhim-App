@@ -219,6 +219,14 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 removeItem(currentProduct); // Remove the product from Firebase
                 shoppingCartProducts.remove(currentProduct); // Remove the item from the recycler view
 
+                // if the shopping cart is empty after removal - display it
+                if(shoppingCartProducts.size() == 0) {
+                    ShoppingCartActivity.footer.setVisibility(View.GONE);
+                    ShoppingCartActivity.header.setVisibility(View.GONE);
+                    ShoppingCartActivity.emptyBasketLayout.setVisibility(View.VISIBLE);
+                    ShoppingCartActivity.checkOutButton.setVisibility(View.GONE);
+                }
+
                 // Update the shipping cost
                 if(ShoppingCartActivity.getSubtotalCost() <= Constants.DISCOUNT_QUALIFIER) {
                     ShoppingCartActivity.setShippingCost(Constants.SINGLE_ITEM_SHIPPING_COST);
@@ -232,7 +240,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
                 notifyDataSetChanged(); // Notify the adapter about the change
 
+
                 Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show(); // Notify the user
+
             }
         });
 
@@ -390,6 +400,12 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+
+                    ShoppingCartActivity.footer.setVisibility(View.VISIBLE);
+                    ShoppingCartActivity.header.setVisibility(View.VISIBLE);
+                    ShoppingCartActivity.emptyBasketLayout.setVisibility(View.GONE);
+                    ShoppingCartActivity.checkOutButton.setVisibility(View.VISIBLE);
+
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         final ShoppingCartProduct currentProduct = ds.getValue(ShoppingCartProduct.class);
@@ -428,7 +444,12 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                             public void onCancelled(DatabaseError databaseError) {}
                         });
                     }
+                } else {
+                    ShoppingCartActivity.emptyBasketLayout.setVisibility(View.VISIBLE);
+                    ShoppingCartActivity.checkOutButton.setVisibility(View.GONE);
+
                 }
+
             }
 
             @Override

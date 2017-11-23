@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.BaseActivity;
@@ -19,6 +20,8 @@ public class OrderActivity extends BaseActivity {
     ArrayList<UserOrder> orders;
     OrderAdapter adapter;
     RecyclerView recyclerView;
+    //access the noOrdersLayout from the order adapter
+    public static RelativeLayout noOrdersLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,13 @@ public class OrderActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         setTitle(getString(R.string.orders_placed));
+
+        initializeComponents();
+    }
+
+    public void initializeComponents(){
+
+        noOrdersLayout = findViewById(R.id.noOrdersLayout);
 
         // Lookup the recycler view in activity layout
         recyclerView = findViewById(R.id.ordersRecyclerView);

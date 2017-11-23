@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_log_in"
-        android:title="@string/shopping_cart_title"
-        android:icon="@drawable/login"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/action_wishlist"
         android:title="@string/wishlist_activity_title"
         android:icon="@drawable/wishlist"
@@ -16,7 +10,7 @@
 
     <item
         android:id="@+id/action_shopping_cart"
-        android:title="@string/log_in"
+        android:title="@string/shopping_cart_title"
         android:icon="@drawable/shopping_bag"
         app:showAsAction="always"/>
 

@@ -4,6 +4,34 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize">
 
+    <RelativeLayout
+        android:id="@+id/noAddressesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageNoAddresses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/skyline"
+            android:contentDescription="@string/shopping_cart_title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/noAddressesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ups_you_don_t_have_any_addresses_yet"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/imageNoAddresses"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/shipping_addresses_listView"
         android:layout_marginTop="?attr/actionBarSize"

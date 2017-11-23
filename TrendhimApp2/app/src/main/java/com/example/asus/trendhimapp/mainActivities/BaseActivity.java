@@ -20,9 +20,9 @@ import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.aboutUsPage.AboutUsActivity;
 import com.example.asus.trendhimapp.categoryPage.CategoryProductActivity;
 import com.example.asus.trendhimapp.loginPage.TabbedActivity;
+import com.example.asus.trendhimapp.settings.Settings;
 import com.example.asus.trendhimapp.shoppingCartPage.ShoppingCartActivity;
 import com.example.asus.trendhimapp.util.Constants;
-import com.example.asus.trendhimapp.settings.Settings;
 import com.example.asus.trendhimapp.weeklyLookPage.WeeklyLookActivity;
 import com.example.asus.trendhimapp.wishlistPage.WishlistActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,20 +84,20 @@ public class BaseActivity extends AppCompatActivity
         switch (id) {
 
             /*
-             * Start Log In Activity whenever the Log In button is clicked
+             * Start Shopping cart Activity whenever the shopping cart button is clicked
              * and the user is not logged in.
              * If the user is logged in - Display Toast
              */
-            case R.id.action_log_in:
-                if (!isUserOnline()) {
-                    Intent toLogin = new Intent(getApplicationContext(), TabbedActivity.class);
-                    startActivity(toLogin);
-                } else if (isUserOnline())
-                    Toast.makeText(getApplicationContext(), R.string.already_logged_in_message, Toast.LENGTH_LONG).show();
+            case R.id.action_shopping_cart:
+                if (isUserOnline()) {
+                    Intent toShoppingCart = new Intent(getApplicationContext(), ShoppingCartActivity.class);
+                    startActivity(toShoppingCart);
+                } else
+                    Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
 
                 break;
-
-            /*
+                
+             /*
              * Start Wish list Activity whenever the wish list button is clicked
              * and the user is logged in.
              * If the user is not logged in - Display Toast
@@ -112,19 +112,6 @@ public class BaseActivity extends AppCompatActivity
 
                 break;
 
-            /*
-             * Start Shopping cart Activity whenever the shopping cart button is clicked
-             * and the user is not logged in.
-             * If the user is logged in - Display Toast
-             */
-            case R.id.action_shopping_cart:
-                if (isUserOnline()) {
-                    Intent toShoppingCart = new Intent(getApplicationContext(), ShoppingCartActivity.class);
-                    startActivity(toShoppingCart);
-                } else
-                    Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
-
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -190,6 +177,20 @@ public class BaseActivity extends AppCompatActivity
             case R.id.aboutUs:
                 intent = new Intent(getApplicationContext(), AboutUsActivity.class);
                 startActivity(intent, options.toBundle());
+                break;
+
+              /*
+             * Start Log In Activity whenever the Log In button is clicked
+             * and the user is not logged in.
+             * If the user is logged in - Display Toast
+             */
+            case R.id.action_log_in:
+                if (!isUserOnline()) {
+                    Intent toLogin = new Intent(getApplicationContext(), TabbedActivity.class);
+                    startActivity(toLogin);
+                } else if (isUserOnline())
+                    Toast.makeText(getApplicationContext(), R.string.already_logged_in_message, Toast.LENGTH_LONG).show();
+
                 break;
 
         }

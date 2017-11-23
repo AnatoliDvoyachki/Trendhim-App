@@ -2,45 +2,19 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="10dp"
-    android:layout_marginTop="20dp">
-
-    <RelativeLayout
-        android:id="@+id/container_order"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/order_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-smallcaps"
-            android:gravity="center"
-            android:text="@string/your_order"
-            android:textAllCaps="true"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+    android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/order_number"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="?attr/actionBarSize"
+            android:id="@+id/linearLayout">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/detailedOrderRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-    </RelativeLayout>
 
 </ScrollView>

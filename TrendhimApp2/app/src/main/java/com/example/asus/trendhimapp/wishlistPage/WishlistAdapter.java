@@ -184,6 +184,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
+                        //Hide no products in the wishlist layout
+                        WishlistActivity.emptyWishlistLayout.setVisibility(View.GONE);
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             WishlistProduct wishProd = ds.getValue(WishlistProduct.class);
@@ -217,7 +219,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                                 public void onCancelled(DatabaseError databaseError) {}
                             });
                         }
-                    }
+                    } else
+                        WishlistActivity.emptyWishlistLayout.setVisibility(View.VISIBLE);
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {}
@@ -280,6 +283,12 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 removeItem(categoryProduct); //Remove item from the wishlist firebase
                 productList.remove(position); //Remove item from the wishlist recycler view
                 notifyItemRemoved(position); //Notify the adapter that an item has been removed
+
+                // if the wishlist is empty after removal - display it
+                if(productList.size() == 0)
+                    WishlistActivity.emptyWishlistLayout.setVisibility(View.VISIBLE);
+
+
             }
 
         });
@@ -327,6 +336,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                         removeItem(categoryProduct); // Item is attempted to be removed
                         productList.remove(categoryProduct); // Item is also removed from the RecyclerView
                         notifyDataSetChanged(); // Refresh the view
+
+                        // if the wishlist is empty after removal - display it
+                        if(productList.size() == 0)
+                            WishlistActivity.emptyWishlistLayout.setVisibility(View.VISIBLE);
+
                         Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
                     }
                 });

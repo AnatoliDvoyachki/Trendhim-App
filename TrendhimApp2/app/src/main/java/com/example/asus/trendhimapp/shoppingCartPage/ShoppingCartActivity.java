@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.asus.trendhimapp.R;
@@ -26,6 +27,9 @@ public class ShoppingCartActivity extends BaseActivity {
     //static because they are access from the Shopping Cart Adapter
     private static TextView subtotalTextView, shippingTextView, totalTextView;
     public static ShoppingCartAdapter adapter;
+    public static RelativeLayout footer, header, emptyBasketLayout;
+    public static Button checkOutButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +54,13 @@ public class ShoppingCartActivity extends BaseActivity {
         shippingTextView = findViewById(R.id.shipping_value_text_view);
         totalTextView = findViewById(R.id.grand_total_value_text_view);
 
-        Button checkoutButton = findViewById(R.id.checkout_button);
-        checkoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toCredentials = new Intent(ShoppingCartActivity.this, CredentialsActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(ShoppingCartActivity.this, v, "profile");
-                startActivity(toCredentials, options.toBundle());
-            }
-        });
+        //Use to display a message to the user if the basket is empty
+        emptyBasketLayout = findViewById(R.id.emptyBasketLayout);
+
+        //Hide layouts if the basket is empty
+        footer = findViewById(R.id.footer);
+        header = findViewById(R.id.header);
+        checkOutButton = findViewById(R.id.checkout_button);
 
         // Setup the recycler view
         RecyclerView recyclerView = findViewById(R.id.the_recycler_view);
@@ -130,4 +131,11 @@ public class ShoppingCartActivity extends BaseActivity {
         return Integer.parseInt(value);
     }
 
+
+    public void toCheckOut(View view) {
+        Intent intent = new Intent(this, CredentialsActivity.class);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(ShoppingCartActivity.this, view, "profile");
+        startActivity(intent, options.toBundle());
+    }
 }

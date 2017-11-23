@@ -59,7 +59,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         address.setText(order.getAddress());
 
         TextView productPrice = viewHolder.price;
-        productPrice.setText(String.format(Constants.PRICE_FORMAT, order.getGrandTotal()));
+        productPrice.setText(String.format(Constants.PRICE_FORMAT, order.getGrand_Total()));
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +90,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
                             if (dataSnapshot.exists()) {
 
+                                OrderActivity.noOrdersLayout.setVisibility(View.GONE);
+
                                 for (final DataSnapshot product : dataSnapshot.getChildren()) {
                                     //Found product
                                     final UserOrder order = product.getValue(UserOrder.class);
                                     DatabaseReference myRef =
                                             FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
-                                    myRef.addListenerForSingleValueEvent(new ValueEventListener() { //get user address
+                                    myRef.orderByChild("userEmail").equalTo(currentUser.getEmail())
+                                            .addListenerForSingleValueEvent(new ValueEventListener() { //get user address
                                         @Override
                                         public void onDataChange(final DataSnapshot dataSnapshot) {
 
@@ -104,7 +107,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                                                 for (final DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                                     Credentials credentials =  dataSnapshot1.getValue(Credentials.class);
                                                     orders.add(0, new UserOrder(order.getDate(), credentials.getAddress(),
-                                                            order.getGrandTotal(), product.getKey()));
+                                                            order.getGrand_Total(), product.getKey()));
                                                     notifyItemInserted(0);
 
                                                 }
@@ -119,7 +122,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
 
                                 }
-                            }
+                            } else
+                                OrderActivity.noOrdersLayout.setVisibility(View.VISIBLE);
                         }
 
                         @Override
