@@ -4,9 +4,9 @@ public class LookProduct {
 
     private String key, category;
 
-    LookProduct(){};
+    public LookProduct(){};
 
-    LookProduct(String key, String category) {
+    public LookProduct(String key, String category) {
         this.key = key;
         this.category = category;
     }

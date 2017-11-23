@@ -46,6 +46,7 @@ public final class Constants {
     // Shopping cart
     public static final int SINGLE_ITEM_SHIPPING_COST = 5;
     public static final int DISCOUNT_QUALIFIER = 75;
+    public static final String INITIAL_QUANTITY = "1";
     public static final String ORDER_DATE = "date";
     public static final String GRAND_TOTAL = "grand_total";
 
@@ -71,5 +72,8 @@ public final class Constants {
     // Trendhim email credentials
     public static final String GMAIL_EMAIL = "trendhimaps@gmail.com"; // GMAIL address
     public static final String GMAIL_PASSWORD = "android11"; // GMAIL Password
+
+    // The maximum amount of objects that the Flyweight can store
+    public static final int MAX_CACHE_CAPACITY = 100;
 
 }

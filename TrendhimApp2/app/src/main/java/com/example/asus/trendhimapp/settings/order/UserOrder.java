@@ -4,7 +4,7 @@ public class UserOrder {
 
     private String date, address, grand_total, key;
 
-    UserOrder(){}; //empty constructor for the firebase queries
+    public UserOrder(){}; //empty constructor for the firebase queries
 
     public UserOrder(String date, String address, String grand_total, String key){
         this.date = date;

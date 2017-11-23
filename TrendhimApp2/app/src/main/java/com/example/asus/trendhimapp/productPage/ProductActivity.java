@@ -115,7 +115,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
     /**
      * Handle wishlist and shopping cart on click listeners
-     * @param v
+     * @param v the view
      */
     @Override
     public void onClick(View v) {
@@ -161,7 +161,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
                     // Align the buttons in the center of the dialog window
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-                    layoutParams.weight = 10;
+                    layoutParams.weight = R.dimen.center_position;
                     btnPositive.setLayoutParams(layoutParams);
                     btnNegative.setLayoutParams(layoutParams);
                 }
@@ -203,13 +203,14 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
                     // Align the buttons in the center of the dialog window
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-                    layoutParams.weight = 10;
+                    layoutParams.weight = R.dimen.center_position;
                     btnPositive.setLayoutParams(layoutParams);
                     btnNegative.setLayoutParams(layoutParams);
                 }
             }
         } else {
-            Toast.makeText(this, R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
+            Toast.makeText(ProductActivity.this, R.string.not_logged_in_unsuccess_message,
+                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -219,7 +220,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     private void addToShoppingCart() {
 
         Intent fromCategoryPage = getIntent();
-        if (fromCategoryPage != null) {
+
+        if (fromCategoryPage != null &&
+                fromCategoryPage.getExtras().containsKey(Constants.KEY_PRODUCT_KEY)) {
             String productKey = fromCategoryPage.getStringExtra(Constants.KEY_PRODUCT_KEY);
             executeAddToCart(productKey);
         }
@@ -248,7 +251,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                                 if(Objects.equals(shoppingCartProduct.getUserEmail(), user.getEmail())) {
                                     int currentQuantity = Integer.parseInt(shoppingCartProduct.getQuantity()) + 1;
                                     //Increase the product quantity if the product is already in the shopping cart
-                                    dataSnapshot1.getRef().child(Constants.KEY_QUANTITY).setValue(String.valueOf(currentQuantity));
+                                    dataSnapshot1.getRef().child(Constants.KEY_QUANTITY)
+                                            .setValue(String.valueOf(currentQuantity));
 
                                     Toast.makeText(getApplicationContext(), R.string.item_added_to_cart_message,
                                             Toast.LENGTH_SHORT).show();
@@ -262,9 +266,9 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                                 Map<String, Object> values = new HashMap<>();
                                 values.put(Constants.KEY_PRODUCT_KEY, categoryProductKey);
                                 values.put(Constants.KEY_USER_EMAIL, user.getEmail());
-                                values.put(Constants.KEY_QUANTITY, "1");
+                                values.put(Constants.KEY_QUANTITY, Constants.INITIAL_QUANTITY);
                                 myRef.push().setValue(values);
-                                Toast.makeText(getApplicationContext(), R.string.item_added_to_cart_message,
+                                Toast.makeText(ProductActivity.this, R.string.item_added_to_cart_message,
                                         Toast.LENGTH_SHORT).show();
                             }
 
@@ -288,7 +292,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
         Intent intent = getIntent();
 
-        if (intent != null) {
+        if (intent != null &&
+                intent.getExtras().containsKey(Constants.KEY_PRODUCT_KEY)) {
             final String userEmail = user.getEmail();
             final String productKey = intent.getStringExtra(Constants.KEY_PRODUCT_KEY);
 
@@ -300,11 +305,11 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        WishlistProduct wishlistProduct = dataSnapshot1.getValue(WishlistProduct.class);
+                        WishlistProduct currentWishProd = dataSnapshot1.getValue(WishlistProduct.class);
 
-                        if(Objects.equals(wishlistProduct.getUserEmail(), userEmail)) {
+                        if(Objects.equals(currentWishProd.getUserEmail(), userEmail)) {
 
-                            Toast.makeText(getApplicationContext(),
+                            Toast.makeText(ProductActivity.this,
                                     R.string.item_already_in_the_wishlist_message, Toast.LENGTH_SHORT).show();
                             exists[0] = true;
 
@@ -318,7 +323,8 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                         values.put(Constants.KEY_USER_EMAIL,userEmail);
                         values.put(Constants.KEY_ENTITY_NAME, getCategory(productKey));
                         myRef.push().setValue(values);
-                        Toast.makeText(getApplicationContext(), R.string.added_to_wishlist_success_message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductActivity.this, R.string.added_to_wishlist_success_message,
+                                Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -334,7 +340,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
     /**
      * Get the product category - Used to query the wishlist database
      * @param productKey
-     * @return
+     * @return the name of the entity to which the product belongs to
      */
     public String getCategory(String productKey){
         String entityName;

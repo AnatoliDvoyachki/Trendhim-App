@@ -7,7 +7,9 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-
+/**
+ * Utility class, used for storing the content(in bytes) of the emails being sent.
+ **/
 public class ByteArrayDataSource implements DataSource {
     public byte[] data;
     public String type;

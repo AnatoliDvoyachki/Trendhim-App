@@ -42,7 +42,7 @@ public class WishlistActivity extends BaseActivity {
 
         recyclerView.setNestedScrollingEnabled(true);
 
-        WishlistAdapter wishlistAdapter = new WishlistAdapter(this);
+        WishlistAdapter wishlistAdapter = new WishlistAdapter(WishlistActivity.this);
         wishlistAdapter.populateRecyclerView();
 
         recyclerView.setAdapter(wishlistAdapter);

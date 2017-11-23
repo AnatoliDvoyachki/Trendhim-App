@@ -64,7 +64,7 @@ public class DetailedOrderAdapter extends RecyclerView.Adapter<DetailedOrderAdap
         address.setText(product.getBrand());
 
         TextView productPrice = viewHolder.price;
-        productPrice.setText(String.format("%s €", product.getPrice()));
+        productPrice.setText(String.format(Constants.PRICE_FORMAT, product.getPrice()));
 
         ImageView productImage = viewHolder.detailed_order_image;
         BitmapFlyweight.getPicture(product.getBannerPictureURL(), productImage);

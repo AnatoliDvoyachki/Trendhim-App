@@ -30,7 +30,7 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
     private Context context;
     private List<WeeklyLook> weeklyLooks;
 
-    WeeklyLookAdapter(Context context, List<WeeklyLook> weeklyLooks) {
+    public WeeklyLookAdapter(Context context, List<WeeklyLook> weeklyLooks) {
         this.weeklyLooks = weeklyLooks;
         this.context = context;
     }

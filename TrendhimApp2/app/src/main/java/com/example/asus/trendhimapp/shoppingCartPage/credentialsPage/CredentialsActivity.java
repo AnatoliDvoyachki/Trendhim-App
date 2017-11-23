@@ -39,9 +39,9 @@ import java.util.Map;
 
 public class CredentialsActivity extends BaseActivity implements View.OnClickListener, View.OnKeyListener {
 
-    EditText name, email, streetAddress, city, zipcode, country;
-    String subject, receiver, messageContent;
-    ArrayList<Order> orders;
+    private EditText name, email, streetAddress, city, zipcode, country;
+    private String subject, receiver, messageContent;
+    private ArrayList<Order> orders;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -166,7 +166,6 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
                             message,
                             Constants.GMAIL_EMAIL,
                             to);
-                    Log.w("sendEmail",getString(R.string.order_successful_message));
 
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
@@ -179,7 +178,6 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
 
                 } catch (final Exception e) {
-                    Log.e("sendEmail", e.getMessage(), e);
 
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
@@ -211,7 +209,8 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
      */
     private void saveUserCredentials(){
 
-        final DatabaseReference credentialsDatabase = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
+        final DatabaseReference credentialsDatabase = FirebaseDatabase.getInstance()
+                .getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
         credentialsDatabase.orderByChild(Constants.KEY_USER_EMAIL).equalTo(email.getText().toString())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -331,9 +330,10 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
     }
 
     /**
-     *  Check if parameter 'emailAddress' is a valid email
+     *  @return true, if @param emailAdress exists and matches the regex pattern.
+     *  Otherwise false.
      */
-    boolean isValidEmail(CharSequence emailAddress) {
+    private boolean isValidEmail(CharSequence emailAddress) {
         return emailAddress != null && android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches();
     }
 

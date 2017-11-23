@@ -142,8 +142,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     /**
-     *  Provide a direct reference to each of the views
-     * used to cache the views within the layout for fast access
+     * Provide a direct reference to each of the views
+     * used to cache the views within the layout to reduce findViewById() calls
     */
     class ViewHolder extends RecyclerView.ViewHolder {
 

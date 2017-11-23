@@ -18,9 +18,9 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class CategoryProductActivity extends BaseActivity {
 
-    ArrayList<CategoryProduct> categoryProducts;
-    CategoryAdapter adapter;
-    RecyclerView recyclerView;
+    private ArrayList<CategoryProduct> categoryProducts;
+    private CategoryAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
