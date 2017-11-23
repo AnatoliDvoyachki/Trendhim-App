@@ -115,7 +115,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
     /**
      * Handle wishlist and shopping cart on click listeners
-     * @param v
+     * @param v the view
      */
     @Override
     public void onClick(View v) {
@@ -161,15 +161,14 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
                     // Align the buttons in the center of the dialog window
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-                    layoutParams.weight = 10;
+                    layoutParams.weight = R.dimen.center_position;
                     btnPositive.setLayoutParams(layoutParams);
                     btnNegative.setLayoutParams(layoutParams);
                 }
             } else {
                 Intent intent = getIntent();
 
-                if (intent != null &&
-                        intent.getExtras().containsKey(Constants.KEY_PRODUCT_NAME)) {
+                if (intent != null) {
 
                     String productName = intent.getStringExtra(Constants.KEY_PRODUCT_NAME);
                     final AlertDialog.Builder builder = new AlertDialog.Builder(ProductActivity.this);
@@ -204,7 +203,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
                     // Align the buttons in the center of the dialog window
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-                    layoutParams.weight = 10;
+                    layoutParams.weight = R.dimen.center_position;
                     btnPositive.setLayoutParams(layoutParams);
                     btnNegative.setLayoutParams(layoutParams);
                 }

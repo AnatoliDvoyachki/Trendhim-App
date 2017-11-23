@@ -214,7 +214,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
 
         // Align the views in the center of the dialog window
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-        layoutParams.weight = 10;
+        layoutParams.weight = R.dimen.center_position;
         btnPositive.setLayoutParams(layoutParams);
         btnNegative.setLayoutParams(layoutParams);
     }

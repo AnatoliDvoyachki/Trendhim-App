@@ -256,7 +256,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         // Align the buttons in the center of the dialog window
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-        layoutParams.weight = 10;
+        layoutParams.weight = R.dimen.center_position;
         btnPositive.setLayoutParams(layoutParams);
         btnNegative.setLayoutParams(layoutParams);
     }
