@@ -13,8 +13,7 @@ import java.util.Map;
 public final class BitmapFlyweight {
 
     private BitmapFlyweight() {}
-
-    private static final int MAX_CACHE_CAPACITY = 100;
+    
     private static final Map<String, Bitmap> PICTURE_CACHE = new HashMap<>();
 
     /**
@@ -40,7 +39,7 @@ public final class BitmapFlyweight {
      **/
     public static void cachePicture(String url, Bitmap bitmap) {
         // If the HashMap contains 100 or over 100 entries, it is cleared to free up the memory
-        if (PICTURE_CACHE.size() >= MAX_CACHE_CAPACITY) {
+        if (PICTURE_CACHE.size() >= Constants.MAX_CACHE_CAPACITY) {
             PICTURE_CACHE.clear();
         }
         PICTURE_CACHE.put(url, bitmap);

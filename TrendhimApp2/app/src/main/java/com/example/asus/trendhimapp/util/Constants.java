@@ -73,4 +73,7 @@ public final class Constants {
     public static final String GMAIL_EMAIL = "trendhimaps@gmail.com"; // GMAIL address
     public static final String GMAIL_PASSWORD = "android11"; // GMAIL Password
 
+    // The maximum amount of objects that the Flyweight can store
+    public static final int MAX_CACHE_CAPACITY = 100;
+
 }
