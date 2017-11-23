@@ -13,7 +13,7 @@ import java.util.Map;
 public final class BitmapFlyweight {
 
     private BitmapFlyweight() {}
-    
+
     private static final Map<String, Bitmap> PICTURE_CACHE = new HashMap<>();
 
     /**
