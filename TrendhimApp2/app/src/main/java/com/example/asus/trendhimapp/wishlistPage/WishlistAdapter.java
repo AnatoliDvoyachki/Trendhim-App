@@ -324,7 +324,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        removeItem(categoryProduct); // Item is attempted to be removed
+                        removeItem(categoryProduct); // Item is removed from Firebase
                         productList.remove(categoryProduct); // Item is also removed from the RecyclerView
                         notifyDataSetChanged(); // Refresh the view
                         Toast.makeText(context, R.string.remove_success_message, Toast.LENGTH_SHORT).show();
