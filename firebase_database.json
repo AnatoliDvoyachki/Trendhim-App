@@ -1,0 +1,866 @@
+{
+  "bags" : {
+    "bag1" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_banner-min.png?alt=media&token=45c00922-3007-4521-a70a-31a323c8191d",
+      "brand" : "DELTON",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_left_sided_picture-min.PNG?alt=media&token=514c6ba7-90b7-480b-9f28-646c26bc7c06",
+      "price" : 53,
+      "productName" : "Deep Blue Canvas Satchel",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag1%2Fbag1_right_sided_picture-min.PNG?alt=media&token=ee02d479-5212-49cb-9224-8f5fee3e1c0e"
+    },
+    "bag2" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag2%2Fbag2_banner-min.PNG?alt=media&token=65663f26-0c33-4522-ad1d-9f7044225e36",
+      "brand" : "DELTON",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag2%2Fbag2_left-min.PNG?alt=media&token=869b4283-641d-45d8-a0c6-d0b9ac3ea79e",
+      "price" : 70,
+      "productName" : "Green Canvas Pull-up Backpack",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag2%2Fbag2_right-min.PNG?alt=media&token=04cfea05-2d4a-4bba-86e8-3a315a05f31e"
+    },
+    "bag3" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag3%2Fbag3_banner-min.PNG?alt=media&token=b6adf847-f89f-4789-9a76-071839b3a707",
+      "brand" : "DELTON",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag3%2Fbag3_left-min.PNG?alt=media&token=e1099311-e823-4a4f-bf05-bea53c3ac328",
+      "price" : 117,
+      "productName" : "Brown Everyday Leather Bag",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag3%2Fbag3_right-min.PNG?alt=media&token=b797bd39-6769-4713-9ace-8ee53b55aea1"
+    },
+    "bag4" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag4%2Fbag4_banner.png?alt=media&token=b83f61b6-f034-439d-a7a4-d157f2d23c86",
+      "brand" : "LUCLEON",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag4%2Fbag4_left_sided_picture.png?alt=media&token=77d1e702-e83d-4ce9-9fea-d97f992c37f3",
+      "price" : 270,
+      "productName" : "Montreal Luxury Leather Tan Satchel Bag",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag4%2Fbag4_right_sided_picture.png?alt=media&token=8b21ec8c-e4b4-4e01-94b4-91949e1764c7"
+    },
+    "bag5" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag5%2Fbag5_banner-min.PNG?alt=media&token=8d94a364-1599-43db-9f6e-2efcfd1e23aa",
+      "brand" : "Convey",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag5%2Fbag5_left-min.PNG?alt=media&token=d9303192-bca4-4b38-baf4-c60e46451290",
+      "price" : 94,
+      "productName" : "Narita Messenger Bag",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag5%2Fbag5_right-min.PNG?alt=media&token=8ad11b47-747b-41ab-b582-658e6794ea9d"
+    },
+    "bag6" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag6%2Fbag6_banner-min.PNG?alt=media&token=6814f897-acb6-47a1-800f-29fba76fcf42",
+      "brand" : "DELTON",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag6%2Fbag6_left-min.PNG?alt=media&token=58f489db-9560-497b-9a4f-af20b55920c1",
+      "price" : 93,
+      "productName" : "Brown Single Strap Shoulder Bag",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag6%2Fbag6_right-min.PNG?alt=media&token=a13e7c21-eb78-4e9b-a2a3-847a7025dea5"
+    },
+    "bag7" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag7%2Fbag7_main_picture.png?alt=media&token=8e8efaca-0b3b-48bb-94e6-1f26d3977cab",
+      "brand" : "LUCLEON",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag7%2Fbag7_left_picture.png?alt=media&token=a2dee083-f09f-42cd-8462-4b099b80ae2b",
+      "price" : 328,
+      "productName" : "Montreal Combi Tan Leather Travel Bag",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bag_pictures%2Fbag7%2Fbag7_right_picture.png?alt=media&token=a27b14a0-f3ab-41d6-b5df-a46e68d2a3ba"
+    }
+  },
+  "beard_care" : {
+    "beard_care1" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care1%2Fbeard_care_banner-min.PNG?alt=media&token=62100c15-4fe2-4af1-9221-84eae78e5c94",
+      "brand" : "Proraso",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care1%2Fbeard_care_left_picture-min.PNG?alt=media&token=6e406a2b-c2d2-4da0-be90-12b3b8946fa6",
+      "price" : 17,
+      "productName" : "Fertilizer oil 30ml",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care1%2Fbeard_care_right_picture-min.PNG?alt=media&token=563396db-a047-4a7c-9d21-4787ab77f422"
+    },
+    "beard_care2" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care2%2Fbanner.png?alt=media&token=6d0f72b9-3344-4027-9f6f-b2853a4b00ec",
+      "brand" : "GoldenBeards",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care2%2Fleft.png?alt=media&token=19ee1789-40b8-4250-853c-bd0a8784a628",
+      "price" : 15,
+      "productName" : "Dishwasher with Lavender oil"
+    },
+    "beard_care3" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care3%2Fbeard_care3-min.PNG?alt=media&token=9be6dbe0-ca0a-4981-8909-6d032d63fcd6",
+      "brand" : "GoldenBeards",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care3%2Fbeard_care3_banner-min.PNG?alt=media&token=9bf80d36-2886-4ae4-8e34-3bfba8c3e816",
+      "price" : 15,
+      "productName" : "Organic beard oil of the full beard",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care3%2Fbeard_care3_left-min.PNG?alt=media&token=af01fbf3-6fc0-46a9-be3a-2aa3bab315e7"
+    },
+    "beard_care4" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care_4%2Fbeard_care4_banner-min.PNG?alt=media&token=09007429-9646-4058-901b-1807bc56ee21",
+      "brand" : "Benjamin Barber",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care_4%2Fbeard_care4_banner-min.PNG?alt=media&token=09007429-9646-4058-901b-1807bc56ee21",
+      "price" : 17,
+      "productName" : "Black Oak Light Hold Beard Wax",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care_4%2Fbeard_care_4_left-min.PNG?alt=media&token=3c6f311b-6a64-4a61-aef5-9aa3e1f18d6a"
+    },
+    "beard_care5" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care5%2Fbeard_care5_banner-min.PNG?alt=media&token=4a8b84b6-0f34-4913-8838-b632ab8d97d5",
+      "brand" : "Moutaineer Brand",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care5%2Fbeard_care5_banner-min.PNG?alt=media&token=4a8b84b6-0f34-4913-8838-b632ab8d97d5",
+      "price" : 28,
+      "productName" : "WV Timber Beard Oil",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care5%2Fbeard_care5_left-min.PNG?alt=media&token=50b4a074-094b-47d0-8387-571ff1a607a9"
+    },
+    "beard_care6" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care6%2Fbeard_care6_banner-min.PNG?alt=media&token=ed591faa-55ed-453b-ad2c-a32629ab7844",
+      "brand" : "RAZOR MD",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care6%2Fbeard_care6_left-min.PNG?alt=media&token=5b87f7d8-1164-4a20-8402-5318cc6fbef8",
+      "price" : 24,
+      "productName" : "Essential Sandalwood Post Shave Lotion",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care6%2Fbeard_care6_banner-min.PNG?alt=media&token=ed591faa-55ed-453b-ad2c-a32629ab7844"
+    },
+    "beard_care7" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care7%2Fbeard_care7_banner-min.PNG?alt=media&token=342395d1-9a29-4eca-b526-18c244a5c34b",
+      "brand" : "The Audatious Beard Co.",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care7%2Fbeard_care7_left-min.PNG?alt=media&token=5b0384be-adc4-4f02-999e-20e3130e4b6d",
+      "price" : 100,
+      "productName" : "Daring gift box",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/beard_care_pictures%2Fbeard_care7%2Fbeard_care7_right-min.PNG?alt=media&token=f554146d-948f-4550-aa2e-1d35b095f102"
+    }
+  },
+  "bow_ties" : {
+    "bow_tie1" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie1%2Fbow_tie_banner-min.PNG?alt=media&token=139ba19d-52fd-4203-a119-1b3f19513338",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie1%2Fbow_tie_left-min.PNG?alt=media&token=6aa4fcba-4176-4f77-a3b7-2743f68148e6",
+      "price" : 15,
+      "productName" : "Burgundy Butterfly",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie1%2Fbow_tie_right-min.PNG?alt=media&token=072e5116-3b33-4c11-a092-8012687d1884"
+    },
+    "bow_tie2" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie2%2Fbow_tie2_banner-min.PNG?alt=media&token=3ed77a9a-afac-4897-851f-dc030de2c18e",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie2%2Fbow_tie2_left-min.PNG?alt=media&token=c8f7d313-2d9f-485b-899d-35469479019a",
+      "price" : 15,
+      "productName" : "Red Butterfly",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie2%2Fbow_tie2_left-min.PNG?alt=media&token=c8f7d313-2d9f-485b-899d-35469479019a"
+    },
+    "bow_tie3" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie3%2Fbow_tie3_banner-min.png?alt=media&token=42c774f4-9e8a-459d-afac-49148cf04e85",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie3%2Fbow_tie3_left-min.png?alt=media&token=08d1ac90-d4ef-464a-8478-30492a68f683",
+      "price" : 17,
+      "productName" : "Blue Paisley Bow Tie",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie3%2Fbow_tie3_left-min.png?alt=media&token=08d1ac90-d4ef-464a-8478-30492a68f683"
+    },
+    "bow_tie4" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie4%2Fbow_tie4_banner-min.PNG?alt=media&token=81b9e334-c09d-4b65-adb4-62eef0877fd3",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie4%2Fbow_tie4_banner-min.PNG?alt=media&token=81b9e334-c09d-4b65-adb4-62eef0877fd3",
+      "price" : 24,
+      "productName" : "Union Jack Bow Tie",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie4%2Fbow_tie4_left-min.PNG?alt=media&token=283d2511-7a19-4bf0-bc98-515770c172f3"
+    },
+    "bow_tie5" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie5%2Fbow_tie5_banner-min.PNG?alt=media&token=fcd42f3f-95a2-4d74-a90f-2c6b910081d4",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie5%2Fbow_tie5_left-min.PNG?alt=media&token=f42b6d1a-45a3-4229-84dd-0bd667889949",
+      "price" : 21,
+      "productName" : "Gentleman Cotton Bow Tie",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie5%2Fbow_tie5_right-min.PNG?alt=media&token=24fb9bcf-ba45-42a0-b7a0-c9177c358caa"
+    },
+    "bow_tie6" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie6%2Fbow_tie6_banner-min.PNG?alt=media&token=e0f5c6d3-098c-4739-b649-58c34d17cbbe",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie6%2Fbow_tie6_left-min.PNG?alt=media&token=d44b776d-0916-46cd-a763-489037d48d98",
+      "price" : 21,
+      "productName" : "Bordeaux Pattern Bow Tie",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie6%2Fbow_tie6_banner-min.PNG?alt=media&token=e0f5c6d3-098c-4739-b649-58c34d17cbbe"
+    },
+    "bow_tie7" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie7%2Fbow_tie7_banner-min.PNG?alt=media&token=67849a59-4271-4aae-8e13-0ec678030e1b",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie7%2Fbow_tie7_left-min.PNG?alt=media&token=8b20c702-4376-4436-a3a7-30c3cc0de1aa",
+      "price" : 20,
+      "productName" : "Blue Flower Butterfly",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bow_tie_pictures%2Fbow_tie7%2Fbow_tie7_banner-min.PNG?alt=media&token=67849a59-4271-4aae-8e13-0ec678030e1b"
+    }
+  },
+  "bracelets" : {
+    "bracelet1" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet2%2Fbracelet2_banner-min.PNG?alt=media&token=4f297965-63a9-4374-9c1e-bb74ef359456",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet2%2Fbracelet2_left-min.PNG?alt=media&token=588a6805-e61a-42c1-a819-8d8cb69c18ed",
+      "price" : 20,
+      "productName" : "Black Leather Bracelet",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet2%2Fbracelet2_right-min.PNG?alt=media&token=669a6e85-55fe-4690-bd4e-e3aee97e065a"
+    },
+    "bracelet2" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet1%2Fbracelet1_Banner-min.PNG?alt=media&token=8b4fa36e-cf85-4b9a-af03-56b59794cecc",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet1%2Fbracelet1_left_sided_picture-min.PNG?alt=media&token=d7fed89c-afc0-4c76-bd26-13f7e0313551",
+      "price" : 17,
+      "productName" : "Impeccable Bracelet",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet1%2Fbracelet_right_sided_picture-min.PNG?alt=media&token=8a74da3b-ce1b-4978-a1be-0ea248287a82"
+    },
+    "bracelet3" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet3%2Fbracelet3_banner-min.PNG?alt=media&token=054c6858-e6ab-4d96-98db-66c9ea4e5d1c",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet3%2Fbracelet3_left-min.PNG?alt=media&token=082a0bda-7ef2-42d0-aca3-a147da8eb7eb",
+      "price" : 12,
+      "productName" : "Brown Adjustable Twisted Leather",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet3%2Fbracelet3_right-min.PNG?alt=media&token=3e686311-3838-450d-8298-225f568f98ec"
+    },
+    "bracelet4" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet4%2Fbracelet5_banner_picture-min.PNG?alt=media&token=34dd1942-d5d1-4ca1-a2c2-bfbb7d679f0d",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet4%2Fbracelet5_left_picture-min.PNG?alt=media&token=0ab81f9c-2131-49e8-bd31-4f480ca04ccd",
+      "price" : 14,
+      "productName" : "Brown & Black Bead Bracelet Combo",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet4%2Fbracelet5_right_picture-min.PNG?alt=media&token=3b7023eb-a53d-4e14-a242-43f994339c50"
+    },
+    "bracelet5" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet5%2Fbanner4_right-min.PNG?alt=media&token=3e6ae726-c64a-4283-afab-ae0894137535",
+      "brand" : "Ganesh",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet5%2Fbracelet4_banner-min.PNG?alt=media&token=f8a70859-9341-4d9a-8578-b1437d438c8d",
+      "price" : 21,
+      "productName" : "Blue Homage to Buddha Bracelet",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet5%2Fbracelet4_left-min.PNG?alt=media&token=babbf620-bfa7-4b11-a1f8-4ff173da3ace"
+    },
+    "bracelet6" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet6%2Fbracelet6_banner-min.PNG?alt=media&token=b0e98a59-a804-41e6-9380-8f675b016926",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet6%2Fbracelet6_left-min.PNG?alt=media&token=616360b0-9f09-4ca7-ac31-1b65a2a7196c",
+      "price" : 17,
+      "productName" : "Black Wide Multi Leather Bracelet",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet6%2Fbracelet6_right-min.PNG?alt=media&token=2db1bd73-b879-4219-a919-8947a270f47c"
+    },
+    "bracelet7" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet7%2Fbracelet7_main.png?alt=media&token=6a54a266-05d7-4492-8989-7158e1542fa2",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet7%2Fbracelet7_left.png?alt=media&token=57fe4a51-7a1c-427f-8209-918ce27bb659",
+      "price" : 35,
+      "productName" : "Black Stacked Braided Bracelet",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/bracelet_pictures%2Fbracelet7%2Fbracelet7_right.png?alt=media&token=938484a1-b749-474b-841b-9f232e010362"
+    }
+  },
+  "necklaces" : {
+    "necklace1" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace1%2Fnecklace_banner-min.PNG?alt=media&token=85948bc8-8d37-49ce-b070-8e507ee6c5fe",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace1%2Fnecklace_left_picture-min.PNG?alt=media&token=1995affe-1770-403a-9620-b27f3a33c901",
+      "price" : 29,
+      "productName" : "Cross Inline Steel Necklace",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace1%2Fnecklace_right_picture-min.PNG?alt=media&token=7ec5b3f7-a39b-4740-adea-ffea7593c214"
+    },
+    "necklace2" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace2%2Fnecklace2_banner-min.PNG?alt=media&token=02569315-f155-452b-8007-6be1f649f31c",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace2%2Fnecklace2_left-min.PNG?alt=media&token=0fc47804-8c78-432e-b3bb-34a7d76cd655",
+      "price" : 17,
+      "productName" : "3mm Black Woven Leather Necklace",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace2%2Fnecklace3_right-min.PNG?alt=media&token=2d472b3d-5f80-49f5-a930-d368753ab9d7"
+    },
+    "necklace3" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace3%2Fnecklace3_banner-min.PNG?alt=media&token=11c4c88e-3a0c-49d0-9c50-d12108ee069f",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace3%2Fnecklace3_left-min.PNG?alt=media&token=bb6c9cc2-b254-47ee-97d8-44e6fea82cd5",
+      "price" : 33,
+      "productName" : "Gold Links Chain",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace3%2Fnecklace3_right-min.PNG?alt=media&token=524d21e1-4ba5-496d-8460-ef77c272d468"
+    },
+    "necklace4" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace4%2Fnecklace4_Banner-min.png?alt=media&token=f8f6ff4c-330e-42e5-80d4-fe98fc3129c3",
+      "brand" : "LUCLEON",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace4%2Fnecklace4_left_sided_picture.png?alt=media&token=c0cf0a67-827b-4d93-b29b-cfe81723d8e5",
+      "price" : 22,
+      "productName" : "Double Feather Necklace",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace4%2Fnecklace4_right_sided_picture.png?alt=media&token=da10fbb4-8c6d-453b-93c7-c40d955f4a34"
+    },
+    "necklace5" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace5%2Fnecklace5_banner-min.PNG?alt=media&token=f7a63e3c-9c85-4aac-97d4-70bad459a088",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace5%2Fnecklace5_left-min.PNG?alt=media&token=5e7216b4-f379-4e71-bca8-b6d6db64a526",
+      "price" : 14,
+      "productName" : "Simple Tooth Necklace",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace5%2Fnecklace5_right-min.PNG?alt=media&token=803e433e-3ff0-4ba7-8b9d-d7b6fec8f42d"
+    },
+    "necklace6" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace6%2Fnecklace6_banner-min.PNG?alt=media&token=d841d8ea-59e4-4b6d-b0d8-43628d0484da",
+      "brand" : "LUCLEON",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace6%2Fnecklace6_left-min.PNG?alt=media&token=0db642d6-baa9-4d1a-8bbc-6d0d24193ce0",
+      "price" : 29,
+      "productName" : "Black Crane Necklace",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace6%2Fnecklace6_right-min.PNG?alt=media&token=76a6e691-cb2c-4baa-99a6-c2b565e347f6"
+    },
+    "necklace7" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace7%2Fnecklace7_banner-min.PNG?alt=media&token=7d0c7a67-95f1-4d9c-a7fa-8c0be9874722",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace7%2Fnecklace7_left-min.PNG?alt=media&token=1f85b724-845b-4e93-92a6-212e2cfa4317",
+      "price" : 15,
+      "productName" : "Buffalo Nature Necklace",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/necklace_pictures%2Fnecklace7%2Fnecklace7_right-min.PNG?alt=media&token=7df6d794-c926-435f-9463-1ab37bd81101"
+    }
+  },
+  "orders" : {
+    "-KzF779xkYRlGrv8mKY9" : {
+      "date" : "18 Nov 2017",
+      "grand_total" : "249",
+      "products" : [ {
+        "productKey" : "beard_care2",
+        "quantity" : "1"
+      }, {
+        "productKey" : "watch7",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-KzF9-0TyEj4rlXOMrlT" : {
+      "date" : "18 Nov 2017",
+      "grand_total" : "22",
+      "products" : [ {
+        "productKey" : "bracelet2",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-KzFp3JIixvm9eVC3glq" : {
+      "date" : "18 Nov 2017",
+      "grand_total" : "234",
+      "products" : [ {
+        "productKey" : "watch7",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-KzJNSFbuGElckosxE0e" : {
+      "date" : "19 Nov 2017",
+      "grand_total" : "396",
+      "products" : [ {
+        "productKey" : "necklace2",
+        "quantity" : "1"
+      }, {
+        "productKey" : "bracelet2",
+        "quantity" : "3"
+      }, {
+        "productKey" : "bag7",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-KzJcCwECdD6qFPwuoFW" : {
+      "date" : "19 Nov 2017",
+      "grand_total" : "535",
+      "products" : [ {
+        "productKey" : "bracelet2",
+        "quantity" : "3"
+      }, {
+        "productKey" : "tie1",
+        "quantity" : "1"
+      }, {
+        "productKey" : "watch7",
+        "quantity" : "2"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-KzPfCwT6ODwAHLxd4fy" : {
+      "date" : "20 Nov 2017",
+      "grand_total" : "322",
+      "products" : [ {
+        "productKey" : "necklace4",
+        "quantity" : "4"
+      }, {
+        "productKey" : "watch7",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-KzT8SBmCTnqQZ-xezaM" : {
+      "date" : "21 Nov 2017",
+      "grand_total" : "122",
+      "products" : [ {
+        "productKey" : "bracelet1",
+        "quantity" : "2"
+      }, {
+        "productKey" : "watch1",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-KzTYlGR0lVWP1gsK_Bu" : {
+      "date" : "21 Nov 2017",
+      "grand_total" : "54",
+      "products" : [ {
+        "productKey" : "bracelet1",
+        "quantity" : "1"
+      }, {
+        "productKey" : "necklace1",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-KzTf4pGK6xGTEG8LiBM" : {
+      "date" : "21 Nov 2017",
+      "grand_total" : "101",
+      "products" : [ {
+        "productKey" : "necklace1",
+        "quantity" : "1"
+      }, {
+        "productKey" : "necklace2",
+        "quantity" : "1"
+      }, {
+        "productKey" : "necklace4",
+        "quantity" : "1"
+      }, {
+        "productKey" : "necklace3",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "sarita.lopeez@gmail.com"
+    },
+    "-Kzbp08qshoCeul7p3gI" : {
+      "date" : "23 Nov 2017",
+      "grand_total" : "58",
+      "products" : [ {
+        "productKey" : "bag1",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "slopezalaguero@gmail.com"
+    },
+    "-KzbpTldLsivGrD_Rw-3" : {
+      "date" : "23 Nov 2017",
+      "grand_total" : "82",
+      "products" : [ {
+        "productKey" : "watch1",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "slopezalaguero@gmail.com"
+    },
+    "-KzcetxkOmTxdFI2IQQy" : {
+      "date" : "23 Nov 2017",
+      "grand_total" : "187",
+      "products" : [ {
+        "productKey" : "bag2",
+        "quantity" : "1"
+      }, {
+        "productKey" : "bag3",
+        "quantity" : "1"
+      } ],
+      "userEmail" : "slopezalaguero@gmail.com"
+    }
+  },
+  "recent_products" : {
+    "-Kyqp9vLif-6xL7i16r0" : {
+      "email" : "s@gmail.com",
+      "key" : "necklace4",
+      "order" : "-13082151"
+    },
+    "-KyqpBydkuLt2tNnxq2v" : {
+      "email" : "s@gmail.com",
+      "key" : "beard_care2",
+      "order" : "-13082200"
+    },
+    "-KyqpUNBLQcf02Auv3WZ" : {
+      "email" : "s@gmail.com",
+      "key" : "bracelet1",
+      "order" : "-13082315"
+    },
+    "-KyqpnF4ZU-NoLfbapW2" : {
+      "email" : "s@gmail.com",
+      "key" : "bracelet2",
+      "order" : "-13082437"
+    },
+    "-Kyqpq8o4mQ4TDCSqwCw" : {
+      "email" : "s@gmail.com",
+      "key" : "watch2",
+      "order" : "-13082448"
+    },
+    "-Kyqpt5_VqH8K7cXRJUb" : {
+      "email" : "s@gmail.com",
+      "key" : "tie1",
+      "order" : "-13082501"
+    },
+    "-KyqpuOSuw2xKyZCEBg4" : {
+      "email" : "s@gmail.com",
+      "key" : "bracelet3",
+      "order" : "-13082506"
+    },
+    "-KyqpwUcJpPZsEtUAcBg" : {
+      "email" : "s@gmail.com",
+      "key" : "watch1",
+      "order" : "-13082514"
+    },
+    "-KyqpxLZeGrWAY-ho7KJ" : {
+      "email" : "s@gmail.com",
+      "key" : "watch4",
+      "order" : "-13082518"
+    },
+    "-Kyqq0pDhtONaTLzLjZp" : {
+      "email" : "s@gmail.com",
+      "key" : "tie4",
+      "order" : "-13082536"
+    },
+    "-Kyqr0QQbq2BGYwqY3d5" : {
+      "email" : "s@gmail.com",
+      "key" : "bag3",
+      "order" : "-13082957"
+    },
+    "-KyqzzfuEPaWMLSzLO3U" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "bracelet1",
+      "order" : "-14090740",
+      "visit" : "14090740"
+    },
+    "-KytZOz3SPiu1oDJVQzp" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "bracelet2",
+      "order" : "-16013532",
+      "visit" : "16013532"
+    },
+    "-KytZQkcO1LVfUdrTYxr" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "bag1",
+      "order" : "-23084214",
+      "visit" : "23084214"
+    },
+    "-KytbeXTyUsRngH_We9J" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "necklace2",
+      "order" : "-14092142"
+    },
+    "-Kytc6bt0Dw_MnAVL9JU" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "bag4",
+      "order" : "-14092341"
+    },
+    "-KytcH5aGJpEl0bXOS_X" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "beard_care5",
+      "order" : "-14092424"
+    },
+    "-KytcKjbGB9ZxwMSGAVy" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "tie1",
+      "order" : "-14092439"
+    },
+    "-KytcXSoosfwEBMqnpeK" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "beard_care4",
+      "order" : "-14092531"
+    },
+    "-KzA8RsE-1vr-Hg0BAvZ" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "bracelet2",
+      "order" : "-23084006",
+      "visit" : "23084006"
+    },
+    "-KzACUxtF9n8RCkjdovJ" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "necklace1",
+      "order" : "-23084024",
+      "visit" : "23084024"
+    },
+    "-KzACZvZT-eZST8FhdP3" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "bow_tie1",
+      "order" : "-19041200",
+      "visit" : "19041200"
+    },
+    "-KzAaOJmcHr7lPrjidNt" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "bracelet1",
+      "order" : "-22105231",
+      "visit" : "22105231"
+    },
+    "-KzAahEt0WcKxKm5EYoE" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "watch1",
+      "order" : "-22104554",
+      "visit" : "22104554"
+    },
+    "-KzAeDlHzv5T2GZpvMX3" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "watch2",
+      "order" : "-19041207",
+      "visit" : "19041207"
+    },
+    "-KzDRRrhZulGr7NbR1B1" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "necklace2",
+      "order" : "-23094543",
+      "visit" : "23094543"
+    },
+    "-KzDaIFCcsJp7j7RY4v-" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "beard_care2",
+      "order" : "-19030411",
+      "visit" : "19030411"
+    },
+    "-KzDxQlv72fXp_5Jsx8-" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "bag4",
+      "order" : "-19041313",
+      "visit" : "19041313"
+    },
+    "-KzDzjaF-NA4r6lrb33u" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "watch7",
+      "order" : "-20072537",
+      "visit" : "20072537"
+    },
+    "-KzJNIA8bOpgDWiBvS7w" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "bag7",
+      "order" : "-19031029",
+      "visit" : "19031029"
+    },
+    "-KzJP61R1oVDtJrbI656" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "bracelet4",
+      "order" : "-19041333",
+      "visit" : "19041333"
+    },
+    "-KzJbGEqS57HD8K42miW" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "tie1",
+      "order" : "-21010122",
+      "visit" : "21010122"
+    },
+    "-KzJbV9gnwFKxBxGQ3td" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "watch4",
+      "order" : "-21013139",
+      "visit" : "21013139"
+    },
+    "-KzPerlyvHsBvPbNZMLJ" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "beard_care4",
+      "order" : "-20072312"
+    },
+    "-KzT8o09NRU5MuCzVJIM" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "bracelet7",
+      "order" : "-21113715"
+    },
+    "-KzTf1F-jHQd7YJhaNHR" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "necklace4",
+      "order" : "-21020711",
+      "visit" : "21020711"
+    },
+    "-KzTf2K_V2uyJpG0XNvz" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "necklace3",
+      "order" : "-21020228"
+    },
+    "-Kz_iabZ0Npxo025zPIU" : {
+      "email" : "sarita.lopeez@gmail.com",
+      "key" : "bag1",
+      "order" : "-22105520"
+    },
+    "-KzbpRyx7LJ0IU9DB6rk" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "watch1",
+      "order" : "-23084429"
+    },
+    "-KzceQH5bQnxYvxVBTvH" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "bag2",
+      "order" : "-23094331",
+      "visit" : "23094331"
+    },
+    "-KzcekHwHqg3JKr06r0u" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "bag7",
+      "order" : "-23123722"
+    },
+    "-KzcemNlUtry0kYfzdBx" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "bag3",
+      "order" : "-23123920",
+      "visit" : "23123920"
+    },
+    "-Kzcf-QHYB4HUfASOxXU" : {
+      "email" : "slopezalaguero@gmail.com",
+      "key" : "bow_tie4",
+      "order" : "-23123828"
+    }
+  },
+  "recommended_products" : {
+    "rp1" : {
+      "category" : "bracelets",
+      "key" : "bracelet1"
+    },
+    "rp2" : {
+      "category" : "necklaces",
+      "key" : "necklace1"
+    },
+    "rp3" : {
+      "category" : "watches",
+      "key" : "watch1"
+    }
+  },
+  "shopping_cart" : {
+    "-Kzcf64SOtyt2yyyAcwM" : {
+      "productKey" : "bag2",
+      "quantity" : "1",
+      "userEmail" : "slopezalaguero@gmail.com"
+    },
+    "-KzecGKMXfy3iBX0aUTA" : {
+      "productKey" : "necklace2",
+      "quantity" : "1",
+      "userEmail" : "sarita.lopeez@gmail.com"
+    }
+  },
+  "ties" : {
+    "tie1" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie1%2Ftie_banner-min.PNG?alt=media&token=7a8197d2-c1d9-4bb2-b384-3ce359753b09",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie1%2Ftie_left_picture-min.PNG?alt=media&token=d9c87df7-3740-41bb-91d5-5e0dbf244ecf",
+      "price" : 16,
+      "productName" : "Purple 6cm Tie",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie1%2Ftie_right_picture-min.PNG?alt=media&token=cb1bc755-90d6-49f7-bcb1-c10b9a89b46c"
+    },
+    "tie2" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie2%2Ftie2_banner-min.PNG?alt=media&token=4db4456d-c61d-4de5-8ea3-4ddd81e1cbcb",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie2%2Ftie2_left-min.PNG?alt=media&token=fdb263df-4c54-40d5-9335-2787eefb4154",
+      "price" : 17,
+      "productName" : "Navy blue tie in knit",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie2%2Ftie2_right-min.PNG?alt=media&token=3c2e7578-38b4-4126-ac98-f0d37e0ac444"
+    },
+    "tie3" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie3%2Ftie3_banner-min.PNG?alt=media&token=5e9e9a96-9b30-467d-abef-9268dc858316",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie3%2Ftie3_left-min.PNG?alt=media&token=37816662-e863-43a8-9158-d14752747ffc",
+      "price" : 22,
+      "productName" : "Santa's Knitted Tie",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie3%2Ftie3_right-min.PNG?alt=media&token=bb949a39-a433-477c-b50f-1032a91e9b60"
+    },
+    "tie4" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie4%2Ftie4_banner-min.PNG?alt=media&token=35083d06-16a1-4230-addc-0aacf1f3f238",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie4%2Ftie4_left-min.PNG?alt=media&token=3110c3ed-252a-42c2-9fb0-81df6d91ad16",
+      "price" : 24,
+      "productName" : "Blue Paisley Tie",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie4%2Ftie4_banner-min.PNG?alt=media&token=35083d06-16a1-4230-addc-0aacf1f3f238"
+    },
+    "tie5" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie5%2Ftie5_banner-min.PNG?alt=media&token=1aa01e49-bf3a-46f1-854e-90bc4e2e1aed",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie5%2Ftie5_left-min.PNG?alt=media&token=663a835f-8e18-4350-8217-864a9093bd12",
+      "price" : 22,
+      "productName" : "Blue / Bordeaux Plaid Tie",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie5%2Ftie5_right-min.PNG?alt=media&token=38c91e3c-0fa9-440d-a4fa-1f84d241cb6e"
+    },
+    "tie6" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie6%2Ftie6_banner-min.PNG?alt=media&token=de63bf7b-7277-40aa-87cc-765ab9dfb217",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie6%2Ftie6_left-min.PNG?alt=media&token=4244d2f4-6813-4f4c-8353-6a1ece5530a6",
+      "price" : 18,
+      "productName" : "Skrigende Orange 6cm Slips",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie6%2Ftie6_banner-min.PNG?alt=media&token=de63bf7b-7277-40aa-87cc-765ab9dfb217"
+    },
+    "tie7" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie7%2Ftie7_banner-min.PNG?alt=media&token=041282e5-423d-4eac-a834-5c8893b1a343",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie7%2Ftie7_left-min.PNG?alt=media&token=6bcf0040-e54d-4884-a9f4-176e78cecb0c",
+      "price" : 20,
+      "productName" : "Christmas tips with Santa's sledge",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/tie_pictures%2Ftie7%2Ftie7_banner-min.PNG?alt=media&token=041282e5-423d-4eac-a834-5c8893b1a343"
+    }
+  },
+  "user_credentials" : {
+    "-KzF779_8d1Nx2zJZ2Oy" : {
+      "address" : "kollegievænget 22 S332",
+      "city" : "horsens ",
+      "country" : "Denmark ",
+      "name" : "Sara Lopez Alaguero",
+      "userEmail" : "sarita.lopeez@gmail.com",
+      "zipcode" : "8700"
+    },
+    "-Kzbp07fTuwjNnfxotft" : {
+      "address" : "bdbdbd",
+      "city" : "horsens",
+      "country" : "denmark",
+      "name" : "sara",
+      "userEmail" : "slopezalaguero@gmail.com",
+      "zipcode" : "8700"
+    }
+  },
+  "watches" : {
+    "watch1" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch1%2Fwatch_banner-min.PNG?alt=media&token=cdf86ef2-3d51-4e60-910e-4205f27734bc",
+      "brand" : "LK colouring",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch1%2Fwatch_left-min.PNG?alt=media&token=812e226f-175c-41ec-b8b9-3618f7554271",
+      "price" : 82,
+      "productName" : "Black & Silver Rolat Clock",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch1%2Fwatch_right-min.PNG?alt=media&token=a7660bd9-8d20-4e5c-885c-37d06532bea4"
+    },
+    "watch2" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch2%2Fwatch2_banner-min.PNG?alt=media&token=89e08fa5-103b-4077-90a6-0607e55214fd",
+      "brand" : "Monte Carlo",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch2%2Fwatch2_left-min.PNG?alt=media&token=80a85bc6-2fb5-41ab-97ab-12d62cae1cc5",
+      "price" : 34,
+      "productName" : "Silver pocket watch",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch2%2Fwatch2_right-min.PNG?alt=media&token=1495e112-dc75-4b5b-bae7-303a25f02d0e"
+    },
+    "watch3" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch3%2Fwatch3_banner-min.PNG?alt=media&token=54f82cd3-41aa-4744-b609-32549c3222e6",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch3%2Fwatch3_left-min.PNG?alt=media&token=85127e0c-a8ba-4730-8c6d-06d90e65455f",
+      "price" : 41,
+      "productName" : "Black Paidu Menswear",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch3%2Fwatch3_right-min.PNG?alt=media&token=a99e9a5b-2dba-4103-9925-00cab85ecd59"
+    },
+    "watch4" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch4%2Fwatch4_banner.png?alt=media&token=39eda882-9f52-42d9-a75a-fdca82fe8f2d",
+      "brand" : "Dane Dapper",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch4%2Fwatch4_left_sided_picture.png?alt=media&token=5f108a3b-0e78-426a-be41-abbe50f36f97",
+      "price" : 70,
+      "productName" : "Oliver Watch",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch4%2Fwatch4_right_sided_picture.png?alt=media&token=ff292e13-4821-4761-b459-01bec63a9e58"
+    },
+    "watch5" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch5%2Fwatch5_banner-min.PNG?alt=media&token=809c1893-31f8-4a27-a99f-1c79e66ec9ec",
+      "brand" : "LK Colouring",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch5%2Fwatch5_left-min.PNG?alt=media&token=d797041f-2746-4347-ba61-0bb237c1a89b",
+      "price" : 98,
+      "productName" : "Black & Gold Rolat Watch",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch5%2Fwatch5_right-min.PNG?alt=media&token=8b4a98ec-c948-4a58-82a5-a6eab11146d9"
+    },
+    "watch6" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch6%2Fwatch6_banner-min.PNG?alt=media&token=9a45dc72-9e93-4c8b-b383-d67694db4fe4",
+      "brand" : "Trendhim",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch6%2Fwatch6_left-min.PNG?alt=media&token=4a4871ba-806f-46bc-9f5e-ccc6b53230d0",
+      "price" : 46,
+      "productName" : "Completely Black Lommeur",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch6%2Fwatch6_right-min.PNG?alt=media&token=294bebc7-7806-474f-9f78-d78283e84bef"
+    },
+    "watch7" : {
+      "bannerPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch7%2Fwatch7_main_picture.png?alt=media&token=d5a6dd07-95cc-4c3c-89ef-f89d91c8dac1",
+      "brand" : "Sidegren",
+      "leftPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch7%2Fwatch7_left_picture.png?alt=media&token=b8a47e47-f23d-491f-a9f3-3dacf888d17b",
+      "price" : 234,
+      "productName" : "Oaky Revil Chronograph Watch",
+      "rightPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/watch_pictures%2Fwatch7%2Fwatch7_right_picture.png?alt=media&token=600e79ae-11b4-45ae-bcba-ca488470df27"
+    }
+  },
+  "weekly_look" : {
+    "look1" : {
+      "fifthPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook1%2Ffifth_picture.png?alt=media&token=1997a156-0d19-4d5c-bb31-50e39f0eb906",
+      "fourthPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook1%2Ffourth_picture.png?alt=media&token=e1c54fb6-9fea-4648-b525-bf6b6e280b0e",
+      "mainPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook1%2Fmain_picture%20(2).png?alt=media&token=3775ce04-e7b2-4931-8e92-c03159b9d7f5",
+      "phrase" : "The Ring's the Thing",
+      "products" : [ "necklace4", "bag4", "watch4" ],
+      "secondPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook1%2Fsecond_picture.png?alt=media&token=058aae18-69a0-424d-8055-e271c00729b8",
+      "thirdPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook1%2Fthird_picture.png?alt=media&token=1ebbce1c-7f04-4c2e-b92d-1fb0a0f401a0"
+    },
+    "look2" : {
+      "fifthPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook2%2F5-min.png?alt=media&token=e62e5020-b304-46f6-b7ac-1446ea005699",
+      "fourthPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook2%2F2-min.png?alt=media&token=90191cc2-6d7e-43b0-9e89-fa554768e174",
+      "mainPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook2%2F1.png?alt=media&token=7120a034-0180-4db7-a694-0e30411c27be",
+      "phrase" : "Coffee Shop Casual",
+      "products" : [ "bracelet7", "bag7", "watch7" ],
+      "secondPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook2%2F3-min.png?alt=media&token=dd253da0-449b-44b1-bfc6-5e0fb82f1b23",
+      "thirdPictureUrl" : "https://firebasestorage.googleapis.com/v0/b/trendhim-31939.appspot.com/o/weekly_look_pictures%2Flook2%2F4-min.png?alt=media&token=12f392ca-305f-487a-9328-34e24a4989db"
+    }
+  },
+  "wishlist" : {
+    "-KyXvdcm5iIg17D9uQlG" : {
+      "entityName" : "bracelets",
+      "productKey" : "bracelet1",
+      "userEmail" : "tolco9730@gmail.com"
+    },
+    "-KyoyRzC7mhCyLHJanSc" : {
+      "entityName" : "ties",
+      "productKey" : "tie1",
+      "userEmail" : "sara1@gmail.com"
+    }
+  }
+}
