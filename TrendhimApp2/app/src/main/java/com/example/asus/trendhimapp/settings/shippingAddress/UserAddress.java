@@ -62,11 +62,12 @@ public class UserAddress extends BaseActivity {
     /**
      * Get the user credentials from firebase if the customer is a returning customer
      */
-    private void getUserCredentials(){
+    private void getUserCredentials() {
         DatabaseReference userCredentialsDatabase =
                 FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if(user != null) {
             userCredentialsDatabase.orderByChild(Constants.KEY_USER_EMAIL).equalTo(user.getEmail())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -94,7 +95,10 @@ public class UserAddress extends BaseActivity {
 
     }
 
-    private void goToShippingAddress(){
+    /**
+     * Open individual shipping address
+     */
+    private void goToShippingAddress() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

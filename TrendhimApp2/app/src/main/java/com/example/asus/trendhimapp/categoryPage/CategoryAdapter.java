@@ -34,7 +34,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private List<CategoryProduct> categoryPageList;
     private String category;
 
-    public CategoryAdapter(Context context, List<CategoryProduct> categories, String category) {
+    CategoryAdapter(Context context, List<CategoryProduct> categories, String category) {
         this.categoryPageList = categories;
         this.context = context;
         this.category = category;
@@ -52,7 +52,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return new ViewHolder(categoryProductsView);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
@@ -112,6 +112,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     /**
      * Populate the recycler view. Get data from the database which entity name is equal to the parameter.
+     *
      * @param category
      */
     void addData(String category) {
@@ -142,36 +143,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     /**
-     * Provide a direct reference to each of the views
-     * used to cache the views within the layout to reduce findViewById() calls
-    */
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView productNameTextView;
-        TextView productPriceTextView;
-        TextView productBrandTextView;
-        ImageView productImage;
-
-        /**
-         *  We also create a constructor that does the view lookups to find each subview
-         */
-        ViewHolder(View itemView) {
-            /*
-              Stores the itemView in a public final member variable that can be used
-              to access the context from any ViewHolder instance.
-             */
-            super(itemView);
-
-            productNameTextView = itemView.findViewById(R.id.product_name_category);
-            productPriceTextView = itemView.findViewById(R.id.product_price_category);
-            productBrandTextView = itemView.findViewById(R.id.brand_name_category);
-            productImage = itemView.findViewById(R.id.product_image_category);
-
-        }
-    }
-
-    /**
      * Redirect the user to the correct Product
+     *
      * @param product
      */
     private void getProduct(final CategoryProduct product, final View view) {
@@ -222,6 +195,35 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+    }
+
+    /**
+     * Provide a direct reference to each of the views
+     * used to cache the views within the layout to reduce findViewById() calls
+    */
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView productNameTextView;
+        TextView productPriceTextView;
+        TextView productBrandTextView;
+        ImageView productImage;
+
+        /**
+         *  We also create a constructor that does the view lookups to find each subview
+         */
+        ViewHolder(View itemView) {
+            /*
+              Stores the itemView in a public final member variable that can be used
+              to access the context from any ViewHolder instance.
+             */
+            super(itemView);
+
+            productNameTextView = itemView.findViewById(R.id.product_name_category);
+            productPriceTextView = itemView.findViewById(R.id.product_price_category);
+            productBrandTextView = itemView.findViewById(R.id.brand_name_category);
+            productImage = itemView.findViewById(R.id.product_image_category);
+
+        }
     }
 
 }

@@ -25,6 +25,7 @@ public class TabbedActivity extends BaseActivity {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.swiper_activity, null, false);
         BaseActivity.drawer.addView(contentView, 0);
+
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -37,7 +38,7 @@ public class TabbedActivity extends BaseActivity {
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
+     * one of the selected sections - log in or sign up
      */
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -57,12 +58,20 @@ public class TabbedActivity extends BaseActivity {
             }
         }
 
-
+        /**
+         * @return number of tabs
+         */
         @Override
         public int getCount() {
             return 2;
         }
 
+        /**
+         * Set the page title depending on the fragment selected
+         *
+         * @param position
+         * @return
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {

@@ -54,13 +54,14 @@ public class SecondWeeklyLookActivity extends BaseActivity {
         // Attach the adapter to the recycler view
         recyclerViewWeeklyLooks.setAdapter(adapter);
         recyclerViewWeeklyLooks.setNestedScrollingEnabled(true);
+
+        //Get key look from the intent
         Intent intent = getIntent();
         if(intent != null) {
             //Populate the recycler view
             String lookKey = intent.getStringExtra(Constants.KEY_LOOK_KEY);
             if(lookKey != null)
                 adapter.addData(lookKey);
-
         }
 
         SnapHelper helperNew = new LinearSnapHelper();
@@ -71,13 +72,14 @@ public class SecondWeeklyLookActivity extends BaseActivity {
 
     }
 
-
     /**
      * @return look id from the intent
      */
-    public String getLookId(){
+    public String getLookId() {
+
         Intent intent = getIntent();
         String key;
+
         if (intent != null) {
 
             key = intent.getStringExtra(Constants.KEY_LOOK_KEY);
@@ -87,4 +89,5 @@ public class SecondWeeklyLookActivity extends BaseActivity {
         }
         return null;
     }
+
 }

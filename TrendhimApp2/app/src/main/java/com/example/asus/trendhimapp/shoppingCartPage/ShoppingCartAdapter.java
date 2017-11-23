@@ -204,6 +204,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     /**
      * Handle on click listener events for the remove button
      * Remove an item from the shopping cart - recycler view and firebase
+     *
      * @param currentProduct
      */
     private void initializeRemoveButton(final CategoryProduct currentProduct) {
@@ -273,6 +274,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     /**
      * Redirect the user to the right product when the banner picture is clicked
+     *
      * @param currentProduct
      */
     private void getProduct(final CategoryProduct currentProduct, final View view) {
@@ -299,7 +301,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
                                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                                //If the object key is correct
+                                                //if the object key is correct
                                                 if(Objects.equals(currentProduct.getKey(), dataSnapshot1.getKey())) {
 
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
@@ -340,8 +342,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     }
 
     /**
+     *  Used to query the a product category database
+     *
      *  @return the given product entity name
-     *  Used to query the database
      *  @param productKey
      **/
     private String getCategory(String productKey) {
@@ -358,6 +361,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     /**
      * Removes an item from Firebase that matches the given product key
+     *
      * @param product
      **/
     private void removeItem(CategoryProduct product) {
@@ -388,7 +392,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     /**
      * Retrieves all shopping cart items for the current user and fills the RecyclerView
-     **/
+    **/
     void populateRecyclerView() {
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_SHOPPING_CART);
@@ -400,7 +404,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-
+                    //Show footer and header layout if there are products in the shopping cart database
                     ShoppingCartActivity.footer.setVisibility(View.VISIBLE);
                     ShoppingCartActivity.header.setVisibility(View.VISIBLE);
                     ShoppingCartActivity.emptyBasketLayout.setVisibility(View.GONE);
@@ -444,6 +448,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                             public void onCancelled(DatabaseError databaseError) {}
                         });
                     }
+
                 } else {
                     ShoppingCartActivity.emptyBasketLayout.setVisibility(View.VISIBLE);
                     ShoppingCartActivity.checkOutButton.setVisibility(View.GONE);
@@ -491,4 +496,5 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             removeItemButton = itemView.findViewById(R.id.remove_item_button);
         }
     }
+
 }

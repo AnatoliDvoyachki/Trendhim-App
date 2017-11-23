@@ -131,11 +131,16 @@ public class ShoppingCartActivity extends BaseActivity {
         return Integer.parseInt(value);
     }
 
-
+    /**
+     * Go to check out
+     *
+     * @param view
+     */
     public void toCheckOut(View view) {
         Intent intent = new Intent(this, CredentialsActivity.class);
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(ShoppingCartActivity.this, view, "profile");
         startActivity(intent, options.toBundle());
     }
+
 }

@@ -4,7 +4,7 @@ public class Order {
 
     private String productKey, quantity;
 
-    public Order(){};
+    public Order(){} // No-argument constructor for the Firebase queries
 
     public Order(String productKey, String quantity){
         this.productKey = productKey;

@@ -38,7 +38,6 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
 
     private Context context;
     private List<CategoryProduct> productsWishList;
-    private final String TAG = this.getClass().getSimpleName();
 
     SingleWeeklyLookAdapter(Context context, List<CategoryProduct> categories) {
         this.productsWishList = categories;
@@ -167,8 +166,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
                             GenericTypeIndicator<List<String>> genericTypeIndicator =
                                     new GenericTypeIndicator<List<String>>() {};
                             List<String> products = product.child(Constants.KEY_PRODUCTS).getValue(genericTypeIndicator);
-                            if( products == null ) {}
-                            else {
+                            if( products != null ) {
                               for(int i = 0; i < products.size(); i++){
                                   String category = getCategory(products.get(i));
                                   queryGetProducts(category, products.get(i));
@@ -189,6 +187,7 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
 
     /**
      * Query to the product category database to get an specific product
+     *
      * @param productCategory
      * @param productKey
      */
@@ -221,34 +220,6 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
             public void onCancelled(DatabaseError databaseError) {}
         });
 
-    }
-
-    /**
-     * Provide a direct reference to each of the views
-     * used to cache the views within the layout for fast access
-     */
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView productPriceTextView, productNameTextView;
-        Button addToCart;
-        ImageView productImage;
-
-        /**
-         *  We also create a constructor that does the view lookups to find each subview
-         */
-        ViewHolder(View itemView) {
-            /*
-              Stores the itemView in a public final member variable that can be used
-              to access the context from any ViewHolder instance.
-             */
-            super(itemView);
-
-            productPriceTextView = itemView.findViewById(R.id.product_price_look);
-            addToCart = itemView.findViewById(R.id.addLookToCart);
-            productImage = itemView.findViewById(R.id.product_image_look);
-            productNameTextView = itemView.findViewById(R.id.product_name_look);
-
-        }
     }
 
     /**
@@ -311,6 +282,34 @@ public class SingleWeeklyLookAdapter extends RecyclerView.Adapter<SingleWeeklyLo
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+    }
+
+    /**
+     * Provide a direct reference to each of the views
+     * used to cache the views within the layout for fast access
+     */
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView productPriceTextView, productNameTextView;
+        Button addToCart;
+        ImageView productImage;
+
+        /**
+         *  We also create a constructor that does the view lookups to find each subview
+         */
+        ViewHolder(View itemView) {
+            /*
+              Stores the itemView in a public final member variable that can be used
+              to access the context from any ViewHolder instance.
+             */
+            super(itemView);
+
+            productPriceTextView = itemView.findViewById(R.id.product_price_look);
+            addToCart = itemView.findViewById(R.id.addLookToCart);
+            productImage = itemView.findViewById(R.id.product_image_look);
+            productNameTextView = itemView.findViewById(R.id.product_name_look);
+
+        }
     }
 
 }

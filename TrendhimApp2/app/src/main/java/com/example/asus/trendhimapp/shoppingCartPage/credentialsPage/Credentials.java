@@ -4,7 +4,7 @@ public class Credentials {
 
     private String userEmail, address, city, zipcode, country, name;
 
-    public Credentials(){};
+    public Credentials(){} // No-argument constructor for the Firebase queries
 
     public Credentials(String userEmail, String address, String city, String zipcode, String country, String name){
         this.name = name;

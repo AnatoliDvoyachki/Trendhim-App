@@ -36,6 +36,13 @@ public class DetailedOrderActivity extends BaseActivity {
 
         setTitle(getString(R.string.orders_placed));
 
+        initializeComponents();
+    }
+
+    /**
+     * Initialize recycler view and its adapter
+     */
+    void initializeComponents() {
         // Lookup the recycler view in activity layout
         recyclerView = findViewById(R.id.detailedOrderRecyclerView);
 
@@ -63,7 +70,7 @@ public class DetailedOrderActivity extends BaseActivity {
         // Set layout manager to position the items
         recyclerView.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
-
     }
+
 }
 

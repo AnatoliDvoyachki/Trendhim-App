@@ -78,7 +78,8 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
             emailEditText.setError(getString(R.string.email_invalid_message));
         else {
             if (passwordEditText.getText().toString().equals(confirmEditText.getText().toString())) {
-                auth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
+                auth.createUserWithEmailAndPassword(
+                        emailEditText.getText().toString(), passwordEditText.getText().toString())
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -94,7 +95,7 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
                                                         Toast.LENGTH_SHORT).show();
                                                 TabbedActivity.mViewPager.setCurrentItem(0, true);
                                                 LoginActivity.emailEditText.setText(emailEditText.getText().toString());
-                                                for (EditText editText : fields)
+                                                for (EditText editText : fields) //clean the fields after sign up
                                                     editText.setText(null);
 
                                             } else {
@@ -104,8 +105,6 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
                                             }
                                         }
                                     });
-
-
 
                                 } else {
                                     if(!task.isSuccessful()) {
@@ -191,4 +190,5 @@ public class SignupActivity extends Fragment implements View.OnKeyListener, View
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
     }
+
 }

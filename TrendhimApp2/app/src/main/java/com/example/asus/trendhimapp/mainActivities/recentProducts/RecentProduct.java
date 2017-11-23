@@ -4,7 +4,7 @@ public class RecentProduct {
 
     private String email, category, key;
 
-    public RecentProduct(){}
+    public RecentProduct(){} // No-argument constructor for the Firebase queries
 
     public RecentProduct(String key, String email, String category) {
         this.email = email;

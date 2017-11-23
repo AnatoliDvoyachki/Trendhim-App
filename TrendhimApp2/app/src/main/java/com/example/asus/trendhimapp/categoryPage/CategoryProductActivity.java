@@ -18,10 +18,6 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class CategoryProductActivity extends BaseActivity {
 
-    private ArrayList<CategoryProduct> categoryProducts;
-    private CategoryAdapter adapter;
-    private RecyclerView recyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,16 +31,16 @@ public class CategoryProductActivity extends BaseActivity {
         setTitle(setTitle());
 
         // Lookup the recycler view in activity layout
-        recyclerView = findViewById(R.id.recyclerViewCategory_page);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewCategory_page);
 
         //Define animators to change the behavior of the RecyclerView
         recyclerView.setItemAnimator(new SlideInUpAnimator());
 
         // Initialize categories
-        categoryProducts = new ArrayList<>();
+        ArrayList<CategoryProduct> categoryProducts = new ArrayList<>();
 
         // Create adapter for the categories
-        adapter = new CategoryAdapter(this, categoryProducts, getCategory());
+        CategoryAdapter adapter = new CategoryAdapter(this, categoryProducts, getCategory());
 
         // Attach the adapter to the recycler view
         recyclerView.setAdapter(adapter);
@@ -59,7 +55,7 @@ public class CategoryProductActivity extends BaseActivity {
     }
 
     /**
-     * Get category from the Navigation Bar - Used for the database queries
+     * Get product category from the intent - Used for the database queries
      *
      * @return category title
      */
@@ -74,7 +70,7 @@ public class CategoryProductActivity extends BaseActivity {
     }
 
     /**
-     * Set Activity tile depending on the Category
+     * Set Activity tile depending on the product category
      *
      * @return category title
      */
@@ -104,4 +100,5 @@ public class CategoryProductActivity extends BaseActivity {
         }
         return category;
     }
+
 }

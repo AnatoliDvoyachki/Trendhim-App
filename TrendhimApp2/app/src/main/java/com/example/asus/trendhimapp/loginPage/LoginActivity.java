@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.asus.trendhimapp.R;
 import com.example.asus.trendhimapp.mainActivities.MainActivity;
-import com.example.asus.trendhimapp.util.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -37,6 +36,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         final View rootView = inflater.inflate(R.layout.activity_login, container, false);
 
         emailEditText = rootView.findViewById(R.id.input_email_login);
@@ -78,9 +78,10 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
 
     /**
      * Method listening for login button clicks.
+     *
      * Sign in users with email and password
      */
-    public void login(final View view){
+    public void login(final View view) {
         //Hide the keyboard
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
@@ -129,7 +130,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
     }
 
     /**
-     * Performs logIn operation when the user clicks the Enter button on the keyboard.
+     * Perform logIn operation when the user clicks the Enter button on the keyboard.
      *
      * @param v, keycode, event
      * @return false
@@ -144,7 +145,7 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
     }
 
     /**
-     * Hides the keyboard whenever the user clicks somewhere in the layout.
+     * Hide the keyboard whenever the user clicks somewhere in the layout.
      *
      * @param v View to witch the method is associated to
      */
@@ -218,4 +219,5 @@ public class LoginActivity extends Fragment implements View.OnKeyListener, View.
         btnPositive.setLayoutParams(layoutParams);
         btnNegative.setLayoutParams(layoutParams);
     }
+
 }

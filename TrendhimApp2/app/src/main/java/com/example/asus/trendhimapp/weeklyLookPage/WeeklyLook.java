@@ -7,6 +7,8 @@ public class WeeklyLook {
     private String key, phrase, mainPictureUrl, secondPictureUrl, thirdPictureUrl, fourthPictureUrl, fifthPictureUrl;
     private ArrayList<String> products;
 
+    public WeeklyLook(){} // No-argument constructor for the Firebase queries
+
     public WeeklyLook(String key, String phrase, String mainPictureUrl, String secondPictureUrl,
                       String thirdPictureURl, String fourthPictureUrl, String fifthPictureUrl) {
         this.key = key;
@@ -18,8 +20,6 @@ public class WeeklyLook {
         this.phrase = phrase;
         products = new ArrayList<>();
     }
-
-    public WeeklyLook(){} // Empty constructor for firebase
 
     public String getKey() {
         return key;

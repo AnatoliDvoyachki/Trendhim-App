@@ -123,7 +123,7 @@ public class WeeklyLookAdapter extends RecyclerView.Adapter<WeeklyLookAdapter.Vi
     }
 
     /**
-     *  Provide a direct reference to each of the views
+     * Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access
      */
     class ViewHolder extends RecyclerView.ViewHolder {

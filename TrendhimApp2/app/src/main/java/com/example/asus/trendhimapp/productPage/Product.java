@@ -5,8 +5,7 @@ public class Product {
     private String bannerPictureUrl, leftPictureUrl, rightPictureUrl, brand, productName, productKey;
     private int price;
 
-    // No-argument constructor for the Firebase implementation
-    public Product() {}
+    public Product() {} // No-argument constructor for the Firebase queries
 
     public Product(String key, String productName, String bannerPictureUrl, String leftPictureUrl,
                    String rightPictureUrl, String brand, int price) {

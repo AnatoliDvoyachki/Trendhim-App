@@ -51,7 +51,6 @@ public class BaseActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -96,7 +95,7 @@ public class BaseActivity extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), R.string.not_logged_in_unsuccess_message, Toast.LENGTH_LONG).show();
 
                 break;
-                
+
              /*
              * Start Wish list Activity whenever the wish list button is clicked
              * and the user is logged in.

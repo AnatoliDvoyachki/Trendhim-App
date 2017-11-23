@@ -104,6 +104,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     /**
      * Redirect the user to the right product when the banner picture is clicked
+     *
      * @param currentProduct
      */
     private void getProduct(final CategoryProduct currentProduct, final View view) {
@@ -184,7 +185,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        //Hide no products in the wishlist layout
+                        //Hide empty wishlist layout
                         WishlistActivity.emptyWishlistLayout.setVisibility(View.GONE);
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -249,7 +250,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
                 if(user != null){ //if the user is logged in
                     myRef.orderByChild(Constants.KEY_PRODUCT_KEY).equalTo(categoryProduct.getKey())
-                            .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+                            .addListenerForSingleValueEvent(new ValueEventListener() { // get products
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
@@ -435,4 +436,5 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             addToCartButton = itemView.findViewById(R.id.add_to_cart_button);
         }
     }
+
 }

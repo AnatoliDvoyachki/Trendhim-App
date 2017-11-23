@@ -117,6 +117,7 @@ public class DetailedOrderAdapter extends RecyclerView.Adapter<DetailedOrderAdap
 
     /**
      * Redirect the user to the correct Product
+     *
      * @param product
      */
     private void getProduct(final CategoryProduct product) {
@@ -162,6 +163,7 @@ public class DetailedOrderAdapter extends RecyclerView.Adapter<DetailedOrderAdap
 
     /**
      * Query to the product category database to get an specific product
+     *
      * @param productCategory
      * @param productKey
      */
@@ -177,7 +179,7 @@ public class DetailedOrderAdapter extends RecyclerView.Adapter<DetailedOrderAdap
                     for (DataSnapshot product : dataSnapshot.getChildren()) {
 
                         Product current = product.getValue(Product.class);
-                        //If the key of the product found is equal to the recent product key
+                        //If the key of the product found is equal to the current product key
                         if (Objects.equals(product.getKey(), productKey)) {
 
                             products.add(0, new CategoryProduct(current.getProductName(), current.getPrice(),
@@ -196,13 +198,11 @@ public class DetailedOrderAdapter extends RecyclerView.Adapter<DetailedOrderAdap
 
     }
 
-
-
     /**
      * @param productKey
      * @return product category based on the given product key
      */
-    private String getCategory(String productKey){
+    private String getCategory(String productKey) {
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
@@ -215,7 +215,7 @@ public class DetailedOrderAdapter extends RecyclerView.Adapter<DetailedOrderAdap
     }
 
     /**
-     *  Provide a direct reference to each of the views
+     * Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access
      */
     class ViewHolder extends RecyclerView.ViewHolder {

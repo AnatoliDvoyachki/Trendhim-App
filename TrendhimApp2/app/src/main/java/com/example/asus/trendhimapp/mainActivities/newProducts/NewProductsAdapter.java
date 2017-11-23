@@ -89,7 +89,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
      */
     public void addData() {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMMENDED_PRODUCTS);
-        myRef.orderByChild(Constants.KEY_ORDER).addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+        myRef.orderByChild(Constants.KEY_ORDER).addListenerForSingleValueEvent(new ValueEventListener() { //get recommended products
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
@@ -116,10 +116,11 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
 
     /**
      * Query to the product category entity to get a specific product
+     *
      * @param productCategory
      * @param productKey
      */
-    private void queryGetProducts(String productCategory, final String productKey){
+    private void queryGetProducts(String productCategory, final String productKey) {
 
         //Query to the product category database
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
@@ -152,11 +153,14 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
 
     /**
      * Redirect the user to the correct Product
+     *
      * @param product
      */
     private void getProduct(final CategoryProduct product, final View view) {
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMMENDED_PRODUCTS);
+        final DatabaseReference databaseReference =
+                FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_RECOMMENDED_PRODUCTS);
+
         //get product which key is equal to the one clicked
         databaseReference.orderByChild(Constants.KEY_ATTR_KEY).equalTo(product.getKey())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -180,6 +184,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
                                                 if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
 
                                                     Product foundProduct = dataSnapshot1.getValue(Product.class);
+                                                    //redirect the user to the selected product activity
                                                     Intent toProductActivity = new Intent(context, ProductActivity.class);
 
                                                     ActivityOptionsCompat options = ActivityOptionsCompat.
@@ -241,6 +246,7 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
             productBrandTextView = itemView.findViewById(R.id.brand_name_category);
             productImage = itemView.findViewById(R.id.product_image_category);
         }
+
     }
 
 }

@@ -99,14 +99,14 @@ public class SecondWeeklyLookAdapter extends RecyclerView.Adapter<SecondWeeklyLo
      */
     public void addData(final String lookKey) {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_WEEKLY_LOOK);
-        myRef.orderByKey().equalTo(lookKey).addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+        myRef.orderByKey().equalTo(lookKey).addListenerForSingleValueEvent(new ValueEventListener() { //get looks
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
 
                     for (final DataSnapshot product : dataSnapshot.getChildren()) {
-                        //Found product
+                        //Found look
                         final WeeklyLook newLook = product.getValue(WeeklyLook.class);
 
                         looks.add(new WeeklyLook(lookKey, newLook.getPhrase(), newLook.getMainPictureUrl(),
@@ -127,7 +127,7 @@ public class SecondWeeklyLookAdapter extends RecyclerView.Adapter<SecondWeeklyLo
     }
 
     /**
-     *  Provide a direct reference to each of the views
+     * Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access
      */
     class ViewHolder extends RecyclerView.ViewHolder {

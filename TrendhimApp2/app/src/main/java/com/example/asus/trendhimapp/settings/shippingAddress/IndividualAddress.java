@@ -38,7 +38,10 @@ public class IndividualAddress extends BaseActivity {
 
     }
 
-    public void initializeComponents() {
+    /**
+     * Initialize Address List View components
+     */
+     void initializeComponents() {
         nameTextView = findViewById(R.id.name_address);
         emailTextView = findViewById(R.id.email_address);
         addressTextView = findViewById(R.id.address);
@@ -69,6 +72,10 @@ public class IndividualAddress extends BaseActivity {
         }
     }
 
+    /**
+     * Update user credentials list view and firebase when the user modifies its information
+     * @param view
+     */
     public void updateCredentials(View view) {
         DatabaseReference credentialsReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
         credentialsReference.orderByChild(Constants.KEY_USER_EMAIL).equalTo(emailTextView.getText().toString())
@@ -97,4 +104,5 @@ public class IndividualAddress extends BaseActivity {
                     public void onCancelled(DatabaseError databaseError) {}
                 });
     }
+
 }

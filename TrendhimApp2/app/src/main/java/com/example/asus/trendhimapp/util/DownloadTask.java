@@ -47,25 +47,36 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
      * @return a bitmap of the image
      */
     private Bitmap downloadImage(String urlString) {
+
         URL url = null;
         HttpURLConnection con = null;
         InputStream inFromInternet = null;
         Bitmap bitmap = null;
+
         try {
+
             if (urlString != null) url = new URL(urlString);
             if (url != null) con = (HttpURLConnection) url.openConnection();
             if (con != null) inFromInternet = con.getInputStream();
             if (inFromInternet != null) bitmap = BitmapFactory.decodeStream(inFromInternet);
+
         } catch (IOException e) {
             e.printStackTrace();
+
         } finally {
+
             try {
+
                 if (inFromInternet != null) inFromInternet.close();
                 if (con != null) con.disconnect();
+
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
+
         }
+
         return bitmap;
     }
+
 }

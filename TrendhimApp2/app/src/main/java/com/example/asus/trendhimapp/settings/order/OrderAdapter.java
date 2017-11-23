@@ -84,7 +84,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null) {
             myRef.orderByChild(Constants.KEY_USER_EMAIL).equalTo(currentUser.getEmail())
-                    .addListenerForSingleValueEvent(new ValueEventListener() { //get user recent products
+                    .addListenerForSingleValueEvent(new ValueEventListener() { //get user's orders
                         @Override
                         public void onDataChange(final DataSnapshot dataSnapshot) {
 
@@ -93,21 +93,28 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                                 OrderActivity.noOrdersLayout.setVisibility(View.GONE);
 
                                 for (final DataSnapshot product : dataSnapshot.getChildren()) {
-                                    //Found product
+                                    //Found order
                                     final UserOrder order = product.getValue(UserOrder.class);
+
+                                    //query the credentials database to find the user credentials
                                     DatabaseReference myRef =
                                             FirebaseDatabase.getInstance().getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
+
                                     myRef.orderByChild("userEmail").equalTo(currentUser.getEmail())
-                                            .addListenerForSingleValueEvent(new ValueEventListener() { //get user address
+                                            .addListenerForSingleValueEvent(new ValueEventListener() { //get user email address
                                         @Override
                                         public void onDataChange(final DataSnapshot dataSnapshot) {
 
                                             if (dataSnapshot.exists()) {
 
                                                 for (final DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
                                                     Credentials credentials =  dataSnapshot1.getValue(Credentials.class);
+
                                                     orders.add(0, new UserOrder(order.getDate(), credentials.getAddress(),
                                                             order.getGrand_Total(), product.getKey()));
+
+                                                    //notify item has been inserted in the first position
                                                     notifyItemInserted(0);
 
                                                 }
@@ -136,8 +143,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         }
 
     }
+
     /**
-     *  Provide a direct reference to each of the views
+     * Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access
      */
     class ViewHolder extends RecyclerView.ViewHolder {

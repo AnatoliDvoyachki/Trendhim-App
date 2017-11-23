@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -149,6 +148,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
     /**
      * Send email based on the method parameter
+     *
      * @param to
      * @param subject
      * @param message
@@ -195,6 +195,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
     /**
      * Convert Date to String
+     *
      * @param date
      * @return Date formatted into a string
      */
@@ -211,6 +212,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
 
         final DatabaseReference credentialsDatabase = FirebaseDatabase.getInstance()
                 .getReference(Constants.TABLE_NAME_USER_CREDENTIALS);
+
         credentialsDatabase.orderByChild(Constants.KEY_USER_EMAIL).equalTo(email.getText().toString())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -287,7 +289,7 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
     }
 
     /**
-     * Removes a product from the user's wishlist datbase - firebase
+     * Removes a product from the user's wishlist database - firebase
      **/
     private void removeItem() {
 
@@ -364,6 +366,5 @@ public class CredentialsActivity extends BaseActivity implements View.OnClickLis
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
     }
-
 
 }

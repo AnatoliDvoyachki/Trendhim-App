@@ -24,13 +24,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
 
-    private ArrayList<CategoryProduct> recentProducts, recommendedProducts;
     public static RecentProductsAdapter adapter;
     public static TextView noRecentProducts;
-    private ImageView recentProductImage, recommendedProductsImage;
     private int i = 0, i1= 0; //handle image clicks
-    private NewProductsAdapter newProductAdapter;
-    private ImageView weeklyLookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +37,22 @@ public class MainActivity extends BaseActivity {
         View contentView = inflater.inflate(R.layout.content_main, null, false);
         BaseActivity.drawer.addView(contentView, 0);
 
+        initializeComponents();
+        initializeRecentProductRecyclerView();
+        initializeRecommendedProductsRecyclerView();
+    }
+
+    /**
+     * Initialize Main Activity components and handle image clicks listeners
+     */
+    void initializeComponents() {
+
         final LinearLayout recentProductsLayout = findViewById(R.id.recentProductsLayout);
 
-        recentProductImage = findViewById(R.id.recentproductsImage);
-        weeklyLookImage = findViewById(R.id.weeklyLookImage);
+        ImageView recentProductImage = findViewById(R.id.recentproductsImage);
+        ImageView weeklyLookImage = findViewById(R.id.weeklyLookImage);
         noRecentProducts = findViewById(R.id.noRecentProducts);
-        recommendedProductsImage = findViewById(R.id.recommendedProductsImage);
+        ImageView recommendedProductsImage = findViewById(R.id.recommendedProductsImage);
         final LinearLayout recommendedProductsLayout = findViewById(R.id.recommendedProductsLayout);
 
         /*
@@ -66,7 +72,7 @@ public class MainActivity extends BaseActivity {
         /*
          * Hide or show recommended products recycler view on image clicked
          */
-            recommendedProductsImage.setOnClickListener(new View.OnClickListener() {
+        recommendedProductsImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(i1 % 2 == 0)
@@ -76,7 +82,6 @@ public class MainActivity extends BaseActivity {
                 i1++;
             }
         });
-
 
          /*
          * Open Weekly look Activity on image clicked
@@ -91,19 +96,16 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        initializeRecentProductRecyclerView();
-        initializeRecommendedProductsRecyclerView();
     }
-
     /**
      * Initialize recent product recycler view
      */
-    void initializeRecentProductRecyclerView(){
+    void initializeRecentProductRecyclerView() {
         // Lookup the recycler view in activity layout
         RecyclerView recyclerView = findViewById(R.id.recyclerViewmain);
 
         // Initialize categories
-        recentProducts = new ArrayList<>();
+        ArrayList<CategoryProduct> recentProducts = new ArrayList<>();
 
         // Create adapter for the categories
         adapter = new RecentProductsAdapter(this, recentProducts);
@@ -129,10 +131,10 @@ public class MainActivity extends BaseActivity {
         RecyclerView recyclerViewNewProducts = findViewById(R.id.rvRecommendProducts);
 
         //Recommended products initialize
-        recommendedProducts = new ArrayList<>();
+        ArrayList<CategoryProduct> recommendedProducts = new ArrayList<>();
 
         // Create a new adapter for the category
-        newProductAdapter = new NewProductsAdapter(this, recommendedProducts);
+        NewProductsAdapter newProductAdapter = new NewProductsAdapter(this, recommendedProducts);
 
         // Attach the adapter to the recycler view
         recyclerViewNewProducts.setAdapter(newProductAdapter);

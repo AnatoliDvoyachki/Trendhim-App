@@ -7,7 +7,7 @@ public class ShoppingCartProduct extends WishlistProduct {
     private String productKey, userEmail;
     private String quantity;
 
-    public ShoppingCartProduct() {}
+    public ShoppingCartProduct() {} // No-argument constructor for the Firebase queries
 
     public ShoppingCartProduct(String productKey, String userEmail, String quantity) {
         this.productKey = productKey;

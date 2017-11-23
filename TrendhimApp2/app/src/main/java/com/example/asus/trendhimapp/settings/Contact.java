@@ -3,7 +3,6 @@ package com.example.asus.trendhimapp.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -30,7 +29,11 @@ public class Contact extends BaseActivity {
         message = findViewById(R.id.question_contact);
     }
 
-
+    /**
+     * Submit contact form and send email to trendhimaps@gmail.com
+     *
+     * @param view
+     */
     public void submitContact(View view){
 
         Intent mail = new Intent(Intent.ACTION_SEND);

@@ -110,6 +110,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                                                             if(Objects.equals(product.getKey(), dataSnapshot1.getKey())) {
 
                                                                 Product foundProduct = dataSnapshot1.getValue(Product.class);
+                                                                //Start selected product activity intent
                                                                 Intent toProductPage = new Intent(context, ProductActivity.class);
 
                                                                 toProductPage.putExtra(Constants.KEY_PRODUCT_KEY, product.getKey());
@@ -155,10 +156,11 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
     /**
      * Get product category - Used to query the database
+     *
      * @param productKey
      * @return
      */
-    private String getCategory(String productKey){
+    private String getCategory(String productKey) {
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");
@@ -201,7 +203,8 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                 public void onCancelled(DatabaseError databaseError) {}
 
             });
-        } else {
+
+        } else { //if the user is not logged in
             MainActivity.noRecentProducts.setText(R.string.not_logged_in_unsuccess_message);
             MainActivity.noRecentProducts.setVisibility(View.VISIBLE);
         }
@@ -210,6 +213,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
     /**
      * Add a product to the recent products database when the products is visited
+     *
      * @param product
      */
     public static void addToRecent(final CategoryProduct product) {
@@ -221,7 +225,8 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
         if(user != null){ //if the user is logged in
 
-            myRef.orderByChild(Constants.KEY_ORDER).addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+            myRef.orderByChild(Constants.KEY_ORDER)
+                    .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
 
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -234,7 +239,9 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
                             //if the product is added to the database
                             Date now = new Date();
 
+                            //update the visit date
                             dataSnapshot1.getRef().child(Constants.KEY_VISIT_TIME).setValue(convertDateToString(now));
+                            //set the order to be - visit date
                             dataSnapshot1.getRef().child(Constants.KEY_ORDER).setValue("-" + convertDateToString(now));
                             exists[0] = true;
                             break;
@@ -259,17 +266,18 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
     }
 
     /**
-     *  Add required products to the recent products Array List
+     * Add required products to the recent products Array List
+     *
      * @param user
      * @param productCategory
      * @param productKey
      */
-    private void getProducts(FirebaseUser user, String productCategory, final String productKey){
+    private void getProducts(FirebaseUser user, String productCategory, final String productKey) {
 
         //Query to the product category database
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(productCategory);
 
-        if(user != null){
+        if(user != null) {
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -298,6 +306,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
     /**
      * Convert Date to String
+     *
      * @param date
      * @return Date formatted into a string
      */
@@ -308,7 +317,7 @@ public class RecentProductsAdapter extends RecyclerView.Adapter<RecentProductsAd
 
 
     /**
-     *  Provide a direct reference to each of the views
+     * Provide a direct reference to each of the views
      * used to cache the views within the layout for fast access
      */
     class ViewHolder extends RecyclerView.ViewHolder {

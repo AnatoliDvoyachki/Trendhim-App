@@ -165,6 +165,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
                     btnPositive.setLayoutParams(layoutParams);
                     btnNegative.setLayoutParams(layoutParams);
                 }
+
             } else {
                 Intent intent = getIntent();
 
@@ -241,7 +242,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         if(user != null){ //if the user is logged in
 
             myRef.orderByChild(Constants.KEY_PRODUCT_KEY).equalTo(categoryProductKey)
-                    .addListenerForSingleValueEvent(new ValueEventListener() { // get user recent products
+                    .addListenerForSingleValueEvent(new ValueEventListener() { // get shopping cart products
 
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -339,10 +340,11 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
 
     /**
      * Get the product category - Used to query the wishlist database
+     *
      * @param productKey
      * @return the name of the entity to which the product belongs to
      */
-    public String getCategory(String productKey){
+    public String getCategory(String productKey) {
         String entityName;
         if (productKey.startsWith(Constants.WATCH_PREFIX))
             entityName = productKey.replaceAll(Constants.ALL_DIGITS_REGEX, "es");

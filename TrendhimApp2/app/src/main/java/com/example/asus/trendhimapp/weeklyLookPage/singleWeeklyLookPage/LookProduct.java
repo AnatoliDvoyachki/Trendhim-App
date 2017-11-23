@@ -4,7 +4,7 @@ public class LookProduct {
 
     private String key, category;
 
-    public LookProduct(){};
+    public LookProduct(){} // No-argument constructor for the Firebase queries
 
     public LookProduct(String key, String category) {
         this.key = key;

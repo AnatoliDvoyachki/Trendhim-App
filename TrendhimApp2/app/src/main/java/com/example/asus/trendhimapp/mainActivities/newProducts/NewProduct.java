@@ -4,7 +4,7 @@ public class NewProduct {
 
     private String category, key;
 
-    public NewProduct() {}
+    public NewProduct() {} // No-argument constructor for the Firebase queries
 
     public NewProduct(String key, String category) {
         this.category = category;
