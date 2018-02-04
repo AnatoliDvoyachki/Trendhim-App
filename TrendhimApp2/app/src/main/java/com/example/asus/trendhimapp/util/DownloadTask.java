@@ -36,8 +36,10 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
-        BitmapFlyweight.cachePicture(pictureUrl, bitmap);// Once the download is finished, cache the image
-        imageView.setImageBitmap(bitmap); // Then show it to the user
+        if (bitmap != null) {
+            BitmapFlyweight.cachePicture(pictureUrl, bitmap);// Once the download is finished, cache the image
+            imageView.setImageBitmap(bitmap); // Then show it to the user
+        }
     }
 
     /**
