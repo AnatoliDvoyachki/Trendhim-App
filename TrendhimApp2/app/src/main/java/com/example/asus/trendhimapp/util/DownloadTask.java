@@ -3,6 +3,7 @@ package com.example.asus.trendhimapp.util;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.net.URL;
 public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
     private String pictureUrl;
+    private final String TAG = getClass().getSimpleName();
 
     /**
      * @param pictureUrl url reference to the picture
@@ -46,8 +48,10 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
      * Used to download an image, referenced by an url
      *
      * @param urlString the url of the image
-     * @return a bitmap of the image
-     */
+     * @return a bitmap of the image. Null if unsuccessful.
+     *
+     * @exception IOException
+     **/
     private Bitmap downloadImage(String urlString) {
 
         URL url = null;
@@ -59,12 +63,21 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
 
             if (urlString != null) url = new URL(urlString);
             if (url != null) con = (HttpURLConnection) url.openConnection();
-            if (con != null) inFromInternet = con.getInputStream();
+            if (con != null) {
+
+                // Connection settings
+                con.setConnectTimeout(15000);
+                con.setReadTimeout(15000);
+                con.connect();
+
+                // HTTP response verification
+                int responseCode = con.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) inFromInternet = con.getInputStream();
+            }
             if (inFromInternet != null) bitmap = BitmapFactory.decodeStream(inFromInternet);
 
         } catch (IOException e) {
-            e.printStackTrace();
-
+            Log.e(TAG, e.getMessage());
         } finally {
 
             try {
@@ -73,7 +86,7 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
                 if (con != null) con.disconnect();
 
             } catch (IOException ioe) {
-                ioe.printStackTrace();
+                Log.e(TAG, ioe.getMessage());
             }
 
         }
