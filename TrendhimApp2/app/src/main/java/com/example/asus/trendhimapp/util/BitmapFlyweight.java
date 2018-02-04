@@ -19,7 +19,7 @@ public final class BitmapFlyweight {
     /**
      * Used to get a picture for the ImageViews.
      *
-     * @param url       the url of the picture - KEY
+     * @param url       the url of the picture
      * @param imageView the ImageView to which the picture will be assigned
      **/
     public static void getPicture(String url, ImageView imageView) {
