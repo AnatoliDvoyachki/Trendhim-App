@@ -78,6 +78,7 @@ public class DownloadTask extends AsyncTask<Void, Void, Bitmap> {
 
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
+            return null;
         } finally {
 
             try {
